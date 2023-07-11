@@ -9,32 +9,24 @@ struct LoginView: View {
   
   @Binding var showingLoginView: Bool
   
-  @State private var progress: CGFloat = 0.0
-  
   var body: some View {
     ZStack {
       VStack {
         loginOptions
         createAccountFooter
       }
-      .scaleEffect(model.isShowingProgressView ? 0.1 : 1)
-      .blur(radius: model.isShowingProgressView ? 5 : 0)
-      .animation(.spring().speed(0.1), value: model.isShowingProgressView)
+      .loginAnimation(model.isShowingProgressView)
       
       if model.isShowingProgressView {
         FrostedProgressView(text: "Fetching exercises")
       }
     }
     .resignKeyboardOnDragGesture()
-    .onTapGesture {
-      focus = nil
-    }
+    .onTapGesture { focus = nil }
     .navigationTitle("〄 Welcome")
     .padding()
     .toolbar() {
-      ToolbarItem(placement: .keyboard) {
-        ResignKeyboardButton()
-      }
+      ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
     }
     .sheet(isPresented: $model.showingCreateAccountView) {
       CreateAccountView(showingLoginView: $showingLoginView)

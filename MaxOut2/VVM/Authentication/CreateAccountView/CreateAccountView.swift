@@ -8,32 +8,26 @@ struct CreateAccountView: View {
   
   @Binding var showingLoginView: Bool
   
-  @State private var isShowingProgressView = false
-  
   var body: some View {
-    NavigationStack {
-      ZStack {
+    ZStack {
+      NavigationStack {
         ScrollView {
           VStack {
             TSTextFieldsView(model: manager, resetPassword: false, withConfirmation: true, buttonText: K.signUpEmail, buttonColor: .accentColor, withUsername: true) { createNewUser() } /// 🪡🧤
-              .padding([.bottom], 8)
             Spacer()
           }
         }
-        
-        if isShowingProgressView {
-          FrostedProgressView(text: "Fetching exercises")
+        .navigationTitle(K.createAccount)
+        .padding()
+        .toolbar() {
+          ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
+          ToolbarItem(placement: .navigationBarLeading) { dismissButton }
         }
       }
-      .navigationTitle(K.createAccount)
-      .padding()
-      .toolbar() {
-        ToolbarItem(placement: .keyboard) {
-          ResignKeyboardButton()
-        }
-        ToolbarItem(placement: .navigationBarLeading) {
-          dismissButton
-        }
+      .loginAnimation(model.isShowingProgressView)
+      
+      if model.isShowingProgressView {
+        FrostedProgressView(text: "Fetching exercises")
       }
     }
   }
@@ -59,7 +53,7 @@ extension CreateAccountView {
         }
         manager.validate(withConfirmation: true) /// Validate info
         
-        isShowingProgressView = true
+        model.isShowingProgressView = true
         
         try await model.createUser(email: manager.email,
                                    password: manager.password,

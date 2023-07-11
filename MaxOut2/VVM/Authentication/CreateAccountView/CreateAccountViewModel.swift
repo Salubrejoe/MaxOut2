@@ -4,6 +4,7 @@ import Foundation
 
 @MainActor
 final class CreateAccountViewModel: ObservableObject {
+  @Published var isShowingProgressView = false
   var authResult: AuthenticationResultModel?
   
   /// CREATE USER
