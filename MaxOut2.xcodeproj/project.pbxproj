@@ -7,18 +7,107 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
+		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
+		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
+		7C7DA0A42A5DAE2500B58AFA /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A32A5DAE2400B58AFA /* Enums.swift */; };
+		7C7DA0AD2A5DAE4100B58AFA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A62A5DAE4100B58AFA /* Session.swift */; };
+		7C7DA0AE2A5DAE4100B58AFA /* SessionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A72A5DAE4100B58AFA /* SessionsManager.swift */; };
+		7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A82A5DAE4100B58AFA /* Bob.swift */; };
+		7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A92A5DAE4100B58AFA /* Workout.swift */; };
+		7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0AB2A5DAE4100B58AFA /* RoutinesManager.swift */; };
+		7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
-		7CBAA1B52A5D90DC00DFA31D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B42A5D90DC00DFA31D /* ContentView.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
+		7CBAA1C22A5D91A800DFA31D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7CBAA1C12A5D91A800DFA31D /* FirebaseAuth */; };
+		7CBAA1C42A5D91A800DFA31D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7CBAA1C32A5D91A800DFA31D /* FirebaseFirestore */; };
+		7CBAA1C62A5D91A800DFA31D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7CBAA1C52A5D91A800DFA31D /* FirebaseFirestoreSwift */; };
+		7CBAA1C82A5D91BC00DFA31D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1C72A5D91BC00DFA31D /* GoogleService-Info.plist */; };
+		7CBAA1CB2A5D91D300DFA31D /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7CBAA1CA2A5D91D300DFA31D /* GoogleSignIn */; };
+		7CBAA1CD2A5D91D300DFA31D /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7CBAA1CC2A5D91D300DFA31D /* GoogleSignInSwift */; };
+		7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1CF2A5D924900DFA31D /* SignInWithAppleHelper.swift */; };
+		7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1D02A5D924900DFA31D /* AuthenticationResultModel.swift */; };
+		7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1D12A5D924900DFA31D /* FireAuthManager.swift */; };
+		7CBAA1D62A5D924900DFA31D /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1D22A5D924900DFA31D /* SignInGoogleHelper.swift */; };
+		7CBAA1D82A5D92B000DFA31D /* SignInUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1D72A5D92B000DFA31D /* SignInUtility.swift */; };
+		7CBAA1DD2A5D935500DFA31D /* FitUsersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1DB2A5D935500DFA31D /* FitUsersManager.swift */; };
+		7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1DC2A5D935500DFA31D /* FitUser.swift */; };
+		7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E02A5D93D400DFA31D /* RootView.swift */; };
+		7CBAA1E32A5D93D400DFA31D /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */; };
+		7CBAA1F52A5D944400DFA31D /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E62A5D944400DFA31D /* CreateAccountViewModel.swift */; };
+		7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E72A5D944400DFA31D /* CreateAccountView.swift */; };
+		7CBAA1F72A5D944400DFA31D /* TSTextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E92A5D944400DFA31D /* TSTextFieldsView.swift */; };
+		7CBAA1F82A5D944400DFA31D /* ResignKeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EB2A5D944400DFA31D /* ResignKeyboardButton.swift */; };
+		7CBAA1F92A5D944400DFA31D /* TSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EC2A5D944400DFA31D /* TSTextField.swift */; };
+		7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */; };
+		7CBAA1FB2A5D944400DFA31D /* TSTextFieldsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EE2A5D944400DFA31D /* TSTextFieldsManager.swift */; };
+		7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */; };
+		7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F12A5D944400DFA31D /* LoginView.swift */; };
+		7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F32A5D944400DFA31D /* SignInWithAppleButton.swift */; };
+		7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F42A5D944400DFA31D /* SignInWithGoogleButton.swift */; };
+		7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2022A5D94A600DFA31D /* Constants.swift */; };
+		7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2042A5D94AC00DFA31D /* TextFieldFocus.swift */; };
+		7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */; };
+		7CBAA20B2A5D94EB00DFA31D /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */; };
+		7CBAA20C2A5D94EB00DFA31D /* CustomTFStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2092A5D94EB00DFA31D /* CustomTFStyle.swift */; };
+		7CBAA20F2A5D952A00DFA31D /* Bundle-decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA20E2A5D952A00DFA31D /* Bundle-decodable.swift */; };
+		7CBAA2112A5D953500DFA31D /* Resign-onDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */; };
+		7CBAA2142A5D954C00DFA31D /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA2122A5D954C00DFA31D /* exercises.json */; };
+		7CBAA2152A5D954C00DFA31D /* selectedExercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA2132A5D954C00DFA31D /* selectedExercises.json */; };
+		7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2182A5D964F00DFA31D /* Colors.swift */; };
+		7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA21A2A5D96F000DFA31D /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
+		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
+		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
+		7C7DA0A32A5DAE2400B58AFA /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		7C7DA0A62A5DAE4100B58AFA /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		7C7DA0A72A5DAE4100B58AFA /* SessionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsManager.swift; sourceTree = "<group>"; };
+		7C7DA0A82A5DAE4100B58AFA /* Bob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bob.swift; sourceTree = "<group>"; };
+		7C7DA0A92A5DAE4100B58AFA /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		7C7DA0AB2A5DAE4100B58AFA /* RoutinesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesManager.swift; sourceTree = "<group>"; };
+		7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
-		7CBAA1B42A5D90DC00DFA31D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7CBAA1C72A5D91BC00DFA31D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7CBAA1CF2A5D924900DFA31D /* SignInWithAppleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleHelper.swift; sourceTree = "<group>"; };
+		7CBAA1D02A5D924900DFA31D /* AuthenticationResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResultModel.swift; sourceTree = "<group>"; };
+		7CBAA1D12A5D924900DFA31D /* FireAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireAuthManager.swift; sourceTree = "<group>"; };
+		7CBAA1D22A5D924900DFA31D /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
+		7CBAA1D72A5D92B000DFA31D /* SignInUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUtility.swift; sourceTree = "<group>"; };
+		7CBAA1DB2A5D935500DFA31D /* FitUsersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitUsersManager.swift; sourceTree = "<group>"; };
+		7CBAA1DC2A5D935500DFA31D /* FitUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitUser.swift; sourceTree = "<group>"; };
+		7CBAA1E02A5D93D400DFA31D /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		7CBAA1E62A5D944400DFA31D /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		7CBAA1E72A5D944400DFA31D /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		7CBAA1E92A5D944400DFA31D /* TSTextFieldsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTextFieldsView.swift; sourceTree = "<group>"; };
+		7CBAA1EB2A5D944400DFA31D /* ResignKeyboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResignKeyboardButton.swift; sourceTree = "<group>"; };
+		7CBAA1EC2A5D944400DFA31D /* TSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTextField.swift; sourceTree = "<group>"; };
+		7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		7CBAA1EE2A5D944400DFA31D /* TSTextFieldsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTextFieldsManager.swift; sourceTree = "<group>"; };
+		7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7CBAA1F12A5D944400DFA31D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7CBAA1F32A5D944400DFA31D /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
+		7CBAA1F42A5D944400DFA31D /* SignInWithGoogleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithGoogleButton.swift; sourceTree = "<group>"; };
+		7CBAA2022A5D94A600DFA31D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7CBAA2042A5D94AC00DFA31D /* TextFieldFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldFocus.swift; sourceTree = "<group>"; };
+		7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnFirstAppear.swift; sourceTree = "<group>"; };
+		7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
+		7CBAA2092A5D94EB00DFA31D /* CustomTFStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTFStyle.swift; sourceTree = "<group>"; };
+		7CBAA20E2A5D952A00DFA31D /* Bundle-decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-decodable.swift"; sourceTree = "<group>"; };
+		7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Resign-onDrag.swift"; sourceTree = "<group>"; };
+		7CBAA2122A5D954C00DFA31D /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
+		7CBAA2132A5D954C00DFA31D /* selectedExercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = selectedExercises.json; sourceTree = "<group>"; };
+		7CBAA2172A5D958700DFA31D /* MaxOut2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MaxOut2.entitlements; sourceTree = "<group>"; };
+		7CBAA2182A5D964F00DFA31D /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7CBAA21A2A5D96F000DFA31D /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		7CBAA21C2A5D9BC500DFA31D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,12 +115,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CBAA1CD2A5D91D300DFA31D /* GoogleSignInSwift in Frameworks */,
+				7CBAA1C22A5D91A800DFA31D /* FirebaseAuth in Frameworks */,
+				7CBAA1CB2A5D91D300DFA31D /* GoogleSignIn in Frameworks */,
+				7CBAA1C42A5D91A800DFA31D /* FirebaseFirestore in Frameworks */,
+				7CBAA1C62A5D91A800DFA31D /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C7DA09B2A5DA01B00B58AFA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7C7DA09C2A5DA22800B58AFA /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */,
+				7CBAA21A2A5D96F000DFA31D /* Exercise.swift */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		7C7DA0A52A5DAE4100B58AFA /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0A62A5DAE4100B58AFA /* Session.swift */,
+				7C7DA0A72A5DAE4100B58AFA /* SessionsManager.swift */,
+				7C7DA0A82A5DAE4100B58AFA /* Bob.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		7C7DA0AA2A5DAE4100B58AFA /* Routine */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0AB2A5DAE4100B58AFA /* RoutinesManager.swift */,
+				7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */,
+			);
+			path = Routine;
+			sourceTree = "<group>";
+		};
 		7CBAA1A62A5D90DC00DFA31D = {
 			isa = PBXGroup;
 			children = (
@@ -51,10 +181,15 @@
 		7CBAA1B12A5D90DC00DFA31D /* MaxOut2 */ = {
 			isa = PBXGroup;
 			children = (
+				7CBAA21C2A5D9BC500DFA31D /* Info.plist */,
 				7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */,
-				7CBAA1B42A5D90DC00DFA31D /* ContentView.swift */,
-				7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */,
+				7CBAA2172A5D958700DFA31D /* MaxOut2.entitlements */,
+				7CBAA1DF2A5D935600DFA31D /* Model */,
+				7CBAA2002A5D944600DFA31D /* VVM */,
+				7CBAA2012A5D949200DFA31D /* Helpers */,
+				7CBAA2162A5D955500DFA31D /* Other */,
 				7CBAA1B82A5D90DE00DFA31D /* Preview Content */,
+				7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */,
 			);
 			path = MaxOut2;
 			sourceTree = "<group>";
@@ -65,6 +200,160 @@
 				7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7CBAA1CE2A5D924900DFA31D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1D02A5D924900DFA31D /* AuthenticationResultModel.swift */,
+				7CBAA1D12A5D924900DFA31D /* FireAuthManager.swift */,
+				7CBAA1D22A5D924900DFA31D /* SignInGoogleHelper.swift */,
+				7CBAA1CF2A5D924900DFA31D /* SignInWithAppleHelper.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		7CBAA1D92A5D92BB00DFA31D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1D72A5D92B000DFA31D /* SignInUtility.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7CBAA1DA2A5D935500DFA31D /* FitUser */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1DB2A5D935500DFA31D /* FitUsersManager.swift */,
+				7CBAA1DC2A5D935500DFA31D /* FitUser.swift */,
+			);
+			path = FitUser;
+			sourceTree = "<group>";
+		};
+		7CBAA1DF2A5D935600DFA31D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1CE2A5D924900DFA31D /* Firebase */,
+				7C7DA0A32A5DAE2400B58AFA /* Enums.swift */,
+				7CBAA1DA2A5D935500DFA31D /* FitUser */,
+				7C7DA09C2A5DA22800B58AFA /* Exercise */,
+				7C7DA0AA2A5DAE4100B58AFA /* Routine */,
+				7C7DA0A52A5DAE4100B58AFA /* Session */,
+				7C7DA0A92A5DAE4100B58AFA /* Workout.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7CBAA1E42A5D944400DFA31D /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1E52A5D944400DFA31D /* CreateAccountView */,
+				7CBAA1EF2A5D944400DFA31D /* LoginView */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7CBAA1E52A5D944400DFA31D /* CreateAccountView */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1E62A5D944400DFA31D /* CreateAccountViewModel.swift */,
+				7CBAA1E72A5D944400DFA31D /* CreateAccountView.swift */,
+			);
+			path = CreateAccountView;
+			sourceTree = "<group>";
+		};
+		7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1EA2A5D944400DFA31D /* Components */,
+				7CBAA1E92A5D944400DFA31D /* TSTextFieldsView.swift */,
+				7CBAA1EE2A5D944400DFA31D /* TSTextFieldsManager.swift */,
+			);
+			path = TSTextFieldsView;
+			sourceTree = "<group>";
+		};
+		7CBAA1EA2A5D944400DFA31D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1EB2A5D944400DFA31D /* ResignKeyboardButton.swift */,
+				7CBAA1EC2A5D944400DFA31D /* TSTextField.swift */,
+				7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7CBAA1EF2A5D944400DFA31D /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */,
+				7CBAA1F12A5D944400DFA31D /* LoginView.swift */,
+				7CBAA1F22A5D944400DFA31D /* SSO */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		7CBAA1F22A5D944400DFA31D /* SSO */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1F32A5D944400DFA31D /* SignInWithAppleButton.swift */,
+				7CBAA1F42A5D944400DFA31D /* SignInWithGoogleButton.swift */,
+			);
+			path = SSO;
+			sourceTree = "<group>";
+		};
+		7CBAA2002A5D944600DFA31D /* VVM */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA09B2A5DA01B00B58AFA /* Components */,
+				7CBAA1E42A5D944400DFA31D /* Authentication */,
+				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
+				7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */,
+			);
+			path = VVM;
+			sourceTree = "<group>";
+		};
+		7CBAA2012A5D949200DFA31D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1D92A5D92BB00DFA31D /* Utilities */,
+				7CBAA20D2A5D952000DFA31D /* Extensions */,
+				7CBAA2062A5D94EB00DFA31D /* ViewModifiers */,
+				7CBAA2042A5D94AC00DFA31D /* TextFieldFocus.swift */,
+				7CBAA2022A5D94A600DFA31D /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7CBAA2062A5D94EB00DFA31D /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */,
+				7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */,
+				7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */,
+				7CBAA2092A5D94EB00DFA31D /* CustomTFStyle.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		7CBAA20D2A5D952000DFA31D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA2182A5D964F00DFA31D /* Colors.swift */,
+				7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */,
+				7CBAA20E2A5D952A00DFA31D /* Bundle-decodable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7CBAA2162A5D955500DFA31D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */,
+				7CBAA2122A5D954C00DFA31D /* exercises.json */,
+				7CBAA2132A5D954C00DFA31D /* selectedExercises.json */,
+				7CBAA1C72A5D91BC00DFA31D /* GoogleService-Info.plist */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +372,13 @@
 			dependencies = (
 			);
 			name = MaxOut2;
+			packageProductDependencies = (
+				7CBAA1C12A5D91A800DFA31D /* FirebaseAuth */,
+				7CBAA1C32A5D91A800DFA31D /* FirebaseFirestore */,
+				7CBAA1C52A5D91A800DFA31D /* FirebaseFirestoreSwift */,
+				7CBAA1CA2A5D91D300DFA31D /* GoogleSignIn */,
+				7CBAA1CC2A5D91D300DFA31D /* GoogleSignInSwift */,
+			);
 			productName = MaxOut2;
 			productReference = 7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +407,10 @@
 				Base,
 			);
 			mainGroup = 7CBAA1A62A5D90DC00DFA31D;
+			packageReferences = (
+				7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = 7CBAA1B02A5D90DC00DFA31D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,7 +426,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */,
+				7CBAA2152A5D954C00DFA31D /* selectedExercises.json in Resources */,
+				7CBAA2142A5D954C00DFA31D /* exercises.json in Resources */,
+				7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */,
 				7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */,
+				7CBAA1C82A5D91BC00DFA31D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +441,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CBAA1B52A5D90DC00DFA31D /* ContentView.swift in Sources */,
+				7CBAA20B2A5D94EB00DFA31D /* KeyboardAdaptive.swift in Sources */,
+				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
+				7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */,
+				7CBAA1E32A5D93D400DFA31D /* RootViewModel.swift in Sources */,
+				7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */,
+				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
+				7CBAA20F2A5D952A00DFA31D /* Bundle-decodable.swift in Sources */,
+				7CBAA2112A5D953500DFA31D /* Resign-onDrag.swift in Sources */,
+				7CBAA1DD2A5D935500DFA31D /* FitUsersManager.swift in Sources */,
+				7C7DA0AE2A5DAE4100B58AFA /* SessionsManager.swift in Sources */,
+				7CBAA1F82A5D944400DFA31D /* ResignKeyboardButton.swift in Sources */,
+				7C7DA0A42A5DAE2500B58AFA /* Enums.swift in Sources */,
 				7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */,
+				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
+				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
+				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
+				7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */,
+				7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */,
+				7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */,
+				7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */,
+				7C7DA0AD2A5DAE4100B58AFA /* Session.swift in Sources */,
+				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
+				7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */,
+				7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */,
+				7CBAA1F52A5D944400DFA31D /* CreateAccountViewModel.swift in Sources */,
+				7CBAA1F72A5D944400DFA31D /* TSTextFieldsView.swift in Sources */,
+				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
+				7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */,
+				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
+				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
+				7CBAA20C2A5D94EB00DFA31D /* CustomTFStyle.swift in Sources */,
+				7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */,
+				7CBAA1D62A5D924900DFA31D /* SignInGoogleHelper.swift in Sources */,
+				7CBAA1D82A5D92B000DFA31D /* SignInUtility.swift in Sources */,
+				7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */,
+				7CBAA1FB2A5D944400DFA31D /* TSTextFieldsManager.swift in Sources */,
+				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
+				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
+				7CBAA1F92A5D944400DFA31D /* TSTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,15 +605,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MaxOut2/MaxOut2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MaxOut2/Preview Content\"";
 				DEVELOPMENT_TEAM = CLM5L23Y57;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MaxOut2/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Launchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -293,15 +638,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MaxOut2/MaxOut2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MaxOut2/Preview Content\"";
 				DEVELOPMENT_TEAM = CLM5L23Y57;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MaxOut2/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Launchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,6 +688,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7CBAA1C12A5D91A800DFA31D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7CBAA1C32A5D91A800DFA31D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		7CBAA1C52A5D91A800DFA31D /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		7CBAA1CA2A5D91D300DFA31D /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7CBAA1CC2A5D91D300DFA31D /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7CBAA1A72A5D90DC00DFA31D /* Project object */;
 }
