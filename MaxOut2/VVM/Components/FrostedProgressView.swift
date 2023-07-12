@@ -11,6 +11,7 @@ struct FrostedProgressView: View {
         .scaleEffect(2)
       
       Text(text)
+        .multilineTextAlignment(.center)
     }
     .padding()
     .frame(width: 150, height: 150)

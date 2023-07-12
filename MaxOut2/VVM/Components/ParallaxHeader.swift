@@ -1,5 +1,41 @@
 import SwiftUI
 
+struct ParallaxScrollView<Background: View, Header: View, Content: View, Space: Hashable> : View {
+  
+  let background: Background
+  let coordinateSpace: Space
+  let defaultHeight: CGFloat
+  let content: () -> Content
+  let header: () -> Header
+  
+  init(background: Background, coordinateSpace: Space, defaultHeight: CGFloat, @ViewBuilder content: @escaping () -> Content, @ViewBuilder header: @escaping () -> Header) {
+    self.background = background
+    self.coordinateSpace = coordinateSpace
+    self.defaultHeight = defaultHeight
+    self.content = content
+    self.header = header
+  }
+  
+  var body: some View {
+    ZStack {
+      background.ignoresSafeArea()
+      
+      ScrollView(showsIndicators: false) {
+        ParallaxHeader(coordinateSpace: coordinateSpace, defaultHeight: defaultHeight) {
+          header()
+        }
+        content()
+          .padding(.horizontal)
+          .padding(.vertical, 5)
+          .background(.ultraThinMaterial)
+          .cornerRadius(20)
+          .shadow(radius: 10)
+      }.coordinateSpace(name: coordinateSpace)
+        
+    }
+  }
+}
+
 struct ParallaxHeader<Content: View, Space: Hashable>: View {
   let content: () -> Content
   let coordinateSpace: Space
@@ -16,9 +52,8 @@ struct ParallaxHeader<Content: View, Space: Hashable>: View {
       let offset = offset(for: proxy)
       let heightModifier = heightModifier(for: proxy)
       let blurRadius = min(heightModifier/20, max(10, heightModifier/20))
-      
+
       content()
-//        .edgesIgnoringSafeArea(.horizontal)
         .frame(width: proxy.size.width,
                height: proxy.size.height + heightModifier)
         .offset(y: offset)

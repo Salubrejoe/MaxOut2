@@ -7,6 +7,8 @@ struct CreateAccountView: View {
   
   @Binding var showingLoginView: Bool
   
+  let progressText = "Fetching exercises"
+  
   var body: some View {
     ZStack {
       NavigationStack {
@@ -18,7 +20,7 @@ struct CreateAccountView: View {
         }
         .navigationTitle(K.createAccount)
         .padding()
-        .toolbar() {
+        .toolbar {
           ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
           ToolbarItem(placement: .navigationBarLeading) { dismissButton }
         }
@@ -26,7 +28,7 @@ struct CreateAccountView: View {
       .loginAnimation(model.isShowingProgressView)
       
       if model.isShowingProgressView {
-        FrostedProgressView(text: "Fetching exercises")
+        FrostedProgressView(text: progressText)
       }
     }
   }

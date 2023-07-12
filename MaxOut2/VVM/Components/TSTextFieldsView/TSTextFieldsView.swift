@@ -69,15 +69,21 @@ extension TSTextFieldsView {
     if withUsername {
       TSTextField(text: $model.username, field: .username, isSecure: false) {
         // TODO: Validate
-      } xMarkAction: { model.username = "" }
+        focus = withUsername ? .newEmail : .email
+      } xMarkAction: {
+        model.username = ""
+        focus = .username
+      }
         .focused($focus, equals: .username)
     }
     
     //MARK: - EMAIL
     TSTextField(text: $model.email, field: withUsername ? .newEmail : .email, isSecure: false) {
       model.validate(withConfirmation: true)
+      focus = withConfirmation ? .newPassword : .password
     } xMarkAction: {
       model.email = ""
+      focus = withUsername ? .newEmail : .email
       model.errorMessage = ""
     }
       .focused($focus, equals: withUsername ? .newEmail : .email)
@@ -85,8 +91,10 @@ extension TSTextFieldsView {
     //MARK: - PASSWORD
     TSTextField(text: $model.password, field: withConfirmation ? .newPassword : .password, isSecure: true) {
       model.validate(withConfirmation: true)
+      focus = withConfirmation ? .confirmPassword : nil
     } xMarkAction: {
       model.password = ""
+      focus = withConfirmation ? .newPassword : .password
       model.errorMessage = ""
     }
       .focused($focus, equals: withConfirmation ? .newPassword : .password)
@@ -95,8 +103,10 @@ extension TSTextFieldsView {
     if withConfirmation {
       TSTextField(text: $model.confirmPassword, field: .confirmPassword, isSecure: true) {
         model.validate(withConfirmation: true)
+        focus = nil
       } xMarkAction: {
         model.confirmPassword = ""
+        focus = .confirmPassword
         model.errorMessage = ""
       }
       .focused($focus, equals: .confirmPassword)

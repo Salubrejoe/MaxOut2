@@ -13,13 +13,23 @@ struct LoginView: View {
   
   @Binding var showingLoginView: Bool
   
+  let background = LinearGradient(colors: [
+    Color.gray,
+    Color.systemBackground
+  ], startPoint: .topLeading, endPoint: .bottomTrailing)
+  
   var body: some View {
     ZStack {
       VStack {
-        loginOptions
-        createAccountFooter
+        ParallaxScrollView(background: background, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 300) {
+          mainLoginInterface
+            .loginAnimation(model.isShowingProgressView)
+        } header: { header }
+          .edgesIgnoringSafeArea(.bottom)
+        
+//        createAccountFooter
       }
-      .loginAnimation(model.isShowingProgressView)
+      
       
       if model.isShowingProgressView {
         FrostedProgressView(text: "Fetching exercises")
@@ -27,6 +37,7 @@ struct LoginView: View {
     }
     .resignKeyboardOnDragGesture()
     .onTapGesture { focus = nil }
+//    .edgesIgnoringSafeArea(.bottom)
     .toolbar {
       ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
     }
@@ -37,55 +48,48 @@ struct LoginView: View {
 }
 
 extension LoginView {
-  // MARK: - PROPERTIES/COMPONENTS
   
-  @ViewBuilder
-  private var loginOptions: some View {
-    
-      ScrollView(showsIndicators: false) {
-        ParallaxHeader(coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 270) {
-          ZStack {
-            Image("shaunT")
-              .resizable()
-              .scaledToFill()
-            Text("Welcome")
-              .font(.largeTitle.bold())
-              .shadow(color: .systemBackground, radius: 10)
-          }
-        }
-        VStack(spacing: 8) {
-          // MARK: - SIw/ EMAIL
-          TSTextFieldsView(model: manager,
-                           resetPassword: true,
-                           withConfirmation: false,
-                           buttonText: "Log In",
-                           buttonColor: .accentColor) { signInWithEmail() } /// 🪡🧤
-          
-          customSpacer
-          
-          // MARK: - SIw/ APPLE
-          SignInWithAppleButton { signInWithApple() } /// 🪡🧤
-          
-          // MARK: - SIw/ GOOGLE
-          SignInWithGoogleButton { signInWithGoogle() } /// 🪡🧤
-            .padding(.bottom, 12)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 5)
-        .background(Color.systemBackground)
-        .cornerRadius(20)
-        .shadow(radius: 10)
-      }
-      .coordinateSpace(name: CoordinateSpaces.scrollView)
+  @ViewBuilder // MARK: - HEADER
+  private var header: some View {
+    Text("Welcome")
+      .font(.largeTitle.bold())
+      .shadow(color: .systemBackground, radius: 10)
+  }
+  
+  @ViewBuilder // MARK: - MAIN
+  private var mainLoginInterface: some View {
+    VStack(spacing: 8) {
+      // SIw/ EMAIL
+      TSTextFieldsView(model: manager,
+                       resetPassword: true,
+                       withConfirmation: false,
+                       buttonText: "Log In",
+                       buttonColor: .accentColor) { signInWithEmail() } /// 🪡🧤
+      
+      customSpacer
+      
+      // SIw/ APPLE
+      SignInWithAppleButton { signInWithApple() } /// 🪡🧤
+      
+      // SIw/ GOOGLE
+      SignInWithGoogleButton { signInWithGoogle() } /// 🪡🧤
+        .padding(.bottom, 12)
+      
+      createAccountFooter
+    }
   }
   
   @ViewBuilder // MARK: - Create New Account
   private var createAccountFooter: some View {
-    Divider()
-    Text("New around here?")
-    Button(K.createAccount) {
-      model.showingCreateAccountView = true
+    VStack {
+      Divider()
+      Text("New around here?")
+      Button(K.createAccount) {
+        model.showingCreateAccountView = true
+      }
     }
+    .font(.subheadline)
+    .padding(.bottom, 5)
   }
   
   
@@ -105,16 +109,15 @@ extension LoginView {
         .foregroundColor(.secondary)
     }
   }
-} // MARK: - PROPERTIES/COMPONENTS
+}
 
 extension LoginView {
-  // MARK: - METHODS
-
+  // MARK: - Sign In With
   private func signInWithEmail() { /// 🪡🧤
     Task {
       do {
         try await model.signIn(email: manager.email,
-                                   password: manager.password) /// 🧵🥎
+                               password: manager.password) /// 🧵🥎
         showingLoginView = false
       } catch { /// 🧤
         manager.errorMessage = K.TextFieldValidation.ErrorMessage.incorrectInfo
@@ -146,7 +149,7 @@ extension LoginView {
       }
     }
   }
-} // MARK: - TASKS
+}
 
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
