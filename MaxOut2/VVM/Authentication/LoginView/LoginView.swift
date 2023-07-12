@@ -14,21 +14,18 @@ struct LoginView: View {
   @Binding var showingLoginView: Bool
   
   let background = LinearGradient(colors: [
-    Color.gray,
+    Color.indigo.opacity(0.3),
     Color.systemBackground
   ], startPoint: .topLeading, endPoint: .bottomTrailing)
   
   var body: some View {
     ZStack {
-      VStack {
-        ParallaxScrollView(background: background, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 300) {
-          mainLoginInterface
-            .loginAnimation(model.isShowingProgressView)
-        } header: { header }
-          .edgesIgnoringSafeArea(.bottom)
+      ParallaxScrollView(background: background, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 300) {
+        mainLoginInterface
         
-//        createAccountFooter
-      }
+      } header: { header }
+        .edgesIgnoringSafeArea(.bottom)
+        .loginAnimation(model.isShowingProgressView)
       
       
       if model.isShowingProgressView {

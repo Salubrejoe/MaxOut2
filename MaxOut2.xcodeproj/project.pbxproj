@@ -21,6 +21,43 @@
 		7C7DA0BB2A5E909600B58AFA /* ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */; };
 		7C7DA0BD2A5E93F900B58AFA /* FrostedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */; };
 		7C7DA0C02A5E968900B58AFA /* MainButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */; };
+		7C7DA0C42A5EAFA000B58AFA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C22A5EAFA000B58AFA /* SettingsView.swift */; };
+		7C7DA0C52A5EAFA000B58AFA /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C32A5EAFA000B58AFA /* SettingsViewModel.swift */; };
+		7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */; };
+		7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */; };
+		7C7DA0CB2A5EB07A00B58AFA /* InProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0CA2A5EB07A00B58AFA /* InProgressView.swift */; };
+		7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */; };
+		7C7DA0D12A5EB0EA00B58AFA /* TSTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */; };
+		7C7DA0D62A5EB0F800B58AFA /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D32A5EB0F800B58AFA /* SessionViewModel.swift */; };
+		7C7DA0D72A5EB0F800B58AFA /* BobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D42A5EB0F800B58AFA /* BobView.swift */; };
+		7C7DA0D82A5EB0F800B58AFA /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D52A5EB0F800B58AFA /* SessionView.swift */; };
+		7C7DA0DB2A5EB12000B58AFA /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0DA2A5EB12000B58AFA /* GaugeView.swift */; };
+		7C7DA0DE2A5EB15300B58AFA /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 7C7DA0DD2A5EB15300B58AFA /* SwipeActions */; };
+		7C7DA0E82A5EB16400B58AFA /* TsCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E12A5EB16400B58AFA /* TsCalendarView.swift */; };
+		7C7DA0E92A5EB16400B58AFA /* TsCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E22A5EB16400B58AFA /* TsCalendarViewModel.swift */; };
+		7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E32A5EB16400B58AFA /* WorkoutGrid.swift */; };
+		7C7DA0EB2A5EB16400B58AFA /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E42A5EB16400B58AFA /* HistoryViewModel.swift */; };
+		7C7DA0EC2A5EB16400B58AFA /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E62A5EB16400B58AFA /* WorkoutDetailView.swift */; };
+		7C7DA0ED2A5EB16400B58AFA /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0E72A5EB16400B58AFA /* HistoryView.swift */; };
+		7C7DA0F02A5EB1AA00B58AFA /* SwiftUICalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 7C7DA0EF2A5EB1AA00B58AFA /* SwiftUICalendar */; };
+		7C7DA0F22A5EB1ED00B58AFA /* TimeInterval-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F12A5EB1ED00B58AFA /* TimeInterval-String.swift */; };
+		7C7DA0F42A5EB21000B58AFA /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F32A5EB21000B58AFA /* DurationFormatter.swift */; };
+		7C7DA0F92A5EB25400B58AFA /* CategoryImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F52A5EB25400B58AFA /* CategoryImageView.swift */; };
+		7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */; };
+		7C7DA0FB2A5EB25400B58AFA /* LetterPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */; };
+		7C7DA0FC2A5EB25400B58AFA /* SmallTsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */; };
+		7C7DA1092A5EB32A00B58AFA /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */; };
+		7C7DA10A2A5EB32A00B58AFA /* TemplatesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */; };
+		7C7DA10B2A5EB32A00B58AFA /* ThreeWayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1012A5EB32A00B58AFA /* ThreeWayPicker.swift */; };
+		7C7DA10D2A5EB32A00B58AFA /* TemplatesPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */; };
+		7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */; };
+		7C7DA10F2A5EB32A00B58AFA /* TemplatePickerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */; };
+		7C7DA1102A5EB32A00B58AFA /* ExerciseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */; };
+		7C7DA1112A5EB32A00B58AFA /* ExercisePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */; };
+		7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */; };
+		7C7DA1172A5EB35D00B58AFA /* AddEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */; };
+		7C7DA1192A5EB35D00B58AFA /* AddEditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */; };
+		7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -78,6 +115,41 @@
 		7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeader.swift; sourceTree = "<group>"; };
 		7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostedProgressView.swift; sourceTree = "<group>"; };
 		7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonLabel.swift; sourceTree = "<group>"; };
+		7C7DA0C22A5EAFA000B58AFA /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7C7DA0C32A5EAFA000B58AFA /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartContainer.swift; sourceTree = "<group>"; };
+		7C7DA0CA2A5EB07A00B58AFA /* InProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InProgressView.swift; sourceTree = "<group>"; };
+		7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
+		7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTimerView.swift; sourceTree = "<group>"; };
+		7C7DA0D32A5EB0F800B58AFA /* SessionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
+		7C7DA0D42A5EB0F800B58AFA /* BobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BobView.swift; sourceTree = "<group>"; };
+		7C7DA0D52A5EB0F800B58AFA /* SessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		7C7DA0DA2A5EB12000B58AFA /* GaugeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
+		7C7DA0E12A5EB16400B58AFA /* TsCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TsCalendarView.swift; sourceTree = "<group>"; };
+		7C7DA0E22A5EB16400B58AFA /* TsCalendarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TsCalendarViewModel.swift; sourceTree = "<group>"; };
+		7C7DA0E32A5EB16400B58AFA /* WorkoutGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutGrid.swift; sourceTree = "<group>"; };
+		7C7DA0E42A5EB16400B58AFA /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		7C7DA0E62A5EB16400B58AFA /* WorkoutDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
+		7C7DA0E72A5EB16400B58AFA /* HistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		7C7DA0F12A5EB1ED00B58AFA /* TimeInterval-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval-String.swift"; sourceTree = "<group>"; };
+		7C7DA0F32A5EB21000B58AFA /* DurationFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
+		7C7DA0F52A5EB25400B58AFA /* CategoryImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryImageView.swift; sourceTree = "<group>"; };
+		7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTsButton.swift; sourceTree = "<group>"; };
+		7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterPicker.swift; sourceTree = "<group>"; };
+		7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallTsButton.swift; sourceTree = "<group>"; };
+		7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
+		7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesPickerView.swift; sourceTree = "<group>"; };
+		7C7DA1012A5EB32A00B58AFA /* ThreeWayPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
+		7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesPickerViewModel.swift; sourceTree = "<group>"; };
+		7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesViewModel.swift; sourceTree = "<group>"; };
+		7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatePickerDetailView.swift; sourceTree = "<group>"; };
+		7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseListCell.swift; sourceTree = "<group>"; };
+		7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePickerView.swift; sourceTree = "<group>"; };
+		7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesListView.swift; sourceTree = "<group>"; };
+		7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditViewModel.swift; sourceTree = "<group>"; };
+		7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditExerciseView.swift; sourceTree = "<group>"; };
+		7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-optionals.swift"; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,6 +196,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CBAA1CD2A5D91D300DFA31D /* GoogleSignInSwift in Frameworks */,
+				7C7DA0F02A5EB1AA00B58AFA /* SwiftUICalendar in Frameworks */,
+				7C7DA0DE2A5EB15300B58AFA /* SwipeActions in Frameworks */,
 				7CBAA1C22A5D91A800DFA31D /* FirebaseAuth in Frameworks */,
 				7CBAA1CB2A5D91D300DFA31D /* GoogleSignIn in Frameworks */,
 				7CBAA1C42A5D91A800DFA31D /* FirebaseFirestore in Frameworks */,
@@ -137,10 +211,14 @@
 		7C7DA09B2A5DA01B00B58AFA /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */,
+				7C7DA0D92A5EB0FF00B58AFA /* InProgress */,
 				7CBAA1F22A5D944400DFA31D /* SSO */,
 				7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */,
 				7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */,
+				7C7DA0F52A5EB25400B58AFA /* CategoryImageView.swift */,
+				7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */,
+				7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */,
+				7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */,
 				7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */,
 			);
 			path = Components;
@@ -179,8 +257,123 @@
 			children = (
 				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
 				7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */,
+				7C7DA1132A5EB35D00B58AFA /* AddEditView */,
+				7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */,
+				7C7DA0CE2A5EB0C100B58AFA /* StartWorkoutView */,
+				7C7DA0DF2A5EB16400B58AFA /* HistoryView */,
+				7C7DA0C12A5EAFA000B58AFA /* SettingsView */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		7C7DA0C12A5EAFA000B58AFA /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0C22A5EAFA000B58AFA /* SettingsView.swift */,
+				7C7DA0C32A5EAFA000B58AFA /* SettingsViewModel.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		7C7DA0CE2A5EB0C100B58AFA /* StartWorkoutView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */,
+				7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */,
+				7C7DA0CA2A5EB07A00B58AFA /* InProgressView.swift */,
+				7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */,
+			);
+			path = StartWorkoutView;
+			sourceTree = "<group>";
+		};
+		7C7DA0CF2A5EB0EA00B58AFA /* TSTimer */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */,
+			);
+			path = TSTimer;
+			sourceTree = "<group>";
+		};
+		7C7DA0D22A5EB0F800B58AFA /* SessionView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0D32A5EB0F800B58AFA /* SessionViewModel.swift */,
+				7C7DA0D42A5EB0F800B58AFA /* BobView.swift */,
+				7C7DA0D52A5EB0F800B58AFA /* SessionView.swift */,
+			);
+			path = SessionView;
+			sourceTree = "<group>";
+		};
+		7C7DA0D92A5EB0FF00B58AFA /* InProgress */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0DA2A5EB12000B58AFA /* GaugeView.swift */,
+				7C7DA0D22A5EB0F800B58AFA /* SessionView */,
+				7C7DA0CF2A5EB0EA00B58AFA /* TSTimer */,
+			);
+			path = InProgress;
+			sourceTree = "<group>";
+		};
+		7C7DA0DF2A5EB16400B58AFA /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0E02A5EB16400B58AFA /* TsCalendarView */,
+				7C7DA0E32A5EB16400B58AFA /* WorkoutGrid.swift */,
+				7C7DA0E42A5EB16400B58AFA /* HistoryViewModel.swift */,
+				7C7DA0E52A5EB16400B58AFA /* WorkoutDetailView */,
+				7C7DA0E72A5EB16400B58AFA /* HistoryView.swift */,
+			);
+			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		7C7DA0E02A5EB16400B58AFA /* TsCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0E12A5EB16400B58AFA /* TsCalendarView.swift */,
+				7C7DA0E22A5EB16400B58AFA /* TsCalendarViewModel.swift */,
+			);
+			path = TsCalendarView;
+			sourceTree = "<group>";
+		};
+		7C7DA0E52A5EB16400B58AFA /* WorkoutDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0E62A5EB16400B58AFA /* WorkoutDetailView.swift */,
+			);
+			path = WorkoutDetailView;
+			sourceTree = "<group>";
+		};
+		7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */,
+				7C7DA0FF2A5EB32A00B58AFA /* TemplatePickerView */,
+				7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */,
+				7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */,
+				7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */,
+				7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */,
+				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
+			);
+			path = ExercisesView;
+			sourceTree = "<group>";
+		};
+		7C7DA0FF2A5EB32A00B58AFA /* TemplatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */,
+				7C7DA1012A5EB32A00B58AFA /* ThreeWayPicker.swift */,
+				7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */,
+			);
+			path = TemplatePickerView;
+			sourceTree = "<group>";
+		};
+		7C7DA1132A5EB35D00B58AFA /* AddEditView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */,
+				7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */,
+			);
+			path = AddEditView;
 			sourceTree = "<group>";
 		};
 		7CBAA1A62A5D90DC00DFA31D = {
@@ -238,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBAA1D72A5D92B000DFA31D /* SignInUtility.swift */,
+				7C7DA0F32A5EB21000B58AFA /* DurationFormatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -346,6 +540,7 @@
 		7CBAA2062A5D94EB00DFA31D /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */,
 				7C7DA0B62A5DD36200B58AFA /* LoginAnimation.swift */,
 				7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */,
 				7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */,
@@ -358,6 +553,8 @@
 		7CBAA20D2A5D952000DFA31D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */,
+				7C7DA0F12A5EB1ED00B58AFA /* TimeInterval-String.swift */,
 				7CBAA2182A5D964F00DFA31D /* Colors.swift */,
 				7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */,
 				7CBAA20E2A5D952A00DFA31D /* Bundle-decodable.swift */,
@@ -398,6 +595,8 @@
 				7CBAA1C52A5D91A800DFA31D /* FirebaseFirestoreSwift */,
 				7CBAA1CA2A5D91D300DFA31D /* GoogleSignIn */,
 				7CBAA1CC2A5D91D300DFA31D /* GoogleSignInSwift */,
+				7C7DA0DD2A5EB15300B58AFA /* SwipeActions */,
+				7C7DA0EF2A5EB1AA00B58AFA /* SwiftUICalendar */,
 			);
 			productName = MaxOut2;
 			productReference = 7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */;
@@ -430,6 +629,8 @@
 			packageReferences = (
 				7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */,
+				7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */,
 			);
 			productRefGroup = 7CBAA1B02A5D90DC00DFA31D /* Products */;
 			projectDirPath = "";
@@ -461,13 +662,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C7DA0FC2A5EB25400B58AFA /* SmallTsButton.swift in Sources */,
 				7CBAA20B2A5D94EB00DFA31D /* KeyboardAdaptive.swift in Sources */,
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
 				7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */,
 				7C7DA0C02A5E968900B58AFA /* MainButtonLabel.swift in Sources */,
 				7CBAA1E32A5D93D400DFA31D /* RootViewModel.swift in Sources */,
+				7C7DA0D82A5EB0F800B58AFA /* SessionView.swift in Sources */,
 				7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */,
+				7C7DA10A2A5EB32A00B58AFA /* TemplatesPickerView.swift in Sources */,
+				7C7DA1112A5EB32A00B58AFA /* ExercisePickerView.swift in Sources */,
+				7C7DA10D2A5EB32A00B58AFA /* TemplatesPickerViewModel.swift in Sources */,
+				7C7DA0EB2A5EB16400B58AFA /* HistoryViewModel.swift in Sources */,
 				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
+				7C7DA1172A5EB35D00B58AFA /* AddEditViewModel.swift in Sources */,
 				7CBAA20F2A5D952A00DFA31D /* Bundle-decodable.swift in Sources */,
 				7CBAA2112A5D953500DFA31D /* Resign-onDrag.swift in Sources */,
 				7CBAA1DD2A5D935500DFA31D /* FitUsersManager.swift in Sources */,
@@ -478,32 +686,60 @@
 				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
 				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
 				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
+				7C7DA10B2A5EB32A00B58AFA /* ThreeWayPicker.swift in Sources */,
 				7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */,
+				7C7DA0F42A5EB21000B58AFA /* DurationFormatter.swift in Sources */,
 				7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */,
 				7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */,
 				7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */,
+				7C7DA0F92A5EB25400B58AFA /* CategoryImageView.swift in Sources */,
+				7C7DA0C42A5EAFA000B58AFA /* SettingsView.swift in Sources */,
+				7C7DA0CB2A5EB07A00B58AFA /* InProgressView.swift in Sources */,
 				7C7DA0AD2A5DAE4100B58AFA /* Session.swift in Sources */,
+				7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */,
+				7C7DA0EC2A5EB16400B58AFA /* WorkoutDetailView.swift in Sources */,
 				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
+				7C7DA0D62A5EB0F800B58AFA /* SessionViewModel.swift in Sources */,
+				7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */,
+				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
 				7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */,
 				7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */,
 				7CBAA1F52A5D944400DFA31D /* CreateAccountViewModel.swift in Sources */,
+				7C7DA0D72A5EB0F800B58AFA /* BobView.swift in Sources */,
 				7C7DA0BD2A5E93F900B58AFA /* FrostedProgressView.swift in Sources */,
 				7CBAA1F72A5D944400DFA31D /* TSTextFieldsView.swift in Sources */,
+				7C7DA0ED2A5EB16400B58AFA /* HistoryView.swift in Sources */,
+				7C7DA0DB2A5EB12000B58AFA /* GaugeView.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
+				7C7DA0F22A5EB1ED00B58AFA /* TimeInterval-String.swift in Sources */,
+				7C7DA1092A5EB32A00B58AFA /* PickerCell.swift in Sources */,
 				7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */,
+				7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */,
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* CustomTFStyle.swift in Sources */,
+				7C7DA1192A5EB35D00B58AFA /* AddEditExerciseView.swift in Sources */,
 				7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */,
+				7C7DA0C52A5EAFA000B58AFA /* SettingsViewModel.swift in Sources */,
+				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C7DA0B72A5DD36200B58AFA /* LoginAnimation.swift in Sources */,
+				7C7DA0FB2A5EB25400B58AFA /* LetterPicker.swift in Sources */,
+				7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */,
 				7CBAA1D62A5D924900DFA31D /* SignInGoogleHelper.swift in Sources */,
+				7C7DA0E82A5EB16400B58AFA /* TsCalendarView.swift in Sources */,
 				7CBAA1D82A5D92B000DFA31D /* SignInUtility.swift in Sources */,
+				7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */,
+				7C7DA0D12A5EB0EA00B58AFA /* TSTimerView.swift in Sources */,
+				7C7DA0E92A5EB16400B58AFA /* TsCalendarViewModel.swift in Sources */,
 				7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */,
+				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* TSTextFieldsManager.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
+				7C7DA1102A5EB32A00B58AFA /* ExerciseListCell.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
 				7C7DA0BB2A5E909600B58AFA /* ParallaxHeader.swift in Sources */,
 				7CBAA1F92A5D944400DFA31D /* TSTextField.swift in Sources */,
+				7C7DA10F2A5EB32A00B58AFA /* TemplatePickerDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +950,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/SwipeActions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GGJJack/SwiftUICalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.14;
+			};
+		};
 		7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -733,6 +985,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7C7DA0DD2A5EB15300B58AFA /* SwipeActions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */;
+			productName = SwipeActions;
+		};
+		7C7DA0EF2A5EB1AA00B58AFA /* SwiftUICalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */;
+			productName = SwiftUICalendar;
+		};
 		7CBAA1C12A5D91A800DFA31D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

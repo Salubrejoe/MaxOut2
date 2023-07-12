@@ -19,7 +19,7 @@ final class K {
   static let addNewTrans = "Add New Expense"
   
   struct TextFieldValidation {
-    static let passwordLost = "Have you forgotten your password?"
+    static let passwordLost = "Forgot your password? Click here!"
     static let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
     static let passwordRegex = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$"
         
