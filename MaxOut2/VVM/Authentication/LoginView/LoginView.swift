@@ -3,6 +3,10 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 struct LoginView: View {
+  private enum CoordinateSpaces {
+    case scrollView
+  }
+  
   @StateObject private var model = LoginViewModel()
   @ObservedObject var manager = TSTextFieldsManager()
   @FocusState private var focus: Field?
@@ -23,9 +27,7 @@ struct LoginView: View {
     }
     .resignKeyboardOnDragGesture()
     .onTapGesture { focus = nil }
-    .navigationTitle("〄 Welcome")
-    .padding()
-    .toolbar() {
+    .toolbar {
       ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
     }
     .sheet(isPresented: $model.showingCreateAccountView) {
@@ -41,6 +43,16 @@ extension LoginView {
   private var loginOptions: some View {
     
       ScrollView(showsIndicators: false) {
+        ParallaxHeader(coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 270) {
+          ZStack {
+            Image("shaunT")
+              .resizable()
+              .scaledToFill()
+            Text("Welcome")
+              .font(.largeTitle.bold())
+              .shadow(color: .systemBackground, radius: 10)
+          }
+        }
         VStack(spacing: 8) {
           // MARK: - SIw/ EMAIL
           TSTextFieldsView(model: manager,
@@ -48,7 +60,7 @@ extension LoginView {
                            withConfirmation: false,
                            buttonText: "Log In",
                            buttonColor: .accentColor) { signInWithEmail() } /// 🪡🧤
-            
+          
           customSpacer
           
           // MARK: - SIw/ APPLE
@@ -56,8 +68,15 @@ extension LoginView {
           
           // MARK: - SIw/ GOOGLE
           SignInWithGoogleButton { signInWithGoogle() } /// 🪡🧤
+            .padding(.bottom, 12)
         }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .background(Color.systemBackground)
+        .cornerRadius(20)
+        .shadow(radius: 10)
       }
+      .coordinateSpace(name: CoordinateSpaces.scrollView)
   }
   
   @ViewBuilder // MARK: - Create New Account

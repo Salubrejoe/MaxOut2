@@ -106,13 +106,7 @@ extension TSTextFieldsView {
   @ViewBuilder //MARK: - BUTTON Label
   private var buttonLabel: some View {
     Text(buttonText)
-      .font(.system(size: 18))
-      .fontWeight(.semibold)
-      .foregroundColor(Color.systemBackground)
-      .frame(maxWidth: 432)
-      .frame(height: 46)
-      .background(buttonColor)
-      .cornerRadius(10)
+      .buttonLabel(background: .accentColor, foreground: .systemBackground)
   }
   
   @ViewBuilder //MARK: - PASSW RECOVERY ALERT

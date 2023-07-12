@@ -12,9 +12,9 @@ struct TSTextField: View {
       if isSecure {
         SecureField(field.stringValue.capitalized, text: $text)
           .autocorrectionDisabled(true)
+          .textInputAutocapitalization(.never)
           .padding()
-          .background(.ultraThinMaterial)
-          .cornerRadius(10)
+          .buttonLabel(background: .secondarySytemBackground, foreground: .primary)
           .onSubmit {
             action()
           }
@@ -22,9 +22,10 @@ struct TSTextField: View {
       else {
         TextField(field.stringValue.capitalized, text: $text)
           .autocorrectionDisabled(true)
+          .textInputAutocapitalization(.never)
           .padding()
           .background(.ultraThinMaterial)
-          .cornerRadius(10)
+          .buttonLabel(background: .secondarySytemBackground, foreground: .primary)
           .onSubmit {
             action()
           }
@@ -37,7 +38,8 @@ struct TSTextField: View {
         .padding(.trailing)
       }
     }
-    .frame(maxWidth: 432)
+    .frame(maxWidth: 428)
+    .frame(height: 46)
   }
 }
 

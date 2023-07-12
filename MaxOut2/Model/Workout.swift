@@ -2,11 +2,8 @@
 import Foundation
 
 struct Workout: Identifiable, Codable, Equatable {
-  static func == (lhs: Workout, rhs: Workout) -> Bool {
-    lhs.id == rhs.id
-  }
-  
-  var id: String { routine.id }
+   var id: String { routine.id }
+
   let routine: Routine
   let sessions: [Session]
   
@@ -32,5 +29,9 @@ struct Workout: Identifiable, Codable, Equatable {
     let month = calendar.component(.month, from: date)
     let monthSymbols = calendar.monthSymbols
     return "\(monthSymbols[month - 1])"
+  }
+  
+  static func == (lhs: Workout, rhs: Workout) -> Bool {
+    lhs.id == rhs.id
   }
 }

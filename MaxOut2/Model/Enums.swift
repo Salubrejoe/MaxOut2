@@ -117,19 +117,3 @@ enum Category: String, CaseIterable {
   }
 }
 
-enum Force: String, CaseIterable {
-  case pull = "pull"
-  case push = "push"
-  case stat = "static"
-}
-
-enum Level: String, CaseIterable {
-  case beginner     = "beginner"
-  case intermediate = "intermediate"
-  case expert       = "expert"
-}
-
-enum Mechanic: String, CaseIterable {
-  case compound  = "compound"
-  case isolation = "isolation"
-}

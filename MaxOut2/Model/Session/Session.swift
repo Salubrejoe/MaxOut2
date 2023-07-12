@@ -45,9 +45,8 @@ struct Session: Identifiable, Equatable {
     var bestBobIndex = 0
     
     for (index, bob) in session.bobs.enumerated() {
-      let result = bob.kg * Double(bob.reps)
-      //  + bob.distance * bob.duration
-      // TODO: FIX CALCULATIONS
+      let result = bob.kg * Double(bob.reps) + bob.distance * bob.duration
+      
       
       if result > maxResult {
         maxResult = result
@@ -65,9 +64,9 @@ struct Session: Identifiable, Equatable {
       session.bobs[index].isCompleted = true
     }
   }
-  
 }
 
+// MARK: - CODABLE
 extension Session: Codable {
   enum CodingKeys: String, CodingKey {
     case id

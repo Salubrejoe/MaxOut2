@@ -18,6 +18,9 @@
 		7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0AB2A5DAE4100B58AFA /* RoutinesManager.swift */; };
 		7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */; };
 		7C7DA0B72A5DD36200B58AFA /* LoginAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0B62A5DD36200B58AFA /* LoginAnimation.swift */; };
+		7C7DA0BB2A5E909600B58AFA /* ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */; };
+		7C7DA0BD2A5E93F900B58AFA /* FrostedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */; };
+		7C7DA0C02A5E968900B58AFA /* MainButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -72,6 +75,9 @@
 		7C7DA0AB2A5DAE4100B58AFA /* RoutinesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesManager.swift; sourceTree = "<group>"; };
 		7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		7C7DA0B62A5DD36200B58AFA /* LoginAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAnimation.swift; sourceTree = "<group>"; };
+		7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeader.swift; sourceTree = "<group>"; };
+		7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostedProgressView.swift; sourceTree = "<group>"; };
+		7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonLabel.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,7 +137,11 @@
 		7C7DA09B2A5DA01B00B58AFA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */,
+				7CBAA1F22A5D944400DFA31D /* SSO */,
 				7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */,
+				7C7DA0BA2A5E909600B58AFA /* ParallaxHeader.swift */,
+				7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -148,8 +158,8 @@
 		7C7DA0A52A5DAE4100B58AFA /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0A62A5DAE4100B58AFA /* Session.swift */,
 				7C7DA0A72A5DAE4100B58AFA /* SessionsManager.swift */,
+				7C7DA0A62A5DAE4100B58AFA /* Session.swift */,
 				7C7DA0A82A5DAE4100B58AFA /* Bob.swift */,
 			);
 			path = Session;
@@ -162,6 +172,15 @@
 				7C7DA0AC2A5DAE4100B58AFA /* Routine.swift */,
 			);
 			path = Routine;
+			sourceTree = "<group>";
+		};
+		7C7DA0BE2A5E943900B58AFA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
+				7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		7CBAA1A62A5D90DC00DFA31D = {
@@ -235,12 +254,12 @@
 		7CBAA1DF2A5D935600DFA31D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7CBAA1CE2A5D924900DFA31D /* Firebase */,
 				7C7DA0A32A5DAE2400B58AFA /* Enums.swift */,
+				7CBAA1CE2A5D924900DFA31D /* Firebase */,
 				7CBAA1DA2A5D935500DFA31D /* FitUser */,
 				7C7DA09C2A5DA22800B58AFA /* Exercise */,
-				7C7DA0AA2A5DAE4100B58AFA /* Routine */,
 				7C7DA0A52A5DAE4100B58AFA /* Session */,
+				7C7DA0AA2A5DAE4100B58AFA /* Routine */,
 				7C7DA0A92A5DAE4100B58AFA /* Workout.swift */,
 			);
 			path = Model;
@@ -289,7 +308,6 @@
 			children = (
 				7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */,
 				7CBAA1F12A5D944400DFA31D /* LoginView.swift */,
-				7CBAA1F22A5D944400DFA31D /* SSO */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -308,8 +326,7 @@
 			children = (
 				7C7DA09B2A5DA01B00B58AFA /* Components */,
 				7CBAA1E42A5D944400DFA31D /* Authentication */,
-				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
-				7CBAA1E12A5D93D400DFA31D /* RootViewModel.swift */,
+				7C7DA0BE2A5E943900B58AFA /* Core */,
 			);
 			path = VVM;
 			sourceTree = "<group>";
@@ -447,6 +464,7 @@
 				7CBAA20B2A5D94EB00DFA31D /* KeyboardAdaptive.swift in Sources */,
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
 				7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */,
+				7C7DA0C02A5E968900B58AFA /* MainButtonLabel.swift in Sources */,
 				7CBAA1E32A5D93D400DFA31D /* RootViewModel.swift in Sources */,
 				7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */,
 				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
@@ -469,6 +487,7 @@
 				7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */,
 				7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */,
 				7CBAA1F52A5D944400DFA31D /* CreateAccountViewModel.swift in Sources */,
+				7C7DA0BD2A5E93F900B58AFA /* FrostedProgressView.swift in Sources */,
 				7CBAA1F72A5D944400DFA31D /* TSTextFieldsView.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
 				7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */,
@@ -483,6 +502,7 @@
 				7CBAA1FB2A5D944400DFA31D /* TSTextFieldsManager.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
+				7C7DA0BB2A5E909600B58AFA /* ParallaxHeader.swift in Sources */,
 				7CBAA1F92A5D944400DFA31D /* TSTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

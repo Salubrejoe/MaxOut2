@@ -23,9 +23,7 @@ struct RootView: View {
       .fontDesign(.rounded)
       .onAppear(perform: model.checkCurrentUser)
       .fullScreenCover(isPresented: $model.showingLoginView) {
-        NavigationStack {
-          LoginView(showingLoginView: $model.showingLoginView)
-        }
+        LoginView(showingLoginView: $model.showingLoginView)
       }
   }
 

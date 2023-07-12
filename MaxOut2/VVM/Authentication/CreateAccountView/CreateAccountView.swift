@@ -4,7 +4,6 @@ struct CreateAccountView: View {
   @Environment(\.dismiss) var dismiss
   @StateObject private var model = CreateAccountViewModel()
   @ObservedObject var manager = TSTextFieldsManager()
-  @State private var showAlert = false
   
   @Binding var showingLoginView: Bool
   
@@ -61,6 +60,7 @@ extension CreateAccountView {
         
         if model.authResult != nil { showingLoginView = false }
       } catch { /// 🧤
+        model.isShowingProgressView = false
         manager.errorMessage = "The email address is already in use by another account"
       }
     }
@@ -72,27 +72,6 @@ struct SignInWithEmailView_Previews: PreviewProvider {
     NavigationStack {
       CreateAccountView(showingLoginView: .constant(true))
     }
-  }
-}
-
-struct FrostedProgressView: View {
-  let text: String
-  
-  var body: some View {
-    VStack {
-      ProgressView()
-        .frame(width: 50, height: 50)
-        .imageScale(.large)
-        .scaleEffect(2)
-      
-      Text(text)
-    }
-    .padding()
-    .frame(width: 150, height: 150)
-    .font(.headline)
-    .foregroundColor(.secondary)
-    .background(.ultraThinMaterial)
-    .cornerRadius(20)
   }
 }
 

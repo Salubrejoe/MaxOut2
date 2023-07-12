@@ -22,11 +22,15 @@ struct Routine: Codable, Identifiable, Hashable {
       let calendar = Calendar.current
       let currentHour = calendar.component(.hour, from: Date())
       
-      if (5..<12).contains(currentHour) {
+      if (4..<8).contains(currentHour) {
+        return "Early Morning Workout"
+      } else if (8..<11).contains(currentHour) {
         return "Morning Workout"
-      } else if (12..<19).contains(currentHour) {
+      } else if (11..<13).contains(currentHour) {
+        return "Midday Workout"
+      } else if (13..<17).contains(currentHour) {
         return "Afternoon Workout"
-      } else if (19..<23).contains(currentHour) {
+      } else if (17..<22).contains(currentHour) {
         return "Evening Workout"
       } else {
         return "Night Workout"
