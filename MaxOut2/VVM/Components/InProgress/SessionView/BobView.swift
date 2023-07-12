@@ -7,7 +7,7 @@ import SwipeActions
 struct BobView: View {
   @ObservedObject var model: SessionViewModel
   @Binding var session: Session
-  @Binding var isShowingKeyboard: Bool
+//  @Binding var isShowingKeyboard: Bool
 
   
   let index: Int
@@ -37,23 +37,6 @@ struct BobView: View {
     .fontDesign(.rounded)
     .background(session.bobs[index].isCompleted ? Color(.systemGreen).opacity(0.3) : .clear)
     .animation(.default, value: session.bobs)
-  }
-  
-  @ViewBuilder
-  private var bobSet: some View {
-    HStack {
-      let bob = session.bobs[index]
-      
-      Text("kg")
-      Text(String(format: "%.0f", bob.kg)).onTapGesture {
-        isShowingKeyboard.toggle()
-      }
-      Text("   ×   ")
-      Text(String(format: "%.0f", bob.reps)).onTapGesture {
-        isShowingKeyboard.toggle()
-      }
-      Text("reps")
-    }
   }
   
   @ViewBuilder // MARK: - BOB

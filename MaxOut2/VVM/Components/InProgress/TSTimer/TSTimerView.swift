@@ -19,17 +19,11 @@ struct TSTimerView: View {
           Text(startDate, style: .timer)
             .font(.headline)
             .foregroundColor(.primary)
-//          Image(systemName: "record.circle")
-//            .imageScale(.large)
-//            .foregroundColor(.red)
           Spacer()
         }
         
         HStack {
           Spacer()
-//          Text(startDate, style: .timer)
-//            .font(.headline)
-//            .foregroundColor(.primary)
           Image(systemName: "record.circle")
             .imageScale(.large)
             .foregroundColor(.red)
@@ -37,8 +31,7 @@ struct TSTimerView: View {
       }
       
       .padding(.vertical, 3)
-//      .frame(width: 90)
-      .frame(minWidth: 80)
+      .frame(width: 90)
       .frame(height: 47)
       .padding(.leading, 13)
       .padding(.trailing, 11)

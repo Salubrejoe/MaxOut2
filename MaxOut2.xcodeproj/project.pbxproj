@@ -58,6 +58,7 @@
 		7C7DA1172A5EB35D00B58AFA /* AddEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */; };
 		7C7DA1192A5EB35D00B58AFA /* AddEditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */; };
 		7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */; };
+		7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -150,6 +151,7 @@
 		7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditViewModel.swift; sourceTree = "<group>"; };
 		7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditExerciseView.swift; sourceTree = "<group>"; };
 		7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-optionals.swift"; sourceTree = "<group>"; };
+		7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInProgressView.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */,
 				7C7DA0CA2A5EB07A00B58AFA /* InProgressView.swift */,
 				7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */,
+				7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */,
 			);
 			path = StartWorkoutView;
 			sourceTree = "<group>";
@@ -317,11 +320,11 @@
 		7C7DA0DF2A5EB16400B58AFA /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA0E52A5EB16400B58AFA /* WorkoutDetailView */,
 				7C7DA0E02A5EB16400B58AFA /* TsCalendarView */,
 				7C7DA0E32A5EB16400B58AFA /* WorkoutGrid.swift */,
-				7C7DA0E42A5EB16400B58AFA /* HistoryViewModel.swift */,
-				7C7DA0E52A5EB16400B58AFA /* WorkoutDetailView */,
 				7C7DA0E72A5EB16400B58AFA /* HistoryView.swift */,
+				7C7DA0E42A5EB16400B58AFA /* HistoryViewModel.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -346,8 +349,8 @@
 		7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */,
 				7C7DA0FF2A5EB32A00B58AFA /* TemplatePickerView */,
+				7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */,
 				7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */,
 				7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */,
 				7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */,
@@ -718,6 +721,7 @@
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* CustomTFStyle.swift in Sources */,
+				7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */,
 				7C7DA1192A5EB35D00B58AFA /* AddEditExerciseView.swift in Sources */,
 				7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */,
 				7C7DA0C52A5EAFA000B58AFA /* SettingsViewModel.swift in Sources */,

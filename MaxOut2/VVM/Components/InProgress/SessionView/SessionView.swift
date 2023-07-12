@@ -26,7 +26,7 @@ final class SessionViewModel: ObservableObject {
 
 struct SessionView: View {
 
-  @Binding var isShowingKeyboard: Bool
+//  @Binding var isShowingKeyboard: Bool
   @Binding var session: Session
   @StateObject private var sessModel = SessionViewModel()
   @ObservedObject var model: StartViewModel
@@ -41,22 +41,23 @@ struct SessionView: View {
           
           header
             .padding(.horizontal, 16)
-            .padding(.top, 20)
+            .padding(.top, 10)
           
           VStack(spacing: 0) {
             ForEach($session.bobs.indices, id: \.self) { index in
-              BobView(model: sessModel, session: $session, isShowingKeyboard: $isShowingKeyboard, index: index)
+              BobView(model: sessModel, session: $session,  index: index)
             }
           }
           .background(Color.background)
           .cornerRadius(10)
-          
           .padding(.bottom, 5)
+          .padding(.horizontal, 5)
         }
-//        .background(Color.secondarySytemBackground)
+        .background(Color.accentColor.opacity(0.1))
         .cornerRadius(14)
         
         newSetButton
+          .padding(.bottom, 10)
       }
     }
   }
@@ -79,10 +80,6 @@ extension SessionView {
           
           Text(session.exerciseName.capitalized)
             .fontDesign(.rounded)
-          
-          Image(session.image)
-            .resizable().scaledToFit()
-            .frame(width: 18, height: 18).foregroundColor(.secondary.opacity(0.5))
           Text(" - \(session.timeString)")
             .font(.caption)
             .foregroundColor(.secondary.opacity(0.5))

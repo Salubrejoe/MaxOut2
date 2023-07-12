@@ -3,9 +3,9 @@ import SwiftUI
 import SwiftUICalendar
 
 struct TsCalendartView: View {
+  
   @StateObject private var controller = CalendarController()
   @ObservedObject var model: HistoryViewModel
-  
   
   var body: some View {
       VStack {

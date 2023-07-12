@@ -2,19 +2,22 @@
 import SwiftUI
 
 struct StartPageView: View {
-  @ObservedObject var model: StartViewModel
+  private enum CoordinateSpaces {
+    case scrollView
+  }
   
+  @ObservedObject var model: StartViewModel
   @Binding var showingLoginView: Bool
   
   var body: some View {
-    NavigationStack {
-      VStack {
-        header(user: model.fitUser)
-          .padding(.vertical, 40)
+    ZStack(alignment: .topTrailing) {
+      ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 500) {
         startButton
+          .padding(.vertical)
+      } header: {
+        header(user: model.fitUser)
       }
-      .navigationTitle("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
-      .toolbar { settings }
+      settings
     }
   }
 }
@@ -23,12 +26,14 @@ extension StartPageView {
   
   // MARK: - HEADER
   private func header(user: FitUser) -> some View {
-    HStack {
+    VStack {
       if let photoUrl = user.photoUrl {
         AsyncImage(url: URL(string: photoUrl))
           .frame(width: 50, height: 50)
           .cornerRadius(12)
       }
+      Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
+        .font(.largeTitle.bold())
     }
   }
   
@@ -40,14 +45,12 @@ extension StartPageView {
     }
   }
   
-  @ToolbarContentBuilder // MARK: - SETTINGS
-  private var settings: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      NavigationLink {
-        SettingsView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
-      } label: {
-        Image(systemName: "gearshape")
-      }
+  @ViewBuilder // MARK: - SETTINGS
+  private var settings: some View {
+    NavigationLink {
+      SettingsView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
+    } label: {
+      Image(systemName: "gearshape")
     }
   }
 }

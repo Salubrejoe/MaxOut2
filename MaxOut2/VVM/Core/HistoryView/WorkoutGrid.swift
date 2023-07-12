@@ -7,23 +7,21 @@ struct WorkoutGrid: View {
   let columns = [GridItem(.adaptive(minimum: 300))]
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      ScrollViewReader { value in
-        VStack(alignment: .leading) {
-          Text("History").font(.title).padding(.leading)
-          LazyVGrid(columns: columns) {
-            elements
-          }
+    ScrollViewReader { value in
+      VStack(alignment: .leading) {
+        Text("History").font(.title).padding(.leading)
+        LazyVGrid(columns: columns) {
+          elements
         }
-        .onChange(of: model.focusedDate) { newValue in
-          withAnimation {
-            value.scrollTo(newValue, anchor: .top)
-          }
+      }
+      .padding(.vertical, 10)
+      .onChange(of: model.focusedDate) { newValue in
+        withAnimation {
+          value.scrollTo(newValue, anchor: .center)
         }
       }
     }
     .animation(.spring(), value: model.workouts)
-    
   }
 
   @ViewBuilder // MARK: - LIST

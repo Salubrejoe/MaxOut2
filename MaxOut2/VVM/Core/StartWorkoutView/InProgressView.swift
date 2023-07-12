@@ -13,7 +13,7 @@ struct InProgressView: View {
       ScrollView(showsIndicators: false) {
         LazyVGrid(columns: columns, spacing: 5) {
           ForEach($model.sessions) { $session in
-            SessionView(isShowingKeyboard: $isShowingKeyboard, session: $session, model: model)
+            SessionView(session: $session, model: model)
           }
           
           VStack {
@@ -32,7 +32,7 @@ struct InProgressView: View {
         }
         .toolbar { timer }
         .animation(.spring(), value: model.sessions)
-        .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
+        .alert(model.alertText, isPresented: $model.showingCancelAlert) { cancelAlert }
       }
       .scrollDismissesKeyboard(.interactively)
     }
@@ -65,7 +65,7 @@ extension InProgressView {
   }
   
   @ViewBuilder // MARK: - CANCEL Alert
-  private var finishAlert: some View {
+  private var cancelAlert: some View {
     Button("Resume", role: .cancel) {}
     Button("Quit", role: .destructive) {
       model.cancelRoutine()

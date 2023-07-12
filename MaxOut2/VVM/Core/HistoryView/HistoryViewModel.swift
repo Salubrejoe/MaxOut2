@@ -9,7 +9,9 @@ final class HistoryViewModel: ObservableObject {
   @Published var decorations     = [YearMonthDay: [(String, Color)]]()
 
   @Published var currentFocusedMonth : String = "Calendar"
-  @Published  var currentFocusedYear  : String = "📆"
+  @Published var currentFocusedYear  : String = "📆"
+  
+  @Published var isShowingCalendar = true
   
   var focusedDayName: String? {
     guard
