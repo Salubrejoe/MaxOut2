@@ -52,6 +52,7 @@ final class StartViewModel: ObservableObject {
   func loadCurrentUser() async throws { /// 🧵⚾️
     let authDataResult = try FireAuthManager.shared.currentAuthenticatedUser() /// 🥎
     self.fitUser = try await FitUserManager.shared.user(id: authDataResult.uid) /// 🧵🥎
+    print(fitUser)
   }
   
   

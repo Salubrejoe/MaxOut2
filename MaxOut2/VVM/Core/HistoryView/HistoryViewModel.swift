@@ -3,16 +3,26 @@ import SwiftUICalendar
 
 
 final class HistoryViewModel: ObservableObject {
+  
+  /// Main array used for populating WorkoutGrid()
   @Published var workouts        : [Workout] = []
+  
+  /// CalendarView
   @Published var focusedWorkouts : [Workout]? = nil
   @Published var focusedDate     : YearMonthDay? = nil
-  @Published var decorations     = [YearMonthDay: [(String, Color)]]()
+  
+  /// Still needed because some methods (hasWorkotsRecorded) rely on it
+  @Published var decorations = [YearMonthDay: [(String, Color)]]()
 
+  /// Placeholders for the title
   @Published var currentFocusedMonth : String = "Calendar"
   @Published var currentFocusedYear  : String = "📆"
   
+  /// Toolbar condition
   @Published var isShowingCalendar = true
   
+  
+  /// Returns the name of the current day (eg Monday, Tuesday, ..)
   var focusedDayName: String? {
     guard
       let date = focusedDate
@@ -22,13 +32,16 @@ final class HistoryViewModel: ObservableObject {
     return weekdayName(from: dayOfWeek.rawValue)
   }
   
+  // MARK: - WORKOUTS SECTIONED
+  /// Method returns section headers and respective array of workouts
   var groupedWorkouts: [(String, [Workout])] {
     let sortedItems = workouts.sorted { $0.monthYear < $1.monthYear }
     let grouped = Dictionary(grouping: sortedItems) { String($0.month) + " " + String($0.year) }
     return grouped.sorted { $0.0 < $1.0 }
   }
   
-  
+  // MARK: - BACKGROUND
+  /// Style for cells
   func opacity(for date: YearMonthDay) -> CGFloat {
     guard hasWorkoutsRecorded(date) else { return 1 }
     let totalDuration = workoutTime(for: date)
@@ -40,12 +53,27 @@ final class HistoryViewModel: ObservableObject {
     return true
   }
   
+  func backgroundColor(for date: YearMonthDay) -> Color {
+    if focusedDate == date { return Color.accentColor.opacity(0.5)}
+    else { return .secondarySytemBackground }
+  }
+  
+
+  
+  /// This init is missing from the API..........
   func yearMonthDay(from date: Date) -> YearMonthDay {
     let calendar = Calendar.current
     let year = calendar.component(.year, from: date)
     let month = calendar.component(.month, from: date)
     let day = calendar.component(.day, from: date)
     return YearMonthDay(year: year, month: month, day: day)
+  }
+  
+  
+  /// TOOLBAR method for "Today" Button
+  func jumpToToday() {
+    if isShowingCalendar == false { isShowingCalendar = true }
+    focusedDate = YearMonthDay.current
   }
   
   // MARK: - WEEKDAY NAME
@@ -61,15 +89,7 @@ final class HistoryViewModel: ObservableObject {
     return weekdayName // 0 = SUNDAY
   }
   
-//  func sectionTitle() -> String {
-//    guard
-//      let date = focusedDate
-//    else { return "History"}
-//    
-//    let s = date.dayOfWeek
-//  }
-  
-  // MARK: - Get Workouts
+  // MARK: - Get Workout Duration
   func workoutTime(for date: YearMonthDay) -> TimeInterval {
     var duration = 0.0
     
@@ -89,13 +109,13 @@ final class HistoryViewModel: ObservableObject {
         duration += workout.routine.duration
       }
     }
-    print("\(date) => \(duration)s \n\n")
     return duration
   }
   
   
+  // MARK: - Populate Calendar method
+  /// Gets workouts for WorkoutGrid and decorations for CalendarView
   func getViewInfo() {
-
     Task {
       do {
         let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid
@@ -142,6 +162,8 @@ final class HistoryViewModel: ObservableObject {
     }
   }
   
+  
+  // MARK: - GET END DATE FOR WORKOUT
   private func getEndDate(for workout: Workout) -> YearMonthDay {
     guard let routineDate = workout.routine.dateEnded else { return YearMonthDay.current}
     
@@ -155,7 +177,7 @@ final class HistoryViewModel: ObservableObject {
     return YearMonthDay(year: year, month: month, day: day)
   }
   
-  // MARK: - OnTap Gesture
+  // MARK: - TAP CALEND CELLS ACTION
   func switchFocus(for date: YearMonthDay) {
     withAnimation {
       if focusedDate == date {
@@ -205,16 +227,19 @@ final class HistoryViewModel: ObservableObject {
     }
 }
 
-//  func removeFromFocusInfo(_ workout: Workout) {
-//    guard let index = focusInfo?.firstIndex(of: workout) else { return }
-//    focusInfo?.remove(at: index)
-//  }
-//
-//  func reloadInformations(_ workout: Workout) {
-//    let endDate = getEndDate(for: workout)
-//
-//    if let _ = self.decorations[endDate] {
-//      self.decorations[endDate] = []
-//      getInformations()
-//    }
-//  }
+extension HistoryViewModel {
+
+  //  func removeFromFocusInfo(_ workout: Workout) {
+  //    guard let index = focusInfo?.firstIndex(of: workout) else { return }
+  //    focusInfo?.remove(at: index)
+  //  }
+  //
+  //  func reloadInformations(_ workout: Workout) {
+  //    let endDate = getEndDate(for: workout)
+  //
+  //    if let _ = self.decorations[endDate] {
+  //      self.decorations[endDate] = []
+  //      getInformations()
+  //    }
+  //  }
+}

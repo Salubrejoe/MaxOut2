@@ -10,14 +10,13 @@ struct StartPageView: View {
   @Binding var showingLoginView: Bool
   
   var body: some View {
-    ZStack(alignment: .topTrailing) {
+    NavigationStack {
       ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 500) {
         startButton
           .padding(.vertical)
       } header: {
         header(user: model.fitUser)
       }
-      settings
     }
   }
 }
@@ -26,14 +25,18 @@ extension StartPageView {
   
   // MARK: - HEADER
   private func header(user: FitUser) -> some View {
-    VStack {
-      if let photoUrl = user.photoUrl {
-        AsyncImage(url: URL(string: photoUrl))
-          .frame(width: 50, height: 50)
-          .cornerRadius(12)
+    ZStack {
+      VStack {
+        if let photoUrl = user.photoUrl {
+          AsyncImage(url: URL(string: photoUrl))
+            .frame(width: 50, height: 50)
+            .cornerRadius(12)
+        }
+        Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
+          .font(.largeTitle.bold())
       }
-      Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
-        .font(.largeTitle.bold())
+      
+      settings
     }
   }
   
@@ -47,10 +50,18 @@ extension StartPageView {
   
   @ViewBuilder // MARK: - SETTINGS
   private var settings: some View {
-    NavigationLink {
-      SettingsView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
-    } label: {
-      Image(systemName: "gearshape")
+    VStack {
+      HStack {
+        Spacer()
+        NavigationLink {
+          SettingsView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
+        } label: {
+          Image(systemName: "gearshape")
+            .imageScale(.large)
+        }
+      }
+      Spacer()
     }
+    .padding()
   }
 }

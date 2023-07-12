@@ -22,9 +22,14 @@ struct TsCalendartView: View {
       .onReceive(controller.$yearMonth) { _ in
         getMonthAndYear()
       }
-      
+      .onChange(of: model.focusedDate) { newValue in
+        guard let date = newValue else { return }
+        let yearMonth = YearMonth(year: date.year, month: date.month)
+        controller.scrollTo(yearMonth)
+      }
   }
   
+  /// GET TITLE
   private func getMonthAndYear() {
     model.currentFocusedYear = controller.yearMonth.year.description
     model.currentFocusedMonth = controller.yearMonth.monthShortString
@@ -34,8 +39,7 @@ struct TsCalendartView: View {
 
 extension TsCalendartView {
   
-  
-  // MARK: - CV HEADER
+  // MARK: - WEEKDAYS HEADER
   private func header(week: Week) -> some View {
     GeometryReader { geometry in
       Text(week.shortString)
@@ -48,34 +52,41 @@ extension TsCalendartView {
   
   // MARK: - CELL
   private func cell(date: YearMonthDay) -> some View {
-    GeometryReader { geometry in
-//      let height = geometry.size.height
-      VStack(alignment: .center) {
-        
-        // MARK: - TODAY label
-        if date.isToday {
-          
-            Text("\(date.day)")
-            .font(.headline)
-              .padding(4)
-              .foregroundColor(model.focusedDate == date ? .background : .accentColor)
-              .frame(width: 30, height: 30)
-              .background(background(for: date))
-              .cornerRadius(7)
-          
-        } else {
-          
-          // MARK: - DAYS label
-            Text("\(date.day)")
-              .font(model.hasWorkoutsRecorded(date) ? .headline : .subheadline)
-              .foregroundColor(model.hasWorkoutsRecorded(date) ? .systemBackground : .primary)
-              .padding(4)
-              .frame(width: 30, height: 30)
-              .background(background(for: date))
-              .cornerRadius(7)
-              .opacity(date.isFocusYearMonth == true ? 1 : 0.2)
-              
-        }
+    VStack {
+      
+      if date.isToday {
+        // TODAY label
+        Text("\(date.day)")
+          .foregroundColor(model.focusedDate == date ? .systemBackground : .accentColor)
+          .calendarCell(model, date: date)
+      }
+      else {
+        // DAYS label
+        Text("\(date.day)")
+          .foregroundColor(model.hasWorkoutsRecorded(date) ? .systemBackground : .primary)
+          .opacity(date.isFocusYearMonth == true ? 1 : 0.2)
+          .calendarCell(model, date: date)
+      }
+    }.onTapGesture { model.switchFocus(for: date) }
+  }
+}
+
+// MARK: - VIEW MODIFIER
+fileprivate extension View {
+  @ViewBuilder
+  func calendarCell(_ model: HistoryViewModel, date: YearMonthDay) -> some View {
+    self
+      .font(.subheadline)
+      .padding(4)
+      .frame(width: 30, height: 30)
+      .background(model.backgroundColor(for: date))
+      .cornerRadius(7)
+      .shadow(color: model.hasWorkoutsRecorded(date) ? .primary.opacity(model.opacity(for: date)) : .clear, radius: 5)
+  }
+}
+
+
+// MARK: - DECORATIONS
 //        if let decorations = model.decorations[date] {
 //          ForEach(decorations.indices, id: \.self) { index in
 //            let decoration = decorations[index]
@@ -88,7 +99,6 @@ extension TsCalendartView {
 //              }
 //
 //
-//              // MARK: - Decoration
 //              Text(!focusedInfo ? "" : decoration.0)
 //                .lineLimit(2)
 //                .foregroundColor(.white)
@@ -102,27 +112,3 @@ extension TsCalendartView {
 //            }
 //          }
 //        }
-      }
-        .frame(width: geometry.size.width - 2, height: geometry.size.height - 2, alignment: .top)
-        .padding(.top, geometry.size.height/5)
-        
-        .cornerRadius(7)
-        .onTapGesture { model.switchFocus(for: date) }
-    }
-  }
-
-  func background(for date: YearMonthDay) -> Color {
-    if model.hasWorkoutsRecorded(date) {
-      return model.focusedDate == date ? Color.accentColor.opacity(model.opacity(for: date)) : Color.primary.opacity(model.opacity(for: date))
-    }
-    else {
-      return model.focusedDate == date ? Color.accentColor : Color.clear
-    }
-  }
-}
-
-struct TsCalendartView_Previews: PreviewProvider {
-  static var previews: some View {
-    TsCalendartView(model: HistoryViewModel())
-  }
-}

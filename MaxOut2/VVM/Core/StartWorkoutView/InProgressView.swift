@@ -9,8 +9,7 @@ struct InProgressView: View {
   let columns = [GridItem(.adaptive(minimum: 300))]
   
   var body: some View {
-    ZStack(alignment: .bottom) {
-      ScrollView(showsIndicators: false) {
+//      ScrollView(showsIndicators: false) {
         LazyVGrid(columns: columns, spacing: 5) {
           ForEach($model.sessions) { $session in
             SessionView(session: $session, model: model)
@@ -33,9 +32,9 @@ struct InProgressView: View {
         .toolbar { timer }
         .animation(.spring(), value: model.sessions)
         .alert(model.alertText, isPresented: $model.showingCancelAlert) { cancelAlert }
-      }
-      .scrollDismissesKeyboard(.interactively)
-    }
+//      }
+      
+    
   }
 }
 

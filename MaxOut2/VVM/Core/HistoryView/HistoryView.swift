@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUICalendar
 
 struct HistoryView: View {
   private enum CoordinateSpaces {
@@ -10,7 +11,7 @@ struct HistoryView: View {
   
   var body: some View {
     NavigationStack {
-      ParallaxScrollView(background: Color.secondarySytemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: model.isShowingCalendar ? 300 : 0, content: {
+      ParallaxScrollView(background: Color.secondarySytemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: model.isShowingCalendar ? 320 : 0, content: {
         WorkoutGrid(model: model)
       }, header: {
         if model.isShowingCalendar { TsCalendartView(model: model) }
@@ -26,7 +27,14 @@ struct HistoryView: View {
           } label: {
             Image(systemName: "calendar")
               .imageScale(.large)
-              .foregroundColor(.accentColor)
+          }
+        }
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            model.jumpToToday()
+          } label: {
+            Text("Today")
           }
         }
       }
