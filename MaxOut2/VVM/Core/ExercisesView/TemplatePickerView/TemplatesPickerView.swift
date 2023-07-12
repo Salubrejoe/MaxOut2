@@ -13,6 +13,17 @@ struct TemplatesPickerView: View {
         
         LetterPicker(selectedLetter: $model.selectedLetter, alphabet: model.alphabet)
           .animation(.spring(), value: model.selectedLetter)
+        
+        VStack {
+          Spacer()
+          if model.selectedTemplates.count > 0 {
+            LargeTsButton(text: "Add \(model.selectedTemplates.count)", buttonColor: .accentColor, textColor: .systemBackground) {
+              model.addToExercises(model.selectedTemplates)
+              model.selectedTemplates = []
+              dismiss()
+            }
+          }
+        }
       }
       .padding(.horizontal)
       .navigationTitle("🚀 Discover").navigationBarTitleDisplayMode(.inline)

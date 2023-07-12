@@ -58,6 +58,7 @@
 		7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */; };
 		7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */; };
 		7C7DA1212A5F058A00B58AFA /* ThreeWayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */; };
+		7C7DA1232A5F117500B58AFA /* QuickActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1222A5F117500B58AFA /* QuickActionButtonView.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -150,6 +151,7 @@
 		7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-optionals.swift"; sourceTree = "<group>"; };
 		7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInProgressView.swift; sourceTree = "<group>"; };
 		7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
+		7C7DA1222A5F117500B58AFA /* QuickActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionButtonView.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -214,13 +216,17 @@
 				7C7DA0D92A5EB0FF00B58AFA /* InProgress */,
 				7CBAA1F22A5D944400DFA31D /* SSO */,
 				7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */,
+				7C7DA0D22A5EB0F800B58AFA /* SessionView */,
+				7C7DA0CF2A5EB0EA00B58AFA /* TSTimer */,
+				7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */,
 				7C7DA0BA2A5E909600B58AFA /* ParallaxScrollView.swift */,
 				7C7DA0F52A5EB25400B58AFA /* CategoryImageView.swift */,
-				7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */,
-				7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */,
 				7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */,
+				7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */,
 				7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */,
+				7C7DA1222A5F117500B58AFA /* QuickActionButtonView.swift */,
 				7C7DA0BC2A5E93F900B58AFA /* FrostedProgressView.swift */,
+				7C7DA0DA2A5EB12000B58AFA /* GaugeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -308,9 +314,6 @@
 		7C7DA0D92A5EB0FF00B58AFA /* InProgress */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0DA2A5EB12000B58AFA /* GaugeView.swift */,
-				7C7DA0D22A5EB0F800B58AFA /* SessionView */,
-				7C7DA0CF2A5EB0EA00B58AFA /* TSTimer */,
 			);
 			path = InProgress;
 			sourceTree = "<group>";
@@ -701,6 +704,7 @@
 				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
 				7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */,
 				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
+				7C7DA1232A5F117500B58AFA /* QuickActionButtonView.swift in Sources */,
 				7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */,
 				7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */,
 				7CBAA1F52A5D944400DFA31D /* CreateAccountViewModel.swift in Sources */,

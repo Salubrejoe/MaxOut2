@@ -9,6 +9,9 @@ struct StartPageView: View {
   @ObservedObject var model: StartViewModel
   @Binding var showingLoginView: Bool
   
+  // GRID LAYOUT
+  let columns = [GridItem(.adaptive(minimum: 160))]
+  
   var body: some View {
     NavigationStack {
       ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 500) {
@@ -34,9 +37,23 @@ extension StartPageView {
         }
         Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
           .font(.largeTitle.bold())
+        
+        quickGrid
+          .padding()
       }
       
       settings
+    }
+  }
+  
+  @ViewBuilder
+  private var quickGrid: some View {
+    LazyVGrid(columns: columns, spacing: 20) {
+      NavigationLink {
+        ExercisesListView()
+      } label: {
+        QuickActionButtonView()
+      }
     }
   }
   
