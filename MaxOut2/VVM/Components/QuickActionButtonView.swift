@@ -19,17 +19,19 @@ struct QuickActionButtonView: View {
         Image("exercisesList")
           .resizable()
           .scaledToFit()
-          .frame(width: 60, height: 60)
+          .frame(width: 66, height: 66)
         
         // small
         Spacer()
         HStack(spacing: 3) {
           Text("Exercise List")
             .font(.subheadline)
+            .foregroundColor(.primary)
           Image(systemName: "chevron.right")
             .imageScale(.small)
             .scaleEffect(0.5)
             .offset(y: 1)
+            .foregroundColor(.primary)
           Spacer()
         }
         
