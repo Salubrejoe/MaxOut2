@@ -16,7 +16,7 @@ struct ExercisesListView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .cornerRadius(20)
-        .padding()
+//        .padding()
         .shadow(radius: 5)
       }
       .listStyle(.plain)
