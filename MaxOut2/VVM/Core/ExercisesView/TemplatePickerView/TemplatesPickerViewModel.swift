@@ -1,6 +1,6 @@
 import SwiftUI
 
-
+@MainActor
 final class TemplatesPickerViewModel: ObservableObject {
   @Published var templateExercises: [Exercise] = []
   @Published var selectedTemplates: [Exercise] = [] /// Selectable
@@ -13,18 +13,21 @@ final class TemplatesPickerViewModel: ObservableObject {
   @Published var selectedMuscle    : String = ""
   @Published var selectedEquipment : String = ""
   
+  /// Bools
+  @Published var isShowing3WayPicker = false
+  @Published var showingAddEdit      = false
+  
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
-  
-  init() { // MARK: - INIT
-    loadJson()
-  }
-  
+  /// Exercise.mockup
+  @Published var newExercise = Exercise.mockup
+
+  /// Letter Picker variable
   @Published var selectedLetter = ""
   
   
-  // MARK: - Letter Picker var
+  // MARK: - SECTIONED EXERCISES
   var groupedExercises: [(String, [Exercise])] {
     let sortedItems = templateExercises.sorted { $0.name < $1.name }
     let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
@@ -43,6 +46,28 @@ final class TemplatesPickerViewModel: ObservableObject {
     selectedLetter = letter
   }
   
+    
+  // MARK: - IndexForExercise
+  func indexOfItem(_ exercise: Exercise) -> Int? {
+    guard let index = self.templateExercises.firstIndex(where: { $0.id == exercise.id }) else {
+      return nil
+    }
+    return index
+  }
+  
+  
+  // MARK: - TOGGLE IsSELECTED
+  func toggleIsSelected(_ exercise: Exercise) {
+    guard let generalIndex = indexOfItem(exercise) else { return }
+    
+    if exercise.isSelected == false {
+      templateExercises[generalIndex].isSelected = true
+      selectedTemplates.append(exercise)
+    }
+    else {
+      removeFromSelected(exercise)
+    }
+  }
   
   func removeFromSelected(_ exercise: Exercise) {
     guard let generalIndex = indexOfItem(exercise) else { return }
@@ -55,35 +80,8 @@ final class TemplatesPickerViewModel: ObservableObject {
     }
   }
   
-  
-  // MARK: - IndexForExercise
-  func indexOfItem(_ exercise: Exercise) -> Int? {
-    guard let index = self.templateExercises.firstIndex(where: { $0.id == exercise.id }) else {
-      return nil
-    }
-    return index
-  }
-  
-  func toggleIsSelected(_ exercise: Exercise) {
-    guard let generalIndex = indexOfItem(exercise) else { return }
-    
-    if exercise.isSelected == false {
-      templateExercises[generalIndex].isSelected = true
-      selectedTemplates.append(exercise)
-    }
-    else {
-      templateExercises[generalIndex].isSelected = false
-      for i in selectedTemplates.indices {
-        let id = selectedTemplates[i].id
-        if id == exercise.id {
-          selectedTemplates.remove(at: i)
-        }
-      }
-    }
-  }
-  
-  /// Load all templates
-  private func loadJson() {
+  // MARK: - LOAD JSON
+  func loadJson() {
     self.templateExercises = []
     let result: ExercisesArray = Bundle.main.decode("exercises.json")
     
@@ -92,7 +90,8 @@ final class TemplatesPickerViewModel: ObservableObject {
     templateExercises = decodedExercises
   }
   
-  /// SAVE
+  
+  // MARK: - ADD TO EXERCISES
   func addToExercises(_ exercises: [Exercise]) {
     Task {
       let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid
@@ -138,6 +137,8 @@ extension TemplatesPickerViewModel {
     templateExercises = filteredExercises.sorted { ($0.category > $1.category) || ($0.primaryMuscles[0] > $1.primaryMuscles[0]) }
   }
 }
+
+
 
 
 /*

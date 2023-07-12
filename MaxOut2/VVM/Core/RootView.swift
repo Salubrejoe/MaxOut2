@@ -22,10 +22,10 @@ struct RootView: View {
         .tabItem {
           Label("Start", systemImage: "bolt.ring.closed")
         }
-//      ExercisesListView()
-//        .tabItem {
-//          Label("Exercises", systemImage: "figure.hiking")
-//        }
+      ExercisesListView()
+        .tabItem {
+          Label("Exercises", systemImage: "figure.hiking")
+        }
       HistoryView()
         .tabItem {
           Label("History", systemImage: "mountain.2")

@@ -9,7 +9,6 @@ struct InProgressView: View {
   let columns = [GridItem(.adaptive(minimum: 300))]
   
   var body: some View {
-//      ScrollView(showsIndicators: false) {
         LazyVGrid(columns: columns, spacing: 5) {
           ForEach($model.sessions) { $session in
             SessionView(session: $session, model: model)
@@ -26,15 +25,10 @@ struct InProgressView: View {
           .padding(.top, 25)
         }
         .navigationTitle(model.stateTextString())
-        .fullScreenCover(isPresented: $model.isShowingPicker) {
-          fullScreenPicker
-        }
+        .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
         .toolbar { timer }
         .animation(.spring(), value: model.sessions)
         .alert(model.alertText, isPresented: $model.showingCancelAlert) { cancelAlert }
-//      }
-      
-    
   }
 }
 
@@ -47,6 +41,7 @@ extension InProgressView {
         model.isShowingPicker = false
       }
       ExercisePickerView(routineModel: model)
+//      LesPickerView(sharedModel: model, isDiscovering: false)
     }
   }
   

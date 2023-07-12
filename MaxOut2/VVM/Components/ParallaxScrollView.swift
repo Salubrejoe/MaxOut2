@@ -30,10 +30,9 @@ struct ParallaxScrollView<Background: View, Header: View, Content: View, Space: 
           .background(.ultraThinMaterial)
           .cornerRadius(20)
           .shadow(radius: 5)
-      }.coordinateSpace(name: coordinateSpace)
-        .scrollDismissesKeyboard(.interactively)
-
-        
+      }
+      .coordinateSpace(name: coordinateSpace)
+      .scrollDismissesKeyboard(.interactively)
     }
   }
 }

@@ -9,14 +9,17 @@ struct ExercisesListView: View {
       VStack {
         smallButtons
           .padding(.horizontal)
+          .padding(.top, 20)
         
         List(model.exercises) { exercise in
           cell(for: exercise)
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .cornerRadius(20)
+        .padding()
+        .shadow(radius: 5)
       }
       .listStyle(.plain)
-      .navigationTitle("🦾 My Exercises")
-      .navigationBarTitleDisplayMode(.inline)
       .onAppear(perform: model.addListenerToFavourites)
       .animation(.spring(), value: model.exercises)
       .sheet(isPresented: $model.showingAddEdit) {
@@ -25,21 +28,28 @@ struct ExercisesListView: View {
         }
       }
     }
+    .background(Color.secondarySytemBackground)
   }
 }
 
 extension ExercisesListView {
   @ViewBuilder // MARK: - Small BUTTONS
   private var smallButtons: some View {
-    HStack {
-      SmallTsButton(text: "🖌️ Create", style: .secondary) {
-        model.showingAddEdit = true
+    VStack {
+      HStack {
+        Text("🦾 My Exercises").font(.largeTitle)
+        Spacer()
       }
-      NavigationLink {
-        TemplatesPickerView(isShowing3WayPicker: $model.isShowing3WayPicker)
-      } label: {
-        Text("🚀 Discover")
-          .tsButtonLabel(background: .backgroundInverted, foreground: .systemBackground)
+      HStack {
+        SmallTsButton(text: "🖌️ Create", style: .secondary) {
+          model.showingAddEdit = true
+        }
+        NavigationLink {
+          TemplatesPickerView()
+        } label: {
+          Text("🚀 Discover")
+            .tsButtonLabel(background: .primary, foreground: .systemBackground)
+        }
       }
     }
   }

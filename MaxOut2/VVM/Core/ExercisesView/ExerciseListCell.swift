@@ -11,6 +11,7 @@ struct ExerciseListCell: View {
       BodyPartImageView(muscleGroup: exercise.muscleGroupImage, equipment: exercise.equipmentImage, size: 60, color: exercise.color)
       
       vStackLabels
+      Spacer()
     }
     .multilineTextAlignment(.leading)
     .animation(.easeIn, value: exercise.isSelected)

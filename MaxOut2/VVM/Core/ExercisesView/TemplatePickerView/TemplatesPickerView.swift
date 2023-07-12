@@ -4,14 +4,11 @@ import SwiftUI
 
 struct TemplatesPickerView: View {
   @Environment(\.dismiss) var dismiss
-  @Binding var isShowing3WayPicker: Bool
   @StateObject private var model = TemplatesPickerViewModel()
-  
   
   var body: some View {
     NavigationStack {
       ZStack {
-        
         exercisesList
         
         LetterPicker(selectedLetter: $model.selectedLetter, alphabet: model.alphabet)
@@ -27,7 +24,7 @@ struct TemplatesPickerView: View {
           saveButton()
         }
       }
-      
+      .onAppear { model.loadJson() }
       .searchable(text: $model.searchText, placement: .navigationBarDrawer(displayMode: .always))  /// SearchBar
       .onChange(of: model.searchText) { _ in
         model.search()
@@ -39,7 +36,7 @@ struct TemplatesPickerView: View {
 extension TemplatesPickerView {
   
   @ViewBuilder // MARK: - LIST
-  private var exercisesList: some View {
+  private var exercisesList: some View { 
     ScrollView(showsIndicators: false) {
       ScrollViewReader { pageScroller in
         LazyVGrid(columns: model.columns) {
@@ -96,7 +93,7 @@ extension TemplatesPickerView {
     }
   }
   
-  @ViewBuilder
+  @ViewBuilder // MARK: - SELECTED LIST
   private var selectedList: some View {
     let exercises = model.selectedTemplates
     
@@ -115,7 +112,6 @@ extension TemplatesPickerView {
       withAnimation {
         model.addToExercises(model.selectedTemplates)
         model.selectedTemplates = []
-        isShowing3WayPicker = false
         dismiss()
       }
       

@@ -1,5 +1,5 @@
 
-import Foundation
+import SwiftUI
 import Combine
 
 final class ExercisesViewModel: ObservableObject {
@@ -26,6 +26,9 @@ final class ExercisesViewModel: ObservableObject {
   
   /// Alphabetical order 
   @Published var selectedLetter = ""
+  
+  /// Grid columns
+  let columns = [GridItem(.adaptive(minimum: 300))]
   
   var groupedExercises: [(String, [Exercise])] {
     let sortedItems = exercises.sorted { $0.name < $1.name }

@@ -72,7 +72,7 @@ extension ExercisePickerView {
         model.showingAddEdit = true
       }
       NavigationLink {
-        TemplatesPickerView(isShowing3WayPicker: $model.isShowing3WayPicker)
+        TemplatesPickerView()
       } label: {
         Text("🚀 Discover")
           .tsButtonLabel(background: .primary, foreground: .systemBackground)
@@ -109,7 +109,6 @@ extension ExercisePickerView {
       Spacer()
     }
     .padding(.top)
-    
   }
   
   @ViewBuilder // MARK: - LIST
