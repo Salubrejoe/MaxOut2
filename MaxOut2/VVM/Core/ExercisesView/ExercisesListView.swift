@@ -10,8 +10,24 @@ struct ExercisesListView: View {
         smallButtons
           .padding(.horizontal)
         
-        List(model.exercises) { exercise in
-          cell(for: exercise)
+        ScrollViewReader { pageScroller in
+          List {
+            ForEach(model.groupedExercises, id: \.0) { section in
+              Section(section.0) {
+                ForEach(section.1) { exercise in
+                  cell(for: exercise)
+                }
+              }
+            }
+          }
+          .overlay {
+            HStack {
+              Spacer()
+              SectionIndexTitles(model: model, pageScroller: pageScroller)
+                .padding(.trailing, 10)
+                .background(Color.systemBackground.opacity(0.5))
+            }
+          }
         }
       }
       .listStyle(.plain)
@@ -44,7 +60,7 @@ extension ExercisesListView {
     }
   }
   
-  // MARK: - CELL
+  // MARK: - Nav LINK
   private func cell(for exercise: Exercise) -> some View {
     NavigationLink {
       AddEditExerciseView(passedExercise: exercise)
@@ -53,6 +69,27 @@ extension ExercisesListView {
         model.remove(exercise: exercise.id)
       }
     }
+  }
+}
+
+
+// MARK: - CELL
+struct ExerciseListCell: View {
+  let exercise: Exercise
+  
+  let deleteAction: () -> ()
+  
+  var body: some View {
+    CellLabel(exercise: exercise)
+      .animation(.easeIn, value: exercise.isSelected)
+      .swipeActions(edge: .leading, allowsFullSwipe: true) {
+        Button {
+          deleteAction()
+        } label: {
+          Image(systemName: "trash")
+        }
+        .tint(Color(.systemRed))
+      }
   }
 }
 

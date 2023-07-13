@@ -45,12 +45,10 @@
 		7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */; };
 		7C7DA0FB2A5EB25400B58AFA /* LetterPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */; };
 		7C7DA0FC2A5EB25400B58AFA /* SmallTsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */; };
-		7C7DA1092A5EB32A00B58AFA /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */; };
 		7C7DA10A2A5EB32A00B58AFA /* TemplatesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */; };
-		7C7DA10D2A5EB32A00B58AFA /* TemplatesPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */; };
 		7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */; };
 		7C7DA10F2A5EB32A00B58AFA /* TemplatePickerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */; };
-		7C7DA1102A5EB32A00B58AFA /* ExerciseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */; };
+		7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */; };
 		7C7DA1112A5EB32A00B58AFA /* ExercisePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */; };
 		7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */; };
 		7C7DA1172A5EB35D00B58AFA /* AddEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */; };
@@ -59,7 +57,8 @@
 		7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */; };
 		7C7DA1212A5F058A00B58AFA /* ThreeWayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */; };
 		7C7DA1232A5F117500B58AFA /* QuickActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1222A5F117500B58AFA /* QuickActionButtonView.swift */; };
-		7C7DA1252A5FF8FC00B58AFA /* SectionIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1242A5FF8FC00B58AFA /* SectionIndexView.swift */; };
+		7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */; };
+		7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1262A6018C300B58AFA /* CellStyle.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -139,12 +138,10 @@
 		7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTsButton.swift; sourceTree = "<group>"; };
 		7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterPicker.swift; sourceTree = "<group>"; };
 		7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallTsButton.swift; sourceTree = "<group>"; };
-		7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesPickerView.swift; sourceTree = "<group>"; };
-		7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatesPickerViewModel.swift; sourceTree = "<group>"; };
 		7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesViewModel.swift; sourceTree = "<group>"; };
 		7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplatePickerDetailView.swift; sourceTree = "<group>"; };
-		7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseListCell.swift; sourceTree = "<group>"; };
+		7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabel.swift; sourceTree = "<group>"; };
 		7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePickerView.swift; sourceTree = "<group>"; };
 		7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesListView.swift; sourceTree = "<group>"; };
 		7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditViewModel.swift; sourceTree = "<group>"; };
@@ -153,7 +150,8 @@
 		7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInProgressView.swift; sourceTree = "<group>"; };
 		7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C7DA1222A5F117500B58AFA /* QuickActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionButtonView.swift; sourceTree = "<group>"; };
-		7C7DA1242A5FF8FC00B58AFA /* SectionIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIndexView.swift; sourceTree = "<group>"; };
+		7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIndexTitles.swift; sourceTree = "<group>"; };
+		7C7DA1262A6018C300B58AFA /* CellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStyle.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,8 +219,9 @@
 				7C7DA0F72A5EB25400B58AFA /* LetterPicker.swift */,
 				7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */,
 				7C7DA0BA2A5E909600B58AFA /* ParallaxScrollView.swift */,
-				7C7DA1242A5FF8FC00B58AFA /* SectionIndexView.swift */,
+				7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */,
 				7C7DA0F52A5EB25400B58AFA /* CategoryImageView.swift */,
+				7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */,
 				7C7DA0F82A5EB25400B58AFA /* SmallTsButton.swift */,
 				7C7DA0F62A5EB25400B58AFA /* LargeTsButton.swift */,
 				7C7DA1202A5F058A00B58AFA /* ThreeWayPicker.swift */,
@@ -337,24 +336,12 @@
 		7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0FF2A5EB32A00B58AFA /* TemplatePickerView */,
 				7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */,
-				7C7DA0FE2A5EB32A00B58AFA /* PickerCell.swift */,
 				7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */,
-				7C7DA1062A5EB32A00B58AFA /* ExerciseListCell.swift */,
 				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
-			);
-			path = ExercisesView;
-			sourceTree = "<group>";
-		};
-		7C7DA0FF2A5EB32A00B58AFA /* TemplatePickerView */ = {
-			isa = PBXGroup;
-			children = (
-				7C7DA1032A5EB32A00B58AFA /* TemplatesPickerViewModel.swift */,
-				7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */,
 				7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */,
 			);
-			path = TemplatePickerView;
+			path = ExercisesView;
 			sourceTree = "<group>";
 		};
 		7C7DA1132A5EB35D00B58AFA /* AddEditView */ = {
@@ -362,6 +349,7 @@
 			children = (
 				7C7DA1142A5EB35D00B58AFA /* AddEditViewModel.swift */,
 				7C7DA1162A5EB35D00B58AFA /* AddEditExerciseView.swift */,
+				7C7DA1052A5EB32A00B58AFA /* TemplatePickerDetailView.swift */,
 			);
 			path = AddEditView;
 			sourceTree = "<group>";
@@ -530,6 +518,7 @@
 		7CBAA2062A5D94EB00DFA31D /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA1262A6018C300B58AFA /* CellStyle.swift */,
 				7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */,
 				7C7DA0B62A5DD36200B58AFA /* LoginAnimation.swift */,
 				7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */,
@@ -661,10 +650,9 @@
 				7CBAA1E32A5D93D400DFA31D /* RootViewModel.swift in Sources */,
 				7C7DA0D82A5EB0F800B58AFA /* SessionView.swift in Sources */,
 				7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */,
-				7C7DA1252A5FF8FC00B58AFA /* SectionIndexView.swift in Sources */,
+				7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */,
 				7C7DA10A2A5EB32A00B58AFA /* TemplatesPickerView.swift in Sources */,
 				7C7DA1112A5EB32A00B58AFA /* ExercisePickerView.swift in Sources */,
-				7C7DA10D2A5EB32A00B58AFA /* TemplatesPickerViewModel.swift in Sources */,
 				7C7DA0EB2A5EB16400B58AFA /* HistoryViewModel.swift in Sources */,
 				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
 				7C7DA1172A5EB35D00B58AFA /* AddEditViewModel.swift in Sources */,
@@ -680,6 +668,7 @@
 				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
 				7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */,
 				7C7DA0F42A5EB21000B58AFA /* DurationFormatter.swift in Sources */,
+				7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */,
 				7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */,
 				7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */,
 				7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */,
@@ -703,7 +692,6 @@
 				7C7DA0DB2A5EB12000B58AFA /* GaugeView.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
 				7C7DA0F22A5EB1ED00B58AFA /* TimeInterval-String.swift in Sources */,
-				7C7DA1092A5EB32A00B58AFA /* PickerCell.swift in Sources */,
 				7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */,
 				7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */,
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
@@ -727,7 +715,7 @@
 				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* TSTextFieldsManager.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
-				7C7DA1102A5EB32A00B58AFA /* ExerciseListCell.swift in Sources */,
+				7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
 				7C7DA0BB2A5E909600B58AFA /* ParallaxScrollView.swift in Sources */,
 				7CBAA1F92A5D944400DFA31D /* TSTextField.swift in Sources */,

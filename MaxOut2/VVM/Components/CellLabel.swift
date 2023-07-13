@@ -1,10 +1,9 @@
 
 import SwiftUI
 
-struct ExerciseListCell: View {
-  var exercise: Exercise
-  
-  let deleteAction: () -> ()
+
+struct CellLabel: View {
+  let exercise: Exercise
   
   var body: some View {
     HStack(spacing: 18) {
@@ -14,19 +13,8 @@ struct ExerciseListCell: View {
       Spacer()
     }
     .multilineTextAlignment(.leading)
-    .animation(.easeIn, value: exercise.isSelected)
-    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-      Button {
-        deleteAction()
-      } label: {
-        Image(systemName: "trash")
-      }
-      .tint(Color(.systemRed))
-    }
   }
-}
-
-extension ExerciseListCell {
+  
   @ViewBuilder // MARK: - Label
   private var vStackLabels: some View {
     VStack(alignment: .leading, spacing: 2) {
@@ -46,4 +34,3 @@ extension ExerciseListCell {
     }
   }
 }
-
