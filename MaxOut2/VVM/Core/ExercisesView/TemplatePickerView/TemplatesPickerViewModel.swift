@@ -1,6 +1,6 @@
 import SwiftUI
 
-@MainActor
+@MainActor 
 final class TemplatesPickerViewModel: ObservableObject {
   @Published var templateExercises: [Exercise] = []
   @Published var selectedTemplates: [Exercise] = [] /// Selectable

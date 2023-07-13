@@ -4,14 +4,15 @@ import SwiftUI
 
 struct TemplatesPickerView: View {
   @Environment(\.dismiss) var dismiss
-  @StateObject private var model = TemplatesPickerViewModel()
+  @StateObject private var model = ExercisesViewModel()
   
   var body: some View {
     NavigationStack {
       ZStack {
         exercisesList
         
-        LetterPicker(selectedLetter: $model.selectedLetter, alphabet: model.alphabet)
+//        LetterPicker(selectedLetter: $model.selectedLetter, alphabet: model.alphabet)
+        
           .animation(.spring(), value: model.selectedLetter)
         
         VStack {
@@ -69,7 +70,6 @@ extension TemplatesPickerView {
         Text("")
           .id("")
         
-        
           ForEach(model.groupedExercises, id: \.0) { section in
             
             // MARK: LETTERED SECTIONS
@@ -93,13 +93,13 @@ extension TemplatesPickerView {
             }
           }
       
-          .onChange(of: model.selectedLetter) { newValue in
-            withAnimation {
-              pageScroller.scrollTo(newValue, anchor: .top)
-            }
-          }
+//          .onChange(of: model.selectedLetter) { newValue in
+//            withAnimation {
+//              pageScroller.scrollTo(newValue, anchor: .top)
+//            }
+//          }
         }
-        .resignKeyboardOnDragGesture()
+        .overlay { SectionIndexTitles(model: model, pageScroller: pageScroller) }
       }
     }
   }
