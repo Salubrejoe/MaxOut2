@@ -27,7 +27,9 @@ struct GradientTextFieldBackground: TextFieldStyle {
   private func textField(_ configuration: TextField<Self._Label>) -> some View {
     ZStack {
       RoundedRectangle(cornerRadius: 8.0)
-        .foregroundStyle(.ultraThickMaterial.shadow(.inner(color: .primary.opacity(0.3), radius: 1.5)))
+        .foregroundStyle(.ultraThinMaterial
+          .shadow(.inner(color: .primary.opacity(0.5), radius: 2))
+        )
       
       configuration
     }

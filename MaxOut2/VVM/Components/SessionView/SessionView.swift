@@ -128,9 +128,8 @@ extension SessionView {
         }
       } label: {
        Image(systemName: "plus")
-          .bold()
           .imageScale(.medium)
-          .foregroundStyle(Color.primary.gradient.shadow(.inner(color: .accentColor.opacity(0.9), radius: 1)))
+          .foregroundColor(.primary.opacity(0.5))
       }
     }
     .padding(.horizontal, 8)

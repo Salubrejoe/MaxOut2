@@ -68,7 +68,7 @@ extension ExercisesViewModel {
                               bobs: (lastSession == nil ? [Bob()] : lastSession!.bobs),
                               image: exercise.equipmentImage)
         
-        model.sessions.insert(session, at: 0)
+        model.sessions.append(session)
       }
       selectedExercises = []
     }
