@@ -30,6 +30,8 @@ final class ExercisesViewModel: ObservableObject {
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
+  /// Haptics
+  let haptics = UIImpactFeedbackGenerator(style: .rigid)
   
   /// Alphabetic taxon
   var groupedExercises: [(String, [Exercise])] {

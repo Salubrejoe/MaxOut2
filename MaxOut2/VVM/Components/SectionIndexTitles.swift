@@ -20,6 +20,7 @@ struct SectionIndexTitles: View {
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
           .updating($dragLocation) { value, state, _ in
             state = value.location
+            
         }
       )
       .animation(.spring(), value: model.selectedLetter)
@@ -37,6 +38,8 @@ struct SectionIndexTitles: View {
     if geometry.frame(in: .global).contains(dragLocation) {
       DispatchQueue.main.async {
         pageScroller.scrollTo(title, anchor: .center)
+        model.haptics.prepare()
+        if title != model.selectedLetter { model.haptics.impactOccurred() }
         model.selectedLetter = title
       }
     }

@@ -7,18 +7,12 @@ import SwipeActions
 struct BobView: View {
   @ObservedObject var model: SessionViewModel
   @Binding var session: Session
-//  @Binding var isShowingKeyboard: Bool
-
-  
   let index: Int
   
-  
   var body: some View {
-    
     SwipeView {
       
       bobo
-        .resignKeyboardOnDragGesture()
         .frame(maxWidth: .infinity)
         .padding(.vertical, 6)
         .foregroundColor(.primary)
@@ -34,7 +28,7 @@ struct BobView: View {
     .swipeActionCornerRadius(10)
     .swipeActionsMaskCornerRadius(10)
     
-    .fontDesign(.rounded)
+//    .fontDesign(.rounded)
     .background(session.bobs[index].isCompleted ? Color(.systemGreen).opacity(0.3) : .clear)
     .animation(.default, value: session.bobs)
   }
@@ -42,52 +36,83 @@ struct BobView: View {
   @ViewBuilder // MARK: - BOB
   private var bobo: some View {
     HStack {
-      if session.category == "cardio" {
-        Text("\(index + 1)")
-          .bold()
-          .foregroundColor(.secondary)
-          .padding(.leading)
-        Spacer()
-        Text("km")
-        TextField("", value: $session.bobs[index].distance, formatter: NumberFormatter.decimalWithoutDecimals)
-          .customTextFieldStyle(text: "km", parameter: $session.bobs[index].distance)
-        Text(" × ")
-        TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
-          .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
-        Text("min")
-        Spacer()
-        Button {
-          self.session.bobs[index].isCompleted.toggle()
-          
-        } label: {
-          Image(systemName: "checkmark")
-            .padding(.trailing)
-            .foregroundColor(session.bobs[index].isCompleted ? .green : .secondary)
-        }
-      }
+      if session.category == "cardio" { cardioBob }
+      else if session.category == "stretching" { stretchingBob }
+      else { strenghtBob }
+    }
+    .frame(height: 27)
+  }
+}
+
+// MARK: - CARDIO
+extension BobView {
+  
+  @ViewBuilder
+  private var cardioBob: some View {
+    Text("\(index + 1)")
+      .bold()
+      .foregroundColor(.secondary)
+      .padding(.leading)
+    Spacer()
+    Text("km")
+    TextField("", value: $session.bobs[index].distance, formatter: NumberFormatter.decimalWithoutDecimals)
+      .customTextFieldStyle(text: "km", parameter: $session.bobs[index].distance)
+    Text(" × ")
+    TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
+      .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
+    Text("min")
+    Spacer()
+    Button {
+      self.session.bobs[index].isCompleted.toggle()
       
-      else if session.category == "stretching" {
-        
-        TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
-          .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
-        Text("min")
-          
-      }
-      else {
-        Group {
+    } label: {
+      Image(systemName: "checkmark")
+        .padding(.trailing)
+        .foregroundColor(session.bobs[index].isCompleted ? .green : .secondary)
+    }
+  }
+}
+
+
+// MARK: - STRETCHING
+extension BobView {
+  @ViewBuilder
+  private var stretchingBob: some View {
+    TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
+      .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
+    Text("min")
+  }
+}
+
+
+// MARK: - STRENGHT
+extension BobView {
+  
+  @ViewBuilder
+  private var strenghtBob: some View {
+    Group {
+      GeometryReader { proxy in
+        let width = proxy.size.width
+        HStack {
           Text("\(index + 1)")
             .bold()
             .foregroundColor(.secondary)
             .padding(.leading)
-          Spacer()
-          Text("kg")
-          TextField("", value: $session.bobs[index].kg, formatter: NumberFormatter.decimalWithoutDecimals)
-            .customTextFieldStyle(text: "kg", parameter: $session.bobs[index].kg)
-          Text(" × ")
-          TextField("", value: $session.bobs[index].reps, formatter: NumberFormatter.decimalWithoutDecimals)
-            .customTextFieldStyle(text: "reps", parameter: $session.bobs[index].reps)
-          Text("reps")
-          Spacer()
+            .frame(width: width * 0.1)
+          
+          if let equipment = model.equipment {
+            Text(equipment).padding(.bottom, 3).foregroundColor(.secondary)
+              .frame(width: width * 0.35)
+          }
+          
+          HStack {
+            TextField("", value: $session.bobs[index].kg, formatter: NumberFormatter.decimalWithoutDecimals)
+              .customTextFieldStyle(text: "kg", parameter: $session.bobs[index].kg)
+            
+            TextField("", value: $session.bobs[index].reps, formatter: NumberFormatter.decimalWithoutDecimals)
+              .customTextFieldStyle(text: "reps", parameter: $session.bobs[index].reps)
+          }
+          .frame(width: width * 0.4)
           Button {
             self.session.bobs[index].isCompleted.toggle()
           } label: {
@@ -95,13 +120,15 @@ struct BobView: View {
               .padding(.trailing)
               .foregroundColor(session.bobs[index].isCompleted ? .green : .secondary)
           }
-
+          .frame(width: width * 0.10)
         }
-        .font(.subheadline)
+
       }
     }
+    .font(.subheadline)
   }
 }
+
 
 
 // MARK: - Swipe Actions
@@ -141,8 +168,6 @@ extension BobView {
     }
   }
 }
-
-
 
 extension NumberFormatter {
   static let decimalWithoutDecimals: NumberFormatter = {

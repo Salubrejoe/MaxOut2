@@ -3,62 +3,41 @@ import SwiftUI
 import Combine
 import SwipeActions
 
-final class SessionViewModel: ObservableObject {
-  /// Swipe action
-  @Published var open = PassthroughSubject<Void, Never>()
-  
-  var isAllCompletedChekmarkFilled = true
-  
-  let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-  
-  func toggleIsComplete(_ session: inout Session, index: Int) {
-    if !isAllCompletedChekmarkFilled {
-      session.bobs[index].isCompleted = true
-      impactFeedback.impactOccurred()
-      
-    }
-    else {
-      session.bobs[index].isCompleted = false
-    }
-  }
-}
-
 
 struct SessionView: View {
-
-//  @Binding var isShowingKeyboard: Bool
   @Binding var session: Session
-  @StateObject private var sessModel = SessionViewModel()
+  @StateObject private var controller = SessionViewModel()
   @ObservedObject var model: StartViewModel
   
   @State private var removeAlert = false
 
-  
   var body: some View {
     SwipeViewGroup {
       VStack {
-        VStack(spacing: 5) {
+        VStack(alignment: .set, spacing: 0) {
           
           header
             .padding(.horizontal, 16)
-            .padding(.top, 10)
+            .padding(.top, 15)
           
           VStack(spacing: 0) {
+            
             ForEach($session.bobs.indices, id: \.self) { index in
-              BobView(model: sessModel, session: $session,  index: index)
+              BobView(model: controller, session: $session,  index: index)
             }
           }
-          .background(Color.background)
           .cornerRadius(10)
           .padding(.bottom, 5)
           .padding(.horizontal, 5)
         }
-        .background(Color.accentColor.opacity(0.1))
+        .background(.ultraThinMaterial)
         .cornerRadius(14)
         
         newSetButton
-          .padding(.bottom, 10)
+          .padding(.bottom, 20)
+          .padding(.top, 2)
       }
+      .task { try? await controller.equipment(for: session) }
     }
   }
 }
@@ -68,54 +47,69 @@ struct SessionView: View {
 extension SessionView {
   @ViewBuilder // MARK: - HEADER
   private var header: some View {
-    VStack {
+    VStack(spacing: 10) {
       HStack {
         HStack {
           Button {
-            removeAlert = true
+            model.remove(session)
           } label: {
-            Image(systemName: "xmark").imageScale(.small).foregroundColor(.secondary)
+            HStack(alignment: .firstTextBaseline) {
+              Label("\(session.exerciseName.capitalized)", systemImage: "ellipsis.circle")
+              Text(" - \(session.timeString)").font(.caption2).foregroundColor(.secondary)
+            }
           }
-
-          
-          Text(session.exerciseName.capitalized)
-            .fontDesign(.rounded)
-          Text(" - \(session.timeString)")
-            .font(.caption)
-            .foregroundColor(.secondary.opacity(0.5))
-          
           Spacer()
         }
+        .bold()
         .onTapGesture {
           removeAlert = true
         }
-        .alert("Remove?", isPresented: $removeAlert, actions: {
-          Button("Cancel", role: .cancel) {}
-          Button {
-            model.remove(session)
-            removeAlert = false
-          } label: {
-            Label("Remove", systemImage: "trash")
-          }
-        })
+        
         
         Button {
-          sessModel.isAllCompletedChekmarkFilled.toggle()
-          sessModel.open.send()
+          controller.isAllCompletedChekmarkFilled.toggle()
+          controller.open.send()
         } label: {
           Image(systemName: "checkmark")
-            
-//            .padding(.trailing, 4)
             .imageScale(.medium)
-            .foregroundColor(!sessModel.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .secondary)
+            .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .secondary)
         }
       }
       
+      bobHeader
     }
     .frame(maxWidth: 428)
-    .bold()
+    .alert("Remove?", isPresented: $removeAlert, actions: {
+      Button("Cancel", role: .cancel) {}
+      Button {
+        model.remove(session)
+        removeAlert = false
+      } label: {
+        Label("Remove", systemImage: "trash")
+      }
+    })
   }
 
+  @ViewBuilder // MARK: - BOB HEADER
+  private var bobHeader: some View {
+    GeometryReader { proxy in
+      let width = proxy.size.width
+      HStack(spacing: 0) {
+        Text("SET")
+          .frame(width: width * 0.1)
+        Text(controller.equipment?.uppercased() ?? "")
+          .frame(width: width * 0.4)
+        Text("KG")
+          .frame(width: width * 0.20)
+        Text("REPS")
+          .frame(width: width * 0.25)
+      }
+    }
+    .frame(height: 15)
+    .font(.caption)
+    .foregroundColor(.secondary)
+    .shadow(color: .gray.opacity(0.5), radius: 1)
+  }
   
   @ViewBuilder // MARK: FOOTER
   private var newSetButton: some View {
@@ -133,35 +127,28 @@ extension SessionView {
           }
         }
       } label: {
-        Label("New Set", systemImage: "plus")
-          .foregroundColor(.primary)
-          .font(.subheadline)
+       Image(systemName: "plus")
+          .bold()
+          .imageScale(.medium)
+          .foregroundStyle(Color.primary.gradient.shadow(.inner(color: .accentColor.opacity(0.9), radius: 1)))
       }
     }
+    .padding(.horizontal, 8)
+    .padding(.vertical, 3)
+    .background(.ultraThinMaterial)
+    .clipShape(Capsule())
+    .shadow(radius: 1)
   }
 }
 
 
-
-
-
-//struct SessionView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    SessionView(isShowingKeyboard: .constant(true), session: .constant(Session(id: "Pizza",
-//                                           exerciseId: "Margherita",
-//                                           exerciseName: "Chest Fly",
-//                                           dateCreated: Date(),
-//                                           category: "strenght",
-//                                           bobs: [
-//                                            Bob(kg: 21.3, reps: 10),
-//                                            Bob(kg: 21.3, reps: 10),
-//                                            Bob(kg: 21.3, reps: 10),
-//                                            Bob(kg: 21.3, reps: 10),
-//                                            Bob(kg: 21.3, reps: 10)
-//                                           ],
-//                                           image: "trash"
-//                                          )), sharedModel: StartViewModel()
-//    )
-//    
-//  }
-//}
+extension HorizontalAlignment {
+  enum PaulHudsonStruct: AlignmentID {
+    static func defaultValue(in context: ViewDimensions) -> CGFloat {
+      context[.leading]
+    }
+  }
+  
+  static let equipment = HorizontalAlignment(PaulHudsonStruct.self)
+  static let set = HorizontalAlignment(PaulHudsonStruct.self)
+}

@@ -17,6 +17,13 @@ final class StartViewModel: ObservableObject {
   
   var startDate = Date()
   
+  /// Rest Time
+  @Published var restTime = 60.0
+  
+  
+  /// Grid element
+  let columns = [GridItem(.adaptive(minimum: 300))]
+  
   /// Cancel Alert
   @Published var showingCancelAlert = false
   let alertText = "Are you sure you want to discard your progress?"
@@ -33,19 +40,7 @@ final class StartViewModel: ObservableObject {
   
   
   @Published var controller = GaugeViewController()
-  
-  
-//  var color: Color = .black
-//  func getColor(_ session: Session)  {
-//    Task {
-//      do {
-//        self.color = try await SessionsManager.shared.getColor(with: session)
-//      }
-//      catch {
-//        print("Could not get color - SESSION VIEW MODEL")
-//      }
-//    }
-//  }
+
   
   // MARK: - USER
   @MainActor

@@ -7,29 +7,24 @@ struct NewInProgressView: View {
   }
   
   @ObservedObject var model: StartViewModel
-  @State private var restTime = 40.0
-  
-  let columns = [GridItem(.adaptive(minimum: 300))]
-  
+
   var body: some View {
-    ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 200) {
-      LazyVGrid(columns: columns, spacing: 5) {
-        ForEach($model.sessions) { $session in
-          SessionView(session: $session, model: model)
-        }
-        LargeTsButton(text: "🦾 Add Exercises", buttonColor: Color.secondarySytemBackground, textColor: .accentColor) {
-          model.isShowingPicker = true
-        }
+    ScrollView(showsIndicators: false) {
+      ParallaxHeader(coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 170) {
+        header
       }
-      .padding(.vertical)
-      .fullScreenCover(isPresented: $model.isShowingPicker) {
-        fullScreenPicker
-      }
-      .animation(.spring(), value: model.sessions)
-      .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
-    } header: {
-      header
+      sessionGrid
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .background(Color.clear)
+        .cornerRadius(20)
+        .shadow(color: .primary.opacity(0.5), radius: 5)
     }
+    .coordinateSpace(name: CoordinateSpaces.scrollView)
+    .scrollDismissesKeyboard(.interactively)
+    .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
+    .animation(.spring(), value: model.sessions)
+    .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
   }
 }
 
@@ -57,6 +52,19 @@ extension NewInProgressView {
       }
     }
     .padding(.horizontal)
+  }
+  
+  
+  @ViewBuilder
+  private var sessionGrid: some View {
+    LazyVGrid(columns: model.columns, spacing: 5) {
+      ForEach($model.sessions) { $session in
+        SessionView(session: $session, model: model)
+      }
+      LargeTsButton(text: "🦾 Add Exercises", buttonColor: Color.accentColor.opacity(0.1), textColor: .accentColor) {
+        model.isShowingPicker = true
+      }
+    }
   }
   
   @ViewBuilder // MARK: - FULL SCREEN PICKER

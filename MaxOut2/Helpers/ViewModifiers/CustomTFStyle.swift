@@ -8,11 +8,10 @@ extension View {
       .bold()
       .foregroundColor(.primary)
       .keyboardType(.decimalPad)
-//      .textFieldStyle(.roundedBorder)
       .textFieldStyle( GradientTextFieldBackground(text: text, parameter: parameter) )
       .multilineTextAlignment(.center)
-      .frame(width: 70)
-      .frame(height: 33)
+      .frame(width: 60)
+      .frame(height: 27)
   }
 }
 
@@ -21,29 +20,14 @@ struct GradientTextFieldBackground: TextFieldStyle {
   @Binding var parameter: Double
   
   func _body(configuration: TextField<Self._Label>) -> some View {
-//    HStack(spacing: 4) {
-//      Button { parameter -= 1 } label: {
-//        Image(systemName: "minus")
-//          .imageScale(.small)
-//          .foregroundColor(.accentColor)
-//          .contentShape(Rectangle())
-//      }
       textField(configuration)
-      
-
-//      Button { parameter += 1 } label: {
-//        Image(systemName: "plus")
-//          .imageScale(.small)
-//          .foregroundColor(.accentColor)
-//
-//      }
     }
   
   @ViewBuilder
   private func textField(_ configuration: TextField<Self._Label>) -> some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 7.0)
-        .fill(Color.secondarySytemBackground)
+      RoundedRectangle(cornerRadius: 8.0)
+        .foregroundStyle(.ultraThickMaterial.shadow(.inner(color: .primary.opacity(0.3), radius: 1.5)))
       
       configuration
     }

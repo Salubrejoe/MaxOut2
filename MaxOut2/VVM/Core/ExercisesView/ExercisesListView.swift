@@ -4,6 +4,10 @@ import SwiftUI
 struct ExercisesListView: View {
   @StateObject private var model = ExercisesViewModel()
 
+  init() {
+    UITableView.appearance().showsVerticalScrollIndicator = false
+  }
+  
   var body: some View {
     NavigationStack {
       VStack {
@@ -25,7 +29,7 @@ struct ExercisesListView: View {
               Spacer()
               SectionIndexTitles(model: model, pageScroller: pageScroller)
                 .padding(.trailing, 10)
-                .background(Color.systemBackground.opacity(0.5))
+                .background(Color.systemBackground.opacity(0.01))
             }
           }
         }

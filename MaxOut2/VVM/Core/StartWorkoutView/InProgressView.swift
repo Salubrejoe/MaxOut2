@@ -4,7 +4,6 @@ import SwiftUI
 struct InProgressView: View {
   @ObservedObject var model: StartViewModel
   @State private var restTime = 40.0
-  @State private var isShowingKeyboard = false
   
   let columns = [GridItem(.adaptive(minimum: 300))]
   
@@ -41,7 +40,6 @@ extension InProgressView {
         model.isShowingPicker = false
       }
       ExercisePickerView(routineModel: model)
-//      LesPickerView(sharedModel: model, isDiscovering: false)
     }
   }
   
