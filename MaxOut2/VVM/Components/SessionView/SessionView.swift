@@ -13,7 +13,7 @@ struct SessionView: View {
 
   var body: some View {
     SwipeViewGroup {
-      VStack {
+      VStack(spacing: 1) {
         VStack(alignment: .set, spacing: 0) {
           
           header
@@ -127,29 +127,31 @@ extension SessionView {
   
   @ViewBuilder // MARK: FOOTER
   private var newSetButton: some View {
-    HStack {
-      
-      Button {
-        if let lastBob = session.bobs.last {
-          let bob = Bob(bob: lastBob)
-          withAnimation {
-            session.bobs.append(bob)
+    Image(systemName: "plus")
+      .imageScale(.large)
+      .foregroundColor(.primary.opacity(0.5))
+      .padding(.vertical)
+      .frame(maxWidth: 428)
+      .frame(height: 27)
+      .background(.ultraThinMaterial)
+      .clipShape(Capsule())
+      .overlay {
+        Rectangle().fill(Color.secondarySytemBackground.opacity(0.01))
+          .frame(maxWidth: .infinity)
+          .frame(maxHeight: .infinity)
+          .onTapGesture {
+            if let lastBob = session.bobs.last {
+              let bob = Bob(bob: lastBob)
+              withAnimation {
+                session.bobs.append(bob)
+              }
+            } else {
+              withAnimation {
+                session.bobs.append(Bob())
+              }
+            }
           }
-        } else {
-          withAnimation {
-            session.bobs.append(Bob())
-          }
-        }
-      } label: {
-       Image(systemName: "plus")
-          .imageScale(.medium)
-          .foregroundColor(.primary.opacity(0.5))
-      }
     }
-    .padding(.horizontal, 8)
-    .padding(.vertical, 3)
-    .background(.ultraThinMaterial)
-    .clipShape(Capsule())
   }
 }
 
