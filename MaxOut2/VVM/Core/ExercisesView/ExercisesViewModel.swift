@@ -69,6 +69,7 @@ extension ExercisesViewModel {
                               image: exercise.equipmentImage)
         
         model.sessions.append(session)
+        print(exercise.equipment)
       }
       selectedExercises = []
     }

@@ -6,7 +6,7 @@ import SwipeActions
 
 struct SessionView: View {
   @Binding var session: Session
-  @StateObject private var controller = SessionViewModel()
+  @StateObject private var controller = SeshController()
   @ObservedObject var model: StartViewModel
   
   @State private var removeAlert = false
@@ -22,8 +22,9 @@ struct SessionView: View {
           
           VStack(spacing: 0) {
             
-            ForEach($session.bobs.indices, id: \.self) { index in
-              BobView(model: controller, session: $session,  index: index)
+            ForEach($session.bobs) { $bob in
+              BobView(controller: controller, bob: $bob, session: $session)
+              
             }
           }
           .cornerRadius(10)
@@ -37,7 +38,9 @@ struct SessionView: View {
           .padding(.bottom, 20)
           .padding(.top, 2)
       }
-      .task { try? await controller.equipment(for: session) }
+      .onAppear {
+        UITextField.appearance().clearButtonMode = .whileEditing
+      }
     }
   }
 }
@@ -70,8 +73,9 @@ extension SessionView {
           controller.isAllCompletedChekmarkFilled.toggle()
           controller.open.send()
         } label: {
-          Image(systemName: "checkmark")
+          Image(systemName: "checkmark.circle")
             .imageScale(.medium)
+            .bold()
             .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .secondary)
         }
       }
@@ -95,20 +99,30 @@ extension SessionView {
     GeometryReader { proxy in
       let width = proxy.size.width
       HStack(spacing: 0) {
-        Text("SET")
+        Text("#")
           .frame(width: width * 0.1)
-        Text(controller.equipment?.uppercased() ?? "")
+        
+        Text(textForHeader().0)
+          .frame(width: session.category != "stretching" ? (width * 0.20) : (width * 0.43))
+        Text(textForHeader().1)
+          .frame(width: session.category != "stretching" ? (width * 0.25) : 0)
+        
+        Text("REST TIME")
           .frame(width: width * 0.4)
-        Text("KG")
-          .frame(width: width * 0.20)
-        Text("REPS")
-          .frame(width: width * 0.25)
       }
     }
     .frame(height: 15)
     .font(.caption)
     .foregroundColor(.secondary)
-    .shadow(color: .gray.opacity(0.5), radius: 1)
+  }
+  
+  private func textForHeader() -> (String, String) {
+    switch session.category {
+      case "cardio": return ("KM", "MIN")
+      case "stretching": return ("MIN", "")
+      case "strength": return ("KG", "REPS")
+      default: return ("","")
+    }
   }
   
   @ViewBuilder // MARK: FOOTER
@@ -136,7 +150,6 @@ extension SessionView {
     .padding(.vertical, 3)
     .background(.ultraThinMaterial)
     .clipShape(Capsule())
-    .shadow(radius: 1)
   }
 }
 

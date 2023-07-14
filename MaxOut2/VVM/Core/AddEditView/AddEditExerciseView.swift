@@ -18,7 +18,7 @@ struct AddEditExerciseView: View {
     
       ScrollView {
         
-        TSTextField(text: $exercise.name, field: .name, isSecure: false) {
+        LoginTextField(text: $exercise.name, field: .name, isSecure: false) {
           Field.hideKeyboard()
         } xMarkAction: {
           focus = .name

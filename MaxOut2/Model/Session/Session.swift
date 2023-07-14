@@ -36,28 +36,28 @@ struct Session: Identifiable, Equatable {
     self.image        = image
   }
   
-  func calculateBestBob(for session: Session) throws -> (bob: Bob, index: Int) {
-    guard !session.bobs.isEmpty else {
-      throw URLError(.badServerResponse)
-    }
-    
-    var maxResult = Double.leastNormalMagnitude // Initialize with the smallest possible value
-    var bestBobIndex = 0
-    
-    for (index, bob) in session.bobs.enumerated() {
-      let result = bob.kg * Double(bob.reps) + bob.distance * bob.duration
-      
-      
-      if result > maxResult {
-        maxResult = result
-        bestBobIndex = index
-      }
-    }
-    
-    let bestBob = session.bobs[bestBobIndex]
-    
-    return (bestBob, bestBobIndex)
-  }
+//  func calculateBestBob(for session: Session) throws -> (bob: Bob, index: Int) {
+//    guard !session.bobs.isEmpty else {
+//      throw URLError(.badServerResponse)
+//    }
+//    
+//    var maxResult = Double.leastNormalMagnitude // Initialize with the smallest possible value
+//    var bestBobIndex = 0
+//    
+//    for (index, bob) in session.bobs.enumerated() {
+//      let result = bob.kg * Double(bob.reps) + bob.distance * bob.duration
+//      
+//      
+//      if result > maxResult {
+//        maxResult = result
+//        bestBobIndex = index
+//      }
+//    }
+//    
+//    let bestBob = session.bobs[bestBobIndex]
+//    
+//    return (bestBob, bestBobIndex)
+//  }
   
   func markBobsAsComplete(session: inout Session) {
     for index in 0..<session.bobs.count {

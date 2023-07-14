@@ -69,7 +69,7 @@ extension Exercise {
   var equipmentImage: String {
     switch equipment {
       case "noSelection"   :   return "plate"
-      case "body only"     :   return "bodyonly"
+      case "body only"     :   return ""
       case "machine"       :   return "machine"
       case "kettlebells"   :   return "kettlebell"
       case "dumbbell"      :   return "dumbbell"

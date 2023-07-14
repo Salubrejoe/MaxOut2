@@ -18,7 +18,7 @@ struct NewInProgressView: View {
         .padding(.vertical, 5)
         .background(Color.clear)
         .cornerRadius(20)
-        .shadow(color: .primary.opacity(0.5), radius: 5)
+//        .shadow(color: .primary.opacity(0.5), radius: 1, y: 1)
     }
     .coordinateSpace(name: CoordinateSpaces.scrollView)
     .scrollDismissesKeyboard(.interactively)
@@ -65,7 +65,7 @@ extension NewInProgressView {
       ForEach($model.sessions) { $session in
         SessionView(session: $session, model: model)
       }
-      LargeTsButton(text: "🦾 Add Exercises", buttonColor: Color.accentColor.opacity(0.1), textColor: .accentColor) {
+      LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
         model.isShowingPicker = true
       }
     }

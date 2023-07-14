@@ -8,7 +8,7 @@ struct LoginView: View {
   }
   
   @StateObject private var model = LoginViewModel()
-  @ObservedObject var manager = TSTextFieldsManager()
+  @ObservedObject var manager = LoginTextFieldsManager()
   @FocusState private var focus: Field?
   
   @Binding var showingLoginView: Bool
@@ -57,7 +57,7 @@ extension LoginView {
   private var mainLoginInterface: some View {
     VStack(spacing: 8) {
       // SIw/ EMAIL
-      TSTextFieldsView(model: manager,
+      LoginTextFieldsView(model: manager,
                        resetPassword: true,
                        withConfirmation: false,
                        buttonText: "Log In",

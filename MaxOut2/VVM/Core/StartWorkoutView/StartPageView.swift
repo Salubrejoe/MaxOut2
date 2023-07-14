@@ -59,7 +59,7 @@ extension StartPageView {
   
   @ViewBuilder // MARK: - START BUTTON
   private var startButton: some View {
-    LargeTsButton(text: "Start a new workout", buttonColor: .accentColor, textColor: .systemBackground) {
+    LargeTsButton(text: "Start a new workout", background: Color.accentColor, textColor: .systemBackground) {
       model.startRoutine()
       model.viewState = .inProgress
     }

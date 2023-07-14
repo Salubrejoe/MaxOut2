@@ -27,12 +27,10 @@ struct BodyPartImageView: View {
                 .scaledToFit()
                 .frame(width: size/3, height: size/3)
                 .padding(3)
-//                .background(Color.background.opacity(0.7))
-//                .foregroundColor(.accentColor)
-                .colorMultiply(.accentColor)
                 .background(.ultraThickMaterial)
                 .clipShape(Circle())
                 .shadow(radius: 5)
+                
             }
           }
           .offset(x: 3, y: 3)

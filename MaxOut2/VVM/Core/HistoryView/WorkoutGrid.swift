@@ -41,7 +41,8 @@ struct WorkoutGrid: View {
       
       ForEach(section.1) { workout in
         NavigationLink {
-          WorkoutDetailView(workout: workout)
+//          WorkoutDetailView(workout: workout)
+          Text("WORKOUT DETAIL VIEW")
         } label: {
           WorkoutCell(workout: workout) {
             withAnimation {
@@ -83,8 +84,6 @@ struct WorkoutCell: View {
     
     .contextMenu {
       deleteButton
-    } preview: {
-      WorkoutDetailView(workout: workout)
     }
     .animation(.spring(), value: workout)
     

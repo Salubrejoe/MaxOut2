@@ -24,7 +24,7 @@ struct ExercisePickerView: View {
         }
         
         if model.selectedExercises.count > 0 {
-          LargeTsButton(text: "Add \(model.selectedExercises.count)", buttonColor: .accentColor, textColor: .systemBackground) {
+          LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .systemBackground) {
             model.commitSelection(toRoutineVM: routineModel)
             dismiss()
           }

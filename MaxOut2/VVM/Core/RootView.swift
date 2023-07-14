@@ -4,6 +4,7 @@ import SwiftUI
 
 struct RootView: View {
   @StateObject private var model = RootViewModel()
+  let gaugeController = GaugeViewController()
   
   var body: some View {
     mainTabBar
@@ -11,6 +12,9 @@ struct RootView: View {
       .onAppear(perform: model.checkCurrentUser)
       .fullScreenCover(isPresented: $model.showingLoginView) {
         LoginView(showingLoginView: $model.showingLoginView)
+      }
+      .onFirstAppear {
+        gaugeController.requestNotificationPermish()
       }
   }
 

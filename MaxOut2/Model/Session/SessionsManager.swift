@@ -34,6 +34,7 @@ extension SessionsManager {
     var bobs: [[String: Any]] = []
     for bob in session.bobs {
       let dict: [String: Any] = [
+        Bob.CodingKeys.id.rawValue          : bob.id,
         Bob.CodingKeys.kg.rawValue          : bob.kg,
         Bob.CodingKeys.reps.rawValue        : bob.reps,
         Bob.CodingKeys.duration.rawValue    : bob.duration,

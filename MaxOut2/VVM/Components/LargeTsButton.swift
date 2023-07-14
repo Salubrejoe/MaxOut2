@@ -1,15 +1,34 @@
 
 import SwiftUI
 
-struct LargeTsButton: View {
+struct LargeTsButton<Background: ShapeStyle>: View {
   let text: String
-  let buttonColor: Color
+  let background: Background
   let textColor: Color
+  let image: String
   let action: ()->()
   
+  
+  init(text: String, background: Background, textColor: Color, image: String = "", action: @escaping () -> Void) {
+    self.text = text
+    self.background = background
+    self.textColor = textColor
+    self.image = image
+    self.action = action
+  }
+  
   var body: some View {
-    Button(text) { action() }
-      .buttonLabel(background:  buttonColor, foreground: textColor)
+    Button{ action() } label: {
+      HStack {
+        Image(image)
+          .resizable()
+          .scaledToFit()
+          .padding(.vertical)
+        
+        Text(text)
+      }
+    }
+      .buttonLabel(background:  background, foreground: textColor)
       .overlay {
         Rectangle()
           .frame(maxWidth: .infinity)
@@ -19,14 +38,5 @@ struct LargeTsButton: View {
             action()
           }
       }
-  }
-}
-
-
-struct LargeTsButton_Previews: PreviewProvider {
-  static var previews: some View {
-    LargeTsButton(text: "Save", buttonColor: .accentColor, textColor: .white) {
-      
-    }
   }
 }

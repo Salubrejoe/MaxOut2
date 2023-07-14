@@ -3,7 +3,7 @@ import SwiftUI
 struct CreateAccountView: View {
   @Environment(\.dismiss) var dismiss
   @StateObject private var model = CreateAccountViewModel()
-  @ObservedObject var manager = TSTextFieldsManager()
+  @ObservedObject var manager = LoginTextFieldsManager()
   
   @Binding var showingLoginView: Bool
   
@@ -14,7 +14,7 @@ struct CreateAccountView: View {
       NavigationStack {
         ScrollView {
           VStack {
-            TSTextFieldsView(model: manager, resetPassword: false, withConfirmation: true, buttonText: K.signUpEmail, buttonColor: .accentColor, withUsername: true) { createNewUser() } /// 🪡🧤
+            LoginTextFieldsView(model: manager, resetPassword: false, withConfirmation: true, buttonText: K.signUpEmail, buttonColor: .accentColor, withUsername: true) { createNewUser() } /// 🪡🧤
             Spacer()
           }
         }

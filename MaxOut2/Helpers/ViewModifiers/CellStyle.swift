@@ -8,7 +8,7 @@ extension View {
       .frame(maxWidth: .infinity)
       .padding(.vertical, 10)
       .padding(.horizontal, 10)
-      .background(Color.cell)
+      .background(.ultraThinMaterial)
       .cornerRadius(10)
   }
 }
