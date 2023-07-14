@@ -25,6 +25,10 @@ struct NewInProgressView: View {
     .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
     .animation(.spring(), value: model.sessions)
     .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
+    .toolbar {
+      ToolbarItem(placement: .keyboard) { Spacer() }
+      ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
+    }
   }
 }
 

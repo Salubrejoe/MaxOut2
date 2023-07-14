@@ -42,7 +42,7 @@ struct BobView: View {
     }
     .frame(height: 27)
   }
-}
+} 
 
 // MARK: - CARDIO
 extension BobView {
@@ -56,10 +56,10 @@ extension BobView {
     Spacer()
     Text("km")
     TextField("", value: $session.bobs[index].distance, formatter: NumberFormatter.decimalWithoutDecimals)
-      .customTextFieldStyle(text: "km", parameter: $session.bobs[index].distance)
+      .customTextFieldStyle()
     Text(" × ")
     TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
-      .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
+      .customTextFieldStyle()
     Text("min")
     Spacer()
     Button {
@@ -79,7 +79,7 @@ extension BobView {
   @ViewBuilder
   private var stretchingBob: some View {
     TextField("", value: $session.bobs[index].duration, formatter: DurationFormatter())
-      .customTextFieldStyle(text: "min", parameter: $session.bobs[index].duration)
+      .customTextFieldStyle()
     Text("min")
   }
 }
@@ -106,11 +106,11 @@ extension BobView {
           }
           
           HStack {
-            TextField("", value: $session.bobs[index].kg, formatter: NumberFormatter.decimalWithoutDecimals)
-              .customTextFieldStyle(text: "kg", parameter: $session.bobs[index].kg)
+            TextField("0", value: $session.bobs[index].kg, formatter: NumberFormatter.decimalWithoutDecimals)
+              .customTextFieldStyle()
             
-            TextField("", value: $session.bobs[index].reps, formatter: NumberFormatter.decimalWithoutDecimals)
-              .customTextFieldStyle(text: "reps", parameter: $session.bobs[index].reps)
+            TextField("0", value: $session.bobs[index].reps, formatter: NumberFormatter.decimalWithoutDecimals)
+              .customTextFieldStyle()
           }
           .frame(width: width * 0.4)
           Button {

@@ -1,5 +1,6 @@
 import Foundation
 
+
 struct Bob: Hashable {
   var kg          : Double
   var reps        : Double

@@ -24,7 +24,6 @@ struct TSTextField: View {
           .autocorrectionDisabled(true)
           .textInputAutocapitalization(.never)
           .padding()
-          .background(.ultraThinMaterial)
           .buttonLabel(background: .secondarySytemBackground, foreground: .primary)
           .onSubmit {
             action()
