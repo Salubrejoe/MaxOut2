@@ -124,7 +124,7 @@ struct BobGauge: View {
     }
     .frame(minWidth: 80)
     .frame(height: 46)
-    .foregroundStyle(.accentColor.opacity(0.5))
+    .foregroundStyle(Color.accentColor.opacity(0.5))
     .contextMenu {
       TimerSheet(value: $bob.restTime, model: model)
         .onChange(of: bob.restTime) { newValue in
