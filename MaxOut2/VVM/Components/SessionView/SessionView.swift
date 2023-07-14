@@ -74,7 +74,7 @@ extension SessionView {
           controller.open.send()
         } label: {
           Image(systemName: "checkmark.circle")
-            .imageScale(.medium)
+            .imageScale(.large)
             .bold()
             .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .secondary)
         }
@@ -99,7 +99,7 @@ extension SessionView {
     GeometryReader { proxy in
       let width = proxy.size.width
       HStack(spacing: 0) {
-        Text("#")
+        Text(" ")
           .frame(width: width * 0.1)
         
         Text(textForHeader().0)
@@ -107,7 +107,7 @@ extension SessionView {
         Text(textForHeader().1)
           .frame(width: session.category != "stretching" ? (width * 0.25) : 0)
         
-        Text("REST TIME")
+        Text("REST")
           .frame(width: width * 0.4)
       }
     }
@@ -135,6 +135,7 @@ extension SessionView {
       .frame(height: 27)
       .background(.ultraThinMaterial)
       .clipShape(Capsule())
+      .shadow(color: .primary.opacity(0.1), radius: 2, y: 1)
       .overlay {
         Rectangle().fill(Color.secondarySytemBackground.opacity(0.01))
           .frame(maxWidth: .infinity)

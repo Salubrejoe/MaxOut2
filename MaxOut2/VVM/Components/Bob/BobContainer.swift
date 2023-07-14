@@ -16,7 +16,7 @@ extension BobView {
       }.frame(width: width * 0.4)
       
       BobGauge(bob: $bob)
-        .frame(width: width * 0.35)
+        .frame(width: width * 0.33)
         .frame(height: 37)
       
     }

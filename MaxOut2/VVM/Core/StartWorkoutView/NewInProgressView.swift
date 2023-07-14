@@ -18,7 +18,7 @@ struct NewInProgressView: View {
         .padding(.vertical, 5)
         .background(Color.clear)
         .cornerRadius(20)
-//        .shadow(color: .primary.opacity(0.5), radius: 1, y: 1)
+        .shadow(color: .primary.opacity(0.2), radius: 2, y: 1)
     }
     .coordinateSpace(name: CoordinateSpaces.scrollView)
     .scrollDismissesKeyboard(.interactively)
@@ -68,6 +68,7 @@ extension NewInProgressView {
       LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
         model.isShowingPicker = true
       }
+      .padding(.bottom, 40)
     }
   }
   

@@ -32,7 +32,7 @@ extension View {
   func bobTFStyle() -> some View {
     self
       .bold()
-      .foregroundColor(.primary)
+      .foregroundStyle(.primary.shadow(.inner(color: .primary.opacity(0.2), radius: 2, y: -1)))
       .textFieldStyle( GradientTextFieldBackground() )
       .multilineTextAlignment(.center)
   }
