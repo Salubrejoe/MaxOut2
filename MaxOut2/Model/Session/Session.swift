@@ -59,11 +59,11 @@ struct Session: Identifiable, Equatable {
 //    return (bestBob, bestBobIndex)
 //  }
   
-  func markBobsAsComplete(session: inout Session) {
-    for index in 0..<session.bobs.count {
-      session.bobs[index].isCompleted = true
-    }
-  }
+//  func markBobsAsComplete(session: inout Session) {
+//    for index in 0..<session.bobs.count {
+//      session.bobs[index].isCompleted = true
+//    }
+//  }
 }
 
 // MARK: - CODABLE

@@ -16,9 +16,8 @@ extension BobView {
       }.frame(width: width * 0.4)
       
       BobGauge(bob: $bob)
-        .frame(width: width * 0.33)
+        .frame(width: width * 0.35)
         .frame(height: 37)
-      
     }
   }
   
@@ -72,10 +71,11 @@ extension BobView {
         let width = proxy.size.width
         let index = session.bobs.firstIndex(of: bob) ?? 0
         HStack {
-          Image(systemName: "\(index + 1).circle")
+          Image(systemName: "\(index + 1).square")
             .foregroundColor(.secondary)
-            .padding(.leading)
-            .frame(width: width * 0.1)
+            .padding(.leading, 4)
+            .frame(width: width * 0.09)
+            
           
           content(width)
           
@@ -83,9 +83,9 @@ extension BobView {
             self.bob.isCompleted.toggle()
           } label: {
             Image(systemName: "checkmark")
-              .padding(.trailing)
-              .foregroundColor(bob.isCompleted ? .green : .secondary)
+              .foregroundColor(bob.isCompleted ? .green : .primary)
           }
+          .padding(.trailing)
           .frame(width: width * 0.10)
         }
         ///CORRECTING GEO READER

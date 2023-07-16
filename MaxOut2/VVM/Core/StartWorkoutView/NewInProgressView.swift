@@ -14,11 +14,12 @@ struct NewInProgressView: View {
         header
       }
       sessionGrid
-        .padding(.horizontal)
-        .padding(.vertical, 5)
-        .background(Color.clear)
+//        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(model.sessions.isEmpty ? .ultraThinMaterial.opacity(0.001) : .ultraThinMaterial)
         .cornerRadius(20)
-        .shadow(color: .primary.opacity(0.2), radius: 2, y: 1)
+//        .shadow(color: .primary.opacity(0.2), radius: 2, y: 1)
+      
     }
     .coordinateSpace(name: CoordinateSpaces.scrollView)
     .scrollDismissesKeyboard(.interactively)
@@ -65,10 +66,13 @@ extension NewInProgressView {
       ForEach($model.sessions) { $session in
         SessionView(session: $session, model: model)
       }
+      
       LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
         model.isShowingPicker = true
       }
       .padding(.bottom, 40)
+      .padding(.top, 20)
+      .padding(.horizontal)
     }
   }
   

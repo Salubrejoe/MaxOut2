@@ -44,8 +44,7 @@ struct GradientTextFieldBackground: TextFieldStyle {
     ZStack {
       RoundedRectangle(cornerRadius: 8.0)
         .foregroundStyle(.ultraThinMaterial
-//          .shadow(.inner(color: .primary.opacity(0.5),
-//                         radius: 1))
+//          .shadow(.inner(color: .primary.opacity(0.5), radius: 1))
         )
       configuration
     }

@@ -13,31 +13,30 @@ struct SessionView: View {
 
   var body: some View {
     SwipeViewGroup {
-      VStack(spacing: 1) {
-        VStack(alignment: .set, spacing: 0) {
+      VStack(spacing: 0) {
+        VStack(spacing: 0) {
           
           header
             .padding(.horizontal, 16)
             .padding(.top, 15)
           
           VStack(spacing: 0) {
-            
             ForEach($session.bobs) { $bob in
               BobView(controller: controller, bob: $bob, session: $session)
-              
             }
           }
           .cornerRadius(10)
           .padding(.bottom, 5)
           .padding(.horizontal, 5)
         }
-        .background(.ultraThinMaterial)
-        .cornerRadius(14)
+//        .background(.ultraThinMaterial)
+//        .cornerRadius(14)
         
-        newSetButton
+        newBobButton
           .padding(.bottom, 20)
-          .padding(.top, 2)
+          .padding(.top, 5)
       }
+      
       .onAppear {
         UITextField.appearance().clearButtonMode = .whileEditing
       }
@@ -50,15 +49,16 @@ struct SessionView: View {
 extension SessionView {
   @ViewBuilder // MARK: - HEADER
   private var header: some View {
-    VStack(spacing: 10) {
+    VStack(spacing: 6) {
       HStack {
         HStack {
           Button {
             model.remove(session)
           } label: {
             HStack(alignment: .firstTextBaseline) {
-              Label("\(session.exerciseName.capitalized)", systemImage: "ellipsis.circle")
-              Text(" - \(session.timeString)").font(.caption2).foregroundColor(.secondary)
+              Label("\(session.exerciseName.capitalized)", systemImage: session.image)
+                .fontWeight(.heavy)
+              Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
             }
           }
           Spacer()
@@ -73,10 +73,9 @@ extension SessionView {
           controller.isAllCompletedChekmarkFilled.toggle()
           controller.open.send()
         } label: {
-          Image(systemName: "checkmark.circle")
-            .imageScale(.large)
-            .bold()
-            .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .secondary)
+          Image(systemName: "checkmark")
+            .font(.headline)
+            .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .accentColor)
         }
       }
       
@@ -99,21 +98,29 @@ extension SessionView {
     GeometryReader { proxy in
       let width = proxy.size.width
       HStack(spacing: 0) {
-        Text(" ")
-          .frame(width: width * 0.1)
+        HStack {
+          Spacer()
+          Text(textForHeader().0)
+            .padding(.trailing, 25)
+        }
+        .frame(width: session.category != "stretching" ? (width * 0.305) : (width * 0.43))
         
-        Text(textForHeader().0)
-          .frame(width: session.category != "stretching" ? (width * 0.20) : (width * 0.43))
-        Text(textForHeader().1)
-          .frame(width: session.category != "stretching" ? (width * 0.25) : 0)
+        HStack {
+          Text(textForHeader().1)
+            .padding(.leading, 22)
+          Spacer()
+        }
+        .frame(width: session.category != "stretching" ? (width * 0.20) : 0)
+        
         
         Text("REST")
-          .frame(width: width * 0.4)
+          .padding(.trailing, 20)
+          .frame(width: width * 0.45)
       }
     }
     .frame(height: 15)
-    .font(.caption)
-    .foregroundColor(.secondary)
+    .font(.caption2)
+    .foregroundColor(.gray)
   }
   
   private func textForHeader() -> (String, String) {
@@ -124,46 +131,47 @@ extension SessionView {
       default: return ("","")
     }
   }
+
   
-  @ViewBuilder // MARK: FOOTER
-  private var newSetButton: some View {
-    Image(systemName: "plus")
-      .imageScale(.large)
-      .foregroundColor(.primary.opacity(0.5))
-      .padding(.vertical)
-      .frame(maxWidth: 428)
-      .frame(height: 27)
-      .background(.ultraThinMaterial)
-      .clipShape(Capsule())
-      .shadow(color: .primary.opacity(0.1), radius: 2, y: 1)
-      .overlay {
-        Rectangle().fill(Color.secondarySytemBackground.opacity(0.01))
-          .frame(maxWidth: .infinity)
-          .frame(maxHeight: .infinity)
-          .onTapGesture {
-            if let lastBob = session.bobs.last {
-              let bob = Bob(bob: lastBob)
-              withAnimation {
-                session.bobs.append(bob)
-              }
-            } else {
-              withAnimation {
-                session.bobs.append(Bob())
-              }
-            }
-          }
+  @ViewBuilder // MARK: - NEW BOB
+  private var newBobButton: some View {
+    HStack(spacing: 2) {
+      Text("+ New Set")
+    }
+    .font(.headline)
+    .foregroundColor(.primary)
+    .frame(maxWidth: 428, alignment: .center)
+    .frame(maxHeight: 20)
+    .background(.ultraThinMaterial)
+    .clipShape(Capsule())
+    .padding(.horizontal)
+    
+    .onTapGesture {
+      if let lastBob = session.bobs.last {
+        let bob = Bob(bob: lastBob)
+        withAnimation {
+          session.bobs.append(bob)
+        }
+      } else {
+        withAnimation {
+          session.bobs.append(Bob())
+        }
+      }
     }
   }
 }
 
 
-extension HorizontalAlignment {
-  enum PaulHudsonStruct: AlignmentID {
-    static func defaultValue(in context: ViewDimensions) -> CGFloat {
-      context[.leading]
-    }
+struct SessionView_Previews: PreviewProvider {
+  static var previews: some View {
+    SessionView(session: .constant(
+      Session(id: "", exerciseId: "", exerciseName: "Bench Press", dateCreated: Date(), category: "strength", bobs: [
+        Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
+        Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
+        Bob(kg: "25", reps: "10", isCompleted: true, restTime: 45),
+        Bob(kg: "27", reps: "9", isCompleted: false, restTime: 45)
+      ], image: "figure.rower")
+    ), model: StartViewModel())
+    .padding(.horizontal)
   }
-  
-  static let equipment = HorizontalAlignment(PaulHudsonStruct.self)
-  static let set = HorizontalAlignment(PaulHudsonStruct.self)
 }
