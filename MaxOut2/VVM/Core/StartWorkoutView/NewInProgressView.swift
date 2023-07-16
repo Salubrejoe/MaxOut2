@@ -14,9 +14,9 @@ struct NewInProgressView: View {
         header
       }
       sessionGrid
-//        .padding(.horizontal)
+        .padding(.horizontal)
         .padding(.vertical, 10)
-        .background(model.sessions.isEmpty ? .ultraThinMaterial.opacity(0.001) : .ultraThinMaterial)
+//        .background(.ultraThinMaterial)
         .cornerRadius(20)
 //        .shadow(color: .primary.opacity(0.2), radius: 2, y: 1)
       
@@ -72,7 +72,6 @@ extension NewInProgressView {
       }
       .padding(.bottom, 40)
       .padding(.top, 20)
-      .padding(.horizontal)
     }
   }
   

@@ -29,8 +29,8 @@ struct SessionView: View {
           .padding(.bottom, 5)
           .padding(.horizontal, 5)
         }
-//        .background(.ultraThinMaterial)
-//        .cornerRadius(14)
+        .background(.ultraThinMaterial)
+        .cornerRadius(14)
         
         newBobButton
           .padding(.bottom, 20)
