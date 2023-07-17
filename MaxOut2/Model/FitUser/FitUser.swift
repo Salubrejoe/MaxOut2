@@ -2,7 +2,7 @@
 import Foundation
 
 struct FitUser {
-  static let mockup = FitUser(id: "", username: "Username", firstName: "FirstName", lastName: "McLastname", dateCreated: Date(), photoUrl: nil, email: "pizza@spaghetti.man", weight: 75, height: 178, dateOfBirth: Date(timeIntervalSince1970: 623_721_600))
+  static let mockup = FitUser(id: "", username: "Username", firstName: "FirstName", lastName: "McLastname", dateCreated: Date(), photoUrl: nil, email: "pizza@spaghetti.man", weight: "75", height: "178", dateOfBirth: Date(timeIntervalSince1970: 623_721_600))
   
   let id          : String
   var username    : String?
@@ -12,10 +12,12 @@ struct FitUser {
   let email       : String?
   let dateCreated : Date?
   
-  var weight      : Double?
-  var height      : Double?
+  var weight      : String?
+  var height      : String?
   
   var dateOfBirth : Date?
+  
+  var color       : String?
   
   init(from arm: AuthenticationResultModel) {
     self.id          = arm.uid
@@ -28,6 +30,7 @@ struct FitUser {
     self.weight      = nil
     self.height      = nil
     self.dateOfBirth = nil
+    self.color       = nil
   }
   
   init(
@@ -38,8 +41,9 @@ struct FitUser {
     dateCreated : Date?   = nil,
     photoUrl    : String? = nil,
     email       : String? = nil,
-    weight      : Double? = nil,
-    height      : Double? = nil,
+    weight      : String? = nil,
+    height      : String? = nil,
+    color       : String? = nil,
     dateOfBirth : Date?   = nil
   ) {
     self.id          = id
@@ -51,11 +55,29 @@ struct FitUser {
     self.email       = email
     self.weight      = nil
     self.height      = nil
+    self.color      = nil
     self.dateOfBirth = nil
   }
 }
 
 extension FitUser {
+  var firstLetter: Character {
+    
+    if let name = username,
+       name.count > 0 { return name.first! }
+    
+    else if let name = firstName,
+            name.count > 0 { return name.first! }
+    
+    else if let name = lastName,
+            name.count > 0 { return name.first! }
+    
+    else if let name = email,
+            name.count > 0 { return name.first! }
+    
+    return "7"
+  }
+  
   // MARK: - COMPUTED PROPERTIES
   var dateCreatedShortString: String {
     guard let dateCreated else { return "No creation Date "}
@@ -68,7 +90,7 @@ extension FitUser {
     let yearOfBirth = calendar.component(.year, from: dateOfBirth)
     let currentYear = calendar.component(.year, from: Date())
     let result = currentYear - yearOfBirth
-    return "🎂 \(result) years old • "
+    return "🎂 \(result) years old  •"
   }
   
   var heightString: String {
@@ -90,6 +112,7 @@ extension FitUser: Codable {
     case weight
     case height
     case dateOfBirth
+    case color
   }
   
   func encode(to encoder: Encoder) throws { var container = encoder.container(keyedBy: CodingKeys.self)
@@ -101,6 +124,7 @@ extension FitUser: Codable {
     try container.encodeIfPresent(self.firstName,   forKey: .firstName)
     try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
     try container.encodeIfPresent(self.weight,      forKey: .weight)
+    try container.encodeIfPresent(self.color,       forKey: .color)
     try container.encodeIfPresent(self.height,      forKey: .height)
     try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
   }
@@ -114,7 +138,9 @@ extension FitUser: Codable {
     self.email       = try container.decodeIfPresent(String.self, forKey: .email)
     self.dateCreated = try container.decodeIfPresent(Date.self,   forKey: .dateCreated)
     self.dateOfBirth = try container.decodeIfPresent(Date.self,   forKey: .dateOfBirth)
-    self.weight      = try container.decodeIfPresent(Double.self, forKey: .weight)
-    self.height      = try container.decodeIfPresent(Double.self, forKey: .height)
+    self.weight      = try container.decodeIfPresent(String.self, forKey: .weight)
+    self.height      = try container.decodeIfPresent(String.self, forKey: .height)
+    self.color       = try container.decodeIfPresent(String.self, forKey: .color)
+    
   }
 }

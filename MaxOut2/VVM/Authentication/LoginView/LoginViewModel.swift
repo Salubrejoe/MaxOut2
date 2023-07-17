@@ -16,7 +16,8 @@ final class LoginViewModel: NSObject, ObservableObject {
     // CHECK FOR EXISTING ACCOUNT
     let isNewUser = try await FitUserManager.shared.isNewUser(with: authResult.uid) /// 🧵🥎
     if isNewUser {
-      let newUser = FitUser(from: authResult)
+      var newUser = FitUser(from: authResult)
+      newUser.color = goodColors.randomElement()
       try await FitUserManager.shared.pushNew(user: newUser) /// 🥎
       self.isShowingProgressView = false
     }

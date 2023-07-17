@@ -5,6 +5,9 @@ final class DiaryViewModel: ObservableObject {
   @Published var user: FitUser = FitUser.mockup
   @Published var authProviders: [AuthProviderOption] = []
   
+  @Published var height = ""
+  @Published var weight = ""
+  
   @MainActor
   func loadCurrentUser() async throws { /// 🧵⚾️
     let authDataResult = try FireAuthManager.shared.currentAuthenticatedUser() /// 🥎
@@ -14,6 +17,12 @@ final class DiaryViewModel: ObservableObject {
 
 // MARK: - FirebaseAuth Methods
 extension DiaryViewModel {
+  
+  func saveHeightAndWeight() {
+    user.weight = self.weight
+    user.height = self.height
+  }
+  
   func loadAuthProviders() {
     if let providers = try? FireAuthManager.shared.authProviderOptions() {
       self.authProviders = providers
@@ -21,6 +30,7 @@ extension DiaryViewModel {
   }
   
   func update(user: FitUser) {
+    saveHeightAndWeight()
     do {
       try FitUserManager.shared.update(user: user)
     } catch {

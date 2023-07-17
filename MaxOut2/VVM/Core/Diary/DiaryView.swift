@@ -38,10 +38,10 @@ extension DiaryView {
   
   @ViewBuilder // MARK: - Widgets
   private var listOfWidgets: some View {
-    LazyVGrid(columns: [.init(.fixed(350))]) {
+    LazyVGrid(columns: [.init(.fixed(360))]) {
       ForEach(0...5, id: \.self) { n in
         Text(" ")
-          .frame(height: 100)
+          .frame(height: 120)
           .frame(maxWidth: .infinity)
           .background(.ultraThinMaterial)
           .cornerRadius(14)
@@ -76,15 +76,17 @@ struct ProfileLabel: View {
         } placeholder: {
           ProgressView()
         }
-        .frame(width: 44, height: 44)
+        .frame(width: 46, height: 46)
         .background(Color.gray)
         .clipShape(Circle())
       }
       else {
-        Image(systemName: "person")
-          .imageScale(.large)
-          .frame(width: 44, height: 44)
-          .background(Color.gray)
+        Text(String(user.firstLetter))
+          .font(.title)
+          .fontDesign(.rounded)
+          .foregroundColor(.systemBackground)
+          .frame(width: 46, height: 46)
+          .background(Color(hex: user.color ?? ""))
           .clipShape(Circle())
       }
       VStack(alignment: .leading) {
@@ -99,6 +101,7 @@ struct ProfileLabel: View {
       }
     }
     .padding(.horizontal)
+    .onAppear { print(user.firstLetter) }
   }
 }
 

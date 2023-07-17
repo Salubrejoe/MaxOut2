@@ -15,19 +15,12 @@ struct ProfileView: View {
            
           measuresSection
 
-          Section {
-            HStack {
-              Text("Email")
-              Spacer()
-              Text(model.user.email ?? "no email")
-                .foregroundColor(.secondary)
-            }
-          }
+          
           
           logoutSection
         }
         .listStyle(.grouped)
-        .scrollDismissesKeyboard(.interactively)
+        .scrollDismissesKeyboard(.immediately)
         
         LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
           model.update(user: model.user)
@@ -49,6 +42,21 @@ extension ProfileView {
                displayedComponents: .date)
     .datePickerStyle(.compact)
   }
+  
+  
+  @ViewBuilder // MARK: - Email SECTION
+  private var emailSection: some View {
+    Section {
+      HStack {
+        Text("Email")
+          .minimumScaleFactor(0.7)
+        Spacer()
+        Text(model.user.email ?? "no email")
+          .foregroundColor(.secondary)
+      }
+    }
+  }
+  
   
   @ViewBuilder // MARK: - Names SECTION
   private var namesSection: some View {
@@ -85,17 +93,19 @@ extension ProfileView {
     HStack {
       Text("Height(cm)")
       Spacer()
-      TextField("cm", value: $model.user.height, format: .number)
+      TextField("cm", text: $model.height)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.trailing)
+        .numbersOnly($model.height)
     }
     
     HStack {
       Text("Weight(kg)")
       Spacer()
-      TextField("enter", value: $model.user.weight, format: .number)
+      TextField("kg", text: $model.weight)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.trailing)
+        .numbersOnly($model.weight)
     }
   }
   
@@ -116,6 +126,7 @@ extension ProfileView {
           do {
             try model.signOut()
             showingLoginView = true
+            dismiss()
           } catch {
             print("Troubles signin out: \(error)")
           }
