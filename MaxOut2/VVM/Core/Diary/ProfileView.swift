@@ -15,7 +15,7 @@ struct ProfileView: View {
            
           measuresSection
 
-          
+          emailSection
           
           logoutSection
         }
@@ -67,6 +67,7 @@ extension ProfileView {
         TextField("", text: $model.user.firstName.bound)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.trailing)
+        
       }
       
       HStack {
@@ -97,6 +98,9 @@ extension ProfileView {
         .foregroundColor(.secondary)
         .multilineTextAlignment(.trailing)
         .numbersOnly($model.height)
+        .onChange(of: model.height) { newValue in
+          model.user.height = newValue
+        }
     }
     
     HStack {
@@ -106,6 +110,9 @@ extension ProfileView {
         .foregroundColor(.secondary)
         .multilineTextAlignment(.trailing)
         .numbersOnly($model.weight)
+        .onChange(of: model.weight) { newValue in
+          model.user.weight = newValue
+        }
     }
   }
   

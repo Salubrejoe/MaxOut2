@@ -55,27 +55,22 @@ struct FitUser {
     self.email       = email
     self.weight      = nil
     self.height      = nil
-    self.color      = nil
+    self.color       = nil
     self.dateOfBirth = nil
   }
 }
 
 extension FitUser {
-  var firstLetter: Character {
-    
-    if let name = username,
-       name.count > 0 { return name.first! }
-    
-    else if let name = firstName,
-            name.count > 0 { return name.first! }
-    
-    else if let name = lastName,
-            name.count > 0 { return name.first! }
-    
-    else if let name = email,
-            name.count > 0 { return name.first! }
-    
-    return "7"
+  var firstLetter: String {
+    if let username = username, !username.isEmpty {
+      return String(username.prefix(1))
+    } else if let firstName = firstName, !firstName.isEmpty {
+      return String(firstName.prefix(1))
+    } else if let email = email, !email.isEmpty {
+      return String(email.prefix(1))
+    } else {
+      return ""
+    }
   }
   
   // MARK: - COMPUTED PROPERTIES
@@ -84,7 +79,7 @@ extension FitUser {
     return dateCreated.formatted(date: .abbreviated, time: .shortened)
   }
   
-  var age: String {
+  var ageString: String {
     guard let dateOfBirth else { return "" }
     let calendar = Calendar.current
     let yearOfBirth = calendar.component(.year, from: dateOfBirth)
@@ -94,8 +89,8 @@ extension FitUser {
   }
   
   var heightString: String {
-    guard let height else { return ""}
-    return "📐" + String(format: "%.0f", height) + " cm"
+    guard let height else { return "" }
+    return height + " cm"
   }
 }
 

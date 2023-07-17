@@ -81,10 +81,10 @@ struct ProfileLabel: View {
         .clipShape(Circle())
       }
       else {
-        Text(String(user.firstLetter))
+        Text(user.firstLetter)
           .font(.title)
           .fontDesign(.rounded)
-          .foregroundColor(.systemBackground)
+          .foregroundColor(.blue)
           .frame(width: 46, height: 46)
           .background(Color(hex: user.color ?? ""))
           .clipShape(Circle())
@@ -93,7 +93,7 @@ struct ProfileLabel: View {
         Text(user.username ?? "Pizza guy")
           .font(.title3.bold())
         HStack {
-          Text(user.age)
+          Text(user.ageString)
           Text(user.heightString)
         }
         .font(.caption)
