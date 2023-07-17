@@ -1,0 +1,113 @@
+
+import SwiftUI
+
+final class DiaryViewModel: ObservableObject {
+  @Published var user: FitUser = FitUser.mockup
+}
+
+struct DiaryView: View {
+  enum CoordinateSpaces {
+    case scrollView
+  }
+  
+  @StateObject private var model = DiaryViewModel()
+  @Binding var showingLoginView: Bool
+  
+  var body: some View {
+    NavigationStack {
+      ParallaxScrollView(background: Color.clear, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
+        listOfWidgets
+      } header: {
+        header
+      }
+      .navigationTitle("Diary")
+      .toolbar { toolbar }
+    }
+  }
+}
+
+extension DiaryView {
+  
+  @ViewBuilder // MARK: - Header
+  private var header: some View {
+    List {
+      NavigationLink {
+        ProfileView(showingLoginView: $showingLoginView, fitUser: $model.user)
+      } label: {
+        ProfileLabel(user: model.user)
+      }
+    }.listStyle(.plain)
+  }
+  
+  @ViewBuilder // MARK: - Widgets
+  private var listOfWidgets: some View {
+    LazyVGrid(columns: [.init(.fixed(350))]) {
+      ForEach(0...5, id: \.self) { n in
+        Text(" ")
+          .frame(height: 100)
+          .frame(maxWidth: .infinity)
+          .background(.ultraThinMaterial)
+          .cornerRadius(14)
+          .padding(.horizontal)
+      }
+    }
+  }
+  
+  @ToolbarContentBuilder // MARK: - TOOLBAR
+  private var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      NavigationLink {
+        // SettingsView
+      } label: {
+        Image(systemName: "gearshape")
+      }
+    }
+  }
+}
+  
+
+// MARK: - PROFILE LABEL
+struct ProfileLabel: View {
+  let user: FitUser
+  var body: some View {
+    HStack(spacing: 12) {
+      if let urlString = user.photoUrl, let url = URL(string: urlString) {
+        AsyncImage(url: url) { image in
+          image
+            .resizable()
+            .scaledToFill()
+        } placeholder: {
+          ProgressView()
+        }
+        .frame(width: 44, height: 44)
+        .background(Color.gray)
+        .clipShape(Circle())
+      }
+      else {
+        Image(systemName: "person")
+          .imageScale(.large)
+          .frame(width: 44, height: 44)
+          .background(Color.gray)
+          .clipShape(Circle())
+      }
+      VStack {
+        Text(user.username ?? "Pizza guy")
+          .font(.title3.bold())
+        HStack {
+          Text(user.age.description + " years old")
+          Text(user.weight?.description ?? "0" + " kg")
+        }
+        .font(.caption)
+        .foregroundColor(.gray)
+      }
+    }
+    .padding(.horizontal)
+  }
+}
+
+
+struct DiaryView_Previews: PreviewProvider {
+  static var previews: some View {
+    DiaryView(showingLoginView: .constant(false))
+  }
+}

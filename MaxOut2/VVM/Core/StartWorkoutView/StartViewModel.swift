@@ -90,38 +90,24 @@ final class StartViewModel: ObservableObject {
   // MARK: - Save Routine
   @MainActor
   func save(_ routine: Routine?) async throws {
-    errorMessage = nil
-    isShowingeErrorAlert = false
-    
-    guard let routine else {
-      isShowingeErrorAlert = true
-      errorMessage = "No routine"
-      print(errorMessage)
-      throw URLError(.cannotCloseFile)
-    }
-    
-    guard let userId = try? FireAuthManager.shared.currentAuthenticatedUser().uid  else {
-      isShowingeErrorAlert = true
-      errorMessage = "No userId"
-      print(errorMessage)
-      throw URLError(.userAuthenticationRequired)
-    }
-    
+    let userId = try userId()
+    guard let routine else { throw URLError(.cannotCloseFile) }
     let dateStarted = routine.dateStarted.timeIntervalSince1970
     let dateEnded = Date().timeIntervalSince1970
     let duration = (dateEnded - dateStarted).rounded()
-    
     var sessionPaths = [SessionPath]()
     var bobs = [Bob]()
     
     for session in sessions {
       for bob in session.bobs {
         if bob.isCompleted {
-          let newBob = Bob(kg: bob.kg,
-                           reps: bob.reps,
-                           duration: bob.duration,
-                           distance: bob.distance,
-                           isCompleted: false)
+//          let newBob = Bob(kg: bob.kg,
+//                           reps: bob.reps,
+//                           duration: bob.duration,
+//                           distance: bob.distance,
+//                           isCompleted: false,
+//                           restTime: bob.restTime)
+          let newBob = Bob(bob: bob)
           bobs.append(newBob)
         }
       }
@@ -141,13 +127,20 @@ final class StartViewModel: ObservableObject {
     }
       
     let newRoutine = Routine(sessionsPaths: sessionPaths,
-                             dateEnded: Date(timeIntervalSince1970: dateStarted),
-                             dateStarted: Date(timeIntervalSince1970: dateEnded),
+                             dateEnded: Date(timeIntervalSince1970: dateEnded),
+                             dateStarted: Date(timeIntervalSince1970: dateStarted),
                              duration: duration)
-      
-      cancelRoutine()
-    
-      try? await RoutinesManager.shared.addToRoutines(routine: newRoutine , for: userId)
+    try? await RoutinesManager.shared.addToRoutines(routine: newRoutine , for: userId)
+    cancelRoutine()
+  }
+  
+  private func userId() throws -> String {
+    guard let userId = try? FireAuthManager.shared.currentAuthenticatedUser().uid  else {
+      isShowingeErrorAlert = true
+      errorMessage = "No userId"
+      throw URLError(.userAuthenticationRequired)
+    }
+    return userId
   }
 }
 

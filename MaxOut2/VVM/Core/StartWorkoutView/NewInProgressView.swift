@@ -72,6 +72,7 @@ extension NewInProgressView {
       }
       .padding(.bottom, 40)
       .padding(.top, 20)
+      
     }
   }
   

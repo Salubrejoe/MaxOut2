@@ -22,6 +22,10 @@ struct RootView: View {
   @ViewBuilder
   private var mainTabBar: some View {
     TabView {
+      DiaryView(showingLoginView: $model.showingLoginView)
+        .tabItem {
+          Label("Diary", systemImage: "book.closed")
+        }
       StartContainer(showingLoginView: $model.showingLoginView)
         .tabItem {
           Label("Start", systemImage: "bolt.ring.closed")
@@ -30,10 +34,7 @@ struct RootView: View {
         .tabItem {
           Label("Exercises", systemImage: "figure.hiking")
         }
-      HistoryView()
-        .tabItem {
-          Label("History", systemImage: "mountain.2")
-        }
+      
       
     }
   }

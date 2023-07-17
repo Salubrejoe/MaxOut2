@@ -226,20 +226,3 @@ final class HistoryViewModel: ObservableObject {
       }
     }
 }
-
-extension HistoryViewModel {
-
-  //  func removeFromFocusInfo(_ workout: Workout) {
-  //    guard let index = focusInfo?.firstIndex(of: workout) else { return }
-  //    focusInfo?.remove(at: index)
-  //  }
-  //
-  //  func reloadInformations(_ workout: Workout) {
-  //    let endDate = getEndDate(for: workout)
-  //
-  //    if let _ = self.decorations[endDate] {
-  //      self.decorations[endDate] = []
-  //      getInformations()
-  //    }
-  //  }
-}

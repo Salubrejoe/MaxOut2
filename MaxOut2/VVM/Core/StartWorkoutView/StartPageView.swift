@@ -71,7 +71,7 @@ extension StartPageView {
       HStack {
         Spacer()
         NavigationLink {
-          SettingsView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
+          ProfileView(showingLoginView: $showingLoginView, fitUser: $model.fitUser)
         } label: {
           Image(systemName: "gearshape")
             .imageScale(.large)

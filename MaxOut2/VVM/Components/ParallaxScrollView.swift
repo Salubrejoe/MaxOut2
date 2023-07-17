@@ -27,7 +27,7 @@ struct ParallaxScrollView<Background: View, Header: View, Content: View, Space: 
         content()
           .padding(.horizontal)
           .padding(.vertical, 5)
-          .background(.ultraThinMaterial)
+//          .background(.ultraThinMaterial)
           .cornerRadius(20)
 //          .shadow(color: .primary.opacity(0.5), radius: 02)
       }

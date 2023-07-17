@@ -5,6 +5,7 @@ final class SettingsViewModel: ObservableObject {
   @Published var fitUser: FitUser = FitUser.mockup
   @Published var authProviders: [AuthProviderOption] = []
   
+  @Published var isShowingPassResetAlert = false
   
   func loadCurrentUser() async throws { /// 🧵⚾️
     let authDataResult = try FireAuthManager.shared.currentAuthenticatedUser() /// 🥎
