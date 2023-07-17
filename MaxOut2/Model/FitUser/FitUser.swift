@@ -15,7 +15,7 @@ struct FitUser {
   var weight      : Double?
   var height      : Double?
   
-  let dateOfBirth : Date?
+  var dateOfBirth : Date?
   
   init(from arm: AuthenticationResultModel) {
     self.id          = arm.uid
@@ -53,20 +53,27 @@ struct FitUser {
     self.height      = nil
     self.dateOfBirth = nil
   }
-  
-  
+}
+
+extension FitUser {
   // MARK: - COMPUTED PROPERTIES
   var dateCreatedShortString: String {
     guard let dateCreated else { return "No creation Date "}
     return dateCreated.formatted(date: .abbreviated, time: .shortened)
   }
   
-  var age: Int {
-    guard let dateOfBirth else { return 0 }
+  var age: String {
+    guard let dateOfBirth else { return "" }
     let calendar = Calendar.current
     let yearOfBirth = calendar.component(.year, from: dateOfBirth)
     let currentYear = calendar.component(.year, from: Date())
-    return currentYear - yearOfBirth
+    let result = currentYear - yearOfBirth
+    return "🎂 \(result) years old • "
+  }
+  
+  var heightString: String {
+    guard let height else { return ""}
+    return "📐" + String(format: "%.0f", height) + " cm"
   }
 }
 
@@ -95,6 +102,7 @@ extension FitUser: Codable {
     try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
     try container.encodeIfPresent(self.weight,      forKey: .weight)
     try container.encodeIfPresent(self.height,      forKey: .height)
+    try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
   }
   
   init(from decoder: Decoder) throws { let container = try decoder.container(keyedBy: CodingKeys.self)

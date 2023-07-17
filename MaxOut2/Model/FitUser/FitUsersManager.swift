@@ -4,28 +4,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-//final class ExercisesSelectionManager {
-//  static let shared = ExercisesSelectionManager()
-//  private init() { }
-//  
-//  private let exercisesSelectionPath = Firestore.firestore().collection("exercisesSelection")
-//  
-//  func exerciseSelectionDocument(id: String) -> DocumentReference {
-//    exercisesSelectionPath
-//      .document(id)
-//  }
-//  
-//  func push(exercise: Exercise) throws {
-//    try exerciseSelectionDocument(id: exercise.id)
-//      .setData(from: exercise, merge: false)
-//  }
-//  
-//  func getAll() async throws -> [Exercise] {
-//    try await exercisesSelectionPath.getDocuments(as: Exercise.self)
-//  }
-//}
-
-
 final class FitUserManager {
   static let shared = FitUserManager()
   private init() { }

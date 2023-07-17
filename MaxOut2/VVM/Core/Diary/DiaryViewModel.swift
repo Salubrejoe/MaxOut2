@@ -1,27 +1,32 @@
-import Foundation
+import UIKit
 
-@MainActor
-final class SettingsViewModel: ObservableObject {
-  @Published var fitUser: FitUser = FitUser.mockup
+
+final class DiaryViewModel: ObservableObject {
+  @Published var user: FitUser = FitUser.mockup
   @Published var authProviders: [AuthProviderOption] = []
   
-  @Published var isShowingPassResetAlert = false
-  
+  @MainActor
   func loadCurrentUser() async throws { /// 🧵⚾️
     let authDataResult = try FireAuthManager.shared.currentAuthenticatedUser() /// 🥎
-    self.fitUser = try await FitUserManager.shared.user(id: authDataResult.uid) /// 🧵🥎
+    self.user = try await FitUserManager.shared.user(id: authDataResult.uid) /// 🧵🥎
   }
 }
 
-
 // MARK: - FirebaseAuth Methods
-extension SettingsViewModel {
+extension DiaryViewModel {
   func loadAuthProviders() {
     if let providers = try? FireAuthManager.shared.authProviderOptions() {
       self.authProviders = providers
     }
   }
   
+  func update(user: FitUser) {
+    do {
+      try FitUserManager.shared.update(user: user)
+    } catch {
+      print("Could not update user: \(error)")
+    }
+  }
   
   func resetPassword() async throws { /// 🧵⚾️
     let authUser = try FireAuthManager.shared.currentAuthenticatedUser() /// 🥎

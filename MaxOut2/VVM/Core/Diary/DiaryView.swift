@@ -1,17 +1,13 @@
 
 import SwiftUI
 
-final class DiaryViewModel: ObservableObject {
-  @Published var user: FitUser = FitUser.mockup
-}
-
 struct DiaryView: View {
   enum CoordinateSpaces {
     case scrollView
   }
-  
   @StateObject private var model = DiaryViewModel()
   @Binding var showingLoginView: Bool
+  
   
   var body: some View {
     NavigationStack {
@@ -20,8 +16,9 @@ struct DiaryView: View {
       } header: {
         header
       }
-      .navigationTitle("Diary")
+      .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
       .toolbar { toolbar }
+      .task { try? await model.loadCurrentUser() }
     }
   }
 }
@@ -32,7 +29,7 @@ extension DiaryView {
   private var header: some View {
     List {
       NavigationLink {
-        ProfileView(showingLoginView: $showingLoginView, fitUser: $model.user)
+        ProfileView(model: model, showingLoginView: $showingLoginView)
       } label: {
         ProfileLabel(user: model.user)
       }
@@ -90,12 +87,12 @@ struct ProfileLabel: View {
           .background(Color.gray)
           .clipShape(Circle())
       }
-      VStack {
+      VStack(alignment: .leading) {
         Text(user.username ?? "Pizza guy")
           .font(.title3.bold())
         HStack {
-          Text(user.age.description + " years old")
-          Text(user.weight?.description ?? "0" + " kg")
+          Text(user.age)
+          Text(user.heightString)
         }
         .font(.caption)
         .foregroundColor(.gray)
