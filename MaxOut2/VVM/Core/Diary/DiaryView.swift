@@ -38,16 +38,14 @@ extension DiaryView {
   
   @ViewBuilder // MARK: - Widgets
   private var listOfWidgets: some View {
-    LazyVGrid(columns: [.init(.fixed(360))]) {
-      ForEach(0...5, id: \.self) { n in
-        Text(" ")
-          .frame(height: 120)
-          .frame(maxWidth: .infinity)
-          .background(.ultraThinMaterial)
-          .cornerRadius(14)
-          .padding(.horizontal)
+    VStack {
+      NavigationLink {
+        HistoryView()
+      } label: {
+        ExerciseMinutesWidget(controller: ExerciseMinutesController())
       }
     }
+    .frame(height: 180)
   }
   
   @ToolbarContentBuilder // MARK: - TOOLBAR
@@ -84,7 +82,8 @@ struct ProfileLabel: View {
         Text(user.firstLetter)
           .font(.title)
           .fontDesign(.rounded)
-          .foregroundColor(.blue)
+          .fontWeight(.heavy)
+          .foregroundColor(.systemBackground)
           .frame(width: 46, height: 46)
           .background(Color(hex: user.color ?? ""))
           .clipShape(Circle())
@@ -101,7 +100,6 @@ struct ProfileLabel: View {
       }
     }
     .padding(.horizontal)
-    .onAppear { print(user.firstLetter) }
   }
 }
 

@@ -2,6 +2,7 @@ import UIKit
 
 
 final class DiaryViewModel: ObservableObject {
+  
   @Published var user: FitUser = FitUser.mockup
   @Published var authProviders: [AuthProviderOption] = []
   

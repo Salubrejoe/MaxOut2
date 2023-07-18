@@ -19,7 +19,7 @@ struct ProfileView: View {
           
           logoutSection
         }
-        .listStyle(.grouped)
+        .listStyle(.automatic)
         .scrollDismissesKeyboard(.immediately)
         
         LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
