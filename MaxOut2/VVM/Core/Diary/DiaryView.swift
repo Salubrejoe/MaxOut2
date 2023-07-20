@@ -6,13 +6,14 @@ struct DiaryView: View {
     case scrollView
   }
   @StateObject private var model = DiaryViewModel()
+  @StateObject var manager = HealthKitManager()
   @Binding var showingLoginView: Bool
   
   
   var body: some View {
     NavigationStack {
       ParallaxScrollView(background: Color.clear, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
-        listOfWidgets
+        WidgetGrid()
       } header: {
         header
       }
@@ -20,6 +21,7 @@ struct DiaryView: View {
       .toolbar { toolbar }
       .task { try? await model.loadCurrentUser() }
     }
+    .environmentObject(manager)
   }
 }
 
@@ -36,18 +38,7 @@ extension DiaryView {
     }.listStyle(.plain)
   }
   
-  @ViewBuilder // MARK: - Widgets
-  private var listOfWidgets: some View {
-    VStack {
-      NavigationLink {
-        HistoryView()
-      } label: {
-        ExerciseMinutesWidget(controller: ExerciseMinutesController())
-      }
-    }
-    .frame(height: 180)
-  }
-  
+    
   @ToolbarContentBuilder // MARK: - TOOLBAR
   private var toolbar: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {

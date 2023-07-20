@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
   @Environment(\.dismiss) var dismiss
   @ObservedObject var model: DiaryViewModel
+  @EnvironmentObject var manager: HealthKitManager
   @Binding var showingLoginView: Bool
   
   var body: some View {
@@ -106,6 +107,7 @@ extension ProfileView {
     HStack {
       Text("Weight(kg)")
       Spacer()
+      Text(manager.bodyMassStats.last?.weightString ?? "")
       TextField("kg", text: $model.weight)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.trailing)

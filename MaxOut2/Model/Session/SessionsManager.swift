@@ -39,7 +39,8 @@ extension SessionsManager {
         Bob.CodingKeys.reps.rawValue        : bob.reps,
         Bob.CodingKeys.duration.rawValue    : bob.duration,
         Bob.CodingKeys.distance.rawValue    : bob.distance,
-        Bob.CodingKeys.isCompleted.rawValue : bob.isCompleted
+        Bob.CodingKeys.isCompleted.rawValue : bob.isCompleted,
+        Bob.CodingKeys.restTime.rawValue    : bob.restTime,
       ]
       bobs.append(dict)
     }

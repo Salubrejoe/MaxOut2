@@ -26,7 +26,7 @@ struct TSTimerView: View {
           Spacer()
           Image(systemName: "record.circle")
             .imageScale(.large)
-            .foregroundColor(.red)
+            .foregroundColor(.systemBackground)
         }
       }
       
@@ -35,7 +35,7 @@ struct TSTimerView: View {
       .frame(height: 47)
       .padding(.leading, 13)
       .padding(.trailing, 11)
-      .background(Color.cell)
+      .background(Color.exerciseRing.gradient)
       .cornerRadius(14)
       .alert("Sure you want to finish?", isPresented: $isShowingAlert) { finishAlert }
       

@@ -22,7 +22,7 @@ struct SmallTsButton: View {
         Button(text) {
           action()
         }
-        .tsButtonLabel(background: .cell, foreground: .primary)
+        .tsButtonLabel(background: .gray, foreground: .primary)
     }
   }
 }
