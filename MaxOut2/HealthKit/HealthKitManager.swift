@@ -4,15 +4,37 @@ import HealthKit
 final class HealthKitManager: ObservableObject {
   var store: HKHealthStore?
   
-  let allTypes = Set([
-    HKQuantityType(.appleExerciseTime),
-    HKQuantityType(.bodyMass),
-  ])
   
-  var query: HKStatisticsCollectionQuery?
+  // MARK: - TYPES
+  let exerciseTimeType = HKQuantityType(.appleExerciseTime)
+  let bodyMassType     = HKQuantityType(.bodyMass)
+  let exerciseGoalType = HKObjectType.activitySummaryType()
+  let workoutType      = HKSampleType.workoutType()
   
+  var allTypes: Set<HKObjectType> {
+    Set([
+      exerciseTimeType,
+      exerciseGoalType,
+      bodyMassType,
+      workoutType
+    ])
+  }
+    
+  
+  // MARK: - STATS
+  @Published var exerTimeGoal: HKQuantity?
   @Published var exerTimeStats = [HealthStat]()
   @Published var bodyMassStats = [HealthStat]()
+  
+  
+  // MARK: - COMPUTED STATS
+  var exerTimeGoalDouble: Double {
+    return exerTimeGoal?.doubleValue(for: .minute()) ?? 0
+  }
+  
+  var exerTimeGoalString: String {
+    String(format: "%0.f", exerTimeGoalDouble)
+  }
   
   var maxWeight: Double {
     var weights: [Double] = []
@@ -25,12 +47,14 @@ final class HealthKitManager: ObservableObject {
   var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerTimeStats {
-      print(stat)
       min.append(stat.minutes/2)
     }
     return min.max() ?? 0
   }
   
+  
+  
+  // MARK: - INIT
   init() {
     self.store = HKHealthStore()
     
@@ -38,21 +62,29 @@ final class HealthKitManager: ObservableObject {
     Task {
       do {
         try await store?.requestAuthorization(toShare: [], read: allTypes)
+        start()
       }
       catch {
         print("Could not request auth: \(error)")
       }
     }
-    
-    getExerciseTime()
-    getBodyMassStats()
   }
   
-  // 2. Get the Health stat from provided category
-  func getExerciseTime() {
+  private func start() {
+    getExerciseTime()
+    getExerciseTimeGoal()
+    getBodyMassStats()
+    getWorkoutStats()
+  }
+}
+
+// MARK: - GET STATS
+extension HealthKitManager {
+  
+  
+  // MARK: - EXERCISE TIME
+  private func getExerciseTime() {
     guard let store else { return }
-    
-    let type = HKQuantityType(.appleExerciseTime)
     
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .weekOfYear,
@@ -66,9 +98,9 @@ final class HealthKitManager: ObservableObject {
     
     let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
     
-    query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: dailyComponent)
+    let query = HKStatisticsCollectionQuery(quantityType: exerciseTimeType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: dailyComponent)
     
-    query?.initialResultsHandler = { query, statistics, error in
+    query.initialResultsHandler = { query, statistics, error in
       statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
         let stat = HealthStat(stat: stats.sumQuantity(), date: stats.startDate)
         healthStats.append(stat)
@@ -79,14 +111,51 @@ final class HealthKitManager: ObservableObject {
       }
     }
     
-    guard let query else { return }
     store.execute(query)
   }
   
-  func getBodyMassStats() {
+  
+  // MARK: - EXERCISE GOAL
+  private func getExerciseTimeGoal() {
     guard let store else { return }
+    let query = HKActivitySummaryQuery(predicate: createPredicate()) { (query, summariesOrNil, errorOrNil) -> Void in
+      guard let summaries = summariesOrNil else { return }
+
+      DispatchQueue.main.async {
+        self.exerTimeGoal = summaries.last?.exerciseTimeGoal
+      }
+    }
+    store.execute(query)
+  }
+  
+  private func createPredicate() -> NSPredicate {
+    let calendar = NSCalendar.current
+    let endDate = Date()
     
-    let type = HKQuantityType(.bodyMass)
+    guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate) else {
+      fatalError("*** Unable to create the start date ***")
+    }
+    
+    
+    let units: Set<Calendar.Component> = [.day, .month, .year, .era]
+    
+    
+    var startDateComponents = calendar.dateComponents(units, from: startDate)
+    startDateComponents.calendar = calendar
+    
+    
+    var endDateComponents = calendar.dateComponents(units, from: endDate)
+    endDateComponents.calendar = calendar
+    
+    let predicate = HKQuery.predicate(forActivitySummariesBetweenStart: startDateComponents,
+                                      end: endDateComponents)
+    return predicate
+  }
+  
+  
+  // MARK: - BODY MASS
+  private func getBodyMassStats() {
+    guard let store else { return }
     
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .weekOfYear,
@@ -100,9 +169,9 @@ final class HealthKitManager: ObservableObject {
     
     let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
     
-    query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
+    let query = HKStatisticsCollectionQuery(quantityType: bodyMassType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
     
-    query?.initialResultsHandler = { query, statistics, error in
+    query.initialResultsHandler = { query, statistics, error in
       statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
         let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
         if stat.stat != nil {
@@ -115,11 +184,47 @@ final class HealthKitManager: ObservableObject {
       }
     }
     
-    guard let query else { return }
+    store.execute(query)
+  }
+  
+  
+  // MARK: - WORKOUTS
+  private func getWorkoutStats() {
+    guard let store else { return }
+    
+    let calendar = Calendar.current
+    let startDate = calendar.date(byAdding: .weekOfYear,
+                                  value: -7,
+                                  to: Date()) ?? Date()
+    let endDate = Date()
+    let anchorDate = Date.firstDayOfWeek()
+    let dailyComponent = DateComponents(day: 1)
+    
+    var healthStats = [HealthStat]()
+    
+    let timePredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+    let workoutPredicate = HKQuery.predicateForWorkouts(with: .traditionalStrengthTraining)
+    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, workoutPredicate])
+    
+    let query = HKSampleQuery(sampleType: workoutType, predicate: timePredicate, limit: 25, sortDescriptors: nil) { query, sample, error in
+      guard let workouts = sample as? [HKWorkout], error == nil  else {
+        print("Troubles fetching workouts; \(error)")
+        return
+    }
+      for workout in workouts {
+        print(workout.allStatistics)
+        print(workout.duration)
+        print(workout.workoutActivityType)
+      }
+      
+    }
+    
     store.execute(query)
   }
 }
 
+
+// MARK: - Extension Date
 extension Date {
   static func firstDayOfWeek() -> Date {
     let calendar =  Calendar(identifier: .iso8601)
@@ -128,9 +233,4 @@ extension Date {
   }
 }
 
-
-
-/*
- BAFORE SAVING DATA CALL authorizationStatus(for:)
- */
 

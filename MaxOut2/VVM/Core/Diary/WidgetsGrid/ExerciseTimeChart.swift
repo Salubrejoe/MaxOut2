@@ -16,11 +16,13 @@ struct ExerciseMinutesWidget: View {
     }
     .chartYAxis {
       AxisMarks(values: [0, manager.maxExerciseTime])
-      AxisMarks(values: [50]) { value in
+      AxisMarks(values: [manager.exerTimeGoalDouble]) { value in
         AxisGridLine(centered: true, stroke: StrokeStyle(dash: [2]))
           .foregroundStyle(Color.exerciseRing)
         AxisValueLabel() {
-          Text("50").foregroundColor(.exerciseRing)
+          if let goal = manager.exerTimeGoal {
+            Text(manager.exerTimeGoalString).foregroundColor(.exerciseRing)
+          }
         }
       }
     }

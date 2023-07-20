@@ -1,10 +1,11 @@
 import SwiftUI
+import HealthKit
 
 struct WidgetGrid: View {
   var body: some View {
     ScrollView(showsIndicators: false) {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], spacing: 20) {
-        CardView("Exercise Minutes", color: .exerciseRing) {
+        MediumCardView("Exercise Minutes", color: .exerciseRing, style: RegularMaterialStyle()) {
           NavigationLink {
             HistoryView()
           } label: {
@@ -13,9 +14,14 @@ struct WidgetGrid: View {
           }
 
         }
-        CardView("Body Mass", color: .primary) {
+        MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
           BodyMassChart()
             .environmentObject(HealthKitManager())
+        }
+      }
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: 155))]) {
+        SmallCardView("Strength", emoji: HKWorkoutActivityType.traditionalStrengthTraining.associatedEmoji, color: .exerciseRing, style: RegularMaterialStyle()) {
+          Text("43 kg").font(.largeTitle)
         }
       }
     }
@@ -28,17 +34,21 @@ struct WidgetGrid_Previews: PreviewProvider {
   }
 }
 
-struct CardView<Content: View>: View {
+
+// MARK: - CARD VIEW
+struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
   
   let text: String
   let link: String?
   let color: Color
+  let style: Style
   let content: () -> Content
 
-  init(_ text: String, link: String? = nil, color: Color, content: @escaping () -> Content) {
+  init(_ text: String, link: String? = nil, color: Color, style: Style, content: @escaping () -> Content) {
     self.text = text
     self.link = link
     self.color = color
+    self.style = style
     self.content = content
   }
   
@@ -53,17 +63,65 @@ struct CardView<Content: View>: View {
       }
       .padding(.leading, 7)
     }
-    .groupBoxStyle(TransparentGroupBox())
+    .frame(width: 329)
+    .frame(height: 155)
+    .groupBoxStyle(style)
   }
 }
 
-struct TransparentGroupBox: GroupBoxStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    configuration.content
-      .frame(maxWidth: 329)
-      .frame(maxHeight: 155)
-      .padding(.horizontal, 14)
-      .padding(.vertical, 12)
-      .background(RoundedRectangle(cornerRadius: 17).fill(.regularMaterial))
+// MARK: - SMALL CARD VIEW
+struct SmallCardView<Content: View, Style: GroupBoxStyle>: View {
+  
+  let text: String
+  let emoji: String?
+  let color: Color
+  let style: Style
+  let content: () -> Content
+  
+  init(_ text: String, emoji: String? = nil, color: Color, style: Style, content: @escaping () -> Content) {
+    self.text = text
+    self.emoji = emoji
+    self.color = color
+    self.style = style
+    self.content = content
+  }
+  
+  var body: some View {
+    GroupBox {
+      VStack(alignment: .leading, spacing: 0) {
+        HStack {
+          Text(text)
+            .fontWeight(.semibold)
+            .foregroundColor(color)
+          Spacer()
+          Text(emoji ?? "")
+        }
+        content()
+          .padding(.top, 5)
+      }
+      .padding(.leading, 7)
+    }
+    .frame(width: 155)
+    .frame(height: 155)
+    .groupBoxStyle(style)
   }
 }
+
+struct RegularMaterialStyle: GroupBoxStyle {
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.content
+      .padding()
+      .background(.regularMaterial)
+      .cornerRadius(14)
+  }
+}
+
+struct BlackMaterialStyle: GroupBoxStyle {
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.content
+      .padding()
+      .background(Color.black.opacity(0.2))
+      .cornerRadius(14)
+  }
+}
+
