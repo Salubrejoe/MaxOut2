@@ -19,12 +19,23 @@ final class HealthKitManager: ObservableObject {
       workoutType
     ])
   }
-    
+  
   
   // MARK: - STATS
-  @Published var exerTimeGoal: HKQuantity?
+  @Published var exerTimeGoal  : HKQuantity?
   @Published var exerTimeStats = [HealthStat]()
   @Published var bodyMassStats = [HealthStat]()
+  @Published var activities    = [Activity]()
+  
+  var currentActivities: [Activity] {
+    var current = [Activity]()
+    for activity in activities {
+      if activity.durationString != "" {
+        current.append(activity)
+      }
+    }
+    return current
+  }
   
   
   // MARK: - COMPUTED STATS
@@ -38,7 +49,7 @@ final class HealthKitManager: ObservableObject {
   
   var maxWeight: Double {
     var weights: [Double] = []
-    for stat in bodyMassStats { 
+    for stat in bodyMassStats {
       weights.append(stat.weight)
     }
     return weights.max() ?? 0
@@ -74,13 +85,12 @@ final class HealthKitManager: ObservableObject {
     getExerciseTime()
     getExerciseTimeGoal()
     getBodyMassStats()
-    getWorkoutStats()
+    getActivities()
   }
 }
 
 // MARK: - GET STATS
 extension HealthKitManager {
-  
   
   // MARK: - EXERCISE TIME
   private func getExerciseTime() {
@@ -120,7 +130,7 @@ extension HealthKitManager {
     guard let store else { return }
     let query = HKActivitySummaryQuery(predicate: createPredicate()) { (query, summariesOrNil, errorOrNil) -> Void in
       guard let summaries = summariesOrNil else { return }
-
+      
       DispatchQueue.main.async {
         self.exerTimeGoal = summaries.last?.exerciseTimeGoal
       }
@@ -189,36 +199,43 @@ extension HealthKitManager {
   
   
   // MARK: - WORKOUTS
-  private func getWorkoutStats() {
+  private func getActivities() {
+    for activityType in Activity.allActivities() {
+      workouts(with: activityType) { stats in
+        let activity = Activity(type: activityType, workouts: stats)
+        DispatchQueue.main.async {
+          self.activities.append(activity)
+        }
+      }
+    }
+  }
+  
+  private func workouts(with type: HKWorkoutActivityType, completion: @escaping ([HKWorkout]) -> ()) {
     guard let store else { return }
     
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .weekOfYear,
-                                  value: -7,
+                                  value: -1,
                                   to: Date()) ?? Date()
     let endDate = Date()
-    let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: 1)
     
-    var healthStats = [HealthStat]()
+    var workouts = [HKWorkout]()
     
     let timePredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
-    let workoutPredicate = HKQuery.predicateForWorkouts(with: .traditionalStrengthTraining)
+    let workoutPredicate = HKQuery.predicateForWorkouts(with: type)
     let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, workoutPredicate])
     
-    let query = HKSampleQuery(sampleType: workoutType, predicate: timePredicate, limit: 25, sortDescriptors: nil) { query, sample, error in
-      guard let workouts = sample as? [HKWorkout], error == nil  else {
-        print("Troubles fetching workouts; \(error)")
+    let query = HKSampleQuery(sampleType: workoutType, predicate: predicate, limit: 50, sortDescriptors: nil) { query, sample, error in
+      guard let stats = sample as? [HKWorkout], error == nil  else {
+        print("Troubles fetching workouts: \(String(describing: error))")
         return
-    }
-      for workout in workouts {
-        print(workout.allStatistics)
-        print(workout.duration)
-        print(workout.workoutActivityType)
+      }
+      for workout in stats {
+        workouts.append(workout)
       }
       
+      completion(workouts)
     }
-    
     store.execute(query)
   }
 }

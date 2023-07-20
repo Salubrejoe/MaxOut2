@@ -2,9 +2,11 @@ import SwiftUI
 import HealthKit
 
 struct WidgetGrid: View {
+  @EnvironmentObject var manager: HealthKitManager
+  
   var body: some View {
     ScrollView(showsIndicators: false) {
-      LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], spacing: 20) {
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
         MediumCardView("Exercise Minutes", color: .exerciseRing, style: RegularMaterialStyle()) {
           NavigationLink {
             HistoryView()
@@ -12,16 +14,15 @@ struct WidgetGrid: View {
             ExerciseMinutesWidget()
               .environmentObject(HealthKitManager())
           }
-
         }
         MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
           BodyMassChart()
             .environmentObject(HealthKitManager())
         }
       }
-      LazyVGrid(columns: [GridItem(.adaptive(minimum: 155))]) {
-        SmallCardView("Strength", emoji: HKWorkoutActivityType.traditionalStrengthTraining.associatedEmoji, color: .exerciseRing, style: RegularMaterialStyle()) {
-          Text("43 kg").font(.largeTitle)
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+        ForEach(manager.currentActivities) {
+          SmallCardView(activity: $0, style: RegularMaterialStyle())
         }
       }
     }
@@ -54,55 +55,52 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
   
   var body: some View {
     GroupBox {
-      VStack(alignment: .leading, spacing: 0) {
+      VStack(alignment: .leading, spacing: 5) {
         Text(text)
           .fontWeight(.semibold)
           .foregroundColor(color)
         content()
-          .padding(.top, 5)
+          
       }
       .padding(.leading, 7)
     }
-    .frame(width: 329)
-    .frame(height: 155)
+    .frame(height: 150)
     .groupBoxStyle(style)
   }
 }
 
 // MARK: - SMALL CARD VIEW
-struct SmallCardView<Content: View, Style: GroupBoxStyle>: View {
+struct SmallCardView<Style: GroupBoxStyle>: View {
   
-  let text: String
-  let emoji: String?
-  let color: Color
+  let activity: Activity
   let style: Style
-  let content: () -> Content
-  
-  init(_ text: String, emoji: String? = nil, color: Color, style: Style, content: @escaping () -> Content) {
-    self.text = text
-    self.emoji = emoji
-    self.color = color
-    self.style = style
-    self.content = content
-  }
   
   var body: some View {
     GroupBox {
       VStack(alignment: .leading, spacing: 0) {
-        HStack {
-          Text(text)
-            .fontWeight(.semibold)
-            .foregroundColor(color)
+        HStack(alignment: .top) {
+          VStack(alignment: .leading) {
+            Text(activity.name)
+              .fontWeight(.semibold)
+              
+            Text("Last 7 days")
+              .font(.footnote)
+              .foregroundColor(.secondary)
+          }
           Spacer()
-          Text(emoji ?? "")
+          Image(systemName: activity.image)
         }
-        content()
-          .padding(.top, 5)
+        .foregroundColor(.exerciseRing)
+        
+        Spacer()
+        HStack {
+          Spacer()
+          Text(activity.durationString)
+            .font(.largeTitle.bold())
+        }
       }
-      .padding(.leading, 7)
+      .frame(height: 150)
     }
-    .frame(width: 155)
-    .frame(height: 155)
     .groupBoxStyle(style)
   }
 }

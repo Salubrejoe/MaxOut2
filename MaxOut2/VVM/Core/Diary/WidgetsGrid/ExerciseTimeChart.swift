@@ -21,7 +21,11 @@ struct ExerciseMinutesWidget: View {
           .foregroundStyle(Color.exerciseRing)
         AxisValueLabel() {
           if let goal = manager.exerTimeGoal {
-            Text(manager.exerTimeGoalString).foregroundColor(.exerciseRing)
+            VStack(alignment: .leading) {
+              Text("Goal")
+              Text(manager.exerTimeGoalString)
+            }
+            .foregroundColor(.exerciseRing)
           }
         }
       }

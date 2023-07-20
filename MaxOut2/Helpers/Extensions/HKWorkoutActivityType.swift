@@ -12,6 +12,36 @@ import HealthKit
 extension HKWorkoutActivityType {
   
   /*
+   Mapping over SFSymbols
+   */
+  var sfSymbol: String {
+    switch self {
+      case .elliptical:                   return "figure.elliptical"
+      case .rowing:                       return "figure.rower"
+      case .running:                      return "figure.run"
+      case .stairClimbing:                return "figure.stair.stepper"
+      case .traditionalStrengthTraining:  return "figure.strengthtraining.traditional"
+      case .walking:                      return "figure.walk"
+      case .yoga:                         return "figure.yoga"
+      case .coreTraining:                 return "figure.core.training"
+      case .flexibility:                  return "figure.cooldown"
+      case .highIntensityIntervalTraining:    return "figure.highintensity.intervaltraining"
+      case .jumpRope:                     return "figure.jumprope"
+      case .pilates:                      return "figure.pilates"
+      case .stairs:                       return "figure.stairs"
+      case .stepTraining:                 return "figure.step.training"
+      case .wheelchairWalkPace:           return "figure.roll"
+      case .wheelchairRunPace:            return "figure.roll.runningpace"
+      case .taiChi:                       return "figure.taichi"
+      case .mixedCardio:                  return "figure.mixed.cardio"
+      case .handCycling:                  return "figure.hand.cycling"
+      case .fitnessGaming:                return "gamecontroller"
+        // Catch-all
+      default:                            return "Other"
+    }
+  }
+  
+  /*
    Simple mapping of available workout types to a human readable name.
    */
   var name: String {

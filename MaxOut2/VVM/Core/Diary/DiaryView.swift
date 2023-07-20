@@ -13,7 +13,7 @@ struct DiaryView: View {
   var body: some View {
     NavigationStack {
       ParallaxScrollView(background: Color.clear, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
-        WidgetGrid()
+        WidgetGrid().environmentObject(manager)
       } header: {
         header
       }

@@ -1,17 +1,54 @@
 import Foundation
+import HealthKit
 
 struct Activity: Identifiable {
-  var id: String
-  var name: String
-  var image: String
+  var id: String { type.name }
+  var name: String { type.name }
+  var type: HKWorkoutActivityType
+  var image: String { type.sfSymbol }
+  let workouts: [HKWorkout]
   
-  static func allActivities() -> [Activity] {
+  var duration: TimeInterval {
+    var duration = 0.0
+    for workout in workouts {
+      duration += workout.duration
+    }
+    return duration
+  }
+  
+  var durationString: String {
+    let totalDuration = Int(duration)
+    let hours = totalDuration / 3600
+    let minutes = (totalDuration % 3600) / 60
+    
+    let hourString = hours > 0 ? "\(hours)h" : ""
+    let minuteString = minutes > 0 ? "\(minutes)m" : ""
+    
+    return "\(hourString) \(minuteString)".trimmingCharacters(in: .whitespaces)
+  }
+  
+  static func allActivities() -> [HKWorkoutActivityType] {
     return [
-      Activity(id: "activeEnergyBurned", name: "Active Burned Calories", image: "🔥"),
-      Activity(id: "appleExerciseTime", name: "Exercise Time", image: "🏋️‍♂️"),
-      Activity(id: "bodyMass", name: "Weight", image: "⚖️"),
-      Activity(id: "distanceWalkingRunning", name: "Distance Walking/Running", image: "🏃‍♂️"),
-      Activity(id: "stepCount", name: "Step Count", image: "👟")
+      .elliptical,
+      .rowing,
+      .running,
+      .stairClimbing,
+      .traditionalStrengthTraining,
+      .walking,
+      .yoga,
+      .coreTraining,
+      .flexibility,
+      .highIntensityIntervalTraining,
+      .jumpRope,
+      .pilates,
+      .stairs,
+      .stepTraining,
+      .wheelchairWalkPace,
+      .wheelchairRunPace,
+      .taiChi,
+      .mixedCardio,
+      .handCycling,
+      .fitnessGaming
     ]
   }
 }
