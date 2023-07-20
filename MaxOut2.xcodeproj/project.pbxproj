@@ -615,11 +615,19 @@
 		7CCB57FE2A6921360086D291 /* WidgetsGrid */ = {
 			isa = PBXGroup;
 			children = (
+				7CCB58012A697C270086D291 /* Charts */,
 				7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */,
+			);
+			path = WidgetsGrid;
+			sourceTree = "<group>";
+		};
+		7CCB58012A697C270086D291 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
 				7CA6CE282A66ED47006FDBD4 /* ExerciseTimeChart.swift */,
 				7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */,
 			);
-			path = WidgetsGrid;
+			path = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

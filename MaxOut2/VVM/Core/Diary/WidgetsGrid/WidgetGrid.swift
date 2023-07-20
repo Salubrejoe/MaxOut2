@@ -81,6 +81,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
         HStack(alignment: .top) {
           VStack(alignment: .leading) {
             Text(activity.name)
+              .foregroundColor(.primary)
               .fontWeight(.semibold)
               
             Text("Last 7 days")
@@ -89,8 +90,9 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
           }
           Spacer()
           Image(systemName: activity.image)
+            .imageScale(.large)
+            .foregroundColor(.exerciseRing)
         }
-        .foregroundColor(.exerciseRing)
         
         Spacer()
         HStack {
@@ -114,11 +116,11 @@ struct RegularMaterialStyle: GroupBoxStyle {
   }
 }
 
-struct BlackMaterialStyle: GroupBoxStyle {
+struct BackgroundStyle: GroupBoxStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.content
       .padding()
-      .background(Color.black.opacity(0.2))
+      .background(Color.systemBackground)
       .cornerRadius(14)
   }
 }

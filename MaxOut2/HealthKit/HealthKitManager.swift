@@ -55,6 +55,14 @@ final class HealthKitManager: ObservableObject {
     return weights.max() ?? 0
   }
   
+  var minWeight: Double {
+    var weights: [Double] = []
+    for stat in bodyMassStats {
+      weights.append(stat.weight)
+    }
+    return weights.min() ?? 0
+  }
+  
   var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerTimeStats {

@@ -14,7 +14,7 @@ struct BodyMassChart: View {
       .foregroundStyle(Color.primary.gradient)
       .symbol(Circle())
     }
-    .chartYScale(domain: [manager.maxWeight-7, manager.maxWeight+7])
+    .chartYScale(domain: [manager.minWeight, manager.maxWeight])
   }
 }
 
