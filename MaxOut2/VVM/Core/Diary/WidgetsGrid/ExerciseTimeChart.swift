@@ -9,7 +9,6 @@ struct ExerciseMinutesWidget: View {
       BarMark(
         x: .value("Week Day", stat.date),
         y: .value("Min", stat.minutes/2)
-//        width: 7
       )
       .foregroundStyle(Color.exerciseRing.gradient)
       .cornerRadius(10)
@@ -33,3 +32,5 @@ struct ExerciseMinutesWidget_Previews: PreviewProvider {
     ExerciseMinutesWidget().environmentObject(HealthKitManager())
   }
 }
+
+
