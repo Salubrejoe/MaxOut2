@@ -31,6 +31,9 @@ struct ProfileView: View {
       }
       .navigationTitle("Profile")
       .onFirstAppear { model.loadAuthProviders() }
+      .onAppear {
+        UITextField.appearance().clearButtonMode = .whileEditing
+      }
     }
   }
 }
@@ -65,26 +68,34 @@ extension ProfileView {
       HStack {
         Text("First Name")
         Spacer()
-        TextField("", text: $model.user.firstName.bound)
+        TextField("", text: $model.firstName)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.trailing)
-        
+          .onChange(of: model.firstName) { _ in
+            model.updateUser()
+          }
       }
       
       HStack {
         Text("Nickname")
         Spacer()
-        TextField("", text: $model.user.username.bound)
+        TextField("", text: $model.username)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.trailing)
+          .onChange(of: model.username) { _ in
+            model.updateUser()
+          }
       }
       
       HStack {
         Text("Last Name")
         Spacer()
-        TextField("", text: $model.user.lastName.bound)
+        TextField("", text: $model.lastName)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.trailing)
+          .onChange(of: model.lastName) { _ in
+            model.updateUser()
+          }
       }
     }
   }
@@ -92,30 +103,20 @@ extension ProfileView {
   
   @ViewBuilder // MARK: - Measures SECTION
   private var measuresSection: some View {
-    HStack {
-      Text("Height(cm)")
-      Spacer()
-      TextField("cm", text: $model.height)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.trailing)
-        .numbersOnly($model.height)
-        .onChange(of: model.height) { newValue in
-          model.user.height = newValue
-        }
+    Group {
+      HStack {
+        Text("Height")
+        Spacer()
+        Text("\(manager.heightStats.last?.heightString ?? "") m")
+      }
+      
+      HStack {
+        Text("Weight")
+        Spacer()
+        Text("\(manager.bodyMassStats.last?.weightString ?? "") kg")
+      }
     }
-    
-    HStack {
-      Text("Weight(kg)")
-      Spacer()
-      Text(manager.bodyMassStats.last?.weightString ?? "")
-      TextField("kg", text: $model.weight)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.trailing)
-        .numbersOnly($model.weight)
-        .onChange(of: model.weight) { newValue in
-          model.user.weight = newValue
-        }
-    }
+    .foregroundColor(.secondary)
   }
   
   

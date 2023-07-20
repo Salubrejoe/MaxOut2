@@ -33,7 +33,7 @@ extension DiaryView {
       NavigationLink {
         ProfileView(model: model, showingLoginView: $showingLoginView)
       } label: {
-        ProfileLabel(user: model.user)
+        ProfileLabel(user: model.user).environmentObject(manager)
       }
     }.listStyle(.plain)
   }
@@ -54,7 +54,9 @@ extension DiaryView {
 
 // MARK: - PROFILE LABEL
 struct ProfileLabel: View {
+  @EnvironmentObject var manager: HealthKitManager
   let user: FitUser
+  
   var body: some View {
     HStack(spacing: 12) {
       if let urlString = user.photoUrl, let url = URL(string: urlString) {
@@ -70,25 +72,29 @@ struct ProfileLabel: View {
         .clipShape(Circle())
       }
       else {
-        Text(user.firstLetter)
+        Text(user.displayLetter)
           .font(.title)
           .fontDesign(.rounded)
           .fontWeight(.heavy)
-          .foregroundColor(.systemBackground)
+          .foregroundStyle(Color.systemBackground.gradient)
           .frame(width: 46, height: 46)
-          .background(Color(hex: user.color ?? ""))
+          .background(Color.primary.gradient)
           .clipShape(Circle())
       }
       VStack(alignment: .leading) {
-        Text(user.username ?? "Pizza guy")
+        Text(user.displayName)
           .font(.title3.bold())
         HStack {
           Text(user.ageString)
-          Text(user.heightString)
+          Text(manager.heightProfileString)
         }
         .font(.caption)
         .foregroundColor(.gray)
       }
+    }
+    .onAppear {
+      print(user.displayName)
+      print(user.displayLetter)
     }
     .padding(.horizontal)
   }

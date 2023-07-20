@@ -2,7 +2,7 @@
 import Foundation
 
 struct FitUser {
-  static let mockup = FitUser(id: "", username: "Username", firstName: "FirstName", lastName: "McLastname", dateCreated: Date(), photoUrl: nil, email: "pizza@spaghetti.man", weight: "75", height: "178", dateOfBirth: Date(timeIntervalSince1970: 623_721_600))
+  static let mockup = FitUser(id: "", username: "", firstName: "", lastName: "", dateCreated: Date(), photoUrl: nil, email: "X@spaghetti.man", weight: "75", height: "178", dateOfBirth: Date(timeIntervalSince1970: 623_721_600))
   
   let id          : String
   var username    : String?
@@ -74,6 +74,28 @@ extension FitUser {
   }
   
   // MARK: - COMPUTED PROPERTIES
+  var displayName: String {
+    if let username = self.username, username.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+      return username }
+    if let firstName = self.firstName, firstName.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+      return firstName }
+    if let lastName = self.lastName, lastName.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+      return lastName }
+    return emailUsername
+  }
+  
+  var displayLetter: String {
+    guard displayName.count > 0 else { return "" }
+    return String(displayName.trimmingCharacters(in: .whitespacesAndNewlines).first!)
+  }
+  
+  var emailUsername: String {
+    guard let email, let atIndex = email.firstIndex(of: "@") else { return "" }
+    
+    let username = email.prefix(upTo: atIndex)
+    return String(username)
+  }
+  
   var dateCreatedShortString: String {
     guard let dateCreated else { return "No creation Date "}
     return dateCreated.formatted(date: .abbreviated, time: .shortened)

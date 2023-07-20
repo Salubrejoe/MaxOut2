@@ -91,7 +91,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
           Spacer()
           Image(systemName: activity.image)
             .imageScale(.large)
-            .foregroundColor(.exerciseRing)
+            .foregroundStyle(Color.exerciseRing.gradient)
         }
         
         Spacer()
@@ -99,6 +99,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
           Spacer()
           Text(activity.durationString)
             .font(.largeTitle.bold())
+            .foregroundStyle(Color.primary.gradient)
         }
       }
       .frame(height: 150)

@@ -8,6 +8,7 @@ final class HealthKitManager: ObservableObject {
   // MARK: - TYPES
   let exerciseTimeType = HKQuantityType(.appleExerciseTime)
   let bodyMassType     = HKQuantityType(.bodyMass)
+  let heightType       = HKQuantityType(.height)
   let exerciseGoalType = HKObjectType.activitySummaryType()
   let workoutType      = HKSampleType.workoutType()
   
@@ -16,6 +17,7 @@ final class HealthKitManager: ObservableObject {
       exerciseTimeType,
       exerciseGoalType,
       bodyMassType,
+      heightType,
       workoutType
     ])
   }
@@ -25,6 +27,7 @@ final class HealthKitManager: ObservableObject {
   @Published var exerTimeGoal  : HKQuantity?
   @Published var exerTimeStats = [HealthStat]()
   @Published var bodyMassStats = [HealthStat]()
+  @Published var heightStats   = [HealthStat]()
   @Published var activities    = [Activity]()
   
   var currentActivities: [Activity] {
@@ -45,6 +48,16 @@ final class HealthKitManager: ObservableObject {
   
   var exerTimeGoalString: String {
     String(format: "%0.f", exerTimeGoalDouble)
+  }
+  
+  var heightProfileString: String {
+    guard let something = heightStats.last else { return "" }
+    return "📏\(something.heightString) meters tall"
+  }
+  
+  var heightString: String {
+    guard let something = heightStats.last else { return "" }
+    return "\(something.heightString) m"
   }
   
   var maxWeight: Double {
@@ -94,6 +107,7 @@ final class HealthKitManager: ObservableObject {
     getExerciseTimeGoal()
     getBodyMassStats()
     getActivities()
+    getHeight()
   }
 }
 
@@ -204,6 +218,40 @@ extension HealthKitManager {
     
     store.execute(query)
   }
+  
+  // MARK: - HEIGHT
+  private func getHeight() {
+    guard let store else { return }
+    let calendar = Calendar.current
+    let startDate = calendar.date(byAdding: .year,
+                                  value: -12,
+                                  to: Date()) ?? Date()
+    
+    let endDate = Date()
+    let anchorDate = Date.firstDayOfWeek()
+    let dailyComponent = DateComponents(day: 10)
+    
+    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+    
+    var healthStats = [HealthStat]()
+    
+    let query = HKStatisticsCollectionQuery(quantityType: heightType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
+    
+    query.initialResultsHandler = { query, statistics, error in
+      statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
+        let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
+        if stat.stat != nil {
+          healthStats.append(stat)
+        }
+      })
+      
+      DispatchQueue.main.async {
+        self.heightStats = healthStats
+      }
+    }
+    store.execute(query)
+  }
+  
   
   
   // MARK: - WORKOUTS

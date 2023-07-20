@@ -20,4 +20,13 @@ struct HealthStat: Identifiable {
   var weightString: String {
     String(format: "%.1f", weight)
   }
+  
+  var height: Double {
+    let height = stat?.doubleValue(for: .meter())
+    return Double(height ?? 0)
+  }
+  
+  var heightString: String {
+    String(format: "%.1f", height)
+  }
 }
