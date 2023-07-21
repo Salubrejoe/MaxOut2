@@ -124,6 +124,8 @@ extension HealthKitManager {
   
   // MARK: - EXERCISE TIME
   func getExerciseTime() {
+    self.exerTimeStats = []
+    
     guard let store else { return }
     
     let calendar = Calendar.current
@@ -157,6 +159,8 @@ extension HealthKitManager {
   
   // MARK: - EXERCISE GOAL
   func getExerciseTimeGoal() {
+    self.exerTimeGoal = nil
+    
     guard let store else { return }
     let query = HKActivitySummaryQuery(predicate: createPredicate()) { (query, summariesOrNil, errorOrNil) -> Void in
       guard let summaries = summariesOrNil else { return }
@@ -212,13 +216,13 @@ extension HealthKitManager {
     let query = HKStatisticsCollectionQuery(quantityType: bodyMassType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
     
     query.initialResultsHandler = { query, statistics, error in
-      statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
+      guard let statistics else { return }
+      statistics.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
         let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
         if stat.stat != nil {
           healthStats.append(stat)
         }
       })
-      
       DispatchQueue.main.async {
         self.bodyMassStats = healthStats
       }
@@ -229,6 +233,8 @@ extension HealthKitManager {
   
   // MARK: - HEIGHT
   func getHeight() {
+    self.heightStats = []
+    
     guard let store else { return }
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .year,
@@ -318,7 +324,7 @@ extension HealthKitManager {
                                     start: Date(),
                                     end: Date())
     store.save(bodyMass) { success, error in
-      guard error != nil else {
+      guard error == nil else {
         print("CATASTROPHIC FAILURE SAVING WEIGHT \n \(error))")
         return
       }
@@ -341,7 +347,7 @@ extension HealthKitManager {
                                     start: Date(),
                                     end: Date())
     store.save(bodyMass) { success, error in
-      guard error != nil else {
+      guard error == nil else {
         print("CATASTROPHIC FAILURE SAVING Height \n \(error))")
         return
       }

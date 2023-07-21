@@ -37,7 +37,7 @@ extension HKWorkoutActivityType {
       case .handCycling:                  return "figure.hand.cycling"
       case .fitnessGaming:                return "gamecontroller"
         // Catch-all
-      default:                            return "Other"
+      default:                            return "figure.run"
     }
   }
   

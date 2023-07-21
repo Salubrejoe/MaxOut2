@@ -14,7 +14,8 @@ struct BodyMassChart: View {
       .foregroundStyle(Color.purple.gradient)
       .symbol(Circle())
     }
-    .chartYScale(domain: [manager.minWeight, manager.maxWeight])
+    .chartXScale()
+    .chartYScale(domain: [manager.minWeight - 1, manager.maxWeight + 1])
     .chartYAxisLabel("kg", position: .topTrailing)
     .onAppear {
       manager.getBodyMassStats()

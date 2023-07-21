@@ -15,7 +15,7 @@ struct WidgetGrid: View {
             HistoryView()
           } label: {
             ExerciseMinutesWidget()
-              .environmentObject(HealthKitManager())
+              .environmentObject(manager)
           }
         }
         MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
@@ -23,7 +23,7 @@ struct WidgetGrid: View {
             WeightView()
           } label: {
             BodyMassChart()
-              .environmentObject(HealthKitManager())
+              .environmentObject(manager)
           }
         }
       }

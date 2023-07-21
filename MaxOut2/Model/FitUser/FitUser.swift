@@ -107,7 +107,7 @@ extension FitUser {
     let yearOfBirth = calendar.component(.year, from: dateOfBirth)
     let currentYear = calendar.component(.year, from: Date())
     let result = currentYear - yearOfBirth
-    return "🎂 \(result) years old  •"
+    return "🎂 \(result) years old   •"
   }
   
   var heightString: String {

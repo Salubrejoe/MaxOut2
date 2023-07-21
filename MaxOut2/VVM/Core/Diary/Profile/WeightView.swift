@@ -23,14 +23,12 @@ struct WeightView: View {
   
   private func saveToHK() {
     guard let weight = Double(weight) else { return }
-    
     manager.submit(weight: weight)
   }
   
   private func getHKWeight() {
-    
+    manager.getBodyMassStats()
     guard let weight = manager.bodyMassStats.last else { return }
-    
     self.weight = weight.weightString
   }
   
@@ -115,14 +113,12 @@ struct HeightView: View {
   
   private func saveToHK() {
     guard let height = Double(height) else { return }
-    
     manager.submit(height: height)
   }
   
   private func getHKWeight() {
-    
+    manager.getHeight()
     guard let height = manager.heightStats.last else { return }
-    
     self.height = height.heightString
   }
   

@@ -20,10 +20,6 @@ struct LargeTsButton<Background: ShapeStyle>: View {
   var body: some View {
     Button{ action() } label: {
       HStack {
-        Image(image)
-          .resizable()
-          .scaledToFit()
-          .padding(.vertical)
         
         Text(text)
       }

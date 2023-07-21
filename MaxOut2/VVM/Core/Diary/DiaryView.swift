@@ -36,8 +36,9 @@ extension DiaryView {
     List {
       NavigationLink {
         ProfileView(model: model, showingLoginView: $showingLoginView)
+//          .environmentObject(manager)
       } label: {
-        ProfileLabel(user: model.user).environmentObject(manager)
+        ProfileLabel(user: model.user)
       }
     }.listStyle(.plain)
   }
