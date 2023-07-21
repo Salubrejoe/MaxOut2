@@ -23,6 +23,9 @@ struct DiaryView: View {
       .task { try? await model.loadCurrentUser() }
     }
     .environmentObject(manager)
+    .onAppear {
+      manager.start()
+    }
   }
 }
 
@@ -92,10 +95,6 @@ struct ProfileLabel: View {
         .font(.caption)
         .foregroundColor(.gray)
       }
-    }
-    .onAppear {
-      print(user.displayName)
-      print(user.displayLetter)
     }
     .padding(.horizontal)
   }

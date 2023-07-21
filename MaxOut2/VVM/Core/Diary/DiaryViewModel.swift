@@ -39,7 +39,6 @@ extension DiaryViewModel {
   
   func update(user: FitUser) {
     do {
-      print(user)
       try FitUserManager.shared.update(user: user)
     } catch {
       print("Could not update user: \(error)")

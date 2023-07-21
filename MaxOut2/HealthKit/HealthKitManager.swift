@@ -103,7 +103,6 @@ final class HealthKitManager: ObservableObject {
     Task {
       do {
         try await store?.requestAuthorization(toShare: shareTypes, read: allTypes)
-        start()
       }
       catch {
         print("Could not request auth: \(error)")
@@ -265,7 +264,8 @@ extension HealthKitManager {
   
   // MARK: - WORKOUTS
   func getActivities() {
-    for activityType in Activity.allActivities() {
+    activities = []
+    for activityType in Activity.allActivities {
       workouts(with: activityType) { stats in
         let activity = Activity(type: activityType, workouts: stats)
         DispatchQueue.main.async {
@@ -290,7 +290,7 @@ extension HealthKitManager {
     let workoutPredicate = HKQuery.predicateForWorkouts(with: type)
     let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, workoutPredicate])
     
-    let query = HKSampleQuery(sampleType: workoutType, predicate: predicate, limit: 50, sortDescriptors: nil) { query, sample, error in
+    let query = HKSampleQuery(sampleType: workoutType, predicate: predicate, limit: 0, sortDescriptors: nil) { query, sample, error in
       guard let stats = sample as? [HKWorkout], error == nil  else {
         print("Troubles fetching workouts: \(String(describing: error))")
         return
@@ -298,7 +298,6 @@ extension HealthKitManager {
       for workout in stats {
         workouts.append(workout)
       }
-      
       completion(workouts)
     }
     store.execute(query)
@@ -320,19 +319,20 @@ extension HealthKitManager {
                                     end: Date())
     store.save(bodyMass) { success, error in
       guard error != nil else {
-        print("CATASTROPHIC FAILURE SAVING WEIGHT \n \(String(describing: error))")
+        print("CATASTROPHIC FAILURE SAVING WEIGHT \n \(error))")
         return
       }
       
       if success { print("Saved! 😄 \(success)")}
     }
+    getBodyMassStats()
   }
   
   // MARK: - SUBMIT HEIGHT
   func submit(height: Double) {
     guard let store else { return }
     
-    let quantityType = HKQuantityType(.bodyMass)
+    let quantityType = HKQuantityType(.height)
     
     let quantity = HKQuantity.init(unit: HKUnit.meter(), doubleValue: height)
     
@@ -342,12 +342,14 @@ extension HealthKitManager {
                                     end: Date())
     store.save(bodyMass) { success, error in
       guard error != nil else {
-        print("CATASTROPHIC FAILURE SAVING Height \n \(String(describing: error))")
+        print("CATASTROPHIC FAILURE SAVING Height \n \(error))")
         return
       }
       
-      if success { print("Saved! 😄 \(success)")}
+      if success { print("Saved Height! 😄 \(success)")}
     }
+    
+    getHeight()
   }
 }
 

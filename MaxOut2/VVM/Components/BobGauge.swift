@@ -12,9 +12,7 @@ final class GaugeViewController: ObservableObject {
   
   func requestNotificationPermish() {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-      if success {
-        print("All set!")
-      } else if let error = error {
+     if let error = error {
         print(error.localizedDescription)
       }
     }

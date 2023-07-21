@@ -27,6 +27,6 @@ struct HealthStat: Identifiable {
   }
   
   var heightString: String {
-    String(format: "%.1f", height)
+    String(format: "%.2f", height)
   }
 }

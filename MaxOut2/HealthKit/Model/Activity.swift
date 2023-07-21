@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 
-struct Activity: Identifiable {
+struct Activity: Identifiable, Hashable {
   var id: String { type.name }
   var name: String { type.name }
   var type: HKWorkoutActivityType
@@ -27,8 +27,8 @@ struct Activity: Identifiable {
     return "\(hourString) \(minuteString)".trimmingCharacters(in: .whitespaces)
   }
   
-  static func allActivities() -> [HKWorkoutActivityType] {
-    return [
+  static let allActivities: [HKWorkoutActivityType] =
+    [
       .elliptical,
       .rowing,
       .running,
@@ -50,5 +50,5 @@ struct Activity: Identifiable {
       .handCycling,
       .fitnessGaming
     ]
-  }
+  
 }

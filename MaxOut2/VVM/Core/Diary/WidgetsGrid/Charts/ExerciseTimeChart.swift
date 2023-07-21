@@ -31,6 +31,10 @@ struct ExerciseMinutesWidget: View {
         }
       }
     }
+    .onAppear {
+      manager.getExerciseTime()
+      manager.getExerciseTimeGoal()
+    }
   }
 }
 

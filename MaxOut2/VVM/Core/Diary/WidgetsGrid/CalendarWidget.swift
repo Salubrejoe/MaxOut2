@@ -59,6 +59,7 @@ struct WidgetCalendarView: View {
         
         Text("1983 kg")
           .font(.largeTitle)
+          .minimumScaleFactor(0.6)
           .bold()
       }
     }

@@ -69,7 +69,7 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
         content()
           
       }
-      .padding(.leading, 7)
+      .padding(.leading, 4)
     }
     .frame(height: 150)
     .groupBoxStyle(style)
@@ -100,6 +100,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
             .imageScale(.large)
             .foregroundStyle(Color.exerciseRing.gradient)
         }
+        .padding(.leading, 2)
         
         Spacer()
         HStack {

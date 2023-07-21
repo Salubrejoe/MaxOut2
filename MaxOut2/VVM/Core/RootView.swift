@@ -38,9 +38,7 @@ struct RootView: View {
           Label("Diary", systemImage: "book.closed")
         }
         .environmentObject(manager)
-        .onAppear {
-          manager.start()
-        }
+        
       StartContainer(showingLoginView: $model.showingLoginView)
         .tabItem {
           Label("Start", systemImage: "bolt.ring.closed")
@@ -49,7 +47,6 @@ struct RootView: View {
         .tabItem {
           Label("Exercises", systemImage: "figure.hiking")
         }
-      
       
     }
   }

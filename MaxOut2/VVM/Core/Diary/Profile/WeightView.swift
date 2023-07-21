@@ -185,16 +185,16 @@ extension String {
     guard var number = Double(self) else {
       return nil
     }
-    number += 1
-    return String(format: "%.0f", number)
+    number += 0.1
+    return String(format: "%.1f", number)
   }
   
   func decrement() -> String? {
     guard var number = Double(self) else {
       return nil
     }
-    number -= 1
-    return String(format: "%.0f", number)
+    number -= 0.1
+    return String(format: "%.1f", number)
   }
 }
 
