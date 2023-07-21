@@ -3,6 +3,7 @@
 import SwiftUI
 
 final class RootViewModel: ObservableObject {
+  
   @Published var showingLoginView = false
   
   func checkCurrentUser() {
@@ -12,6 +13,7 @@ final class RootViewModel: ObservableObject {
 }
 
 struct RootView: View {
+  @StateObject var manager = HealthKitManager()
   @StateObject private var model = RootViewModel()
   let gaugeController = GaugeViewController()
   
@@ -34,6 +36,10 @@ struct RootView: View {
       DiaryView(showingLoginView: $model.showingLoginView)
         .tabItem {
           Label("Diary", systemImage: "book.closed")
+        }
+        .environmentObject(manager)
+        .onAppear {
+          manager.start()
         }
       StartContainer(showingLoginView: $model.showingLoginView)
         .tabItem {

@@ -14,13 +14,14 @@ struct ExerciseMinutesWidget: View {
       .cornerRadius(10)
       .offset(x: -3)
     }
+    .chartYAxisLabel("min", position: .topTrailing)
     .chartYAxis {
       AxisMarks(values: [0, manager.maxExerciseTime])
       AxisMarks(values: [manager.exerTimeGoalDouble]) { value in
         AxisGridLine(centered: true, stroke: StrokeStyle(dash: [2]))
           .foregroundStyle(Color.exerciseRing)
         AxisValueLabel() {
-          if let goal = manager.exerTimeGoal {
+          if let _ = manager.exerTimeGoal {
             VStack(alignment: .leading) {
               Text("Goal")
               Text(manager.exerTimeGoalString)

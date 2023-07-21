@@ -22,6 +22,15 @@ final class HealthKitManager: ObservableObject {
     ])
   }
   
+  var shareTypes: Set<HKSampleType> {
+    Set([
+//      exerciseTimeType,
+      bodyMassType,
+      heightType,
+      workoutType
+    ])
+  }
+  
   
   // MARK: - STATS
   @Published var exerTimeGoal  : HKQuantity?
@@ -93,7 +102,7 @@ final class HealthKitManager: ObservableObject {
     // 1. Request auth
     Task {
       do {
-        try await store?.requestAuthorization(toShare: [], read: allTypes)
+        try await store?.requestAuthorization(toShare: shareTypes, read: allTypes)
         start()
       }
       catch {
@@ -102,7 +111,7 @@ final class HealthKitManager: ObservableObject {
     }
   }
   
-  private func start() {
+  func start() {
     getExerciseTime()
     getExerciseTimeGoal()
     getBodyMassStats()
@@ -115,7 +124,7 @@ final class HealthKitManager: ObservableObject {
 extension HealthKitManager {
   
   // MARK: - EXERCISE TIME
-  private func getExerciseTime() {
+  func getExerciseTime() {
     guard let store else { return }
     
     let calendar = Calendar.current
@@ -148,7 +157,7 @@ extension HealthKitManager {
   
   
   // MARK: - EXERCISE GOAL
-  private func getExerciseTimeGoal() {
+  func getExerciseTimeGoal() {
     guard let store else { return }
     let query = HKActivitySummaryQuery(predicate: createPredicate()) { (query, summariesOrNil, errorOrNil) -> Void in
       guard let summaries = summariesOrNil else { return }
@@ -186,7 +195,7 @@ extension HealthKitManager {
   
   
   // MARK: - BODY MASS
-  private func getBodyMassStats() {
+  func getBodyMassStats() {
     guard let store else { return }
     
     let calendar = Calendar.current
@@ -220,7 +229,7 @@ extension HealthKitManager {
   }
   
   // MARK: - HEIGHT
-  private func getHeight() {
+  func getHeight() {
     guard let store else { return }
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .year,
@@ -255,7 +264,7 @@ extension HealthKitManager {
   
   
   // MARK: - WORKOUTS
-  private func getActivities() {
+  func getActivities() {
     for activityType in Activity.allActivities() {
       workouts(with: activityType) { stats in
         let activity = Activity(type: activityType, workouts: stats)
@@ -293,6 +302,52 @@ extension HealthKitManager {
       completion(workouts)
     }
     store.execute(query)
+  }
+}
+
+extension HealthKitManager {
+  // MARK: - SUBMIT WEIGHT
+  func submit(weight: Double) {
+    guard let store else { return }
+    
+    let quantityType = HKQuantityType(.bodyMass)
+    
+    let quantity = HKQuantity.init(unit: HKUnit.gramUnit(with: .kilo), doubleValue: weight)
+    
+    let bodyMass = HKQuantitySample(type: quantityType,
+                                    quantity: quantity,
+                                    start: Date(),
+                                    end: Date())
+    store.save(bodyMass) { success, error in
+      guard error != nil else {
+        print("CATASTROPHIC FAILURE SAVING WEIGHT \n \(String(describing: error))")
+        return
+      }
+      
+      if success { print("Saved! 😄 \(success)")}
+    }
+  }
+  
+  // MARK: - SUBMIT HEIGHT
+  func submit(height: Double) {
+    guard let store else { return }
+    
+    let quantityType = HKQuantityType(.bodyMass)
+    
+    let quantity = HKQuantity.init(unit: HKUnit.meter(), doubleValue: height)
+    
+    let bodyMass = HKQuantitySample(type: quantityType,
+                                    quantity: quantity,
+                                    start: Date(),
+                                    end: Date())
+    store.save(bodyMass) { success, error in
+      guard error != nil else {
+        print("CATASTROPHIC FAILURE SAVING Height \n \(String(describing: error))")
+        return
+      }
+      
+      if success { print("Saved! 😄 \(success)")}
+    }
   }
 }
 

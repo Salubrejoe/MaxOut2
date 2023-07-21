@@ -11,10 +11,14 @@ struct BodyMassChart: View {
         y: .value("Kg", stat.weight)
       )
       .interpolationMethod(.catmullRom)
-      .foregroundStyle(Color.primary.gradient)
+      .foregroundStyle(Color.purple.gradient)
       .symbol(Circle())
     }
     .chartYScale(domain: [manager.minWeight, manager.maxWeight])
+    .chartYAxisLabel("kg", position: .topTrailing)
+    .onAppear {
+      manager.getBodyMassStats()
+    }
   }
 }
 

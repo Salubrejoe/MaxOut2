@@ -6,8 +6,11 @@ struct WidgetGrid: View {
   
   var body: some View {
     ScrollView(showsIndicators: false) {
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+        CalendarWidget()
+      }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-        MediumCardView("Exercise Minutes", color: .exerciseRing, style: RegularMaterialStyle()) {
+        MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {
           NavigationLink {
             HistoryView()
           } label: {
@@ -16,8 +19,12 @@ struct WidgetGrid: View {
           }
         }
         MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
-          BodyMassChart()
-            .environmentObject(HealthKitManager())
+          NavigationLink {
+            WeightView()
+          } label: {
+            BodyMassChart()
+              .environmentObject(HealthKitManager())
+          }
         }
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
@@ -55,7 +62,7 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
   
   var body: some View {
     GroupBox {
-      VStack(alignment: .leading, spacing: 5) {
+      ZStack(alignment: .topLeading) {
         Text(text)
           .fontWeight(.semibold)
           .foregroundColor(color)
@@ -111,7 +118,8 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
 struct RegularMaterialStyle: GroupBoxStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.content
-      .padding()
+      .padding([.horizontal, .top])
+      .padding(.bottom, 10)
       .background(.regularMaterial)
       .cornerRadius(14)
   }

@@ -33,6 +33,7 @@ struct ProfileView: View {
       .onFirstAppear { model.loadAuthProviders() }
       .onAppear {
         UITextField.appearance().clearButtonMode = .whileEditing
+        manager.start()
       }
     }
   }
@@ -104,19 +105,28 @@ extension ProfileView {
   @ViewBuilder // MARK: - Measures SECTION
   private var measuresSection: some View {
     Group {
-      HStack {
-        Text("Height")
-        Spacer()
-        Text("\(manager.heightStats.last?.heightString ?? "") m")
+      NavigationLink {
+        HeightView().environmentObject(manager)
+      } label: {
+        HStack {
+          Text("Height")
+          Spacer()
+          Text("\(manager.heightStats.last?.heightString ?? "") m")
+        }
       }
       
-      HStack {
-        Text("Weight")
-        Spacer()
-        Text("\(manager.bodyMassStats.last?.weightString ?? "") kg")
+      NavigationLink {
+        WeightView().environmentObject(manager)
+      } label: {
+        HStack {
+          Text("Weight")
+          Spacer()
+          Text("\(manager.bodyMassStats.last?.weightString ?? "") kg")
+        }
       }
+
     }
-    .foregroundColor(.secondary)
+    
   }
   
   

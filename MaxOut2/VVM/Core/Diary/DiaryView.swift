@@ -5,8 +5,9 @@ struct DiaryView: View {
   enum CoordinateSpaces {
     case scrollView
   }
+  @EnvironmentObject var manager: HealthKitManager
   @StateObject private var model = DiaryViewModel()
-  @StateObject var manager = HealthKitManager()
+  
   @Binding var showingLoginView: Bool
   
   
