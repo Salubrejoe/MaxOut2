@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555C62A6A84E2005C2855 /* WeightView.swift */; };
 		7C1555C92A6A98C8005C2855 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */; };
+		7C1555CB2A6B0B3C005C2855 /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -116,6 +117,7 @@
 /* Begin PBXFileReference section */
 		7C1555C62A6A84E2005C2855 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
+		7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHeader.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 			children = (
 				7CCB58012A697C270086D291 /* Charts */,
 				7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */,
+				7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */,
 				7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */,
 			);
 			path = WidgetsGrid;
@@ -819,6 +822,7 @@
 				7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
 				7C7DA1352A65544000B58AFA /* DiaryView.swift in Sources */,
+				7C1555CB2A6B0B3C005C2855 /* GridHeader.swift in Sources */,
 				7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
 				7C7DA0BB2A5E909600B58AFA /* ParallaxScrollView.swift in Sources */,

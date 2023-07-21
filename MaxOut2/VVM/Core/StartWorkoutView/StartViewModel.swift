@@ -100,12 +100,6 @@ final class StartViewModel: ObservableObject {
     for session in sessions {
       for bob in session.bobs {
         if bob.isCompleted {
-//          let newBob = Bob(kg: bob.kg,
-//                           reps: bob.reps,
-//                           duration: bob.duration,
-//                           distance: bob.distance,
-//                           isCompleted: false,
-//                           restTime: bob.restTime)
           let newBob = Bob(bob: bob)
           bobs.append(newBob)
         }

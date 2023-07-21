@@ -10,11 +10,11 @@ struct DiaryView: View {
   
   @Binding var showingLoginView: Bool
   
-  
   var body: some View {
     NavigationStack {
       ParallaxScrollView(background: Color.clear, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
-        WidgetGrid().environmentObject(manager)
+        WidgetGrid()
+          .environmentObject(manager)
       } header: {
         header
       }
@@ -36,7 +36,6 @@ extension DiaryView {
     List {
       NavigationLink {
         ProfileView(model: model, showingLoginView: $showingLoginView)
-//          .environmentObject(manager)
       } label: {
         ProfileLabel(user: model.user)
       }

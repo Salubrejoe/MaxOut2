@@ -16,15 +16,20 @@ struct Activity: Identifiable, Hashable {
     return duration
   }
   
-  var durationString: String {
+  var durationString: (hour: String, minute: String) {
     let totalDuration = Int(duration)
     let hours = totalDuration / 3600
     let minutes = (totalDuration % 3600) / 60
+    let minutesString = minuteString(for: Double(minutes))
+    let hourString = hours > 0 ? "\(hours)" : ""
     
-    let hourString = hours > 0 ? "\(hours)h" : ""
-    let minuteString = minutes > 0 ? "\(minutes)m" : ""
-    
-    return "\(hourString) \(minuteString)".trimmingCharacters(in: .whitespaces)
+    return (hourString, minutesString)
+  }
+  
+  private func minuteString(for minute: Double) -> String {
+    if minute == 0 { return "00" }
+    else if minute < 10 { return "0\(String(format: "%.0f", minute)))"}
+    else { return String(format: "%.0f", minute) }
   }
   
   static let allActivities: [HKWorkoutActivityType] =

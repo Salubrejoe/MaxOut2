@@ -8,6 +8,7 @@ struct MaxOut2App: App {
   var body: some Scene {
     WindowGroup {
       RootView()
+//      GridHeader()
     }
   }
 }

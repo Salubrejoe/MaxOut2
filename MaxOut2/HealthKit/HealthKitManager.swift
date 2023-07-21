@@ -42,11 +42,11 @@ final class HealthKitManager: ObservableObject {
   var currentActivities: [Activity] {
     var current = [Activity]()
     for activity in activities {
-      if activity.durationString != "" {
+      if activity.durationString != ("", "") {
         current.append(activity)
       }
     }
-    return current
+    return current.sorted { $0.duration > $1.duration }
   }
   
   

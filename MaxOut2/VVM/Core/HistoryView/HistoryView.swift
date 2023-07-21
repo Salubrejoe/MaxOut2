@@ -5,22 +5,30 @@ struct HistoryView: View {
   private enum CoordinateSpaces {
     case scrollView
   }
+  @Environment(\.dismiss) var dismiss
+  @EnvironmentObject var model: HistoryViewModel
   
-  @StateObject private var model = HistoryViewModel()
-  
+  @Binding var isShowingHistory: Bool
   
   var body: some View {
     NavigationStack {
-      ParallaxScrollView(background: Color.secondarySytemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: model.isShowingCalendar ? 320 : 0, content: {
-        WorkoutGrid(model: model)
-      }, header: {
-        if model.isShowingCalendar { TsCalendartView(model: model) }
+      if model.isShowingCalendar { TsCalendarView().environmentObject(model) }
+      
+      ScrollView(showsIndicators: false, content: {
+        WorkoutGrid() .environmentObject(model) .padding(.horizontal)
       })
       .onAppear { model.getViewInfo() }
       .navigationTitle("\(model.currentFocusedMonth) \(model.currentFocusedYear)")
-      .navigationBarTitleDisplayMode(.inline)
       .animation(.spring(), value: model.isShowingCalendar)
       .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            model.jumpToToday()
+          } label: {
+            Text("Today")
+          }
+        }
+        
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             model.isShowingCalendar.toggle()
@@ -32,9 +40,11 @@ struct HistoryView: View {
         
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            model.jumpToToday()
+            isShowingHistory = false
+            dismiss()
           } label: {
-            Text("Today")
+            Image(systemName: "xmark.circle.fill")
+              .foregroundColor(.secondary)
           }
         }
       }
@@ -44,6 +54,6 @@ struct HistoryView: View {
 
 struct HistoryView_Previews: PreviewProvider {
   static var previews: some View {
-    HistoryView()
+    HistoryView(isShowingHistory: .constant(true))
   }
 }

@@ -3,16 +3,25 @@ import HealthKit
 
 struct WidgetGrid: View {
   @EnvironmentObject var manager: HealthKitManager
+  @StateObject var historyModel = HistoryViewModel()
+  
+  @State private var isShowingHistory = false
   
   var body: some View {
     ScrollView(showsIndicators: false) {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
         CalendarWidget()
+          .environmentObject(historyModel)
+          .onTapGesture { isShowingHistory = true }
+          .sheet(isPresented: $isShowingHistory) {
+            HistoryView(isShowingHistory: $isShowingHistory)
+              .environmentObject(historyModel)
+          }
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
         MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {
           NavigationLink {
-            HistoryView()
+            // TODO:
           } label: {
             ExerciseMinutesWidget()
               .environmentObject(manager)
@@ -104,10 +113,30 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
         
         Spacer()
         HStack {
+          let hour = activity.durationString.hour
+          let minute = activity.durationString.minute
           Spacer()
-          Text(activity.durationString)
-            .font(.largeTitle.bold())
-            .foregroundStyle(Color.primary.gradient)
+          if hour != "" {
+            HStack(alignment: .bottom, spacing: 0) {
+              Text(hour)
+                .font(.largeTitle)
+                .foregroundStyle(Color.primary.gradient)
+              Text("h")
+                .font(.title)
+                .foregroundStyle(Color.secondary.gradient)
+            }
+          }
+          HStack(alignment: .bottom, spacing: 0) {
+            Text(minute)
+              .font(.largeTitle)
+              .foregroundStyle(Color.primary.gradient)
+            Text("m")
+              .font(.title)
+              .foregroundStyle(Color.secondary.gradient)
+          }
+          .onAppear {
+            print(activity.durationString)
+          }
         }
       }
       .frame(height: 150)

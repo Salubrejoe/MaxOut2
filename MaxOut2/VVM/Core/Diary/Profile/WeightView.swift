@@ -27,7 +27,6 @@ struct WeightView: View {
   }
   
   private func getHKWeight() {
-    manager.getBodyMassStats()
     guard let weight = manager.bodyMassStats.last else { return }
     self.weight = weight.weightString
   }
@@ -107,7 +106,7 @@ struct HeightView: View {
     }
     .toolbar { resignKeyboard }
     .onAppear {
-      getHKWeight()
+      getHKHeight()
     }
   }
   
@@ -116,7 +115,7 @@ struct HeightView: View {
     manager.submit(height: height)
   }
   
-  private func getHKWeight() {
+  private func getHKHeight() {
     manager.getHeight()
     guard let height = manager.heightStats.last else { return }
     self.height = height.heightString

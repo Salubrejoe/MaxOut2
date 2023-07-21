@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WorkoutGrid: View {
   @EnvironmentObject var controller: AuthController
-  @ObservedObject var model: HistoryViewModel
+  @EnvironmentObject var model: HistoryViewModel
   
   let columns = [GridItem(.adaptive(minimum: 300))]
 

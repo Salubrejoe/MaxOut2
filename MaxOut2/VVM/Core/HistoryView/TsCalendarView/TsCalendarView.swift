@@ -2,10 +2,10 @@
 import SwiftUI
 import SwiftUICalendar
 
-struct TsCalendartView: View {
+struct TsCalendarView: View {
   
   @StateObject private var controller = CalendarController()
-  @ObservedObject var model: HistoryViewModel
+  @EnvironmentObject var model: HistoryViewModel
   
   var body: some View {
       VStack {
@@ -16,7 +16,7 @@ struct TsCalendartView: View {
             cell(date: date)
           })
         }
-        .frame(height: 320)
+        .frame(height: 260)
         .padding(.horizontal)
       }
       .onReceive(controller.$yearMonth) { _ in
@@ -37,7 +37,7 @@ struct TsCalendartView: View {
 }
 
 
-extension TsCalendartView {
+extension TsCalendarView {
   
   // MARK: - WEEKDAYS HEADER
   private func header(week: Week) -> some View {
@@ -57,17 +57,24 @@ extension TsCalendartView {
       if date.isToday {
         // TODAY label
         Text("\(date.day)")
-          .foregroundColor(model.focusedDate == date ? .systemBackground : .accentColor)
+          .foregroundColor(.accentColor)
+          .shadow(radius: 2)
           .calendarCell(model, date: date)
       }
       else {
         // DAYS label
         Text("\(date.day)")
           .foregroundColor(model.hasWorkoutsRecorded(date) ? .systemBackground : .primary)
-          .opacity(date.isFocusYearMonth == true ? 1 : 0.2)
+          .opacity(date.isFocusYearMonth == true ? 1 : 0.4)
           .calendarCell(model, date: date)
       }
     }.onTapGesture { model.switchFocus(for: date) }
+      .overlay {
+        Circle()
+          .stroke(lineWidth: 2)
+          .opacity(date == model.focusedDate ? 1 : 0)
+          .scaleEffect(0.9)
+      }
   }
 }
 
@@ -76,12 +83,12 @@ fileprivate extension View {
   @ViewBuilder
   func calendarCell(_ model: HistoryViewModel, date: YearMonthDay) -> some View {
     self
-      .font(.subheadline)
+//      .font(.subheadline)
+      .bold()
       .padding(4)
       .frame(width: 30, height: 30)
       .background(model.backgroundColor(for: date))
-      .cornerRadius(7)
-      .shadow(color: model.hasWorkoutsRecorded(date) ? .primary.opacity(model.opacity(for: date)) : .clear, radius: 5)
+      .clipShape(Circle())
   }
 }
 

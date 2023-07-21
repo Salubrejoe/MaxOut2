@@ -3,6 +3,7 @@ import SwiftUICalendar
 
 
 final class HistoryViewModel: ObservableObject {
+  @Published var widgetData: [CalendarGridData] = []
   
   /// Main array used for populating WorkoutGrid()
   @Published var workouts        : [Workout] = []
@@ -40,12 +41,27 @@ final class HistoryViewModel: ObservableObject {
     return grouped.sorted { $0.0 < $1.0 }
   }
   
+  
+  init() {
+    getViewInfo()
+
+  }
+  
+  
   // MARK: - BACKGROUND
   /// Style for cells
-  func opacity(for date: YearMonthDay) -> CGFloat {
-    guard hasWorkoutsRecorded(date) else { return 1 }
-    let totalDuration = workoutTime(for: date)
-    return totalDuration / 3600
+  func opacity(for yearMonthDay: YearMonthDay) -> CGFloat {
+    guard hasWorkoutsRecorded(yearMonthDay) else { return 1 }
+    let totalDuration = workoutTime(for: yearMonthDay)
+    return max(totalDuration/3600, 0.4)
+  }
+  
+  // Widget Method
+  func opacity(by date: Date) -> CGFloat {
+    let yearMonthDay = yearMonthDay(from: date)
+    guard hasWorkoutsRecorded(yearMonthDay) else { return 0 }
+    let totalDuration = workoutTime(for: yearMonthDay)
+    return max(totalDuration/3600, 0.4)
   }
   
   func hasWorkoutsRecorded(_ date: YearMonthDay) -> Bool {
@@ -53,11 +69,11 @@ final class HistoryViewModel: ObservableObject {
     return true
   }
   
-  func backgroundColor(for date: YearMonthDay) -> Color {
-    if focusedDate == date { return Color.accentColor.opacity(0.5)}
-    else { return .secondarySytemBackground }
+  func backgroundColor(for date: YearMonthDay) -> some ShapeStyle {
+    guard hasWorkoutsRecorded(date) else { return Color.secondarySytemBackground.gradient.opacity(0.01) }
+    return Color.primary.gradient.opacity(opacity(for: date))
   }
-  
+
 
   
   /// This init is missing from the API..........
@@ -75,6 +91,22 @@ final class HistoryViewModel: ObservableObject {
     if isShowingCalendar == false { isShowingCalendar = true }
     focusedDate = YearMonthDay.current
   }
+  
+  // MARK: - WIDGET METHOD
+  func getCalendarData() {
+    var data: [CalendarGridData] = []
+    
+    let today = Date()
+    for i in 0..<49 {
+      let date = Calendar.current.date(byAdding: .day, value: -i, to: today)
+      let dateSecure = date ?? Date()
+      let widgetData = CalendarGridData(opacity: opacity(by: dateSecure), date: dateSecure)
+      data.append(widgetData)
+    }
+    self.widgetData = data.reversed()
+  }
+  
+  
   
   // MARK: - WEEKDAY NAME
   func weekdayName(from dayOfWeek: Int) -> String {
@@ -125,6 +157,7 @@ final class HistoryViewModel: ObservableObject {
           self.workouts = []
           self.workouts = workouts.sorted { $0.routine.dateStarted > $1.routine.dateStarted}
           self.getDecorations(for: workouts)
+          self.getCalendarData()
         }
       }
       catch {
