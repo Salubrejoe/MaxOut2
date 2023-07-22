@@ -17,6 +17,10 @@ struct WidgetGrid: View {
             HistoryView(isShowingHistory: $isShowingHistory)
               .environmentObject(historyModel)
           }
+        
+        RadarMock()
+          .background(.ultraThinMaterial)
+          .cornerRadius(14)
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
         MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {
@@ -100,7 +104,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
               .foregroundColor(.primary)
               .fontWeight(.semibold)
               
-            Text("Last 7 days")
+            Text("last 7 days")
               .font(.footnote)
               .foregroundColor(.secondary)
           }
