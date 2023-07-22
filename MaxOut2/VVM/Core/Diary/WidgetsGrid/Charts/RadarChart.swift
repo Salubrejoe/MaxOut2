@@ -58,8 +58,8 @@ extension RadarChart {
       
       for i in 0..<self.dimensions.count {
         let angle = radiantsAngleFromFraction(numerator: i, denominator: self.dimensions.count)
-        let x = (self.size - (20 + self.labelWidth))/2 * cos(angle) // PADDING OF 25 EACH SIDE
-        let y = (self.size - (20 + self.labelWidth))/2 * sin(angle)
+        let x = (self.size - (self.labelWidth))/2 * cos(angle) // PADDING OF 25 EACH SIDE
+        let y = (self.size - (self.labelWidth))/2 * sin(angle)
         path.move(to: center)
         path.addLine(to: CGPoint(x: center.x + x, y: center.y + y))
       }
@@ -82,7 +82,7 @@ extension RadarChart {
         
         
           .background(Color.clear)
-          .offset(x: (self.size - (20))/2)
+          .offset(x: (self.size)/2)
           .rotationEffect(.radians(Double(radiantsAngleFromFraction(numerator: i, denominator: self.dimensions.count))))
       }
     }
@@ -95,8 +95,8 @@ extension RadarChart {
       for i in 0..<self.dimensions.count + 1 {
         let angle = radiantsAngleFromFraction(numerator: i, denominator: self.dimensions.count)
         
-        let x = (self.size - (20 + self.labelWidth))/2 * cos(angle)
-        let y = (self.size - (20 + self.labelWidth))/2 * sin(angle)
+        let x = (self.size - (self.labelWidth))/2 * cos(angle)
+        let y = (self.size - (self.labelWidth))/2 * sin(angle)
         if i == 0 {
           path.move(to: CGPoint(x: center.x + x, y: center.y + y))
         } else {
@@ -118,7 +118,7 @@ extension RadarChart {
         
         for i in 0..<self.dimensions.count + 1 {
           let angle = radiantsAngleFromFraction(numerator: i, denominator: self.dimensions.count)
-          let size = ((self.size - (20 + self.labelWidth))/2) * (CGFloat(j + 1)/CGFloat(self.numberOfLines + 1))
+          let size = ((self.size - (self.labelWidth))/2) * (CGFloat(j + 1)/CGFloat(self.numberOfLines + 1))
           
           let x = size * cos(angle)
           let y = size * sin(angle)
@@ -159,7 +159,7 @@ extension RadarChart {
             return 0
           }()
           let angle = radiantsAngleFromFraction(numerator: i == self.dimensions.count ? 0 : i, denominator: self.dimensions.count)
-          let size = ((self.size - (20 + self.labelWidth))/2) * (CGFloat(dataPointVal)/CGFloat(maxVal))
+          let size = ((self.size - (self.labelWidth))/2) * (CGFloat(dataPointVal)/CGFloat(maxVal))
           
           
           let x = size * cos(angle)

@@ -7,7 +7,7 @@ struct CalendarWidget: View {
   var body: some View {
     GroupBox {
       HStack {
-        WidgetCalendarView(widgetData: model.widgetData, size: 90)
+        WidgetCalendarView(widgetData: model.widgetData, size: 80)
         Spacer()
       }
     }

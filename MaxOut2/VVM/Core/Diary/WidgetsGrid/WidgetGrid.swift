@@ -18,9 +18,10 @@ struct WidgetGrid: View {
               .environmentObject(historyModel)
           }
         
-        RadarMock()
-          .background(.ultraThinMaterial)
-          .cornerRadius(14)
+        GroupBox {
+          RadarMock()
+        }
+        .groupBoxStyle(RegularMaterialStyle())
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
         MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {

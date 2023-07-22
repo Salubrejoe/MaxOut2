@@ -18,8 +18,8 @@ let data = [
 
 struct RadarMock: View {
   var body: some View {
-    RadarChart(size: 150,
-               labelWidth: 30,
+    RadarChart(size: 135,
+               labelWidth: 0,
                mainColor: .secondary,
                subtleColor: .secondary,
                numberOfLines: 3,
