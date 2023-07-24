@@ -8,11 +8,12 @@ struct ExerciseMinutesWidget: View {
     Chart(manager.exerTimeStats) { stat in
       BarMark(
         x: .value("Week Day", stat.date),
-        y: .value("Min", stat.minutes)
+        y: .value("Min", stat.minutes/Double(manager.resolution)),
+        width: switchWidth
       )
       .foregroundStyle(Color.exerciseRing.gradient)
-      .cornerRadius(10)
-      .offset(x: -3)
+      .cornerRadius(4)
+      
     }
     .chartYAxisLabel("min", position: .topTrailing)
     .chartYAxis {
@@ -31,9 +32,16 @@ struct ExerciseMinutesWidget: View {
         }
       }
     }
-    .onAppear {
-      manager.getExerciseTime()
-      manager.getExerciseTimeGoal()
+    .transition(.opacity)
+    .animation(.spring(), value: manager.timeRange)
+  }
+  
+  private var switchWidth: MarkDimension {
+    switch manager.timeRange {
+      case .W  : return MarkDimension(integerLiteral: 27)
+      case .M  : return MarkDimension(integerLiteral: 7)
+      case .SM : return MarkDimension(integerLiteral: 7)
+      case .Y  : return MarkDimension(integerLiteral: 17)
     }
   }
 }

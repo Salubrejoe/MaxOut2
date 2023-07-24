@@ -1,21 +1,29 @@
 
 import SwiftUI
 
+struct ExerciseQuery {
+  let resolution: Int
+  let startDate: Date
+}
+
 struct ExerciseTimeView: View {
   @EnvironmentObject var manager: HealthKitManager
-  
-  @State private var days = 0.0
-  @State private var weeks = 0.0
-  @State private var months = 0.0
-  @State private var years = 0.0
-  
-  @State private var number: Int = 0
-  @State private var string = "W"
-  
   
   var body: some View {
     NavigationStack {
       ScrollView {
+        
+        Picker("", selection: $manager.timeRange) {
+          ForEach(TimeRange.allCases) { range in
+            Text(range.rawValue)
+          }
+        }
+        .pickerStyle(.segmented)
+        .padding([.horizontal, .bottom])
+        .onChange(of: manager.timeRange) { newValue in
+          manager.getExerciseTime(newValue.query)
+          manager.resolution = newValue.query.resolution
+        }
         
         HStack {
           VStack(alignment: .leading, spacing: -2) {
@@ -24,75 +32,112 @@ struct ExerciseTimeView: View {
               .foregroundColor(.secondary)
             
             HStack(alignment: .firstTextBaseline, spacing: 0) {
-              Text("23")
+              Text("34")
                 .font(.largeTitle)
               Text("min")
                 .font(.title2)
                 .foregroundColor(.secondary)
             }
-            Text("15-23 Jul 2023")
+            Text(formatDateRange())
               .font(.caption)
               .foregroundColor(.secondary)
           }
           Spacer()
-          Button("Refresh") {
-            manager.getExerciseTime()
-          }
-          .buttonStyle(.bordered)
         }
         .padding(.horizontal, 22)
         
         GroupBox {
           ExerciseMinutesWidget()
+            .padding(.leading)
         }
         .frame(height: 300)
         .groupBoxStyle(RegularMaterialStyle())
         .padding(.horizontal)
         .padding(.bottom)
         
-        GroupBox {
-          VStack {
-            HStack {
-              Text("Start Date").font(.headline)
-              Spacer()
-              DatePicker("", selection: $manager.startDate, in: ...Date(), displayedComponents: .date)
-            }
-            Divider()
-              .padding(.leading)
-            HStack {
-              Text("Average every ").font(.headline)
-              Spacer()
-              HStack(spacing: 0) {
-                Picker("days", selection: $manager.dataPointComponents) {
-                  ForEach(1..<manager.intervalInDays, id: \.self) {
-                    Text("\($0)")
-                  }
-                }
-                Text(manager.dataPointComponents == 1 ? "day" : "days")
-              }
-            }
-          }
-        }
-        .groupBoxStyle(RegularMaterialStyle())
-        .padding(.horizontal)
+        
+//          VStack {
+//            HStack {
+//              Text("Start Date").font(.headline)
+//              Spacer()
+//              DatePicker("", selection: $manager.startDate, in: ...Date(), displayedComponents: .date)
+//                .onChange(of: manager.startDate) { newValue in
+//                  manager.getExerciseTime()
+//                }
+//            }
+//            Divider()
+//            HStack {
+//              Text("Average every ").font(.headline)
+//              Spacer()
+//              HStack(spacing: 0) {
+//                Picker("days", selection: $manager.resolution) {
+//                  ForEach(1..<manager.intervalInDays, id: \.self) {
+//                    Text("\($0)")
+//                  }
+//                }
+//                .onChange(of: manager.resolution) { newValue in
+//                  manager.getExerciseTime()
+//                }
+//                Text(manager.resolution == 1 ? "day" : "days")
+//              }
+//            }
+//          }
+//        .padding(.horizontal)
       }
       .navigationTitle("Exercise Time").navigationBarTitleDisplayMode(.inline)
     }
   }
   
-  private func formatDateRange(from startDate: Date) -> String {
+  private func formatDateRange() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "d MMM"
     
-    let startDateString = dateFormatter.string(from: startDate)
+    let startDateMonth = Calendar.current.dateComponents([.month], from: manager.startDate)
+    let startDateDay = Calendar.current.dateComponents([.day], from: manager.startDate)
+    let startDay = startDateDay.day ?? 0
+    let currentMonth = Calendar.current.dateComponents([.month], from: Date())
+    
     let todayString = dateFormatter.string(from: Date())
+    
+    guard currentMonth != startDateMonth else {
+      return "\(startDay)-\(todayString) \(Date().yearAsString())"
+    }
+    
+    let startDateString = dateFormatter.string(from:manager.startDate)
     
     if startDateString == todayString {
       return "\(startDateString), \(Date().yearAsString())"
-    } else {
+    }
+    else {
       return "\(startDateString)-\(todayString) \(Date().yearAsString())"
     }
   }
+  
+//  private func dataPointAvg() -> String? {
+//    var duration = 0.0
+//    var conto = 0
+//    guard !manager.exerTimeStats.isEmpty else { return nil }
+//    for exerciseTimeStat in manager.exerTimeStats {
+//      duration += exerciseTimeStat.minutes
+//      if exerciseTimeStat.minutes != 0.0 {
+//        print("Minutes: \(exerciseTimeStat.minutes)")
+//        conto += 1
+//        print("Conto: \(conto)")
+//      }
+//    }
+//
+//    let count = conto - 1
+//    let average = duration/Double(conto)
+//    let realAverage = average/Double(manager.resolution)
+//
+//    print("Duration: \(duration)")
+//    print("Average: \(average)")
+//    print("Conto: \(conto)")
+//    print("Count: \(count)")
+//    print("ExCount: \(manager.exerTimeStats.count)")
+//    print("Resol: \(manager.resolution) \n")
+//    return String(format: "%.0f", realAverage)
+//  }
 }
 
 struct ExerciseTimeView_Previews: PreviewProvider {

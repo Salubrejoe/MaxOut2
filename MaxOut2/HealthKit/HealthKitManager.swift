@@ -1,6 +1,43 @@
 import Foundation
 import HealthKit
 
+enum TimeRange: String, CaseIterable, Identifiable {
+  case W  = "W"
+  case M  = "M"
+  case SM = "6M"
+  case Y  = "Y"
+  var id: TimeRange { self }
+  
+  var query: ExerciseQuery {
+    switch self {
+      case .W :
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .weekOfYear,
+                                      value: -1,
+                                      to: Date()) ?? Date()
+        return ExerciseQuery(resolution: 1, startDate: startDate)
+      case .M :
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .month,
+                                      value: -1,
+                                      to: Date()) ?? Date()
+        return ExerciseQuery(resolution: 1, startDate: startDate)
+      case .SM :
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .month,
+                                      value: -6,
+                                      to: Date()) ?? Date()
+        return ExerciseQuery(resolution: 7, startDate: startDate)
+      case .Y :
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .year,
+                                      value: -1,
+                                      to: Date()) ?? Date()
+        return ExerciseQuery(resolution: 30, startDate: startDate)
+    }
+  }
+}
+
 final class HealthKitManager: ObservableObject {
   var store: HKHealthStore?
   
@@ -39,15 +76,16 @@ final class HealthKitManager: ObservableObject {
   @Published var heightStats   = [HealthStat]()
   @Published var activities    = [Activity]()
   
-  @Published var startDate = Date.yesterday()
-  @Published var dataPointComponents = 1
+  let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+  @Published var resolution = 1
   
-  var intervalInDays: Int {
-    let now = Date().timeIntervalSince1970
-    let start = startDate.timeIntervalSince1970
-    let interval = now - start
-    return max(Int((interval/86400).rounded(.down)), 1)
-  }
+  // MARK: - COMPUTED STATS
+//  var intervalInDays: Int {
+//    let now = Date().timeIntervalSince1970
+//    let start = startDate.timeIntervalSince1970
+//    let interval = now - start
+//    return max(Int((interval/86400).rounded()), 1)
+//  }
   
   var currentActivities: [Activity] {
     var current = [Activity]()
@@ -60,7 +98,6 @@ final class HealthKitManager: ObservableObject {
   }
   
   
-  // MARK: - COMPUTED STATS
   var exerTimeGoalDouble: Double {
     return exerTimeGoal?.doubleValue(for: .minute()) ?? 0
   }
@@ -84,6 +121,7 @@ final class HealthKitManager: ObservableObject {
     for stat in bodyMassStats {
       weights.append(stat.weight)
     }
+    
     return weights.max() ?? 0
   }
   
@@ -98,7 +136,7 @@ final class HealthKitManager: ObservableObject {
   var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerTimeStats {
-      min.append(stat.minutes)
+      min.append(stat.minutes/Double(resolution))
     }
     return min.max() ?? 0
   }
@@ -121,45 +159,51 @@ final class HealthKitManager: ObservableObject {
   }
   
   func start() {
-    getExerciseTime()
+    getExerciseTime(timeRange.query)
     getExerciseTimeGoal()
     getBodyMassStats()
     getActivities(last: 7)
     getHeight()
   }
+  
+  // MARK: - TIME RANGE FOR QUERY
+  @Published var timeRange: TimeRange = .M
+  
+  
+  
 }
 
 
 // MARK: - GET STATS
 extension HealthKitManager {
   
+
   // MARK: - EXERCISE TIME
-  func getExerciseTime() {
+//  @MainActor
+  func getExerciseTime(_ exQuery: ExerciseQuery) {
     self.exerTimeStats = []
     
     guard let store else { return }
     
     let calendar = Calendar.current
-    let startDate = self.startDate
     let endDate = Date()
     let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: self.dataPointComponents)
+    let dailyComponent = DateComponents(day: exQuery.resolution)
     
     var healthStats = [HealthStat]()
     
-    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+    let predicate = HKQuery.predicateForSamples(withStart: exQuery.startDate, end: endDate)
     
     let query = HKStatisticsCollectionQuery(quantityType: exerciseTimeType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: dailyComponent)
     
     query.initialResultsHandler = { query, statistics, error in
-      statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
+      statistics?.enumerateStatistics(from: exQuery.startDate, to: endDate, with: { stats, _ in
         let stat = HealthStat(stat: stats.sumQuantity(), date: stats.startDate)
         healthStats.append(stat)
       })
       
       DispatchQueue.main.async {
         self.exerTimeStats = healthStats
-        print(self.exerTimeStats)
       }
     }
     
@@ -241,6 +285,7 @@ extension HealthKitManager {
     store.execute(query)
   }
   
+  
   // MARK: - HEIGHT
   func getHeight() {
     self.heightStats = []
@@ -275,7 +320,6 @@ extension HealthKitManager {
     }
     store.execute(query)
   }
-  
   
   
   // MARK: - WORKOUTS
