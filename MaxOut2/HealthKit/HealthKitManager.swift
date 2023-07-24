@@ -114,7 +114,7 @@ final class HealthKitManager: ObservableObject {
     getExerciseTime()
     getExerciseTimeGoal()
     getBodyMassStats()
-    getActivities()
+    getActivities(last: 7)
     getHeight()
   }
 }
@@ -130,11 +130,11 @@ extension HealthKitManager {
     
     let calendar = Calendar.current
     let startDate = calendar.date(byAdding: .weekOfYear,
-                                  value: -7,
+                                  value: -4,
                                   to: Date()) ?? Date()
     let endDate = Date()
     let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: 2)
+    let dailyComponent = DateComponents(day: 1)
     
     var healthStats = [HealthStat]()
     
@@ -269,10 +269,10 @@ extension HealthKitManager {
   
   
   // MARK: - WORKOUTS
-  func getActivities() {
+  func getActivities(last interval: Int) {
     activities = []
     for activityType in Activity.allActivities {
-      workouts(with: activityType) { stats in
+      workouts(with: activityType, last: interval) { stats in
         let activity = Activity(type: activityType, workouts: stats)
         DispatchQueue.main.async {
           self.activities.append(activity)
@@ -281,12 +281,12 @@ extension HealthKitManager {
     }
   }
   
-  private func workouts(with type: HKWorkoutActivityType, completion: @escaping ([HKWorkout]) -> ()) {
+  private func workouts(with type: HKWorkoutActivityType, last interval: Int, completion: @escaping ([HKWorkout]) -> ()) {
     guard let store else { return }
     
     let calendar = Calendar.current
-    let startDate = calendar.date(byAdding: .weekOfYear,
-                                  value: -1,
+    let startDate = calendar.date(byAdding: .day,
+                                  value: -interval,
                                   to: Date()) ?? Date()
     let endDate = Date()
     

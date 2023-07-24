@@ -42,7 +42,7 @@ extension TsCalendarView {
   // MARK: - WEEKDAYS HEADER
   private func header(week: Week) -> some View {
     GeometryReader { geometry in
-      Text(week.shortString)
+      Text(week.shortString.uppercased())
         .font(.caption.bold())
         .foregroundColor(.secondary)
         .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
@@ -69,6 +69,7 @@ extension TsCalendarView {
           .calendarCell(model, date: date)
       }
     }.onTapGesture { model.switchFocus(for: date) }
+      .minimumScaleFactor(0.8)
       .overlay {
         Circle()
           .stroke(lineWidth: 2)

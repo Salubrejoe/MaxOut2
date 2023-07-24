@@ -16,28 +16,12 @@ struct Activity: Identifiable, Hashable {
     return duration
   }
   
-  var durationString: (hour: String, minute: String) {
-    let totalDuration = Int(duration)
-    let hours = totalDuration / 3600
-    let minutes = (totalDuration % 3600) / 60
-    let minutesString = minuteString(for: Double(minutes))
-    let hourString = hours > 0 ? "\(hours)" : ""
-    
-    return (hourString, minutesString)
-  }
+  var durationString: (hour: String, minute: String) { duration.durationString() }
   
-  private func minuteString(for minute: Double) -> String {
-    if minute == 0 { return "00" }
-    else if minute < 10 { return "0\(String(format: "%.0f", minute)))"}
-    else { return String(format: "%.0f", minute) }
-  }
-  
-  static let allActivities: [HKWorkoutActivityType] =
-    [
+  static let allActivities: [HKWorkoutActivityType] = [
       .elliptical,
       .rowing,
       .running,
-      .stairClimbing,
       .traditionalStrengthTraining,
       .walking,
       .yoga,
@@ -48,12 +32,25 @@ struct Activity: Identifiable, Hashable {
       .pilates,
       .stairs,
       .stepTraining,
-      .wheelchairWalkPace,
       .wheelchairRunPace,
       .taiChi,
       .mixedCardio,
       .handCycling,
       .fitnessGaming
     ]
-  
+}
+
+extension TimeInterval {
+  func durationString() -> (hour: String, minute: String) {
+    let totalDuration = Int(self)
+    let hours = totalDuration / 3600
+    let minutes = (totalDuration % 3600) / 60
+    var minutesString = ""
+    if minutes == 0 { minutesString = "00" }
+    else if minutes < 10 { minutesString = "0\(String(format: "%.0f", Double(minutes)))"}
+    else { minutesString = String(format: "%.0f", Double(minutes)) }
+    let hourString = hours > 0 ? "\(hours)" : ""
+    
+    return (hourString, minutesString)
+  }
 }

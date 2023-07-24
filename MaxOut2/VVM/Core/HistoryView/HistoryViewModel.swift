@@ -1,15 +1,40 @@
 import SwiftUI
 import SwiftUICalendar
 
+struct WidgetStat {
+  let amount: Double?
+  let unit: TSUnit?
+  
+  enum TSUnit: String {
+    case km, kg, min
+  }
+  
+  init(amount: Double? = nil, unit: TSUnit? = nil) {
+    self.amount = amount
+    self.unit = unit
+  }
+  
+//  var queryResultString: (String, String) {
+//    guard let amount, let unit else { return ("", "") }
+//    if unit == .min, amount > 59 {
+//      let hour = Int(amount/60.rounded(.down))
+//      let minute = Int(amount)%60
+//      return 
+//    }
+//    return (String(format: "%.1f", amount), unit.rawValue)
+//  }
+}
+
 
 final class HistoryViewModel: ObservableObject {
-  @Published var widgetData: [CalendarGridData] = []
+  @Published var widgetData : [CalendarGridData] = []
+  @Published var widgetStat = WidgetStat()
   
   /// Main array used for populating WorkoutGrid()
   @Published var workouts        : [Workout] = []
   
   /// CalendarView
-  @Published var focusedWorkouts : [Workout]? = nil
+  @Published var focusedWorkouts : [Workout]? = nil 
   @Published var focusedDate     : YearMonthDay? = nil
   
   /// Still needed because some methods (hasWorkotsRecorded) rely on it
@@ -97,7 +122,7 @@ final class HistoryViewModel: ObservableObject {
     var data: [CalendarGridData] = []
     
     let today = Date()
-    for i in 0..<49 {
+    for i in 0..<84 {
       let date = Calendar.current.date(byAdding: .day, value: -i, to: today)
       let dateSecure = date ?? Date()
       let widgetData = CalendarGridData(opacity: opacity(by: dateSecure), date: dateSecure)

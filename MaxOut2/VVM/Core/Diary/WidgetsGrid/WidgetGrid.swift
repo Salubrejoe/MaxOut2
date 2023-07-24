@@ -5,7 +5,8 @@ struct WidgetGrid: View {
   @EnvironmentObject var manager: HealthKitManager
   @StateObject var historyModel = HistoryViewModel()
   
-  @State private var isShowingHistory = false
+  @State private var isShowingHistory      = false
+  @State private var isShowingExerciseTime = false
   
   var body: some View {
     ScrollView(showsIndicators: false) {
@@ -25,12 +26,13 @@ struct WidgetGrid: View {
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
         MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {
-          NavigationLink {
-            // TODO:
-          } label: {
-            ExerciseMinutesWidget()
-              .environmentObject(manager)
-          }
+          ExerciseMinutesWidget()
+            .environmentObject(manager)
+            .onTapGesture { isShowingExerciseTime = true }
+            .sheet(isPresented: $isShowingExerciseTime) {
+              ExerciseTimeView()
+                .environmentObject(manager)
+            }
         }
         MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
           NavigationLink {
@@ -122,7 +124,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
           let minute = activity.durationString.minute
           Spacer()
           if hour != "" {
-            HStack(alignment: .bottom, spacing: 0) {
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
               Text(hour)
                 .font(.largeTitle)
                 .foregroundStyle(Color.primary.gradient)
@@ -131,16 +133,15 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
                 .foregroundStyle(Color.secondary.gradient)
             }
           }
-          HStack(alignment: .bottom, spacing: 0) {
-            Text(minute)
-              .font(.largeTitle)
-              .foregroundStyle(Color.primary.gradient)
-            Text("m")
-              .font(.title)
-              .foregroundStyle(Color.secondary.gradient)
-          }
-          .onAppear {
-            print(activity.durationString)
+          if minute != "00" {
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
+              Text(minute)
+                .font(.largeTitle)
+                .foregroundStyle(Color.primary.gradient)
+              Text("m")
+                .font(.title)
+                .foregroundStyle(Color.secondary.gradient)
+            }
           }
         }
       }
@@ -156,16 +157,17 @@ struct RegularMaterialStyle: GroupBoxStyle {
       .padding([.horizontal, .top])
       .padding(.bottom, 10)
       .background(.regularMaterial)
-      .cornerRadius(14)
+      .cornerRadius(11)
   }
 }
 
-struct BackgroundStyle: GroupBoxStyle {
+struct SecondaryBackgroundStyle: GroupBoxStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.content
-      .padding()
-      .background(Color.systemBackground)
-      .cornerRadius(14)
+      .padding([.horizontal, .top])
+      .padding(.bottom, 10)
+      .background(Color.secondarySytemBackground)
+      .cornerRadius(11)
   }
 }
 

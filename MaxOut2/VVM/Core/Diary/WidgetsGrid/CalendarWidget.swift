@@ -6,12 +6,12 @@ struct CalendarWidget: View {
   
   var body: some View {
     GroupBox {
-      HStack {
-        WidgetCalendarView(widgetData: model.widgetData, size: 80)
-        Spacer()
-      }
+      WidgetCalendarView(widgetData: model.widgetData, size: 85)
     }
     .groupBoxStyle(RegularMaterialStyle())
+    .task {
+      model.getViewInfo()
+    }
   }
 }
 
@@ -22,19 +22,27 @@ struct CalendarGridData: Identifiable, Equatable {
 }
 
 struct WidgetCalendarView: View {
+  @EnvironmentObject var manager: HealthKitManager
   let widgetData: [CalendarGridData]?
   let size: CGFloat
   var body: some View {
-    VStack(alignment: .leading) {
-      grid
-        .background(ContainerRelativeShape().fill(Color.clear))
-      Text("last 50 days")
+    VStack(alignment: .leading, spacing: 0) {
+      Text("last 10 weeks")
+        .padding(.bottom, 3)
         .font(.caption)
         .foregroundColor(.secondary)
-      
-      Text("12983 kg")
-        .font(.title)
-        .foregroundColor(.primary)
+      Group {
+        grid
+      }
+      .padding(.leading, 5)
+      .frame(maxWidth: .infinity)
+      Spacer()
+      HStack {
+        Spacer()
+        Text(Date().formattedString())
+          .font(.title2.bold())
+          .foregroundColor(.primary)
+      }
     }
   }
 }
@@ -51,7 +59,7 @@ extension WidgetCalendarView {
               Circle()
                 .frame(width: size(proxy), height: size(proxy))
                 .foregroundStyle(Color.primary.gradient.shadow(.inner(radius: 3)))
-                .opacity(datum.opacity != 0 ? 1 : 0.1)
+                .opacity(datum.opacity != 0 ? datum.opacity : 0.1)
             }
           }
         }
@@ -91,12 +99,34 @@ extension WidgetCalendarView {
   }
 }
 
-//struct WidgetCalendarView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    Group {
-//      WidgetCalendarView(widgetData: controller., size: <#T##CGFloat#>size: 90)
-//    }
-//  }
-//}
 
+extension Date {
+  func formattedString() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEE"
+    let dayString = dateFormatter.string(from: self)
+    
+    dateFormatter.dateFormat = "MMM"
+    let monthString = dateFormatter.string(from: self)
+    
+    dateFormatter.dateFormat = "dd"
+    let dayNumber = Int(dateFormatter.string(from: self)) ?? 0
+    
+    return "\(dayString), \(monthString) \(dayNumber)"
+  }
+}
 
+extension Int {
+  func getOrdinalSuffix() -> String {
+    if 10...20 ~= self {
+      return "th"
+    } else {
+      switch self % 10 {
+        case 1: return "st"
+        case 2: return "nd"
+        case 3: return "rd"
+        default: return "th"
+      }
+    }
+  }
+}

@@ -11,7 +11,8 @@
 		7C1555C92A6A98C8005C2855 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */; };
 		7C1555CB2A6B0B3C005C2855 /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */; };
 		7C1555D22A6BB4B4005C2855 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D12A6BB4B4005C2855 /* RadarChart.swift */; };
-		7C1555D42A6BDF44005C2855 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D32A6BDF44005C2855 /* Content.swift */; };
+		7C1555D42A6BDF44005C2855 /* RadarMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D32A6BDF44005C2855 /* RadarMock.swift */; };
+		7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D52A6C0087005C2855 /* ExerciseTimeView.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -121,7 +122,8 @@
 		7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHeader.swift; sourceTree = "<group>"; };
 		7C1555D12A6BB4B4005C2855 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
-		7C1555D32A6BDF44005C2855 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		7C1555D32A6BDF44005C2855 /* RadarMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarMock.swift; sourceTree = "<group>"; };
+		7C1555D52A6C0087005C2855 /* ExerciseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimeView.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 			children = (
 				7CCB58012A697C270086D291 /* Charts */,
 				7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */,
+				7C1555D52A6C0087005C2855 /* ExerciseTimeView.swift */,
 				7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */,
 				7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */,
 			);
@@ -648,7 +651,7 @@
 				7CA6CE282A66ED47006FDBD4 /* ExerciseTimeChart.swift */,
 				7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */,
 				7C1555D12A6BB4B4005C2855 /* RadarChart.swift */,
-				7C1555D32A6BDF44005C2855 /* Content.swift */,
+				7C1555D32A6BDF44005C2855 /* RadarMock.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -789,7 +792,7 @@
 				7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */,
 				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
 				7C7DA1232A5F117500B58AFA /* QuickActionButtonView.swift in Sources */,
-				7C1555D42A6BDF44005C2855 /* Content.swift in Sources */,
+				7C1555D42A6BDF44005C2855 /* RadarMock.swift in Sources */,
 				7C1555C92A6A98C8005C2855 /* CalendarWidget.swift in Sources */,
 				7CBAA1FF2A5D944400DFA31D /* SignInWithGoogleButton.swift in Sources */,
 				7C7DA0B12A5DAE4100B58AFA /* RoutinesManager.swift in Sources */,
@@ -807,6 +810,7 @@
 				7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */,
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
+				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
 				7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */,
 				7C7DA1192A5EB35D00B58AFA /* AddEditExerciseView.swift in Sources */,
