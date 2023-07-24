@@ -8,11 +8,8 @@ struct WorkoutGrid: View {
 
   var body: some View {
     ScrollViewReader { value in
-      VStack(alignment: .leading) {
-        Text("History").font(.title).padding(.leading)
-        LazyVGrid(columns: columns) {
-          elements
-        }
+      LazyVGrid(columns: columns) {
+        elements
       }
       .padding(.vertical, 10)
       .onChange(of: model.focusedDate) { newValue in

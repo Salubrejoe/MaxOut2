@@ -8,6 +8,7 @@ struct CalendarWidget: View {
     GroupBox {
       WidgetCalendarView(widgetData: model.widgetData, size: 85)
     }
+    .minimumScaleFactor(0.8)
     .groupBoxStyle(RegularMaterialStyle())
     .task {
       model.getViewInfo()
@@ -36,13 +37,14 @@ struct WidgetCalendarView: View {
       }
       .padding(.leading, 5)
       .frame(maxWidth: .infinity)
-      Spacer()
+      
       HStack {
         Spacer()
         Text(Date().formattedString())
           .font(.title2.bold())
           .foregroundColor(.primary)
       }
+      .padding(.top, 3)
     }
   }
 }

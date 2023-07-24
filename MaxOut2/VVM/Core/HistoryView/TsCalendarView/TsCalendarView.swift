@@ -57,8 +57,7 @@ extension TsCalendarView {
       if date.isToday {
         // TODAY label
         Text("\(date.day)")
-          .foregroundColor(.accentColor)
-          .shadow(radius: 2)
+          .foregroundColor(.red)
           .calendarCell(model, date: date)
       }
       else {
@@ -74,7 +73,7 @@ extension TsCalendarView {
         Circle()
           .stroke(lineWidth: 2)
           .opacity(date == model.focusedDate ? 1 : 0)
-          .scaleEffect(0.9)
+          .scaleEffect(0.85)
       }
   }
 }

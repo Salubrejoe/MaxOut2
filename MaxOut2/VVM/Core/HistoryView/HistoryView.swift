@@ -12,13 +12,16 @@ struct HistoryView: View {
   
   var body: some View {
     NavigationStack {
-      if model.isShowingCalendar { TsCalendarView().environmentObject(model) }
-      
+      if model.isShowingCalendar {
+        TsCalendarView().environmentObject(model)
+        Divider()
+          .padding(.horizontal)
+      }
       ScrollView(showsIndicators: false, content: {
         WorkoutGrid() .environmentObject(model) .padding(.horizontal)
       })
       .onAppear { model.getViewInfo() }
-      .navigationTitle("\(model.currentFocusedMonth) \(model.currentFocusedYear)")
+      .navigationTitle(navTitle())
       .animation(.spring(), value: model.isShowingCalendar)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -49,6 +52,11 @@ struct HistoryView: View {
         }
       }
     }
+  }
+  
+  private func navTitle() -> String {
+    if model.isShowingCalendar { return "\(model.currentFocusedMonth) \(model.currentFocusedYear)" }
+    else { return ""}
   }
 }
 

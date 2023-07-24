@@ -8,7 +8,7 @@ struct ExerciseMinutesWidget: View {
     Chart(manager.exerTimeStats) { stat in
       BarMark(
         x: .value("Week Day", stat.date),
-        y: .value("Min", stat.minutes/2)
+        y: .value("Min", stat.minutes)
       )
       .foregroundStyle(Color.exerciseRing.gradient)
       .cornerRadius(10)

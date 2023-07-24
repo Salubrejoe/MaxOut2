@@ -39,6 +39,16 @@ final class HealthKitManager: ObservableObject {
   @Published var heightStats   = [HealthStat]()
   @Published var activities    = [Activity]()
   
+  @Published var startDate = Date.yesterday()
+  @Published var dataPointComponents = 1
+  
+  var intervalInDays: Int {
+    let now = Date().timeIntervalSince1970
+    let start = startDate.timeIntervalSince1970
+    let interval = now - start
+    return max(Int((interval/86400).rounded(.down)), 1)
+  }
+  
   var currentActivities: [Activity] {
     var current = [Activity]()
     for activity in activities {
@@ -88,7 +98,7 @@ final class HealthKitManager: ObservableObject {
   var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerTimeStats {
-      min.append(stat.minutes/2)
+      min.append(stat.minutes)
     }
     return min.max() ?? 0
   }
@@ -119,6 +129,7 @@ final class HealthKitManager: ObservableObject {
   }
 }
 
+
 // MARK: - GET STATS
 extension HealthKitManager {
   
@@ -129,12 +140,10 @@ extension HealthKitManager {
     guard let store else { return }
     
     let calendar = Calendar.current
-    let startDate = calendar.date(byAdding: .weekOfYear,
-                                  value: -4,
-                                  to: Date()) ?? Date()
+    let startDate = self.startDate
     let endDate = Date()
     let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: 1)
+    let dailyComponent = DateComponents(day: self.dataPointComponents)
     
     var healthStats = [HealthStat]()
     
@@ -150,6 +159,7 @@ extension HealthKitManager {
       
       DispatchQueue.main.async {
         self.exerTimeStats = healthStats
+        print(self.exerTimeStats)
       }
     }
     
@@ -367,6 +377,24 @@ extension Date {
     let components: Set<Calendar.Component> = [.yearForWeekOfYear, .weekOfYear]
     return calendar.date(from: calendar.dateComponents(components, from: Date())) ?? Date()
   }
+  
+  static func yesterday() -> Date {
+    let calendar = Calendar.current
+    let today = Date()
+    
+    // Define the date components for one day ago (yesterday)
+    var dateComponents = DateComponents()
+    dateComponents.weekOfYear = -4
+    
+    // Calculate yesterday's date using the calendar
+    if let yesterday = calendar.date(byAdding: dateComponents, to: today) {
+      return yesterday
+    } else {
+      // If there's an issue calculating the date, return today's date as a fallback
+      return today
+    }
+  }
+
 }
 
 

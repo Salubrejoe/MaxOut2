@@ -113,8 +113,10 @@ final class HistoryViewModel: ObservableObject {
   
   /// TOOLBAR method for "Today" Button
   func jumpToToday() {
-    if isShowingCalendar == false { isShowingCalendar = true }
-    focusedDate = YearMonthDay.current
+    isShowingCalendar = false
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.isShowingCalendar = true
+    }
   }
   
   // MARK: - WIDGET METHOD

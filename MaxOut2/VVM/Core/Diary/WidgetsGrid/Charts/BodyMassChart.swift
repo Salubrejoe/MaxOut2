@@ -11,7 +11,7 @@ struct BodyMassChart: View {
         y: .value("Kg", stat.weight)
       )
       .interpolationMethod(.catmullRom)
-      .foregroundStyle(Color.purple.gradient)
+      .foregroundStyle(Color.primary.gradient)
       .symbol(Circle())
     }
     .chartXScale()
