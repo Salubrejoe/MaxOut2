@@ -35,8 +35,8 @@ final class ExercisesViewModel: ObservableObject {
   
   /// Alphabetic taxon
   var groupedExercises: [(String, [Exercise])] {
-    let sortedItems = exercises.sorted { $0.name < $1.name }
-    let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
+    let sortedItems = exercises.sorted { $0.activity < $1.activity }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.activity) }
     return grouped.sorted { $0.0 < $1.0 }
   }
   

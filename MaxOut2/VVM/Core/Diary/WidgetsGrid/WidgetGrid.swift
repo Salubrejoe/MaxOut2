@@ -15,23 +15,20 @@ struct WidgetGrid: View {
           .environmentObject(historyModel)
           .onTapGesture { isShowingHistory = true }
           .sheet(isPresented: $isShowingHistory) {
-            HistoryView(isShowingHistory: $isShowingHistory)
+            HistoryView()
               .environmentObject(historyModel)
           }
-        
-        GroupBox {
-          RadarMock()
-        }
-        .groupBoxStyle(RegularMaterialStyle())
       }
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-        MediumCardView("Exercise Minutes", color: .primary, style: RegularMaterialStyle()) {
+        MediumCardView("Exercise Time", color: .primary, style: RegularMaterialStyle()) {
           ExerciseMinutesWidget()
             .environmentObject(manager)
+            
             .onTapGesture { isShowingExerciseTime = true }
             .sheet(isPresented: $isShowingExerciseTime) {
               ExerciseTimeView()
                 .environmentObject(manager)
+                .presentationDetents([.medium])
             }
         }
         MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {

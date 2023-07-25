@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 
-struct HealthStat: Identifiable {
+struct HealthStat: Identifiable, Equatable {
   let id = UUID()
   
   let stat: HKQuantity?

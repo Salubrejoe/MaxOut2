@@ -16,8 +16,8 @@ struct TsCalendarView: View {
             cell(date: date)
           })
         }
-        .frame(height: 260)
-        .padding(.horizontal)
+        .frame(height: 270)
+        .padding(.leading)
       }
       .onReceive(controller.$yearMonth) { _ in
         getMonthAndYear()
@@ -45,14 +45,14 @@ extension TsCalendarView {
       Text(week.shortString.uppercased())
         .font(.caption.bold())
         .foregroundColor(.secondary)
-        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
     }
   }
   
   
   // MARK: - CELL
   private func cell(date: YearMonthDay) -> some View {
-    VStack {
+    VStack(alignment: .listRowSeparatorLeading) {
       
       if date.isToday {
         // TODAY label

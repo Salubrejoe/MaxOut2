@@ -63,28 +63,28 @@ struct ProfileLabel: View {
   
   var body: some View {
     HStack(spacing: 12) {
-      if let urlString = user.photoUrl, let url = URL(string: urlString) {
-        AsyncImage(url: url) { image in
-          image
-            .resizable()
-            .scaledToFill()
-        } placeholder: {
-          ProgressView()
-        }
-        .frame(width: 46, height: 46)
-        .background(Color.gray)
-        .clipShape(Circle())
-      }
-      else {
-        Text(user.displayLetter)
-          .font(.title)
-          .fontDesign(.rounded)
-          .fontWeight(.heavy)
-          .foregroundStyle(Color.systemBackground.gradient)
-          .frame(width: 46, height: 46)
-          .background(Color.primary.gradient)
-          .clipShape(Circle())
-      }
+//      if let urlString = user.photoUrl, let url = URL(string: urlString) {
+//        AsyncImage(url: url) { image in
+//          image
+//            .resizable()
+//            .scaledToFill()
+//        } placeholder: {
+//          ProgressView()
+//        }
+//        .frame(width: 46, height: 46)
+//        .background(Color.gray)
+//        .clipShape(Circle())
+//      }
+//      else {
+//        Text(user.displayLetter)
+//          .font(.title)
+//          .fontDesign(.rounded)
+//          .fontWeight(.heavy)
+//          .foregroundStyle(Color.systemBackground.gradient)
+//          .frame(width: 46, height: 46)
+//          .background(Color.primary.gradient)
+//          .clipShape(Circle())
+//      }
       VStack(alignment: .leading) {
         Text(user.displayName)
           .font(.title3.bold())

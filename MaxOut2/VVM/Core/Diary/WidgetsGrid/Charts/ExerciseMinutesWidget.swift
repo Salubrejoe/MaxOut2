@@ -13,8 +13,9 @@ struct ExerciseMinutesWidget: View {
       )
       .foregroundStyle(Color.exerciseRing.gradient)
       .cornerRadius(4)
-      
+      .offset(x: switchOffset)
     }
+    
     .chartYAxisLabel("min", position: .topTrailing)
     .chartYAxis {
       AxisMarks(values: [0, manager.maxExerciseTime])
@@ -32,8 +33,9 @@ struct ExerciseMinutesWidget: View {
         }
       }
     }
-    .transition(.opacity)
-    .animation(.spring(), value: manager.timeRange)
+    .padding(.leading)
+    .transition(.scale)
+    .animation(.spring(), value: manager.exerTimeStats)
   }
   
   private var switchWidth: MarkDimension {
@@ -42,6 +44,15 @@ struct ExerciseMinutesWidget: View {
       case .M  : return MarkDimension(integerLiteral: 7)
       case .SM : return MarkDimension(integerLiteral: 7)
       case .Y  : return MarkDimension(integerLiteral: 17)
+    }
+  }
+  
+  private var switchOffset: Double {
+    switch manager.timeRange {
+      case .W  : return -27
+      case .M  : return -7
+      case .SM : return -7/2
+      case .Y  : return -17/2
     }
   }
 }

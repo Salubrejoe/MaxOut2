@@ -22,17 +22,18 @@ struct ExerciseTimeView: View {
         .padding([.horizontal, .bottom])
         .onChange(of: manager.timeRange) { newValue in
           manager.getExerciseTime(newValue.query)
-          manager.resolution = newValue.query.resolution
+          manager.resolution = Double(newValue.query.resolution)
+          manager.startDate = newValue.query.startDate
         }
         
         HStack {
           VStack(alignment: .leading, spacing: -2) {
-            Text("AVERAGE")
+            Text(average())
               .font(.caption)
               .foregroundColor(.secondary)
             
             HStack(alignment: .firstTextBaseline, spacing: 0) {
-              Text("34")
+              Text(averageMinutes())
                 .font(.largeTitle)
               Text("min")
                 .font(.title2)
@@ -46,45 +47,12 @@ struct ExerciseTimeView: View {
         }
         .padding(.horizontal, 22)
         
-        GroupBox {
-          ExerciseMinutesWidget()
-            .padding(.leading)
-        }
-        .frame(height: 300)
-        .groupBoxStyle(RegularMaterialStyle())
-        .padding(.horizontal)
-        .padding(.bottom)
-        
-        
-//          VStack {
-//            HStack {
-//              Text("Start Date").font(.headline)
-//              Spacer()
-//              DatePicker("", selection: $manager.startDate, in: ...Date(), displayedComponents: .date)
-//                .onChange(of: manager.startDate) { newValue in
-//                  manager.getExerciseTime()
-//                }
-//            }
-//            Divider()
-//            HStack {
-//              Text("Average every ").font(.headline)
-//              Spacer()
-//              HStack(spacing: 0) {
-//                Picker("days", selection: $manager.resolution) {
-//                  ForEach(1..<manager.intervalInDays, id: \.self) {
-//                    Text("\($0)")
-//                  }
-//                }
-//                .onChange(of: manager.resolution) { newValue in
-//                  manager.getExerciseTime()
-//                }
-//                Text(manager.resolution == 1 ? "day" : "days")
-//              }
-//            }
-//          }
-//        .padding(.horizontal)
+        ExerciseMinutesWidget()
+          .padding([.leading, .horizontal, .bottom])
+          .frame(height: 200)
       }
-      .navigationTitle("Exercise Time").navigationBarTitleDisplayMode(.inline)
+      .dismissButton()
+      .navigationTitle("Edit Card").navigationBarTitleDisplayMode(.inline)
     }
   }
   
@@ -111,6 +79,30 @@ struct ExerciseTimeView: View {
     else {
       return "\(startDateString)-\(todayString) \(Date().yearAsString())"
     }
+  }
+  
+  private func average() -> String {
+    switch manager.resolution {
+      case 1 : return "DAILY AVERAGE"
+      case 7 : return "WEEKLY AVERAGE"
+      case 30 : return "MONTHLY AVERAGE"
+      default : return "AVERAGE BOBOBOBO"
+    }
+  }
+  
+  private func averageMinutes() -> String {
+    var duration = 0.0
+    var count = 0.0
+    for stat in manager.exerTimeStats {
+      let statMin = stat.minutes
+      if statMin != 0 {
+        duration += statMin
+        count += 1
+      }
+    }
+    let drt = duration/manager.resolution
+    let avg = drt/count
+    return String(format: "%.0f", avg)
   }
   
 //  private func dataPointAvg() -> String? {
@@ -154,3 +146,5 @@ extension Date {
     return dateFormatter.string(from: self)
   }
 }
+
+

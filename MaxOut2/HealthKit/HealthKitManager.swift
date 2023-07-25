@@ -30,8 +30,8 @@ enum TimeRange: String, CaseIterable, Identifiable {
         return ExerciseQuery(resolution: 7, startDate: startDate)
       case .Y :
         let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .year,
-                                      value: -1,
+        let startDate = calendar.date(byAdding: .month,
+                                      value: -12,
                                       to: Date()) ?? Date()
         return ExerciseQuery(resolution: 30, startDate: startDate)
     }
@@ -76,27 +76,23 @@ final class HealthKitManager: ObservableObject {
   @Published var heightStats   = [HealthStat]()
   @Published var activities    = [Activity]()
   
-  let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
-  @Published var resolution = 1
+  
+  // MARK: - QUERY PROPERTIES
+  @Published var timeRange: TimeRange = .M
+  var startDate = Date()
+  var resolution = 1.0
+  
   
   // MARK: - COMPUTED STATS
-//  var intervalInDays: Int {
-//    let now = Date().timeIntervalSince1970
-//    let start = startDate.timeIntervalSince1970
-//    let interval = now - start
-//    return max(Int((interval/86400).rounded()), 1)
-//  }
-  
   var currentActivities: [Activity] {
     var current = [Activity]()
     for activity in activities {
-      if activity.durationString != ("", "") {
+      if activity.durationString != ("", "00") {
         current.append(activity)
       }
     }
     return current.sorted { $0.duration > $1.duration }
   }
-  
   
   var exerTimeGoalDouble: Double {
     return exerTimeGoal?.doubleValue(for: .minute()) ?? 0
@@ -165,23 +161,16 @@ final class HealthKitManager: ObservableObject {
     getActivities(last: 7)
     getHeight()
   }
-  
-  // MARK: - TIME RANGE FOR QUERY
-  @Published var timeRange: TimeRange = .M
-  
-  
-  
 }
 
 
-// MARK: - GET STATS
 extension HealthKitManager {
   
 
   // MARK: - EXERCISE TIME
 //  @MainActor
   func getExerciseTime(_ exQuery: ExerciseQuery) {
-    self.exerTimeStats = []
+//    self.exerTimeStats = []
     
     guard let store else { return }
     

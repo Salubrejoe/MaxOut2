@@ -9,6 +9,7 @@ struct Exercise: Identifiable, Equatable {
   static let mockup = Exercise(id: "",
                                name: "New Exercise",
                                category: "cardio",
+                               activity: "high intensity interval training",
                                primaryMuscles: ["chest"],
                                instructions: [""],
                                equipment: "barbell",
@@ -18,6 +19,7 @@ struct Exercise: Identifiable, Equatable {
   var name           : String
   
   var category       : String
+  var activity       : String
   var primaryMuscles : [String]
   var instructions   : [String]
   var equipment      : String?
@@ -36,6 +38,7 @@ extension Exercise: Codable {
     try container.encode(self.primaryMuscles, forKey: .primaryMuscles)
     try container.encode(self.instructions, forKey: .instructions)
     try container.encode(self.category, forKey: .category)
+    try container.encode(self.activity, forKey: .activity)
     try container.encodeIfPresent(self.equipment, forKey: .equipment)
     try container.encode(self.dateModified, forKey: .dateModified)
     try container.encode(self.isSelected, forKey: .isSelected)
@@ -47,6 +50,7 @@ extension Exercise: Codable {
     case primaryMuscles
     case instructions
     case category
+    case activity
     case equipment
     case dateModified
     case isSelected
@@ -59,6 +63,7 @@ extension Exercise: Codable {
     self.primaryMuscles = try container.decode([String].self, forKey: .primaryMuscles)
     self.instructions = try container.decode([String].self, forKey: .instructions)
     self.category = try container.decode(String.self, forKey: .category)
+    self.activity = try container.decode(String.self, forKey: .activity)
     self.equipment = try container.decodeIfPresent(String.self, forKey: .equipment)
   }
 }
@@ -83,23 +88,6 @@ extension Exercise {
       case "other"         :   return "plate"
       default: return "plate"
         
-    }
-  }
-  
-  var categoryImage: String {
-    switch category {
-      case  "olympic weightlifting", "powerlifting", "strength" :
-        return "figure.strengthtraining.traditional"
-      case "strongman":
-        return "figure.cross.training"
-      case "stretching":
-        return "figure.cooldown"
-      case "cardio":
-        return "bolt.heart.fill"
-      case "plyometrics":
-        return "figure.kickboxing"
-      default:
-        return "figure.wave"
     }
   }
   

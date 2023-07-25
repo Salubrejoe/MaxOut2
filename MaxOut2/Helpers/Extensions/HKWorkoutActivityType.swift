@@ -9,6 +9,21 @@
 import Foundation
 import HealthKit
 
+//[
+//"activity" : "weight lifting",
+//"activity" : "core training",
+//"activity" : "high intensity interval training",
+//"activity" : "flexibility",
+//"activity" : "elliptical", 1
+//"activity" : "jump rope", 1
+//"activity" : "rowing", 1
+//"activity" : "running", 1
+//"activity" : "skating", 1
+//"activity" : "walking", 1
+//]
+
+
+
 extension HKWorkoutActivityType {
   
   /*
@@ -21,6 +36,7 @@ extension HKWorkoutActivityType {
       case .running:                      return "figure.run"
       case .stairClimbing:                return "figure.stair.stepper"
       case .traditionalStrengthTraining:  return "figure.strengthtraining.traditional"
+      case .skatingSports:                return "Skating Sports"
       case .walking:                      return "figure.walk"
       case .yoga:                         return "figure.yoga"
       case .coreTraining:                 return "figure.core.training"
@@ -94,7 +110,7 @@ extension HKWorkoutActivityType {
       case .tableTennis:                  return "Table Tennis"
       case .tennis:                       return "Tennis"
       case .trackAndField:                return "Track and Field"
-      case .traditionalStrengthTraining:  return "Traditional Strength Training"
+      case .traditionalStrengthTraining:  return "Weight Lifting"
       case .volleyball:                   return "Volleyball"
       case .walking:                      return "Walking"
       case .waterFitness:                 return "Water Fitness"

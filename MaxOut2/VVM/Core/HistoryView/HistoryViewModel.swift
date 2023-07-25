@@ -13,16 +13,6 @@ struct WidgetStat {
     self.amount = amount
     self.unit = unit
   }
-  
-//  var queryResultString: (String, String) {
-//    guard let amount, let unit else { return ("", "") }
-//    if unit == .min, amount > 59 {
-//      let hour = Int(amount/60.rounded(.down))
-//      let minute = Int(amount)%60
-//      return 
-//    }
-//    return (String(format: "%.1f", amount), unit.rawValue)
-//  }
 }
 
 
@@ -67,10 +57,7 @@ final class HistoryViewModel: ObservableObject {
   }
   
   
-  init() {
-    getViewInfo()
-
-  }
+  init() { getViewInfo() }
   
   
   // MARK: - BACKGROUND
@@ -113,10 +100,7 @@ final class HistoryViewModel: ObservableObject {
   
   /// TOOLBAR method for "Today" Button
   func jumpToToday() {
-    isShowingCalendar = false
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      self.isShowingCalendar = true
-    }
+    focusedDate = YearMonthDay.current
   }
   
   // MARK: - WIDGET METHOD

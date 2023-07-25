@@ -44,6 +44,7 @@ extension ExercisesManager {
       Exercise.CodingKeys.primaryMuscles.rawValue    : exercise.primaryMuscles,
       Exercise.CodingKeys.equipment.rawValue         : exercise.equipment ?? "",
       Exercise.CodingKeys.category.rawValue          : exercise.category,
+      Exercise.CodingKeys.activity.rawValue          : exercise.activity,
       Exercise.CodingKeys.instructions.rawValue      : exercise.instructions,
     ]
     

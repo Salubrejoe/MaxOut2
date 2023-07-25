@@ -6,6 +6,7 @@
         "abdominals"
       ],
       "name" : "Ab Roller",
+      "activity" : "core training",
       "instructions" : [
         "Hold the Ab Roller with both hands and kneel on the floor.",
         "Now place the ab roller on the floor in front of you so that you are on all your hands and knees (as in a kneeling push up position). This will be your starting position.",
@@ -39,6 +40,7 @@
         "triceps"
       ],
       "name" : "Arnold Press",
+      "activity" : "weight lifting",
       "instructions" : [
         "Sit on an exercise bench with back support and hold two dumbbells in front of you at about upper chest level with your palms facing your body and your elbows bent. Tip: Your arms should be next to your torso. The starting position should look like the contracted portion of a dumbbell curl.",
         "Now to perform the movement, raise the dumbbells as you rotate the palms of your hands until they are facing forward.",
@@ -66,6 +68,7 @@
       ],
       "mechanic" : "compound",
       "name" : "Around The Worlds",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "shoulders"
       ],
@@ -100,6 +103,7 @@
 
       ],
       "name" : "Back Extension",
+      "activity" : "weight lifting",
       "instructions" : [
         "Lie face down on a hyperextension bench, tucking your ankles securely under the footpads.",
         "Adjust the upper pad if possible so your upper thighs lie flat across the wide pad, leaving enough room for you to bend at the waist without any restriction.",
@@ -130,6 +134,7 @@
       "level" : "",
       "equipment" : "medicine ball",
       "name" : "Ball Slams",
+      "activity" : "weight lifting",
       "aliases" : null,
       "primaryMuscles" : [
         "lats"
@@ -164,7 +169,8 @@
       "aliases" : [
 
       ],
-      "name" : "Battling Ropes"
+      "name" : "Battling Ropes",
+      "activity" : "high intensity interval training",
     },
     {
       "secondaryMuscles" : [
@@ -179,6 +185,7 @@
       ],
       "force" : "push",
       "name" : "Bench Dips",
+      "activity" : "weight lifting",
       "equipment" : "body only",
       "mechanic" : "compound",
       "id" : "tXYcHZEtCApRNQDfWTcM",
@@ -216,6 +223,7 @@
         "hamstrings"
       ],
       "name" : "Bench Jump",
+      "activity" : "weight lifting",
       "description" : "",
       "aliases" : [
 
@@ -228,6 +236,7 @@
     },
     {
       "name" : "Bench Press",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -274,6 +283,7 @@
 
       ],
       "name" : "Bench Press",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "chest"
       ],
@@ -308,6 +318,7 @@
       ],
       "mechanic" : "compound",
       "name" : "Bench Press w\/  Smith Machine",
+      "activity" : "weight lifting",
       "equipment" : "machine",
       "description" : "",
       "level" : "beginner",
@@ -336,6 +347,7 @@
       "description" : "",
       "force" : "pull",
       "name" : "Bench Row",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -362,6 +374,7 @@
       ],
       "id" : "89pWTCPu9A2pH16NvRke",
       "name" : "Bent Over Reverse Fly",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
 
       ],
@@ -386,6 +399,7 @@
       "level" : "beginner",
       "description" : "",
       "name" : "Bent Over Row",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "biceps",
         "lats",
@@ -416,6 +430,7 @@
       "force" : "pull",
       "category" : "strength",
       "name" : "Bent Over Row",
+      "activity" : "weight lifting",
       "description" : "",
       "mechanic" : "compound",
       "id" : "vPKjYYNOcNCJB0Mj8SqB",
@@ -439,6 +454,7 @@
     {
       "level" : "beginner",
       "name" : "Bicep Curl",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -487,6 +503,7 @@
 
       ],
       "name" : "Bicep Curl",
+      "activity" : "weight lifting",
       "category" : "strength",
       "force" : "pull",
       "primaryMuscles" : [
@@ -509,6 +526,7 @@
 
       ],
       "name" : "Bicep Curl",
+      "activity" : "weight lifting",
       "instructions" : [
         "Stand up straight while holding an EZ curl bar at the wide outer handle. The palms of your hands should be facing forward and slightly tilted inward due to the shape of the bar. Keep your elbows close to your torso. This will be your starting position.",
         "Now, while keeping your upper arms stationary, exhale and curl the weights forward while contracting the biceps. Focus on only moving your forearms.",
@@ -548,7 +566,8 @@
         "Then, inhale and slowly begin to lower the dumbbells back to the starting position.",
         "Repeat for the recommended amount of repetitions."
       ],
-      "name" : "Bicep Curl"
+      "name" : "Bicep Curl",
+      "activity" : "weight lifting"
     },
     {
       "id" : "aZ6J6dGgL3J2NFC6aooe",
@@ -560,6 +579,7 @@
       "category" : "strength",
       "level" : "beginner",
       "name" : "Biceps Curl",
+      "activity" : "weight lifting",
       "description" : "",
       "instructions" : [
         "Stand up with your torso upright while holding a cable curl bar that is attached to a low pulley. Grab the cable bar at shoulder width and keep the elbows close to the torso. The palm of your hands should be facing up (supinated grip). This will be your starting position.",
@@ -584,6 +604,7 @@
 
       ],
       "name" : "Bicycle Crunch",
+      "activity" : "core training",
       "primaryMuscles" : [
         "abdominals"
       ],
@@ -598,34 +619,6 @@
       "category" : "strength",
       "aliases" : null,
       "force" : null
-    },
-    {
-      "secondaryMuscles" : [
-
-      ],
-      "description" : "",
-      "instructions" : [
-        "Adjust the pulleys to the appropriate height and adjust the weight. The pulleys should be above your head.",
-        "Grab the left pulley with your right hand and the right pulley with your left hand, crossing them in front of you. This will be your starting position.",
-        "Initiate the movement by moving your arms back and outward, keeping your arms straight as you execute the movement.",
-        "Pause at the end of the motion before returning the handles to the start position."
-      ],
-      "category" : "strength",
-      "level" : "beginner",
-      "tips" : [
-
-      ],
-      "equipment" : "cable",
-      "name" : "Cable Rear Delt Fly",
-      "id" : "sCX9DH1LYiSFA7RtMY32",
-      "force" : "pull",
-      "mechanic" : "isolation",
-      "aliases" : [
-
-      ],
-      "primaryMuscles" : [
-        "shoulders"
-      ]
     },
     {
       "instructions" : [
@@ -646,6 +639,7 @@
       "category" : "strength",
       "mechanic" : "isolation",
       "name" : "Calf Press",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "calves"
       ],
@@ -673,6 +667,7 @@
       "description" : "",
       "id" : "EXpfLVzWKOIxK25PnWlB",
       "name" : "Calf Raise",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "tips" : [
 
@@ -711,7 +706,8 @@
         "triceps"
       ],
       "id" : "ik7U4CS2gykeVP8WCLJx",
-      "name" : "Chest Press"
+      "name" : "Chest Press",
+      "activity" : "weight lifting"
     },
     {
       "force" : "push",
@@ -727,6 +723,7 @@
       ],
       "mechanic" : "compound",
       "name" : "Chest Press",
+      "activity" : "weight lifting",
       "id" : "v4OQ4UCel8d7DlLZPgbw",
       "primaryMuscles" : [
         "chest"
@@ -745,6 +742,7 @@
     {
       "id" : "BT98gcaKlHJknyhO4Idg",
       "name" : "Chin Up",
+      "activity" : "weight lifting",
       "description" : "",
       "category" : "strength",
       "aliases" : [
@@ -779,6 +777,7 @@
       "force" : null,
       "level" : "",
       "name" : "Chin Up Assisted",
+      "activity" : "weight lifting",
       "aliases" : null,
       "equipment" : "machine",
       "description" : null,
@@ -801,6 +800,7 @@
       "category" : "olympic weightlifting",
       "id" : "jjmy3BX7zOXLL2rH64zx",
       "name" : "Clean",
+      "activity" : "weight lifting",
       "instructions" : [
         "With a barbell on the floor close to the shins, take an overhand (or hook) grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.",
         "",
@@ -849,6 +849,7 @@
       "force" : "push",
       "id" : "HyoR0DeTbRI0iqILqtNm",
       "name" : "Crossover",
+      "activity" : "weight lifting",
       "category" : "strength",
       "aliases" : [
 
@@ -856,35 +857,6 @@
       "primaryMuscles" : [
         "chest"
       ]
-    },
-    {
-      "tips" : [
-
-      ],
-      "level" : "beginner",
-      "instructions" : [
-        "To get yourself into the starting position, place the pulleys on a high position (above your head), select the resistance to be used and hold the pulleys in each hand.",
-        "Step forward in front of an imaginary straight line between both pulleys while pulling your arms together in front of you. Your torso should have a small forward bend from the waist. This will be your starting position.",
-        "With a slight bend on your elbows in order to prevent stress at the biceps tendon, extend your arms to the side (straight out at both sides) in a wide arc until you feel a stretch on your chest. Breathe in as you perform this portion of the movement. Tip: Keep in mind that throughout the movement, the arms and torso should remain stationary; the movement should only occur at the shoulder joint.",
-        "Return your arms back to the starting position as you breathe out. Make sure to use the same arc of motion used to lower the weights.",
-        "Hold for a second at the starting position and repeat the movement for the prescribed amount of repetitions."
-      ],
-      "primaryMuscles" : [
-        "chest"
-      ],
-      "force" : "push",
-      "aliases" : [
-
-      ],
-      "mechanic" : "isolation",
-      "description" : "",
-      "id" : "VykuQZdF0K77PANZ3E42",
-      "name" : "Crossover",
-      "secondaryMuscles" : [
-        "shoulders"
-      ],
-      "equipment" : "cable",
-      "category" : "strength"
     },
     {
       "mechanic" : "isolation",
@@ -908,6 +880,7 @@
 
       ],
       "name" : "Crunch",
+      "activity" : "core training",
       "level" : "intermediate",
       "equipment" : "machine",
       "aliases" : [
@@ -938,6 +911,7 @@
       "id" : "wvFggIgVmkaP7dA1EVk4",
       "mechanic" : "isolation",
       "name" : "Crunch",
+      "activity" : "core training",
       "equipment" : "cable",
       "tips" : [
 
@@ -960,6 +934,7 @@
         "traps"
       ],
       "name" : "Dead Clean",
+      "activity" : "weight lifting",
       "category" : "strength",
       "tips" : [
 
@@ -996,6 +971,7 @@
         "lower back"
       ],
       "name" : "Deadlift",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -1030,6 +1006,7 @@
       "level" : "beginner",
       "description" : "",
       "name" : "Deadlift",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "forearms",
         "glutes",
@@ -1060,6 +1037,7 @@
         "chest"
       ],
       "name" : "Decline Bench Press",
+      "activity" : "weight lifting",
       "instructions" : [
         "Secure your legs at the end of the decline bench and slowly lay down on the bench.",
         "Using a medium width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. The arms should be perpendicular to the floor. This will be your starting position. Tip: In order to protect your rotator cuff, it is best if you have a spotter help you lift the barbell off the rack.",
@@ -1095,6 +1073,7 @@
       ],
       "equipment" : "dumbbell",
       "name" : "Decline Bench Press",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "force" : "push",
       "description" : "",
@@ -1125,6 +1104,7 @@
       "force" : "",
       "equipment" : "machine",
       "name" : "Decline Bench Press with Smith Machine",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "chest"
       ],
@@ -1154,6 +1134,7 @@
       "equipment" : "body only",
       "force" : "pull",
       "name" : "Decline Crunch",
+      "activity" : "core training",
       "primaryMuscles" : [
         "abdominals"
       ],
@@ -1191,7 +1172,8 @@
       "category" : "strength",
       "description" : "",
       "mechanic" : "compound",
-      "name" : "Dip - Chest"
+      "name" : "Dip - Chest",
+      "activity" : "weight lifting"
     },
     {
       "aliases" : [
@@ -1204,6 +1186,7 @@
         "triceps"
       ],
       "name" : "Dip - Triceps ",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "chest",
         "shoulders"
@@ -1243,6 +1226,7 @@
       "force" : "push",
       "id" : "3wxrRg5xyDWEBfGPQqZy",
       "name" : "Dip Machine",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "mechanic" : "compound",
       "description" : "",
@@ -1265,6 +1249,7 @@
       ],
       "description" : "",
       "name" : "Elliptical Trainer",
+      "activity" : "elliptical",
       "force" : "",
       "category" : "cardio",
       "primaryMuscles" : [
@@ -1293,6 +1278,7 @@
 
       ],
       "name" : "Face Pull",
+      "activity" : "weight lifting",
       "instructions" : [
         "Facing a high pulley with a rope or dual handles attached, pull the weight directly towards your face, separating your hands as you do so. Keep your upper arms parallel to the ground."
       ],
@@ -1318,6 +1304,7 @@
       "tips" : null,
       "mechanic" : null,
       "name" : "Fly",
+      "activity" : "weight lifting",
       "description" : null,
       "instructions" : [
         "Set both pulleys directly at (or slightly above) shoulder height and select the desired weight.",
@@ -1344,6 +1331,7 @@
       "level" : "beginner",
       "category" : "strength",
       "name" : "Fly",
+      "activity" : "weight lifting",
       "force" : "pull",
       "mechanic" : "isolation",
       "description" : "",
@@ -1381,7 +1369,8 @@
       ],
       "force" : null,
       "category" : "strength",
-      "name" : "Front Raise"
+      "name" : "Front Raise",
+      "activity" : "weight lifting"
     },
     {
       "force" : null,
@@ -1395,6 +1384,7 @@
       "equipment" : "dumbbell",
       "tips" : null,
       "name" : "Front Raise",
+      "activity" : "weight lifting",
       "description" : null,
       "instructions" : [
         "Lift the weights upward while inhaling. Your arms are extended, palms facing down, with a slight bend in the elbows to reduce the stress on the joints.",
@@ -1429,6 +1419,7 @@
       "description" : null,
       "equipment" : "bands",
       "name" : "Front Raise",
+      "activity" : "weight lifting",
       "category" : "strength"
     },
     {
@@ -1454,11 +1445,13 @@
       "level" : "",
       "equipment" : "cable",
       "category" : "strength",
-      "name" : "Front Raise "
+      "name" : "Front Raise ",
+      "activity" : "weight lifting"
     },
     {
       "equipment" : "barbell",
       "name" : "Good Morning",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "abdominals",
         "glutes",
@@ -1505,6 +1498,7 @@
         "glutes"
       ],
       "name" : "Hip Abductor",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "abductors"
       ],
@@ -1516,6 +1510,7 @@
     {
       "description" : "",
       "name" : "Hip Adductor",
+      "activity" : "weight lifting",
       "instructions" : [
         "To begin, sit down on the adductor machine and select a weight you are comfortable with. When your legs are positioned properly on the leg pads of the machine, grip the handles on each side. Your entire upper body (from the waist up) should be stationary. This is the starting position.",
         "Slowly press against the machine with your legs to move them towards each other while exhaling.",
@@ -1550,6 +1545,7 @@
       ],
       "description" : "",
       "name" : "Hip Adductor",
+      "activity" : "weight lifting",
       "id" : "7U3ej9OiZPNxekQ66rgy",
       "force" : "pull",
       "tips" : [
@@ -1589,6 +1585,7 @@
 
       ],
       "name" : "Hip Adductor",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "secondaryMuscles" : [
 
@@ -1604,36 +1601,6 @@
       ]
     },
     {
-      "instructions" : [
-        "Lie back on an incline bench. Using a medium-width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.",
-        "As you breathe in, come down slowly until you feel the bar on you upper chest.",
-        "After a second pause, bring the bar back to the starting position as you breathe out and push the bar using your chest muscles. Lock your arms in the contracted position, squeeze your chest, hold for a second and then start coming down slowly again. Tip: it should take at least twice as long to go down than to come up.",
-        "Repeat the movement for the prescribed amount of repetitions.",
-        "When you are done, place the bar back in the rack."
-      ],
-      "category" : "strength",
-      "name" : "Incline Bench Press",
-      "mechanic" : "compound",
-      "description" : "",
-      "level" : "beginner",
-      "tips" : [
-
-      ],
-      "id" : "eFrhT1dSGXiAv4JYteqA",
-      "secondaryMuscles" : [
-        "shoulders",
-        "triceps"
-      ],
-      "equipment" : "barbell",
-      "primaryMuscles" : [
-        "chest"
-      ],
-      "aliases" : [
-
-      ],
-      "force" : "push"
-    },
-    {
       "secondaryMuscles" : [
 
       ],
@@ -1644,6 +1611,7 @@
         "chest"
       ],
       "name" : "Incline Fly",
+      "activity" : "weight lifting",
       "force" : null,
       "equipment" : "dumbbell",
       "mechanic" : null,
@@ -1658,6 +1626,7 @@
       "mechanic" : "isolation",
       "level" : "beginner",
       "name" : "Incline Reverse Fly",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "shoulders"
       ],
@@ -1692,6 +1661,7 @@
         "shoulders"
       ],
       "name" : "Incline Shoulder Raise",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "category" : "strength",
       "aliases" : [
@@ -1719,6 +1689,7 @@
       "level" : "beginner",
       "equipment" : "machine",
       "name" : "Iso Row",
+      "activity" : "weight lifting",
       "instructions" : [
         "Load an appropriate weight onto the pins and adjust the seat height so that the handles are at chest level. Grasp the handles with either a neutral or pronated grip. This will be your starting position.",
         "Pull the handles towards your torso, retracting your shoulder blades as you flex the elbow.",
@@ -1766,7 +1737,8 @@
       "category" : "strength",
       "equipment" : "body only",
       "level" : "beginner",
-      "name" : "Jackknife Sit-Up"
+      "name" : "Jackknife Sit-Up",
+      "activity" : "core training"
     },
     {
       "description" : "",
@@ -1776,6 +1748,7 @@
 
       ],
       "name" : "Knee Raise On Parallel Bars",
+      "activity" : "core training",
       "instructions" : [
         "Position your body on the vertical leg raise bench so that your forearms are resting on the pads next to the torso and holding on to the handles. Your arms will be bent at a 90 degree angle.",
         "The torso should be straight with the lower back pressed against the pad of the machine and the legs extended pointing towards the floor. This will be your starting position.",
@@ -1801,6 +1774,7 @@
       "category" : "strength",
       "id" : "Elilz4Bb3ZUKpp3x6kjY",
       "name" : "Landmine 180's",
+      "activity" : "core training",
       "secondaryMuscles" : [
         "glutes",
         "lower back",
@@ -1842,6 +1816,7 @@
       "level" : "",
       "aliases" : null,
       "name" : "Lat Pulldown",
+      "activity" : "weight lifting",
       "force" : null,
       "id" : "491D7A48-3C42-48C3-848D-537C2705789A",
       "secondaryMuscles" : [
@@ -1864,6 +1839,7 @@
       ],
       "level" : "intermediate",
       "name" : "Lat Pulldown",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "lats"
       ],
@@ -1883,6 +1859,7 @@
       ],
       "description" : "",
       "name" : "Lateral Box Jump",
+      "activity" : "weight lifting",
       "category" : "plyometrics",
       "force" : "push",
       "id" : "CKBWMo1xLiNLHsyP1DIO",
@@ -1922,6 +1899,7 @@
       "mechanic" : null,
       "equipment" : "body only",
       "name" : "Lateral Lunge",
+      "activity" : "weight lifting",
       "id" : "C6C3D6F4-51B3-4DC3-8F6A-27F2EF2B7CDC",
       "description" : null,
       "secondaryMuscles" : [
@@ -1948,6 +1926,7 @@
         "shoulders"
       ],
       "name" : "Lateral Raise",
+      "activity" : "weight lifting",
       "mechanic" : null,
       "description" : null,
       "id" : "50EA0BFA-4EE4-488A-AE5F-BA56FDA3E969",
@@ -1963,6 +1942,7 @@
       "id" : "5PcYeVZnT7FNxnKYHL5n",
       "category" : "strength",
       "name" : "Lateral Raise",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "force" : "push",
       "aliases" : [
@@ -1987,6 +1967,7 @@
     {
       "equipment" : "bands",
       "category" : "strength",
+      
       "id" : "gV2IaxGYnNSGFDqpz1ud",
       "instructions" : [
         "To begin, stand on an exercise band so that tension begins at arm's length. Grasp the handles using a pronated (palms facing your thighs) grip that is slightly less than shoulder width. The handles should be resting on the sides of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.",
@@ -1996,6 +1977,7 @@
       ],
       "description" : "",
       "name" : "Lateral Raise",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "tips" : [
 
@@ -2031,6 +2013,7 @@
 
       ],
       "name" : "Leg Extension",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -2064,6 +2047,7 @@
       "mechanic" : "compound",
       "force" : "push",
       "name" : "Leg Press",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "secondaryMuscles" : [
         "calves",
@@ -2075,6 +2059,7 @@
       "level" : "beginner",
       "mechanic" : "isolation",
       "name" : "Low Cable Crossover",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "shoulders"
       ],
@@ -2110,6 +2095,7 @@
       "mechanic" : null,
       "category" : "strength",
       "name" : "Lunge",
+      "activity" : "weight lifting",
       "instructions" : [
         ""
       ],
@@ -2127,6 +2113,7 @@
 
       ],
       "name" : "Lunge",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -2162,6 +2149,7 @@
       ],
       "description" : "",
       "name" : "Lunge",
+      "activity" : "weight lifting",
       "mechanic" : "compound",
       "category" : "strength",
       "equipment" : "dumbbell",
@@ -2183,6 +2171,7 @@
     },
     {
       "name" : "Lying Leg Curls",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "primaryMuscles" : [
         "hamstrings"
@@ -2225,6 +2214,7 @@
       "category" : "strength",
       "level" : "beginner",
       "name" : "Lying Leg Raise",
+      "activity" : "core training",
       "equipment" : "body only",
       "description" : "",
       "primaryMuscles" : [
@@ -2239,6 +2229,7 @@
     },
     {
       "name" : "Medicine Ball Chest Pass",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "shoulders",
         "triceps"
@@ -2269,6 +2260,7 @@
     },
     {
       "name" : "Military Press",
+      "activity" : "weight lifting",
       "equipment" : "barbell",
       "tips" : [
 
@@ -2317,6 +2309,7 @@
       "description" : "",
       "category" : "plyometrics",
       "name" : "Mountain Climbers",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "chest",
         "hamstrings",
@@ -2353,6 +2346,7 @@
       ],
       "category" : "strength",
       "name" : "Muscle Up",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -2363,6 +2357,7 @@
       "force" : "pull",
       "mechanic" : "isolation",
       "name" : "Oblique Crunches",
+      "activity" : "core training",
       "id" : "sSegIqjnoiqP9RnDzb49",
       "equipment" : "body only",
       "category" : "strength",
@@ -2411,6 +2406,8 @@
       "mechanic" : "compound",
       "description" : "",
       "name" : "Olympic Squat",
+      
+      "activity" : "weight lifting",
       "equipment" : "barbell",
       "id" : "rqZhTgmdU8cCzQ9ompb1",
       "secondaryMuscles" : [
@@ -2421,6 +2418,7 @@
     },
     {
       "name" : "One Arm Lat Pulldown",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -2455,6 +2453,8 @@
       ],
       "id" : "1j80s1KOKFW0Qn81sevq",
       "name" : "One Arm Preacher Curl",
+      "activity" : "weight lifting",
+      
       "description" : "",
       "aliases" : [
 
@@ -2496,6 +2496,7 @@
         "triceps"
       ],
       "name" : "One Arm Tricep Extension ",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "instructions" : [
         "With your right hand, grasp a single handle attached to the high-cable pulley using a supinated (underhand; palms facing up) grip. You should be standing directly in front of the weight stack.",
@@ -2517,6 +2518,7 @@
       ],
       "description" : "",
       "name" : "One Arm Triceps Extension",
+      "activity" : "weight lifting",
       "equipment" : "dumbbell",
       "id" : "bxUtrtGQsUNLE0LROLsS",
       "level" : "beginner",
@@ -2544,6 +2546,7 @@
       ],
       "description" : "",
       "name" : "One-Legged Cable Kickback",
+      "activity" : "weight lifting",
       "id" : "iYmxOvzMTwetPMlrl4kb",
       "mechanic" : "isolation",
       "equipment" : "cable",
@@ -2570,6 +2573,7 @@
     },
     {
       "name" : "Overhead Cable Curl",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -2618,6 +2622,7 @@
       ],
       "mechanic" : "isolation",
       "name" : "Plank",
+      "activity" : "core training",
       "description" : "",
       "category" : "strength",
       "aliases" : [
@@ -2639,6 +2644,7 @@
       ],
       "description" : "",
       "name" : "Power Clean",
+      "activity" : "weight lifting",
       "instructions" : [
         "Stand with your feet slightly wider than shoulder width apart and toes pointing out slightly.",
         "Squat down and grasp bar with a closed, pronated grip. Your hands should be slightly wider than shoulder width apart outside knees with elbows fully extended.",
@@ -2709,6 +2715,7 @@
       "level" : "expert",
       "description" : "",
       "name" : "Power Snatch",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -2721,6 +2728,7 @@
       ],
       "mechanic" : "isolation",
       "name" : "Preacher Curl",
+      "activity" : "weight lifting",
       "force" : "pull",
       "aliases" : [
 
@@ -2760,6 +2768,7 @@
         "Repeat for the recommended amount of repetitions."
       ],
       "name" : "Preacher Curl",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "description" : "",
       "tips" : [
@@ -2782,6 +2791,7 @@
       ],
       "force" : "pull",
       "name" : "Preacher Curls",
+      "activity" : "weight lifting",
       "equipment" : "machine",
       "instructions" : [
         "Sit down on the Preacher Curl Machine and select the weight.",
@@ -2828,7 +2838,8 @@
       "secondaryMuscles" : [
 
       ],
-      "name" : "Pulldown"
+      "name" : "Pulldown",
+      "activity" : "weight lifting"
     },
     {
       "instructions" : [
@@ -2844,6 +2855,7 @@
       "id" : "mMUypaWEE4hRRqGf4MPq",
       "category" : "strength",
       "name" : "Pullup",
+      "activity" : "weight lifting",
       "description" : "",
       "equipment" : "body only",
       "primaryMuscles" : [
@@ -2885,6 +2897,7 @@
       "equipment" : "bands",
       "level" : "beginner",
       "name" : "Pullup Band Assisted",
+      "activity" : "weight lifting",
       "force" : "",
       "id" : "9IY0Fbq3HB8OCMmvJsd5",
       "category" : "strength",
@@ -2896,6 +2909,7 @@
       ],
       "description" : "",
       "name" : "Push Press",
+      "activity" : "weight lifting",
       "mechanic" : "compound",
       "category" : "olympic weightlifting",
       "force" : "push",
@@ -2940,6 +2954,7 @@
       ],
       "description" : "",
       "name" : "Push Up",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "shoulders",
         "triceps"
@@ -2957,6 +2972,7 @@
       ],
       "category" : "strength",
       "name" : "Push Up Wide",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "tips" : [
 
@@ -2979,6 +2995,7 @@
       "equipment" : "cable",
       "description" : "",
       "name" : "Reverse Fly",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "shoulders"
       ],
@@ -3025,6 +3042,7 @@
         "Repeat for the recommended amount of repetitions."
       ],
       "name" : "Reverse Fly",
+      "activity" : "weight lifting",
       "id" : "hDsNkYenKLGVujCwMTqc",
       "category" : "strength",
       "level" : "beginner",
@@ -3044,6 +3062,7 @@
       "description" : "",
       "id" : "xfacSah8cUraZs1cRSXk",
       "name" : "Reverse Fly",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "tips" : [
 
@@ -3068,6 +3087,7 @@
 
       ],
       "name" : "Rope Crunch",
+      "activity" : "core training",
       "level" : "beginner",
       "mechanic" : "isolation",
       "category" : "strength",
@@ -3101,6 +3121,7 @@
 
       ],
       "name" : "Rope Jumping",
+      "activity" : "jump rope",
       "category" : "cardio",
       "description" : "",
       "tips" : [
@@ -3137,6 +3158,7 @@
       ],
       "level" : "intermediate",
       "name" : "Rowing Machine",
+      "activity" : "rowing",
       "category" : "cardio",
       "id" : "kvRNWqaC0XKgZDDcmPU8",
       "primaryMuscles" : [
@@ -3157,6 +3179,7 @@
         "hamstrings"
       ],
       "name" : "Running",
+      "activity" : "running",
       "equipment" : "machine",
       "id" : "0jg25O0SC4e7Hh7SUReU",
       "aliases" : [
@@ -3185,6 +3208,7 @@
 
       ],
       "name" : "Russian Twist",
+      "activity" : "core training",
       "category" : "strength",
       "instructions" : [
         "Lie down on the floor placing your feet either under something that will not move or by having a partner hold them. Your legs should be bent at the knees.",
@@ -3217,6 +3241,7 @@
         "Repeat for the recommended amount of repetitions."
       ],
       "name" : "Scissor Kick",
+      "activity" : "core training",
       "category" : "stretching",
       "aliases" : [
 
@@ -3252,7 +3277,8 @@
         "shoulders"
       ],
       "force" : "pull",
-      "name" : "Seated Cable Row",
+      "name" : "Seated Row",
+      "activity" : "weight lifting",
       "instructions" : [
         "For this exercise you will need access to a low pulley row machine with a V-bar. Note: The V-bar will enable you to have a neutral grip where the palms of your hands face each other. To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked.",
         "Lean over as you keep the natural alignment of your back and grab the V-bar handles.",
@@ -3294,6 +3320,7 @@
         "calves"
       ],
       "name" : "Seated Calf Raise",
+      "activity" : "weight lifting",
       "description" : "",
       "force" : "push"
     },
@@ -3302,6 +3329,7 @@
 
       ],
       "name" : "Seated Leg Curl",
+      "activity" : "weight lifting",
       "instructions" : [
         "Adjust the machine lever to fit your height and sit on the machine with your back against the back support pad.",
         "Place the back of lower leg on top of padded lever (just a few inches under the calves) and secure the lap pad against your thighs, just above the knees. Then grasp the side handles on the machine as you point your toes straight (or you can also use any of the other two stances) and ensure that the legs are fully straight right in front of you. This will be your starting position.",
@@ -3346,6 +3374,7 @@
         "triceps"
       ],
       "name" : "Seated Triceps Press",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "secondaryMuscles" : [
 
@@ -3356,6 +3385,7 @@
     },
     {
       "name" : "Shoulder Press",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "description" : "",
       "tips" : [
@@ -3401,6 +3431,7 @@
         "triceps"
       ],
       "name" : "Shoulder Press",
+      "activity" : "weight lifting",
       "level" : "intermediate",
       "tips" : [
 
@@ -3429,6 +3460,7 @@
         "Repeat for the recommended amount of repetitions."
       ],
       "name" : "Shoulder Press",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "shoulders"
       ],
@@ -3456,6 +3488,7 @@
       ],
       "equipment" : "dumbbell",
       "name" : "Shoulder Press",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -3496,7 +3529,8 @@
         "shoulders"
       ],
       "mechanic" : "compound",
-      "name" : "Shoulder Press"
+      "name" : "Shoulder Press",
+      "activity" : "weight lifting"
     },
     {
       "description" : "",
@@ -3524,7 +3558,8 @@
         "Keeping your head and chest up, extend through the elbow to press the handles directly over head.",
         "After pausing at the top, return to the starting position and repeat."
       ],
-      "name" : "Shoulder Press"
+      "name" : "Shoulder Press",
+      "activity" : "weight lifting"
     },
     {
       "tips" : [
@@ -3532,6 +3567,7 @@
       ],
       "level" : "beginner",
       "name" : "Shrug",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "traps"
       ],
@@ -3570,6 +3606,7 @@
       ],
       "id" : "xnAHnuoLdIAMf0QWwIMQ",
       "name" : "Shrug",
+      "activity" : "weight lifting",
       "primaryMuscles" : [
         "traps"
       ],
@@ -3604,7 +3641,8 @@
       "tips" : [
 
       ],
-      "name" : "Shrugs",
+      "name" : "Shrug",
+      "activity" : "weight lifting",
       "id" : "FlFcYvjOs4c25Lm7yqQ4",
       "description" : "",
       "category" : "strength",
@@ -3635,6 +3673,7 @@
 
       ],
       "name" : "Single-Arm Cable Crossover",
+      "activity" : "weight lifting",
       "aliases" : [
 
       ],
@@ -3647,6 +3686,7 @@
 
       ],
       "name" : "Sit Up",
+      "activity" : "core training",
       "force" : "pull",
       "equipment" : "body only",
       "level" : "beginner",
@@ -3697,38 +3737,8 @@
       "aliases" : [
 
       ],
-      "name" : "Skating"
-    },
-    {
-      "tips" : [
-
-      ],
-      "category" : "plyometrics",
-      "force" : "push",
-      "equipment" : "body only",
-      "level" : "beginner",
-      "mechanic" : "compound",
-      "id" : "JZksMXH59XME8VPr8cr2",
-      "description" : "",
-      "aliases" : [
-
-      ],
-      "secondaryMuscles" : [
-        "abductors",
-        "adductors",
-        "calves",
-        "glutes",
-        "hamstrings"
-      ],
-      "instructions" : [
-        "Start in a relaxed position with one leg slightly forward. This will be your starting position.",
-        "Skip by executing a step-hop pattern of right-right-step to left-left-step, and so on, alternating back and forth.",
-        "Perform fast skips by maintaining close contact with the ground and reduce air time, moving as quickly as possible."
-      ],
-      "name" : "Skip",
-      "primaryMuscles" : [
-        "quadriceps"
-      ]
+      "name" : "Skating",
+      "activity" : "skating"
     },
     {
       "instructions" : [
@@ -3753,7 +3763,8 @@
       ],
       "category" : "strength",
       "level" : "beginner",
-      "name" : "Skull Crusher",
+      "name" : "Skullcrusher",
+      "activity" : "weight lifting",
       "id" : "UJRXvm0wz4BUz5KOQOx5",
       "force" : "push"
     },
@@ -3762,6 +3773,7 @@
 
       ],
       "name" : "Skullcrusher",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "aliases" : [
 
@@ -3794,6 +3806,7 @@
         "triceps"
       ],
       "name" : "Sled Push",
+      "activity" : "high intensity interval training",
       "force" : "push",
       "instructions" : [
         "Load your pushing sled with the desired weight.",
@@ -3845,7 +3858,8 @@
       "tips" : [
 
       ],
-      "name" : "Snatch Pull"
+      "name" : "Snatch Pull",
+      "activity" : "weight lifting",
     },
     {
       "aliases" : [
@@ -3859,6 +3873,7 @@
 
       ],
       "name" : "Spider Crawl",
+      "activity" : "core training",
       "category" : "strength",
       "force" : "pull",
       "secondaryMuscles" : [
@@ -3900,6 +3915,7 @@
         "triceps"
       ],
       "name" : "Split Jerk",
+      "activity" : "weight lifting",
       "instructions" : [
         "Standing with the weight racked on the front of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward.",
         "Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders. At this moment as the feet leave the floor, the feet must be placed into the receiving position as quickly as possible.",
@@ -3921,6 +3937,7 @@
       "level" : "beginner",
       "force" : "push",
       "name" : "Split Squat",
+      "activity" : "weight lifting",
       "category" : "strength",
       "aliases" : [
 
@@ -3941,6 +3958,7 @@
       "category" : "powerlifting",
       "force" : "push",
       "name" : "Squat",
+      "activity" : "weight lifting",
       "level" : "intermediate",
       "primaryMuscles" : [
         "quadriceps"
@@ -3981,6 +3999,7 @@
       "force" : "push",
       "category" : "strength",
       "name" : "Squat",
+      "activity" : "weight lifting",
       "id" : "Cwl8oju6yynaZlRCPlSp",
       "primaryMuscles" : [
         "quadriceps"
@@ -4024,6 +4043,7 @@
       ],
       "description" : "",
       "name" : "Squat",
+      "activity" : "weight lifting",
       "secondaryMuscles" : [
         "calves",
         "glutes",
@@ -4038,7 +4058,8 @@
       "level" : "beginner",
       "description" : "",
       "mechanic" : "compound",
-      "name" : "Squat with Smith Machine",
+      "name" : "Squat w/ Smith Machine",
+      "activity" : "weight lifting",
       "force" : "push",
       "tips" : [
 
@@ -4065,63 +4086,6 @@
       "category" : "strength"
     },
     {
-      "secondaryMuscles" : [
-
-      ],
-      "id" : "etfDVuzBdNeK0Wx8enlp",
-      "primaryMuscles" : [
-        "calves"
-      ],
-      "mechanic" : "isolation",
-      "category" : "strength",
-      "instructions" : [
-        "Stand with your torso upright holding two dumbbells in your hands by your sides. Place the ball of the foot on a sturdy and stable wooden board (that is around 2-3 inches tall) while your heels extend off and touch the floor. This will be your starting position.",
-        "With the toes pointing either straight (to hit all parts equally), inwards (for emphasis on the outer head) or outwards (for emphasis on the inner head), raise the heels off the floor as you exhale by contracting the calves. Hold the top contraction for a second.",
-        "As you inhale, go back to the starting position by slowly lowering the heels.",
-        "Repeat for the recommended amount of times."
-      ],
-      "force" : "push",
-      "aliases" : [
-
-      ],
-      "name" : "Standin Calf Raise",
-      "level" : "intermediate",
-      "description" : "",
-      "tips" : [
-
-      ],
-      "equipment" : "dumbbell"
-    },
-    {
-      "name" : "Standing Calf Raises",
-      "secondaryMuscles" : [
-
-      ],
-      "level" : "beginner",
-      "category" : "strength",
-      "tips" : [
-
-      ],
-      "equipment" : "machine",
-      "force" : "push",
-      "mechanic" : "isolation",
-      "aliases" : [
-
-      ],
-      "primaryMuscles" : [
-        "calves"
-      ],
-      "instructions" : [
-        "Adjust the padded lever of the calf raise machine to fit your height.",
-        "Place your shoulders under the pads provided and position your toes facing forward (or using any of the two other positions described at the beginning of the chapter). The balls of your feet should be secured on top of the calf block with the heels extending off it. Push the lever up by extending your hips and knees until your torso is standing erect. The knees should be kept with a slight bend; never locked. Toes should be facing forward, outwards or inwards as described at the beginning of the chapter. This will be your starting position.",
-        "Raise your heels as you breathe out by extending your ankles as high as possible and flexing your calf. Ensure that the knee is kept stationary at all times. There should be no bending at any time. Hold the contracted position by a second before you start to go back down.",
-        "Go back slowly to the starting position as you breathe in by lowering your heels as you bend the ankles until calves are stretched.",
-        "Repeat for the recommended amount of repetitions."
-      ],
-      "id" : "hSCQSCT4iJtZTLZpIbqy",
-      "description" : ""
-    },
-    {
       "aliases" : [
 
       ],
@@ -4131,6 +4095,7 @@
 
       ],
       "name" : "Step-up with Knee Raise",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "secondaryMuscles" : [
         "hamstrings",
@@ -4160,6 +4125,7 @@
 
       ],
       "name" : "Sumo Deadlift",
+      "activity" : "weight lifting",
       "instructions" : [
         "Begin with a bar loaded on the ground. Approach the bar so that the bar intersects the middle of the feet. The feet should be set very wide, near the collars. Bend at the hips to grip the bar. The arms should be directly below the shoulders, inside the legs, and you can use a pronated grip, a mixed grip, or hook grip. Relax the shoulders, which in effect lengthens your arms.",
         "Take a breath, and then lower your hips, looking forward with your head with your chest up. Drive through the floor, spreading your feet apart, with your weight on the back half of your feet. Extend through the hips and knees.",
@@ -4189,6 +4155,7 @@
       ],
       "equipment" : "kettlebells",
       "name" : "Sumo High Pull",
+      "activity" : "weight lifting",
       "category" : "strength",
       "level" : "intermediate",
       "secondaryMuscles" : [
@@ -4215,6 +4182,7 @@
     },
     {
       "name" : "Superman",
+      "activity" : "flexibility",
       "instructions" : [
         "To begin, lie straight and face down on the floor or exercise mat. Your arms should be fully extended in front of you. This is the starting position.",
         "Simultaneously raise your arms, legs, and chest off of the floor and hold this contraction for 2 seconds. Tip: Squeeze your lower back to get the best results from this exercise. Remember to exhale during this movement. Note: When holding the contracted position, you should look like superman when he is flying.",
@@ -4260,6 +4228,7 @@
       "category" : "strength",
       "level" : "beginner",
       "name" : "Svend Press",
+      "activity" : "weight lifting",
       "force" : "push",
       "instructions" : [
         "Begin in a standing position.",
@@ -4284,6 +4253,7 @@
 
       ],
       "name" : "Thruster",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -4328,6 +4298,7 @@
         "Repeat for the recommended amount of repetitions."
       ],
       "name" : "Toe Touchers",
+      "activity" : "flexibility",
       "tips" : [
 
       ]
@@ -4351,6 +4322,7 @@
       "equipment" : "exercise ball",
       "category" : "stretching",
       "name" : "Torso Rotation",
+      "activity" : "flexibility",
       "tips" : [
 
       ],
@@ -4373,6 +4345,7 @@
       ],
       "level" : "beginner",
       "name" : "Tricep Kickback",
+      "activity" : "weight lifting",
       "mechanic" : "isolation",
       "category" : "strength",
       "secondaryMuscles" : [
@@ -4388,6 +4361,7 @@
     },
     {
       "name" : "Triceps Extension",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -4440,6 +4414,7 @@
         "Squeeze your triceps at the top of the movement, and slowly lower the weight back to the start position."
       ],
       "name" : "Triceps Overhead Extension with Rope",
+      "activity" : "weight lifting",
       "id" : "aUKiC4nXjsJ1rR7VGTcP"
     },
     {
@@ -4449,6 +4424,7 @@
 
       ],
       "name" : "Triceps Pushdown - Rope Attachment",
+      "activity" : "weight lifting",
       "instructions" : [
         "Attach a rope attachment to a high pulley and grab with a neutral grip (palms facing each other).",
         "Standing upright with the torso straight and a very small inclination forward, bring the upper arms close to your body and perpendicular to the floor. The forearms should be pointing up towards the pulley as they hold the rope with the palms facing each other. This is your starting position.",
@@ -4476,6 +4452,7 @@
       "category" : "strength",
       "equipment" : "cable",
       "name" : "Triceps Pushdown - Straight Bar attachmenr",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -4528,7 +4505,8 @@
       "secondaryMuscles" : [
 
       ],
-      "name" : "Triceps Pushdown - V-Bar Attachment"
+      "name" : "Triceps Pushdown - V-Bar Attachment",
+      "activity" : "weight lifting"
     },
     {
       "aliases" : [
@@ -4559,7 +4537,8 @@
       ],
       "level" : "intermediate",
       "category" : "strength",
-      "name" : "Turkish Get-Up "
+      "name" : "Turkish Get-Up ",
+      "activity" : "weight lifting"
     },
     {
       "category" : "strength",
@@ -4569,6 +4548,7 @@
         "shoulders"
       ],
       "name" : "Upright Row",
+      "activity" : "weight lifting",
       "tips" : [
 
       ],
@@ -4591,6 +4571,7 @@
     },
     {
       "name" : "Upright Row",
+      "activity" : "weight lifting",
       "id" : "d8HAYxuXUCEqPZqOIPcR",
       "instructions" : [
         "Grasp a straight bar cable attachment that is attached to a low pulley with a pronated (palms facing your thighs) grip that is slightly less than shoulder width. The bar should be resting on top of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.",
@@ -4629,6 +4610,7 @@
       "description" : null,
       "mechanic" : null,
       "name" : "V Up",
+      "activity" : "core training",
       "tips" : null,
       "category" : "strength",
       "aliases" : null,
@@ -4664,6 +4646,7 @@
         "As you land, absorb the impact through your legs and draw the dumbbell to your torso before the next repetition."
       ],
       "name" : "Vertical Swing",
+      "activity" : "weight lifting",
       "mechanic" : "compound",
       "category" : "plyometrics",
       "secondaryMuscles" : [
@@ -4675,6 +4658,7 @@
     {
       "id" : "QbB0CsuPqEpNSRfLJ40w",
       "name" : "Walking",
+      "activity" : "walking",
       "primaryMuscles" : [
         "quadriceps"
       ],
@@ -4723,6 +4707,7 @@
         "hamstrings"
       ],
       "name" : "Walking Lunge",
+      "activity" : "weight lifting",
       "level" : "beginner",
       "mechanic" : "compound",
       "primaryMuscles" : [
@@ -4740,6 +4725,7 @@
       ],
       "description" : "",
       "name" : "Wrist Roller",
+      "activity" : "weight lifting",
       "force" : "pull",
       "mechanic" : "isolation",
       "id" : "Fp0iiCOqAHKv2t1vRIOy",
@@ -4789,6 +4775,7 @@
       "secondaryMuscles" : [
         "forearms"
       ],
+      "activity" : "weight lifting",
       "name" : "Zottman Curl"
     }
   ]
