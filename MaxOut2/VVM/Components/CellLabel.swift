@@ -27,10 +27,16 @@ struct CellLabel: View {
         .fontDesign(.rounded)
         .font(.headline)
         .foregroundColor(.primary)
-      Text(exercise.equipment?.capitalized ?? "")
+      Text(equipment())
         .italic()
         .foregroundColor(.secondary)
         .font(.caption)
     }
+  }
+  
+  private func equipment() -> String {
+    guard let equip = exercise.equipment else { return "" }
+    if equip == "body only" { return "" }
+    return equip.capitalized
   }
 }

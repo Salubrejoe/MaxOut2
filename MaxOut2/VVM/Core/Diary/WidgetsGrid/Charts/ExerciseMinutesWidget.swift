@@ -41,6 +41,7 @@ struct ExerciseMinutesWidget: View {
   private var switchWidth: MarkDimension {
     switch manager.timeRange {
       case .W  : return MarkDimension(integerLiteral: 27)
+      case .TW  : return MarkDimension(integerLiteral: 22)
       case .M  : return MarkDimension(integerLiteral: 7)
       case .SM : return MarkDimension(integerLiteral: 7)
       case .Y  : return MarkDimension(integerLiteral: 17)
@@ -50,6 +51,7 @@ struct ExerciseMinutesWidget: View {
   private var switchOffset: Double {
     switch manager.timeRange {
       case .W  : return -27
+      case .TW  : return -22
       case .M  : return -7
       case .SM : return -7/2
       case .Y  : return -17/2

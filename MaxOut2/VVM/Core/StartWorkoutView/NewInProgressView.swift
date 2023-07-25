@@ -82,7 +82,7 @@ extension NewInProgressView {
       Button("Cancel") {
         model.isShowingPicker = false
       }
-      ExercisePickerView(routineModel: model)
+//      ExercisePickerView(routineModel: model)
     }
   }
   

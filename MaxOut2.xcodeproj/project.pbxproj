@@ -14,6 +14,7 @@
 		7C1555D42A6BDF44005C2855 /* RadarMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D32A6BDF44005C2855 /* RadarMock.swift */; };
 		7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D52A6C0087005C2855 /* ExerciseTimeView.swift */; };
 		7C1555D82A6FCBC0005C2855 /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D72A6FCBC0005C2855 /* DismissButton.swift */; };
+		7C1555DA2A701469005C2855 /* ActivitiesWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D92A701469005C2855 /* ActivitiesWheel.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -126,6 +127,7 @@
 		7C1555D32A6BDF44005C2855 /* RadarMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarMock.swift; sourceTree = "<group>"; };
 		7C1555D52A6C0087005C2855 /* ExerciseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimeView.swift; sourceTree = "<group>"; };
 		7C1555D72A6FCBC0005C2855 /* DismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
+		7C1555D92A701469005C2855 /* ActivitiesWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesWheel.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				7C7DA1072A5EB32A00B58AFA /* ExercisePickerView.swift */,
 				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
 				7C7DA1002A5EB32A00B58AFA /* TemplatesPickerView.swift */,
+				7C1555D92A701469005C2855 /* ActivitiesWheel.swift */,
 			);
 			path = ExercisesView;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				7C7DA0ED2A5EB16400B58AFA /* HistoryView.swift in Sources */,
 				7C7DA0DB2A5EB12000B58AFA /* BobGauge.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
+				7C1555DA2A701469005C2855 /* ActivitiesWheel.swift in Sources */,
 				7C7DA0F22A5EB1ED00B58AFA /* TimeInterval-String.swift in Sources */,
 				7CA6CDE72A65995D006FDBD4 /* GoodColors.swift in Sources */,
 				7C7DA12E2A61713100B58AFA /* BobContainer.swift in Sources */,

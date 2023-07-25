@@ -3,6 +3,7 @@ import HealthKit
 
 enum TimeRange: String, CaseIterable, Identifiable {
   case W  = "W"
+  case TW = "TW"
   case M  = "M"
   case SM = "6M"
   case Y  = "Y"
@@ -14,6 +15,12 @@ enum TimeRange: String, CaseIterable, Identifiable {
         let calendar = Calendar.current
         let startDate = calendar.date(byAdding: .weekOfYear,
                                       value: -1,
+                                      to: Date()) ?? Date()
+        return ExerciseQuery(resolution: 1, startDate: startDate)
+      case .TW :
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .weekOfYear,
+                                      value: -2,
                                       to: Date()) ?? Date()
         return ExerciseQuery(resolution: 1, startDate: startDate)
       case .M :
@@ -170,7 +177,6 @@ extension HealthKitManager {
   // MARK: - EXERCISE TIME
 //  @MainActor
   func getExerciseTime(_ exQuery: ExerciseQuery) {
-//    self.exerTimeStats = []
     
     guard let store else { return }
     
@@ -316,7 +322,7 @@ extension HealthKitManager {
     activities = []
     for activityType in Activity.tsActivities {
       workouts(with: activityType, last: interval) { stats in
-        let activity = Activity(type: activityType, workouts: stats)
+        let activity = Activity(type: activityType, workouts: stats, exercises: nil)
         DispatchQueue.main.async {
           self.activities.append(activity)
         }

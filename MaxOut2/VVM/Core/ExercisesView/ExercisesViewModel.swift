@@ -26,7 +26,9 @@ final class ExercisesViewModel: ObservableObject {
   
   /// Alphabetical order 
   @Published var selectedLetter = ""
+  @Published var selectedActivity: NewActivity?
   
+
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
@@ -34,15 +36,23 @@ final class ExercisesViewModel: ObservableObject {
   let haptics = UIImpactFeedbackGenerator(style: .rigid)
   
   /// Alphabetic taxon
-  var groupedExercises: [(String, [Exercise])] {
-    let sortedItems = exercises.sorted { $0.activity < $1.activity }
-    let grouped = Dictionary(grouping: sortedItems) { String($0.activity) }
+  func groupedExercises(_ exercises: [Exercise]) -> [(String, [Exercise])] {
+    let sortedItems = exercises.sorted { $0.name < $1.name }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(0)) }
     return grouped.sorted { $0.0 < $1.0 }
   }
   
+  var groupedActivities: [NewActivity] {
+    let sortedItems = exercises.sorted { $0.activity < $1.activity }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.activity) }
+    let sortedGroup = grouped.sorted { $0.0 < $1.0 }
+    return sortedGroup.map { NewActivity(id: $0.key, name: $0.key, exercises: $0.value) }
+  }
+  
   var alphabet: [String] {
+    guard let selectedActivity else { return [] }
     var a: [String] = []
-    for exercise in groupedExercises {
+    for exercise in groupedExercises(selectedActivity.exercises) {
       a.append(exercise.0)
     }
     return a

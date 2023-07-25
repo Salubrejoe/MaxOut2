@@ -104,32 +104,6 @@ struct ExerciseTimeView: View {
     let avg = drt/count
     return String(format: "%.0f", avg)
   }
-  
-//  private func dataPointAvg() -> String? {
-//    var duration = 0.0
-//    var conto = 0
-//    guard !manager.exerTimeStats.isEmpty else { return nil }
-//    for exerciseTimeStat in manager.exerTimeStats {
-//      duration += exerciseTimeStat.minutes
-//      if exerciseTimeStat.minutes != 0.0 {
-//        print("Minutes: \(exerciseTimeStat.minutes)")
-//        conto += 1
-//        print("Conto: \(conto)")
-//      }
-//    }
-//
-//    let count = conto - 1
-//    let average = duration/Double(conto)
-//    let realAverage = average/Double(manager.resolution)
-//
-//    print("Duration: \(duration)")
-//    print("Average: \(average)")
-//    print("Conto: \(conto)")
-//    print("Count: \(count)")
-//    print("ExCount: \(manager.exerTimeStats.count)")
-//    print("Resol: \(manager.resolution) \n")
-//    return String(format: "%.0f", realAverage)
-//  }
 }
 
 struct ExerciseTimeView_Previews: PreviewProvider {

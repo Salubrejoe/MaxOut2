@@ -12,10 +12,9 @@ struct BodyPartImageView: View {
     Image(muscleGroup)
       .resizable()
       .scaledToFit()
+      .colorMultiply(color)
       .padding(5)
       .frame(width: size, height: size)
-      .background(ContainerRelativeShape().fill(color))
-      .cornerRadius(size/6)
       .overlay {
         if equipment != "" {
           HStack {
@@ -25,12 +24,12 @@ struct BodyPartImageView: View {
               Image(equipment)
                 .resizable()
                 .scaledToFit()
-                .frame(width: size/3, height: size/3)
+                .frame(width: size/2.5, height: size/2.5)
                 .padding(3)
-                .background(.ultraThickMaterial)
+                .background(.ultraThinMaterial)
                 .clipShape(Circle())
-                .shadow(radius: 5)
-                
+//                .shadow(radius: 5)
+
             }
           }
           .offset(x: 3, y: 3)
