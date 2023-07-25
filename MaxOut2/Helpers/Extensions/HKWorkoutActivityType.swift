@@ -36,7 +36,7 @@ extension HKWorkoutActivityType {
       case .running:                      return "figure.run"
       case .stairClimbing:                return "figure.stair.stepper"
       case .traditionalStrengthTraining:  return "figure.strengthtraining.traditional"
-      case .skatingSports:                return "Skating Sports"
+      case .skatingSports:                return "figure.skating"
       case .walking:                      return "figure.walk"
       case .yoga:                         return "figure.yoga"
       case .coreTraining:                 return "figure.core.training"

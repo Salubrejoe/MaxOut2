@@ -18,25 +18,19 @@ struct Activity: Identifiable, Hashable {
   
   var durationString: (hour: String, minute: String) { duration.durationString() }
   
-  static let allActivities: [HKWorkoutActivityType] = [
+  static let tsActivities: [HKWorkoutActivityType] = [
       .elliptical,
       .rowing,
       .running,
       .traditionalStrengthTraining,
       .walking,
-      .yoga,
       .coreTraining,
       .flexibility,
       .highIntensityIntervalTraining,
       .jumpRope,
-      .pilates,
       .stairs,
       .stepTraining,
       .wheelchairRunPace,
-      .taiChi,
-      .mixedCardio,
-      .handCycling,
-      .fitnessGaming
     ]
 }
 

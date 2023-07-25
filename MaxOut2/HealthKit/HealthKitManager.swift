@@ -314,7 +314,7 @@ extension HealthKitManager {
   // MARK: - WORKOUTS
   func getActivities(last interval: Int) {
     activities = []
-    for activityType in Activity.allActivities {
+    for activityType in Activity.tsActivities {
       workouts(with: activityType, last: interval) { stats in
         let activity = Activity(type: activityType, workouts: stats)
         DispatchQueue.main.async {

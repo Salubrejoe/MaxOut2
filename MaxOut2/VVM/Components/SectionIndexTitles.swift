@@ -10,9 +10,8 @@ struct SectionIndexTitles: View {
 
       VStack {
         ForEach(model.alphabet, id: \.self) { letter in
-          Text(letter).font(.system(size: 12).bold())
-            .fontDesign(.rounded)
-            .frame(width: 30)
+          Image(systemName: imageForHeader(for: letter))
+            .foregroundStyle(Color.exerciseRing.gradient)
             .background(dragObserver(title: letter))
         }
       }
@@ -44,5 +43,21 @@ struct SectionIndexTitles: View {
       }
     }
     return Rectangle().fill(Color.clear)
+  }
+  
+  private func imageForHeader(for activity: String) -> String {
+    switch activity {
+      case "weight lifting" : return "figure.strengthtraining.traditional"
+      case "core training" : return "figure.core.training"
+      case "high intensity interval training" : return "figure.highintensity.intervaltraining"
+      case "flexibility" : return "figure.cooldown"
+      case "elliptical" : return "figure.elliptical"
+      case "jump rope" : return "figure.jumprope"
+      case "rowing" : return "figure.rower"
+      case "running" : return "figure.run"
+      case "skating" : return "figure.skating"
+      case "walking" : return "figure.walk"
+      default: return ""
+    }
   }
 }

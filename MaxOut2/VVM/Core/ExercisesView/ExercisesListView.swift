@@ -11,31 +11,35 @@ struct ExercisesListView: View {
   var body: some View {
     NavigationStack {
       VStack {
-        smallButtons
-          .padding(.horizontal)
         
-        ScrollViewReader { pageScroller in
-          List {
-            ForEach(model.groupedExercises, id: \.0) { section in
-              Section(section.0) {
-                ForEach(section.1) { exercise in
-                  cell(for: exercise)
-                }
-              }
-            }
-          }
-          .overlay {
-            HStack {
-              Spacer()
-              SectionIndexTitles(model: model, pageScroller: pageScroller)
-                .padding(.trailing, 10)
-                .background(Color.systemBackground.opacity(0.01))
-            }
+//        ScrollViewReader { pageScroller in
+//          List {
+//            ForEach(model.groupedExercises, id: \.0) { section in
+//              Section {
+//                ForEach(section.1) { exercise in
+//                  cell(for: exercise)
+//                }
+//              } header: {
+//                HStack {
+//                  Image(systemName: imageForHeader(for: section.0))
+//                    .imageScale(.large)
+//                    .foregroundStyle(Color.exerciseRing.gradient)
+//                  Text(section.0)
+//                    .font(.headline)
+//                }
+//              }
+//            }
+//          }
+//        }
+        
+        List(model.groupedExercises, id: \.0) { section in
+          ForEach(section.0, id: \.self) { puff in
+            
           }
         }
       }
-      .listStyle(.plain)
-      .navigationTitle("🦾 My Exercises")
+      .listStyle(.sidebar)
+      .navigationTitle("Activities")
       .navigationBarTitleDisplayMode(.large)
       .onAppear(perform: model.addListenerToFavourites)
       .animation(.spring(), value: model.exercises)
@@ -44,6 +48,22 @@ struct ExercisesListView: View {
           AddEditExerciseView(passedExercise: model.newExercise)
         }
       }
+    }
+  }
+  
+  private func imageForHeader(for activity: String) -> String {
+    switch activity {
+      case "weight lifting" : return "figure.strengthtraining.traditional"
+      case "core training" : return "figure.core.training"
+      case "high intensity interval training" : return "figure.highintensity.intervaltraining"
+      case "flexibility" : return "figure.cooldown"
+      case "elliptical" : return "figure.elliptical"
+      case "jump rope" : return "figure.jumprope"
+      case "rowing" : return "figure.rower"
+      case "running" : return "figure.run"
+      case "skating" : return "figure.skating"
+      case "walking" : return "figure.walk"
+      default: return ""
     }
   }
 }
