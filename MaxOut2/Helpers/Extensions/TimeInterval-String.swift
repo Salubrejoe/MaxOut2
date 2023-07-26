@@ -8,6 +8,19 @@ extension TimeInterval {
     let seconds = Int(self) % 60
     return String(format: "%02d:%02d", minutes, seconds)
   }
+  
+  func durationString() -> (hour: String, minute: String) {
+    let totalDuration = Int(self)
+    let hours = totalDuration / 3600
+    let minutes = (totalDuration % 3600) / 60
+    var minutesString = ""
+    if minutes == 0 { minutesString = "00" }
+    else if minutes < 10 { minutesString = "0\(String(format: "%.0f", Double(minutes)))"}
+    else { minutesString = String(format: "%.0f", Double(minutes)) }
+    let hourString = hours > 0 ? "\(hours)" : ""
+    
+    return (hourString, minutesString)
+  }
 }
 
 
@@ -19,6 +32,7 @@ extension Double {
     return formatter.string(from: self) ?? ""
   }
 }
+
 /*
  10000.asString(style: .positional)  // 2:46:40
  10000.asString(style: .abbreviated) // 2h 46m 40s

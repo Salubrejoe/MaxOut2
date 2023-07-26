@@ -7,37 +7,60 @@ enum tsActivityType: String {
   case running = "running"
   case traditionalStrengthTraining = "weight lifting"
   case walking = "walking"
-  case coreTraining = ""
+  case coreTraining = "core training"
   case flexibility = "flexibility"
   case highIntensityIntervalTraining = "high intensity interval training"
   case jumpRope = "jump rope"
   case skatingSports = "skating"
   case wheelchairRunPace = "wheelchair run pace"
+  
+  static let type: [HKWorkoutActivityType] = [
+    .elliptical,
+    .rowing,
+    .running,
+    .traditionalStrengthTraining,
+    .walking,
+    .coreTraining,
+    .flexibility,
+    .highIntensityIntervalTraining,
+    .jumpRope,
+    .stairs,
+    .skatingSports,
+    .wheelchairRunPace,
+  ]
 }
 
-struct NewActivity: Identifiable, Equatable {
-  var id: String
+struct Activity: Identifiable, Equatable, Hashable {
+  var id: String { type.name }
   var name: String
-  var exercises: [Exercise]
+  var exercises: [Exercise]?
+  var workouts: [HKWorkout]?
   
-  var equipments: [String] {
-    var array = [String]()
-    for exercise in exercises {
-      if let equipment = exercise.equipment,
-         !array.contains(equipment) {
-        array.append(equipment)
-      }
+  public var type: HKWorkoutActivityType {
+    switch name {
+      case "elliptical" : return .elliptical
+      case "rowing" : return .rowing
+      case "running" : return .running
+      case "weight lifting" : return .traditionalStrengthTraining
+      case "walking" : return .walking
+      case "core training" : return .coreTraining
+      case "flexibility" : return .flexibility
+      case "high intensity interval training" : return .highIntensityIntervalTraining
+      case "jump rope" : return .jumpRope
+      case "skating" : return .skatingSports
+      case "wheelchair run pace" : return .wheelchairRunPace
+      default : return .running
     }
-    return array
   }
   
-  var groupedExercises: [(String, [Exercise])] {
+  public var groupedExercises: [(String, [Exercise])] {
+    guard let exercises else { return [] }
     let sortedItems = exercises.sorted { $0.name < $1.name }
     let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
     return grouped.sorted { $0.0 < $1.0 }
   }
   
-  var alphabet: [String] {
+  public var alphabet: [String] {
     var a: [String] = []
     for groupedExercise in groupedExercises {
       a.append(groupedExercise.0)
@@ -46,31 +69,11 @@ struct NewActivity: Identifiable, Equatable {
   }
   
   public var logo: String {
-    switch name {
-      case "weight lifting" : return "figure.strengthtraining.traditional"
-      case "core training" : return "figure.core.training"
-      case "high intensity interval training" : return "figure.highintensity.intervaltraining"
-      case "flexibility" : return "figure.cooldown"
-      case "elliptical" : return "figure.elliptical"
-      case "jump rope" : return "figure.jumprope"
-      case "rowing" : return "figure.rower"
-      case "running" : return "figure.run"
-      case "skating" : return "figure.skating"
-      case "walking" : return "figure.walk"
-      default: return ""
-    }
+    return type.sfSymbol
   }
-}
-
-struct Activity: Identifiable, Hashable {
-  var id: String { type.name }
-  var name: String { type.name }
-  var type: HKWorkoutActivityType
-  var image: String { type.sfSymbol }
-  var workouts: [HKWorkout]
-  var exercises: [Exercise]? = nil
   
-  var duration: TimeInterval {
+  public var duration: TimeInterval {
+    guard let workouts else { return 0 }
     var duration = 0.0
     for workout in workouts {
       duration += workout.duration
@@ -78,35 +81,8 @@ struct Activity: Identifiable, Hashable {
     return duration
   }
   
-  var durationString: (hour: String, minute: String) { duration.durationString() }
-  
-  static let tsActivities: [HKWorkoutActivityType] = [
-      .elliptical,
-      .rowing,
-      .running,
-      .traditionalStrengthTraining,
-      .walking,
-      .coreTraining,
-      .flexibility,
-      .highIntensityIntervalTraining,
-      .jumpRope,
-      .stairs,
-      .skatingSports,
-      .wheelchairRunPace,
-    ]
+  public var durationString: (hour: String, minute: String) { duration.durationString() }
 }
 
-extension TimeInterval {
-  func durationString() -> (hour: String, minute: String) {
-    let totalDuration = Int(self)
-    let hours = totalDuration / 3600
-    let minutes = (totalDuration % 3600) / 60
-    var minutesString = ""
-    if minutes == 0 { minutesString = "00" }
-    else if minutes < 10 { minutesString = "0\(String(format: "%.0f", Double(minutes)))"}
-    else { minutesString = String(format: "%.0f", Double(minutes)) }
-    let hourString = hours > 0 ? "\(hours)" : ""
-    
-    return (hourString, minutesString)
-  }
-}
+
+

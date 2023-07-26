@@ -1,5 +1,10 @@
 import Foundation
 
+enum TSMuscle: String, CaseIterable {
+  case shoulders = "shoulders"
+  case arms = "arms"
+}
+
 enum Muscle: String, CaseIterable {
   case noSelection = ""
   /// Shoulders
@@ -27,20 +32,6 @@ enum Muscle: String, CaseIterable {
   case quadriceps = "quadriceps"
   /// Calves
   case calves = "calves"
-  
-  var image: String {
-    switch self {
-      case .noSelection : return ""
-      case .neck, .traps, .shoulders                        : return "shoulders"
-      case .triceps, .biceps, .forearms                     : return "arms"
-      case .chest                                           : return "chest"
-      case .abdominals                                      : return "abs"
-      case .lowerBack, .middleBack, .lats                   : return "back"
-      case .glutes                                          : return "glutes"
-      case .hamstrings, .abductors, .adductors, .quadriceps : return "thighs"
-      case .calves                                          : return "calves"
-    }
-  }
   
   var muscleGroup : String {
     switch self {

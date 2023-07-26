@@ -28,8 +28,6 @@ struct BodyPartImageView: View {
                 .padding(3)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
-//                .shadow(radius: 5)
-
             }
           }
           .offset(x: 3, y: 3)
@@ -38,28 +36,28 @@ struct BodyPartImageView: View {
   }
 }
 
-
-struct CategoryImageView: View {
-  @Environment(\.colorScheme) var colorScheme
-  let systemName: String
-  let size: CGFloat
-  let color: Color
-  
-  var body: some View {
-    Image(systemName: systemName)
-      .font(.system(size: size/1.7))
-      .frame(width: size, height: size)
-      .foregroundStyle(
-        Color.accentColor.gradient.shadow(
-          .inner(color: colorScheme == .dark ? .green.opacity(0.7) : .orange.opacity(0.5),
-                 radius: 2, x: 0, y: 0)
-        )
-      )
-      .cornerRadius(size/2)
-  }
-}
-
-//struct CategoryImageView_Previews: PreviewProvider {
+//
+//struct CategoryImageView: View {
+//  @Environment(\.colorScheme) var colorScheme
+//  let systemName: String
+//  let size: CGFloat
+//  let color: Color
+//  
+//  var body: some View {
+//    Image(systemName: systemName)
+//      .font(.system(size: size/1.7))
+//      .frame(width: size, height: size)
+//      .foregroundStyle(
+//        Color.accentColor.gradient.shadow(
+//          .inner(color: colorScheme == .dark ? .green.opacity(0.7) : .orange.opacity(0.5),
+//                 radius: 2, x: 0, y: 0)
+//        )
+//      )
+//      .cornerRadius(size/2)
+//  }
+//}
+//
+////struct CategoryImageView_Previews: PreviewProvider {
 //  static let parts = [
 //    "shoulder",
 //    "front",

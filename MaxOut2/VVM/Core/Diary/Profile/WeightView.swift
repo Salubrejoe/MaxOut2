@@ -116,7 +116,7 @@ struct HeightView: View {
   }
   
   private func getHKHeight() {
-    manager.getHeight()
+    manager.getHeightStats()
     guard let height = manager.heightStats.last else { return }
     self.height = height.heightString
   }

@@ -15,7 +15,6 @@ final class ExercisesViewModel: ObservableObject {
   
   /// Three way picker selections
   @Published var selectedCategory  : String = ""
-  @Published var selectedMuscle    : String = ""
   @Published var selectedEquipment : String = ""
   
   /// Exercise.mockup
@@ -26,36 +25,47 @@ final class ExercisesViewModel: ObservableObject {
   
   /// Alphabetical order 
   @Published var selectedLetter = ""
-  @Published var selectedActivity: NewActivity?
+  @Published var selectedActivity: Activity?
+  @Published var selectedMuscle: Muscle?
   
-
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
-  /// Haptics
-  let haptics = UIImpactFeedbackGenerator(style: .rigid)
-  
-  /// Alphabetic taxon
-  func groupedExercises(_ exercises: [Exercise]) -> [(String, [Exercise])] {
-    let sortedItems = exercises.sorted { $0.name < $1.name }
-    let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(0)) }
-    return grouped.sorted { $0.0 < $1.0 }
-  }
-  
-  var groupedActivities: [NewActivity] {
+  var groupedActivities: [Activity] {
     let sortedItems = exercises.sorted { $0.activity < $1.activity }
     let grouped = Dictionary(grouping: sortedItems) { String($0.activity) }
     let sortedGroup = grouped.sorted { $0.0 < $1.0 }
-    return sortedGroup.map { NewActivity(id: $0.key, name: $0.key, exercises: $0.value) }
+    return sortedGroup.map { Activity(name: $0.key, exercises: $0.value) }
   }
   
-  var alphabet: [String] {
-    guard let selectedActivity else { return [] }
+  public var groupedExercises: [(String, [Exercise])] {
+    var filteredExercises = exercises
+    if let selectedMuscle {
+      filteredExercises = exercises.filter { $0.muscleGroup == selectedMuscle.muscleGroup }
+      print("FIltered: \(filteredExercises)")
+    }
+    
+    let sortedItems = filteredExercises.sorted { $0.name < $1.name }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
+
+    return grouped.sorted { $0.0 < $1.0 }
+  }
+  
+  public var alphabet: [String] {
     var a: [String] = []
-    for exercise in groupedExercises(selectedActivity.exercises) {
-      a.append(exercise.0)
+    for groupedExercise in groupedExercises {
+      a.append(groupedExercise.0)
     }
     return a
+  }
+  
+  // MARK: - Body Part SEARCH
+  func sieveByBodyPart() {
+    exercises = []
+    addListenerToFavourites()
+    if let muscle = selectedMuscle {
+      exercises = exercises.filter { $0.primaryMuscles[0] == muscle.rawValue }
+    }
   }
 }
 
@@ -164,9 +174,11 @@ extension ExercisesViewModel {
 
 // MARK: - SEARCH LOGIC
 extension ExercisesViewModel {
+
+  
   func search() {
     if selectedCategory == "",
-       selectedMuscle == "",
+//       selectedMuscle == "",
        selectedEquipment == "",
        searchText == "" {
       addListenerToFavourites()
@@ -185,9 +197,9 @@ extension ExercisesViewModel {
       filteredExercises = filteredExercises.filter { $0.category == selectedCategory }
     }
 
-    if !selectedMuscle.isEmpty {
-      filteredExercises = filteredExercises.filter { $0.primaryMuscles.contains(selectedMuscle) }
-    }
+//    if !selectedMuscle.isEmpty {
+//      filteredExercises = filteredExercises.filter { $0.primaryMuscles.contains(selectedMuscle) }
+//    }
 
     if !selectedEquipment.isEmpty {
       filteredExercises = filteredExercises.filter { $0.equipment == selectedEquipment }

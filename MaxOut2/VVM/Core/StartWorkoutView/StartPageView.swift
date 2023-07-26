@@ -52,7 +52,7 @@ extension StartPageView {
       NavigationLink {
         ExercisesListView()
       } label: {
-        QuickActionButtonView()
+        Text("piazzza")
       }
     }
   }

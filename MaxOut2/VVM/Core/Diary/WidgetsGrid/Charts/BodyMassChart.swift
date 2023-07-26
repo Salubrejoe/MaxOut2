@@ -18,7 +18,7 @@ struct BodyMassChart: View {
     .chartYScale(domain: [manager.minWeight - 1, manager.maxWeight + 1])
     .chartYAxisLabel("kg", position: .topTrailing)
     .onAppear {
-      manager.getBodyMassStats()
+      manager.getWeightStats()
     }
   }
 }

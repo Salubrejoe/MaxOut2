@@ -1,10 +1,7 @@
 
 import SwiftUI
 
-struct ExerciseQuery {
-  let resolution: Int
-  let startDate: Date
-}
+
 
 struct ExerciseTimeView: View {
   @EnvironmentObject var manager: HealthKitManager
@@ -20,10 +17,8 @@ struct ExerciseTimeView: View {
         }
         .pickerStyle(.segmented)
         .padding([.horizontal, .bottom])
-        .onChange(of: manager.timeRange) { newValue in
-          manager.getExerciseTime(newValue.query)
-          manager.resolution = Double(newValue.query.resolution)
-          manager.startDate = newValue.query.startDate
+        .onChange(of: manager.timeRange) { _ in
+          manager.getStats()
         }
         
         HStack {
@@ -60,8 +55,8 @@ struct ExerciseTimeView: View {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "d MMM"
     
-    let startDateMonth = Calendar.current.dateComponents([.month], from: manager.startDate)
-    let startDateDay = Calendar.current.dateComponents([.day], from: manager.startDate)
+    let startDateMonth = Calendar.current.dateComponents([.month], from: manager.timeRange.startDate)
+    let startDateDay = Calendar.current.dateComponents([.day], from: manager.timeRange.startDate)
     let startDay = startDateDay.day ?? 0
     let currentMonth = Calendar.current.dateComponents([.month], from: Date())
     
@@ -71,7 +66,7 @@ struct ExerciseTimeView: View {
       return "\(startDay)-\(todayString) \(Date().yearAsString())"
     }
     
-    let startDateString = dateFormatter.string(from:manager.startDate)
+    let startDateString = dateFormatter.string(from: manager.timeRange.startDate)
     
     if startDateString == todayString {
       return "\(startDateString), \(Date().yearAsString())"
@@ -82,7 +77,7 @@ struct ExerciseTimeView: View {
   }
   
   private func average() -> String {
-    switch manager.resolution {
+    switch manager.timeRange.resolution {
       case 1 : return "DAILY AVERAGE"
       case 7 : return "WEEKLY AVERAGE"
       case 30 : return "MONTHLY AVERAGE"
@@ -100,7 +95,7 @@ struct ExerciseTimeView: View {
         count += 1
       }
     }
-    let drt = duration/manager.resolution
+    let drt = duration/Double(manager.timeRange.resolution)
     let avg = drt/count
     return String(format: "%.0f", avg)
   }

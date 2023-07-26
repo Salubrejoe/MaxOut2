@@ -1,53 +1,25 @@
 import Foundation
 import HealthKit
 
-enum TimeRange: String, CaseIterable, Identifiable {
-  case W  = "W"
-  case TW = "TW"
-  case M  = "M"
-  case SM = "6M"
-  case Y  = "Y"
-  var id: TimeRange { self }
-  
-  var query: ExerciseQuery {
-    switch self {
-      case .W :
-        let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .weekOfYear,
-                                      value: -1,
-                                      to: Date()) ?? Date()
-        return ExerciseQuery(resolution: 1, startDate: startDate)
-      case .TW :
-        let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .weekOfYear,
-                                      value: -2,
-                                      to: Date()) ?? Date()
-        return ExerciseQuery(resolution: 1, startDate: startDate)
-      case .M :
-        let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .month,
-                                      value: -1,
-                                      to: Date()) ?? Date()
-        return ExerciseQuery(resolution: 1, startDate: startDate)
-      case .SM :
-        let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .month,
-                                      value: -6,
-                                      to: Date()) ?? Date()
-        return ExerciseQuery(resolution: 7, startDate: startDate)
-      case .Y :
-        let calendar = Calendar.current
-        let startDate = calendar.date(byAdding: .month,
-                                      value: -12,
-                                      to: Date()) ?? Date()
-        return ExerciseQuery(resolution: 30, startDate: startDate)
+
+// MARK: - HEALTH QUERY
+struct HealthStatsQuery {
+  let timeRange  : TimeRange
+  let type       : HKQuantityType
+  var options : HKStatisticsOptions {
+    switch type {
+      case HKQuantityType(.appleExerciseTime) : return .cumulativeSum
+      case HKQuantityType(.bodyMass) : return .discreteAverage
+      case HKQuantityType(.height) : return .discreteAverage
+      default : return .mostRecent
     }
   }
 }
 
+
+
 final class HealthKitManager: ObservableObject {
   var store: HKHealthStore?
-  
   
   // MARK: - TYPES
   let exerciseTimeType = HKQuantityType(.appleExerciseTime)
@@ -64,7 +36,7 @@ final class HealthKitManager: ObservableObject {
       heightType,
       workoutType
     ])
-  }
+  } 
   
   var shareTypes: Set<HKSampleType> {
     Set([
@@ -77,23 +49,57 @@ final class HealthKitManager: ObservableObject {
   
   
   // MARK: - STATS
-  @Published var exerTimeGoal  : HKQuantity?
+  @Published var exerTimeGoal  : HealthStat?
   @Published var exerTimeStats = [HealthStat]()
   @Published var bodyMassStats = [HealthStat]()
   @Published var heightStats   = [HealthStat]()
-  @Published var activities    = [Activity]()
+  
+  var allActivities: [Activity] = [
+    Activity(name: "elliptical"),
+    Activity(name: "rowing"),
+    Activity(name: "running"),
+    Activity(name: "weight lifting"),
+    Activity(name: "walking"),
+    Activity(name: "core training"),
+    Activity(name: "high intensity interval training"),
+    Activity(name: "jump rope"),
+    Activity(name: "skating"),
+    Activity(name: "wheelchair run pace")
+  ]
   
   
-  // MARK: - QUERY PROPERTIES
-  @Published var timeRange: TimeRange = .M
-  var startDate = Date()
-  var resolution = 1.0
+  // MARK: - T RANGE
+  @Published var timeRange : TimeRange = .M
   
   
-  // MARK: - COMPUTED STATS
+  // MARK: - INIT
+  init() {
+    self.store = HKHealthStore()
+    
+    // 1. Request auth
+    Task {
+      do {
+        try await store?.requestAuthorization(toShare: shareTypes, read: allTypes)
+      }
+      catch {
+        print("Could not request auth: \(error)")
+      }
+    }
+  }
+  
+  func start() {
+    getStats()
+    getExerciseTimeGoal()
+    getActivities(last: 7)
+  }
+}
+
+
+// MARK: - COMPUTED STATS
+extension HealthKitManager {
   var currentActivities: [Activity] {
     var current = [Activity]()
-    for activity in activities {
+    for activity in allActivities {
       if activity.durationString != ("", "00") {
         current.append(activity)
       }
@@ -102,7 +108,11 @@ final class HealthKitManager: ObservableObject {
   }
   
   var exerTimeGoalDouble: Double {
-    return exerTimeGoal?.doubleValue(for: .minute()) ?? 0
+    guard let exerTimeGoal else { return 0 }
+    if let stat = exerTimeGoal.stat {
+      return stat.doubleValue(for: .minute())
+    }
+    return 0
   }
   
   var exerTimeGoalString: String {
@@ -124,7 +134,6 @@ final class HealthKitManager: ObservableObject {
     for stat in bodyMassStats {
       weights.append(stat.weight)
     }
-    
     return weights.max() ?? 0
   }
   
@@ -139,72 +148,89 @@ final class HealthKitManager: ObservableObject {
   var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerTimeStats {
-      min.append(stat.minutes/Double(resolution))
+      min.append(stat.minutes/Double(timeRange.resolution))
     }
     return min.max() ?? 0
-  }
-  
-  
-  
-  // MARK: - INIT
-  init() {
-    self.store = HKHealthStore()
-    
-    // 1. Request auth
-    Task {
-      do {
-        try await store?.requestAuthorization(toShare: shareTypes, read: allTypes)
-      }
-      catch {
-        print("Could not request auth: \(error)")
-      }
-    }
-  }
-  
-  func start() {
-    getExerciseTime(timeRange.query)
-    getExerciseTimeGoal()
-    getBodyMassStats()
-    getActivities(last: 7)
-    getHeight()
   }
 }
 
 
+// MARK: - QUERY STATS
 extension HealthKitManager {
+  func getStats() {
+    getExerciseTimeStats()
+    getWeightStats()
+    getHeightStats()
+  }
   
-
-  // MARK: - EXERCISE TIME
-//  @MainActor
-  func getExerciseTime(_ exQuery: ExerciseQuery) {
-    
+  func getExerciseTimeStats() {
+    let query = HealthStatsQuery(timeRange: timeRange, type: exerciseTimeType)
+    perform(query)
+  }
+  
+  func getWeightStats() {
+    let query = HealthStatsQuery(timeRange: timeRange, type: bodyMassType)
+    perform(query)
+  }
+  
+  func getHeightStats() {
+    let query = HealthStatsQuery(timeRange: timeRange, type: heightType)
+    perform(query)
+  }
+  
+  
+  // MARK: - PERFORM QUERY
+  func perform(_ hSQuery: HealthStatsQuery) {
     guard let store else { return }
-    
-    let calendar = Calendar.current
-    let endDate = Date()
-    let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: exQuery.resolution)
     
     var healthStats = [HealthStat]()
     
-    let predicate = HKQuery.predicateForSamples(withStart: exQuery.startDate, end: endDate)
+    let resolution = hSQuery.timeRange.resolution
+    let startDate = hSQuery.timeRange.startDate
+    let anchorDate = Date.firstDayOfWeek()
+    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date())
     
-    let query = HKStatisticsCollectionQuery(quantityType: exerciseTimeType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: dailyComponent)
+    let query = HKStatisticsCollectionQuery(quantityType: hSQuery.type,
+                                            quantitySamplePredicate: predicate,
+                                            options: hSQuery.options,
+                                            anchorDate: anchorDate,
+                                            intervalComponents: DateComponents(day: resolution))
     
     query.initialResultsHandler = { query, statistics, error in
-      statistics?.enumerateStatistics(from: exQuery.startDate, to: endDate, with: { stats, _ in
-        let stat = HealthStat(stat: stats.sumQuantity(), date: stats.startDate)
-        healthStats.append(stat)
+      statistics?.enumerateStatistics(from: startDate, to: Date(), with: { stats, _ in
+        
+        let stat = HealthStat(stat: self.rightStatistics(stats, for: hSQuery.type), date: stats.startDate)
+        if hSQuery.type != self.bodyMassType {
+          healthStats.append(stat)
+        }
+        else if stat.stat != nil {
+          healthStats.append(stat)
+        }
       })
       
       DispatchQueue.main.async {
-        self.exerTimeStats = healthStats
+        self.save(healthStats, to: hSQuery.type)
       }
     }
     
     store.execute(query)
   }
   
+  private func rightStatistics(_ stats: HKStatistics, for type: HKQuantityType) -> HKQuantity? {
+    switch type {
+      case HKQuantityType(.appleExerciseTime) : return stats.sumQuantity()
+      default : return stats.averageQuantity()
+    }
+  }
+  
+  private func save(_ healthStats: [HealthStat], to type: HKQuantityType) {
+    switch type {
+      case HKQuantityType(.appleExerciseTime) : self.exerTimeStats = healthStats
+      case HKQuantityType(.bodyMass)          : self.bodyMassStats = healthStats
+      case HKQuantityType(.height)            : self.heightStats   = healthStats
+      default : print("ERROR SAVING HEALTH STATS")
+    }
+  }
   
   // MARK: - EXERCISE GOAL
   func getExerciseTimeGoal() {
@@ -213,9 +239,10 @@ extension HealthKitManager {
     guard let store else { return }
     let query = HKActivitySummaryQuery(predicate: createPredicate()) { (query, summariesOrNil, errorOrNil) -> Void in
       guard let summaries = summariesOrNil else { return }
-      
+      let stat = HealthStat(stat: summaries.last?.exerciseTimeGoal ?? nil,
+                            date: Date())
       DispatchQueue.main.async {
-        self.exerTimeGoal = summaries.last?.exerciseTimeGoal
+        self.exerTimeGoal = stat
       }
     }
     store.execute(query)
@@ -244,88 +271,16 @@ extension HealthKitManager {
                                       end: endDateComponents)
     return predicate
   }
+}
+
+
+// MARK: - ACTIVITIES
+extension HealthKitManager {
   
-  
-  // MARK: - BODY MASS
-  func getBodyMassStats() {
-    guard let store else { return }
-    
-    let calendar = Calendar.current
-    let startDate = calendar.date(byAdding: .weekOfYear,
-                                  value: -7,
-                                  to: Date()) ?? Date()
-    let endDate = Date()
-    let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: 1)
-    
-    var healthStats = [HealthStat]()
-    
-    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
-    
-    let query = HKStatisticsCollectionQuery(quantityType: bodyMassType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
-    
-    query.initialResultsHandler = { query, statistics, error in
-      guard let statistics else { return }
-      statistics.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
-        let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
-        if stat.stat != nil {
-          healthStats.append(stat)
-        }
-      })
-      DispatchQueue.main.async {
-        self.bodyMassStats = healthStats
-      }
-    }
-    
-    store.execute(query)
-  }
-  
-  
-  // MARK: - HEIGHT
-  func getHeight() {
-    self.heightStats = []
-    
-    guard let store else { return }
-    let calendar = Calendar.current
-    let startDate = calendar.date(byAdding: .year,
-                                  value: -12,
-                                  to: Date()) ?? Date()
-    
-    let endDate = Date()
-    let anchorDate = Date.firstDayOfWeek()
-    let dailyComponent = DateComponents(day: 10)
-    
-    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
-    
-    var healthStats = [HealthStat]()
-    
-    let query = HKStatisticsCollectionQuery(quantityType: heightType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
-    
-    query.initialResultsHandler = { query, statistics, error in
-      statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
-        let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
-        if stat.stat != nil {
-          healthStats.append(stat)
-        }
-      })
-      
-      DispatchQueue.main.async {
-        self.heightStats = healthStats
-      }
-    }
-    store.execute(query)
-  }
-  
-  
-  // MARK: - WORKOUTS
   func getActivities(last interval: Int) {
-    activities = []
-    for activityType in Activity.tsActivities {
-      workouts(with: activityType, last: interval) { stats in
-        let activity = Activity(type: activityType, workouts: stats, exercises: nil)
-        DispatchQueue.main.async {
-          self.activities.append(activity)
-        }
+    for index in allActivities.indices {
+      workouts(with: allActivities[index].type, last: interval) { workouts in
+        self.allActivities[index].workouts = workouts
       }
     }
   }
@@ -359,8 +314,9 @@ extension HealthKitManager {
   }
 }
 
+// MARK: - SUBMIT STATS
 extension HealthKitManager {
-  // MARK: - SUBMIT WEIGHT
+  
   func submit(weight: Double) {
     guard let store else { return }
     
@@ -374,16 +330,15 @@ extension HealthKitManager {
                                     end: Date())
     store.save(bodyMass) { success, error in
       guard error == nil else {
-        print("CATASTROPHIC FAILURE SAVING WEIGHT \n \(error))")
+        print("Error saving weight: \n \(error?.localizedDescription))")
         return
       }
       
       if success { print("Saved! 😄 \(success)")}
     }
-    getBodyMassStats()
+    getWeightStats()
   }
   
-  // MARK: - SUBMIT HEIGHT
   func submit(height: Double) {
     guard let store else { return }
     
@@ -397,43 +352,121 @@ extension HealthKitManager {
                                     end: Date())
     store.save(bodyMass) { success, error in
       guard error == nil else {
-        print("CATASTROPHIC FAILURE SAVING Height \n \(error))")
+        print("Error saving height: \n \(error?.localizedDescription))")
         return
       }
       
       if success { print("Saved Height! 😄 \(success)")}
     }
     
-    getHeight()
+    getHeightStats()
   }
 }
 
 
-// MARK: - Extension Date
-extension Date {
-  static func firstDayOfWeek() -> Date {
-    let calendar =  Calendar(identifier: .iso8601)
-    let components: Set<Calendar.Component> = [.yearForWeekOfYear, .weekOfYear]
-    return calendar.date(from: calendar.dateComponents(components, from: Date())) ?? Date()
-  }
-  
-  static func yesterday() -> Date {
-    let calendar = Calendar.current
-    let today = Date()
-    
-    // Define the date components for one day ago (yesterday)
-    var dateComponents = DateComponents()
-    dateComponents.weekOfYear = -4
-    
-    // Calculate yesterday's date using the calendar
-    if let yesterday = calendar.date(byAdding: dateComponents, to: today) {
-      return yesterday
-    } else {
-      // If there's an issue calculating the date, return today's date as a fallback
-      return today
-    }
-  }
-
-}
 
 
+
+/*
+ OBSOLETE??
+ // MARK: - HEIGHT
+ //  func getHeight() {
+ //    self.heightStats = []
+ //
+ //    guard let store else { return }
+ //    let calendar = Calendar.current
+ //    let startDate = calendar.date(byAdding: .year,
+ //                                  value: -12,
+ //                                  to: Date()) ?? Date()
+ //
+ //    let endDate = Date()
+ //    let anchorDate = Date.firstDayOfWeek()
+ //    let dailyComponent = DateComponents(day: 10)
+ //
+ //    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+ //
+ //    var healthStats = [HealthStat]()
+ //
+ //    let query = HKStatisticsCollectionQuery(quantityType: heightType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
+ //
+ //    query.initialResultsHandler = { query, statistics, error in
+ //      statistics?.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
+ //        let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
+ //        if stat.stat != nil {
+ //          healthStats.append(stat)
+ //        }
+ //      })
+ //
+ //      DispatchQueue.main.async {
+ //        self.heightStats = healthStats
+ //      }
+ //    }
+ //    store.execute(query)
+ //  }
+ 
+ // MARK: - BODY MASS
+ //  func getBodyMassStats() {
+ //    guard let store else { return }
+ //
+ //    let calendar = Calendar.current
+ //    let startDate = calendar.date(byAdding: .weekOfYear,
+ //                                  value: -7,
+ //                                  to: Date()) ?? Date()
+ //    let endDate = Date()
+ //    let anchorDate = Date.firstDayOfWeek()
+ //    let dailyComponent = DateComponents(day: 1)
+ //
+ //    var healthStats = [HealthStat]()
+ //
+ //    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+ //
+ //    let query = HKStatisticsCollectionQuery(quantityType: bodyMassType, quantitySamplePredicate: predicate, options: .discreteAverage, anchorDate: anchorDate, intervalComponents: dailyComponent)
+ //
+ //    query.initialResultsHandler = { query, statistics, error in
+ //      guard let statistics else { return }
+ //      statistics.enumerateStatistics(from: startDate, to: endDate, with: { stats, _ in
+ //        let stat = HealthStat(stat: stats.averageQuantity(), date: stats.startDate)
+ //        if stat.stat != nil {
+ //          healthStats.append(stat)
+ //        }
+ //      })
+ //      DispatchQueue.main.async {
+ //        self.bodyMassStats = healthStats
+ //      }
+ //    }
+ //
+ //    store.execute(query)
+ //  }
+ 
+ 
+ // MARK: - EXERCISE TIME
+ //  @MainActor
+ //  func getExerciseTime(_ exQuery: HealthStatsQuery) {
+ //
+ //    guard let store else { return }
+ //
+ //    let calendar = Calendar.current
+ //    let endDate = Date()
+ //    let anchorDate = Date.firstDayOfWeek()
+ //    let dailyComponent = DateComponents(day: exQuery.resolution)
+ //
+ //    var healthStats = [HealthStat]()
+ //
+ //    let predicate = HKQuery.predicateForSamples(withStart: exQuery.startDate, end: endDate)
+ //
+ //    let query = HKStatisticsCollectionQuery(quantityType: exerciseTimeType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: dailyComponent)
+ //
+ //    query.initialResultsHandler = { query, statistics, error in
+ //      statistics?.enumerateStatistics(from: exQuery.startDate, to: endDate, with: { stats, _ in
+ //        let stat = HealthStat(stat: stats.sumQuantity(), date: stats.startDate)
+ //        healthStats.append(stat)
+ //      })
+ //
+ //      DispatchQueue.main.async {
+ //        self.exerTimeStats = healthStats
+ //      }
+ //    }
+ //
+ //    store.execute(query)
+ //  }
+ */

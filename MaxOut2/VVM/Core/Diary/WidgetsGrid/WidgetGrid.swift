@@ -109,7 +109,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
               .foregroundColor(.secondary)
           }
           Spacer()
-          Image(systemName: activity.image)
+          Image(systemName: activity.logo)
             .imageScale(.large)
             .foregroundStyle(Color.exerciseRing.gradient)
         }
