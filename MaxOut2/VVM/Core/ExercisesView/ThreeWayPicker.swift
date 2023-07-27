@@ -8,9 +8,18 @@ struct ThreeWayPicker: View {
   var body: some View {
     HStack(spacing: 3) {
       EQPicker(selectedEquipment: $model.selectedEquipment)
+      Divider()
+        .padding(.vertical)
       MGPicker(selectedMuscle: $model.selectedMuscle)
+      Divider()
+        .padding(.vertical)
       APicker(selectedActivityType: $model.selectedActivityType)
     }
+    .frame(height: 50)
+    .padding(.horizontal, 7)
+    .background(.ultraThinMaterial)
+    .cornerRadius(10)
+    .padding()
   }
 }
 
@@ -187,11 +196,12 @@ extension View {
       .frame(maxWidth: .infinity)
       .frame(maxHeight: 38)
 //      .background(isSelected ? Color.systemBackground : Color.secondarySytemBackground.opacity(0.5))
+      
       .cornerRadius(10)
       .overlay {
         if isSelected {
-          RoundedRectangle(cornerRadius: 10)
-            .stroke(Color(.label), lineWidth: 2)
+          RoundedRectangle(cornerRadius: 7)
+            .stroke(Color(.label), lineWidth: 1)
         }
       }
   }

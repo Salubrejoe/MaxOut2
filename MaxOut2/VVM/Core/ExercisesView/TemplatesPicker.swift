@@ -8,7 +8,7 @@ struct TemplatesPicker: View {
       ZStack(alignment: .bottom) {
         ScrollViewReader { pageScroller in
           ScrollView(showsIndicators: false) {
-            ThreeWayPicker(model: model)
+            
             LazyVGrid(columns: model.columns) {
               if !model.selectedExercises.isEmpty {
                 selection
@@ -32,11 +32,7 @@ struct TemplatesPicker: View {
           .navigationBarTitleDisplayMode(.inline)
         }
         
-        LargeTsButton(text: "Create New", background: .regularMaterial, textColor: .accentColor) {
-          //
-        }
-        .padding()
-        .shadow(radius: 5)
+        ThreeWayPicker(model: model)
       }
       .toolbar { saveButton }
       .dismissButton()

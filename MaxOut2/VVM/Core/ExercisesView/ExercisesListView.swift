@@ -11,23 +11,21 @@ struct ExercisesListView: View {
   var body: some View {
     NavigationStack {
       ScrollViewReader { pageScroller in
-        VStack {
-          ThreeWayPicker(model: model)
-            .padding(.horizontal)
-          
+        ZStack(alignment: .bottom) {
           List {
-            
             ForEach(model.groupedExercises, id: \.0) { section in
               actualList(section)
             }
           }
+          .searchable(text: $model.searchText.bound, placement: .automatic, prompt: "Look up")
           .scrollDismissesKeyboard(.interactively)
           .listStyle(.plain)
           .scrollIndicators(.hidden)
-          .searchable(text: $model.searchText.bound, placement: .automatic, prompt: "Look up")
+          
+          ThreeWayPicker(model: model)
+            
         }
         .navigationTitle("Exercises")
-        .navigationBarTitleDisplayMode(.inline)
         .overlay {
           HStack {
             Spacer()
