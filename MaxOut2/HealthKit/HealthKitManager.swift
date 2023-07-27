@@ -55,16 +55,18 @@ final class HealthKitManager: ObservableObject {
   @Published var heightStats   = [HealthStat]()
   
   var allActivities: [Activity] = [
-    Activity(name: "elliptical"),
-    Activity(name: "rowing"),
-    Activity(name: "running"),
-    Activity(name: "weight lifting"),
-    Activity(name: "walking"),
-    Activity(name: "core training"),
-    Activity(name: "high intensity interval training"),
-    Activity(name: "jump rope"),
-    Activity(name: "skating"),
-    Activity(name: "wheelchair run pace")
+    Activity(name: .elliptical),
+    Activity(name: .traditionalStrengthTraining),
+    Activity(name: .coreTraining),
+    Activity(name: .walking),
+    Activity(name: .running),
+    Activity(name: .rowing),
+    Activity(name: .highIntensityIntervalTraining),
+    Activity(name: .wheelchairRunPace),
+    Activity(name: .skatingSports),
+    Activity(name: .flexibility),
+    Activity(name: .jumpRope),
+    Activity(name: .mixedCardio),
   ]
   
   
@@ -279,7 +281,7 @@ extension HealthKitManager {
   
   func getActivities(last interval: Int) {
     for index in allActivities.indices {
-      workouts(with: allActivities[index].type, last: interval) { workouts in
+      workouts(with: allActivities[index].hkType, last: interval) { workouts in
         self.allActivities[index].workouts = workouts
       }
     }

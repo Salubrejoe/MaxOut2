@@ -7,10 +7,6 @@ struct SectionedList: View {
   
   @ObservedObject var model: ExercisesViewModel
   
-  init(model: ExercisesViewModel) {
-    self.model = model
-  }
-  
   var body: some View {
     ScrollViewReader { pageScroller in
       ZStack(alignment: .trailing) {
@@ -29,7 +25,7 @@ struct SectionedList: View {
         } header: {
           HStack {
             APicker(model: model)
-            MuscleGroupPicker(model: model)
+            MGPicker(model: model)
           }
         }
         

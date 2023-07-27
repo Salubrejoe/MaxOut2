@@ -2,25 +2,37 @@ import Foundation
 import HealthKit
 
 struct Activity: Identifiable, Equatable, Hashable {
-  var id: String { type.name }
-  var name: String
+  var id: String { hkType.name }
+  var name: ActivityType
   var exercises: [Exercise]?
   var workouts: [HKWorkout]?
   
-  public var type: HKWorkoutActivityType {
+  public var hkType: HKWorkoutActivityType {
     switch name {
-      case "elliptical" : return .elliptical
-      case "rowing" : return .rowing
-      case "running" : return .running
-      case "weight lifting" : return .traditionalStrengthTraining
-      case "walking" : return .walking
-      case "core training" : return .coreTraining
-      case "flexibility" : return .flexibility
-      case "high intensity interval training" : return .highIntensityIntervalTraining
-      case "jump rope" : return .jumpRope
-      case "skating" : return .skatingSports
-      case "wheelchair run pace" : return .wheelchairRunPace
-      default : return .running
+      case .elliptical:
+        return .elliptical
+      case .rowing:
+        return .rowing
+      case .running:
+        return .running
+      case .traditionalStrengthTraining:
+        return .traditionalStrengthTraining
+      case .walking:
+        return .walking
+      case .coreTraining:
+        return .coreTraining
+      case .flexibility:
+        return .flexibility
+      case .highIntensityIntervalTraining:
+        return .highIntensityIntervalTraining
+      case .jumpRope:
+        return .jumpRope
+      case .skatingSports:
+        return .skatingSports
+      case .wheelchairRunPace:
+        return .wheelchairRunPace
+      case .mixedCardio:
+        return .mixedCardio
     }
   }
   
@@ -40,7 +52,7 @@ struct Activity: Identifiable, Equatable, Hashable {
   }
   
   public var logo: String {
-    return type.sfSymbol
+    return hkType.sfSymbol
   }
   
   public var duration: TimeInterval {

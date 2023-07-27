@@ -100,7 +100,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
       VStack(alignment: .leading, spacing: 0) {
         HStack(alignment: .top) {
           VStack(alignment: .leading) {
-            Text(activity.name)
+            Text(activity.name.rawValue.capitalized)
               .foregroundColor(.primary)
               .fontWeight(.semibold)
               

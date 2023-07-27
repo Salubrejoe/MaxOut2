@@ -5,28 +5,18 @@ import Combine
 final class ExercisesViewModel: ObservableObject {
   @Published var exercises         : [Exercise] = []
   @Published var selectedExercises : [Exercise] = []
-  
-  /// Bools
-  @Published var isShowing3WayPicker = false
-  @Published var showingAddEdit      = false
-  
-  /// Searchable
-  @Published var searchText       : String = ""
-  
-  /// Three way picker selections
-  @Published var selectedCategory  : String = ""
-  @Published var selectedEquipment : String = ""
-  
-  /// Exercise.mockup
-  @Published var newExercise = Exercise.mockup
 
   /// Listener canc
   private var cancellables = Set<AnyCancellable>()
   
-  /// Alphabetical order 
   @Published var selectedLetter = ""
+  
+  
+  /// 3 way Picker
   @Published var selectedActivity: Activity?
+  @Published var selectedActivityType: ActivityType?
   @Published var selectedMuscle: Muscle?
+  @Published var selectedEquipment: EquipmentType?
   
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
@@ -35,13 +25,21 @@ final class ExercisesViewModel: ObservableObject {
     let sortedItems = exercises.sorted { $0.activityType.rawValue < $1.activityType.rawValue }
     let grouped = Dictionary(grouping: sortedItems) { String($0.activityType.rawValue) }
     let sortedGroup = grouped.sorted { $0.0 < $1.0 }
-    return sortedGroup.map { Activity(name: $0.key, exercises: $0.value) }
+    return sortedGroup.map { Activity(name: ActivityType(rawValue: $0.key) ?? .mixedCardio, exercises: $0.value) }
   }
   
   public var groupedExercises: [(String, [Exercise])] {
     var filteredExercises = exercises
     if let selectedMuscle {
-      filteredExercises = exercises.filter { $0.primaryMuscles[0] == selectedMuscle.rawValue }
+      filteredExercises = exercises.filter { $0.muscle.rawValue == selectedMuscle.rawValue }
+    }
+    
+    if let selectedEquipment {
+      filteredExercises = filteredExercises.filter { $0.equipmentType.rawValue == selectedEquipment.rawValue }
+    }
+    
+    if let selectedActivityType {
+      filteredExercises = filteredExercises.filter { $0.activityType.rawValue == selectedActivityType.rawValue }
     }
     
     let sortedItems = filteredExercises.sorted { $0.name < $1.name }
@@ -85,7 +83,7 @@ extension ExercisesViewModel {
                               dateCreated: Date(),
                               category: exercise.category,
                               bobs: (lastSession == nil ? [Bob()] : lastSession!.bobs),
-                              image: exercise.equipmentImage)
+                              image: exercise.equipmentType.image)
         
         model.sessions.append(session)
       }
@@ -172,45 +170,45 @@ extension ExercisesViewModel {
 
 
 // MARK: - SEARCH LOGIC
-extension ExercisesViewModel {
-
-  
-  func search() {
-    if selectedCategory == "",
-//       selectedMuscle == "",
-       selectedEquipment == "",
-       searchText == "" {
-      addListenerToFavourites()
-      return
-    }
-    
-    addListenerToFavourites()
-  
-    var filteredExercises = exercises
-    
-    removeListener()
-    
-    self.exercises = []
-
-    if !selectedCategory.isEmpty {
-      filteredExercises = filteredExercises.filter { $0.category == selectedCategory }
-    }
-
-//    if !selectedMuscle.isEmpty {
-//      filteredExercises = filteredExercises.filter { $0.primaryMuscles.contains(selectedMuscle) }
+//extension ExercisesViewModel {
+//
+//  
+//  func search() {
+//    if selectedCategory == "",
+////       selectedMuscle == "",
+//       selectedEquipment == "",
+//       searchText == "" {
+//      addListenerToFavourites()
+//      return
 //    }
-
-    if !selectedEquipment.isEmpty {
-      filteredExercises = filteredExercises.filter { $0.equipment == selectedEquipment }
-    }
-
-    if !searchText.isEmpty {
-      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-    }
-    
-    exercises = filteredExercises.sorted { ($0.name > $1.name) }
-  }
-}
+//    
+//    addListenerToFavourites()
+//  
+//    var filteredExercises = exercises
+//    
+//    removeListener()
+//    
+//    self.exercises = []
+//
+//    if !selectedCategory.isEmpty {
+//      filteredExercises = filteredExercises.filter { $0.category == selectedCategory }
+//    }
+//
+////    if !selectedMuscle.isEmpty {
+////      filteredExercises = filteredExercises.filter { $0.primaryMuscles.contains(selectedMuscle) }
+////    }
+//
+//    if !selectedEquipment.isEmpty {
+//      filteredExercises = filteredExercises.filter { $0.equipment == selectedEquipment }
+//    }
+//
+//    if !searchText.isEmpty {
+//      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+//    }
+//    
+//    exercises = filteredExercises.sorted { ($0.name > $1.name) }
+//  }
+//}
 
 
 // MARK: - JLOADER/LISTENER

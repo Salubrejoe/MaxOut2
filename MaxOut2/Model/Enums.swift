@@ -15,8 +15,8 @@ enum Muscle: String, CaseIterable {
   /// Abs
   case abdominals
   /// Back
-  case lowerBack
-  case middleBack
+  case lowerBack = "lower back"
+  case middleBack = "middle back"
   case lats
   /// Butt
   case glutes
@@ -80,17 +80,17 @@ enum MuscleGroup: String, CaseIterable, Codable {
 }
 
 enum EquipmentType: String, CaseIterable {
-  case body         = "bodyonly"
+  case body         = "body only"
   case machine      = "machine"
   case kettlebells  = "kettlebell"
   case dumbbell     = "dumbbell"
   case cable        = "cable"
   case barbell      = "barbell"
   case bands        = "bands"
-  case medicineBall = "medicineball"
-  case exerciseBall = "exerciseball"
-  case ezCurlBar    = "ezbar"
-  case foamRoll     = "foamroller"
+  case medicineBall = "medicine ball"
+  case exerciseBall = "exercise ball"
+  case ezCurlBar    = "e-z bar"
+  case foamRoll     = "foam roller"
   case other        = "plate"
   
   public var image : String {
@@ -122,11 +122,11 @@ enum CategoryType: String, CaseIterable {
 
 }
 
-enum ActivityType: String {
+enum ActivityType: String, CaseIterable {
   case elliptical                    = "elliptical"
   case rowing                        = "rowing"
   case running                       = "running"
-  case traditionalStrengthTraining   = "weight lifting"
+  case traditionalStrengthTraining   = "strength training"
   case walking                       = "walking"
   case coreTraining                  = "core training"
   case flexibility                   = "flexibility"
@@ -136,7 +136,7 @@ enum ActivityType: String {
   case wheelchairRunPace             = "wheelchair run pace"
   case mixedCardio                   = "mixed cardio"
   
-  var type: HKWorkoutActivityType {
+  var hkType: HKWorkoutActivityType {
     switch self {
       case .elliptical:
         return .elliptical
@@ -165,6 +165,11 @@ enum ActivityType: String {
     }
   }
   
+  public var logo: String {
+    return hkType.sfSymbol
+  }
+  
+  
   static let types: [HKWorkoutActivityType] = [
     .elliptical,
     .rowing,
@@ -172,6 +177,7 @@ enum ActivityType: String {
     .traditionalStrengthTraining,
     .walking,
     .coreTraining,
+    .mixedCardio,
     .flexibility,
     .highIntensityIntervalTraining,
     .jumpRope,

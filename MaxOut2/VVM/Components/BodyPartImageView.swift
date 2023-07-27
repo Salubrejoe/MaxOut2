@@ -24,6 +24,7 @@ struct BodyPartImageView: View {
                 .frame(width: size/2.5, height: size/2.5)
                 .padding(3)
                 .background(.ultraThinMaterial)
+                .opacity(exercise.equipmentType == .body ? 0 : 1)
                 .clipShape(Circle())
             }
           }
