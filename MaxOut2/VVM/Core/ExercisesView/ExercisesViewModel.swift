@@ -32,8 +32,8 @@ final class ExercisesViewModel: ObservableObject {
   let columns = [GridItem(.adaptive(minimum: 300))]
   
   var groupedActivities: [Activity] {
-    let sortedItems = exercises.sorted { $0.activity < $1.activity }
-    let grouped = Dictionary(grouping: sortedItems) { String($0.activity) }
+    let sortedItems = exercises.sorted { $0.activityType.rawValue < $1.activityType.rawValue }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.activityType.rawValue) }
     let sortedGroup = grouped.sorted { $0.0 < $1.0 }
     return sortedGroup.map { Activity(name: $0.key, exercises: $0.value) }
   }
@@ -41,8 +41,7 @@ final class ExercisesViewModel: ObservableObject {
   public var groupedExercises: [(String, [Exercise])] {
     var filteredExercises = exercises
     if let selectedMuscle {
-      filteredExercises = exercises.filter { $0.muscleGroup == selectedMuscle.muscleGroup }
-      print("FIltered: \(filteredExercises)")
+      filteredExercises = exercises.filter { $0.primaryMuscles[0] == selectedMuscle.rawValue }
     }
     
     let sortedItems = filteredExercises.sorted { $0.name < $1.name }

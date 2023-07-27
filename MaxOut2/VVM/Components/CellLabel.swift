@@ -7,9 +7,11 @@ struct CellLabel: View {
   
   var body: some View {
     HStack(spacing: 18) {
-      BodyPartImageView(muscleGroup: exercise.muscleGroupImage, equipment: exercise.equipmentImage, size: 60, color: exercise.color)
+      
+      BodyPartImageView(exercise: exercise, size: 60)
       
       vStackLabels
+      
       Spacer()
     }
     .multilineTextAlignment(.leading)
@@ -18,25 +20,19 @@ struct CellLabel: View {
   @ViewBuilder // MARK: - Label
   private var vStackLabels: some View {
     VStack(alignment: .leading, spacing: 2) {
-      Text(exercise.muscleGroup.capitalized)
+      Text(exercise.muscleString)
         .font(.caption)
         .bold()
-        .foregroundColor(exercise.color.opacity(0.9))
+        .foregroundColor(exercise.muscle.color)
         .cornerRadius(3)
       Text(exercise.name.capitalized)
         .fontDesign(.rounded)
         .font(.headline)
         .foregroundColor(.primary)
-      Text(equipment())
+      Text(exercise.equipmentString)
         .italic()
         .foregroundColor(.secondary)
         .font(.caption)
     }
-  }
-  
-  private func equipment() -> String {
-    guard let equip = exercise.equipment else { return "" }
-    if equip == "body only" { return "" }
-    return equip.capitalized
   }
 }

@@ -1,35 +1,6 @@
 import Foundation
 import HealthKit
 
-enum tsActivityType: String {
-  case elliptical = "elliptical"
-  case rowing = "rowing"
-  case running = "running"
-  case traditionalStrengthTraining = "weight lifting"
-  case walking = "walking"
-  case coreTraining = "core training"
-  case flexibility = "flexibility"
-  case highIntensityIntervalTraining = "high intensity interval training"
-  case jumpRope = "jump rope"
-  case skatingSports = "skating"
-  case wheelchairRunPace = "wheelchair run pace"
-  
-  static let type: [HKWorkoutActivityType] = [
-    .elliptical,
-    .rowing,
-    .running,
-    .traditionalStrengthTraining,
-    .walking,
-    .coreTraining,
-    .flexibility,
-    .highIntensityIntervalTraining,
-    .jumpRope,
-    .stairs,
-    .skatingSports,
-    .wheelchairRunPace,
-  ]
-}
-
 struct Activity: Identifiable, Equatable, Hashable {
   var id: String { type.name }
   var name: String

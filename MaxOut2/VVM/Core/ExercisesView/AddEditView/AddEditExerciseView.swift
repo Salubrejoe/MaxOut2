@@ -29,10 +29,10 @@ struct AddEditExerciseView: View {
           print(newValue)
         }
 
-        ThreeWayPicker(selectedCategory: $exercise.category,
-                       selectedMuscle: $exercise.primaryMuscles[0],
-                       selectedEquipment: $exercise.equipment.bound) {}
-          .padding(.vertical)
+//        ThreeWayPicker(selectedCategory: $exercise.category,
+//                       selectedMuscle: $exercise.primaryMuscles[0],
+//                       selectedEquipment: $exercise.equipment.bound) {}
+//          .padding(.vertical)
         
         VStack {
           ForEach($exercise.instructions.indices, id: \.self) { index in
