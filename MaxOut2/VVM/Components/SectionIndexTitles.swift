@@ -28,6 +28,7 @@ struct SectionIndexTitles: View {
       )
       .animation(.spring(), value: selectedLetter)
       .padding(.trailing, 3)
+      .background(Color.systemBackground.opacity(0.01))
   }
   
   

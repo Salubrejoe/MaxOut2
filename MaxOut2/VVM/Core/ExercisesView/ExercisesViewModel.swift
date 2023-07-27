@@ -5,15 +5,16 @@ import Combine
 final class ExercisesViewModel: ObservableObject {
   @Published var exercises         : [Exercise] = []
   @Published var selectedExercises : [Exercise] = []
+  @Published var templates         : [Exercise] = []
+//  @Published var selectedExercises : [Exercise] = []
 
   /// Listener canc
   private var cancellables = Set<AnyCancellable>()
   
   @Published var selectedLetter = ""
-  
+  @Published var searchText: String?
   
   /// 3 way Picker
-  @Published var selectedActivity: Activity?
   @Published var selectedActivityType: ActivityType?
   @Published var selectedMuscle: Muscle?
   @Published var selectedEquipment: EquipmentType?
@@ -21,17 +22,15 @@ final class ExercisesViewModel: ObservableObject {
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
-  var groupedActivities: [Activity] {
-    let sortedItems = exercises.sorted { $0.activityType.rawValue < $1.activityType.rawValue }
-    let grouped = Dictionary(grouping: sortedItems) { String($0.activityType.rawValue) }
-    let sortedGroup = grouped.sorted { $0.0 < $1.0 }
-    return sortedGroup.map { Activity(name: ActivityType(rawValue: $0.key) ?? .mixedCardio, exercises: $0.value) }
-  }
-  
   public var groupedExercises: [(String, [Exercise])] {
     var filteredExercises = exercises
+    
+    if let searchText {
+      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+    }
+    
     if let selectedMuscle {
-      filteredExercises = exercises.filter { $0.muscle.rawValue == selectedMuscle.rawValue }
+      filteredExercises = filteredExercises.filter { $0.muscle.rawValue == selectedMuscle.rawValue }
     }
     
     if let selectedEquipment {
@@ -46,6 +45,39 @@ final class ExercisesViewModel: ObservableObject {
     let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
 
     return grouped.sorted { $0.0 < $1.0 }
+  }
+  
+  public var groupedTemplates: [(String, [Exercise])] {
+    var filteredExercises = templates
+    
+    if let searchText {
+      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+    }
+    
+    if let selectedMuscle {
+      filteredExercises = filteredExercises.filter { $0.muscle.rawValue == selectedMuscle.rawValue }
+    }
+    
+    if let selectedEquipment {
+      filteredExercises = filteredExercises.filter { $0.equipmentType.rawValue == selectedEquipment.rawValue }
+    }
+    
+    if let selectedActivityType {
+      filteredExercises = filteredExercises.filter { $0.activityType.rawValue == selectedActivityType.rawValue }
+    }
+    
+    let sortedItems = filteredExercises.sorted { $0.name < $1.name }
+    let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
+    
+    return grouped.sorted { $0.0 < $1.0 }
+  }
+  
+  public var alphabetTemplates: [String] {
+    var a: [String] = []
+    for groupedExercise in groupedTemplates {
+      a.append(groupedExercise.0)
+    }
+    return a
   }
   
   public var alphabet: [String] {
@@ -63,6 +95,12 @@ final class ExercisesViewModel: ObservableObject {
     if let muscle = selectedMuscle {
       exercises = exercises.filter { $0.primaryMuscles[0] == muscle.rawValue }
     }
+  }
+  
+  func loadTemplates() {
+//    removeListener()
+    let array: ExercisesArray = Bundle.main.decode("exercises.json")
+    templates = array.exercises
   }
 }
 
@@ -91,36 +129,17 @@ extension ExercisesViewModel {
     }
   }
   
-  
-  // SELECT
-  func toggleIsSelected(_ exercise: Exercise) {
-    guard let generalIndex = indexOfItem(exercise) else { return }
-    
-    if !exercise.isSelected {
-      exercises[generalIndex].isSelected = true
-      selectedExercises.append(exercise)
-    }
-    else {
-      for i in selectedExercises.indices {
-        let id = selectedExercises[i].id
-        if id == exercise.id {
-          selectedExercises.remove(at: i)
-          exercises[generalIndex].isSelected = false
-          break
-        }
-      }
-    }
+  func select(_ exercise: Exercise) {
+    let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
+    selectedExercises.append(newExercise)
   }
   
-  
-  // DESELECT
-  func removeFromSelected(_ exercise: Exercise) {
-    guard let generalIndex = indexOfItem(exercise) else { return }
-    exercises[generalIndex].isSelected = false
+  func deselect(_ exercise: Exercise) {
     for i in selectedExercises.indices {
       let id = selectedExercises[i].id
       if id == exercise.id {
         selectedExercises.remove(at: i)
+        break
       }
     }
   }
@@ -169,62 +188,10 @@ extension ExercisesViewModel {
 }
 
 
-// MARK: - SEARCH LOGIC
-//extension ExercisesViewModel {
-//
-//  
-//  func search() {
-//    if selectedCategory == "",
-////       selectedMuscle == "",
-//       selectedEquipment == "",
-//       searchText == "" {
-//      addListenerToFavourites()
-//      return
-//    }
-//    
-//    addListenerToFavourites()
-//  
-//    var filteredExercises = exercises
-//    
-//    removeListener()
-//    
-//    self.exercises = []
-//
-//    if !selectedCategory.isEmpty {
-//      filteredExercises = filteredExercises.filter { $0.category == selectedCategory }
-//    }
-//
-////    if !selectedMuscle.isEmpty {
-////      filteredExercises = filteredExercises.filter { $0.primaryMuscles.contains(selectedMuscle) }
-////    }
-//
-//    if !selectedEquipment.isEmpty {
-//      filteredExercises = filteredExercises.filter { $0.equipment == selectedEquipment }
-//    }
-//
-//    if !searchText.isEmpty {
-//      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-//    }
-//    
-//    exercises = filteredExercises.sorted { ($0.name > $1.name) }
-//  }
-//}
 
-
-// MARK: - JLOADER/LISTENER
+// MARK: - LISTENER
 extension ExercisesViewModel {
-  
-  func loadTemplateJson() {
-    removeListener()
-    
-    self.exercises = []
-    let result: ExercisesArray = Bundle.main.decode("exercises.json")
-    
-    let decodedExercises = result.exercises
-    
-    exercises = decodedExercises
-  }
-  
+
   func addListenerToFavourites() {
     Task {
       let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid
@@ -233,6 +200,7 @@ extension ExercisesViewModel {
           
         } receiveValue: { [weak self] exercises in
           self?.exercises = exercises.sorted { $0.name < $1.name}
+          print("COunt: \(exercises.count)")
         }
         .store(in: &cancellables)
     }

@@ -11,6 +11,7 @@ struct BodyPartImageView: View {
       .resizable()
       .scaledToFit()
       .colorMultiply(exercise.muscle.color)
+      .shadow(color: exercise.muscle.color, radius: 7, x: 0, y: 0)
       .padding(5)
       .frame(width: size, height: size)
       .overlay {

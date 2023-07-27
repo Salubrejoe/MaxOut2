@@ -2,9 +2,22 @@
 import SwiftUI
 
 
+struct ThreeWayPicker: View {
+  @ObservedObject var model: ExercisesViewModel
+  
+  var body: some View {
+    HStack(spacing: 3) {
+      EQPicker(selectedEquipment: $model.selectedEquipment)
+      MGPicker(selectedMuscle: $model.selectedMuscle)
+      APicker(selectedActivityType: $model.selectedActivityType)
+    }
+  }
+}
+
+
 // MARK: - MGPICKER
 struct MGPicker: View {
-  @ObservedObject var model: ExercisesViewModel
+  @Binding var selectedMuscle: Muscle?
   
   let muscles  : [Muscle] = Muscle.allCases
   
@@ -12,7 +25,7 @@ struct MGPicker: View {
     Menu {
       Section {
         Button {
-          model.selectedMuscle = nil
+          selectedMuscle = nil
         } label: {
           Text("See All").bold()
         }
@@ -21,60 +34,51 @@ struct MGPicker: View {
       Section {
         ForEach(muscles, id: \.self) { muscle in
           Button {
-            model.selectedMuscle = muscle
+            selectedMuscle = muscle
           } label: {
-            HStack(spacing: 0) {
+            HStack {
               Image(muscle.muscleGroupImage)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 10, height: 10)
-                .padding(2)
               Text(muscle.rawValue.capitalized)
             }
           }
         }
       }
     } label: {
-      label(for: model.selectedMuscle)
-    }
-    .onChange(of: model.selectedMuscle) { newValue in
-//      model.exercises = []
-      model.addListenerToFavourites()
-      print(model.exercises.count)
-      if let muscle = newValue {
-        model.exercises = model.exercises.filter { $0.muscle.rawValue == muscle.rawValue }
-        print(model.exercises.count)
-      }
+      label()
     }
   }
   
   @ViewBuilder // MARK: - Label
-  private func label(for selectedMuscle: Muscle?) -> some View {
+  private func label() -> some View {
     HStack(spacing: 0) {
       
       if let selectedMuscle {
         Image(selectedMuscle.muscleGroupImage)
           .resizable()
           .scaledToFit()
-          .colorMultiply(selectedMuscle.color)
+          .colorMultiply(.primary)
           .frame(width: 20, height: 20)
           .padding(.vertical, 7)
+          .padding(.trailing, 5)
           
       }
-      Text(selectedMuscle?.rawValue.capitalized ?? "Body Part")
-        .foregroundStyle(selectedMuscle?.color.gradient ?? Color.secondary.gradient)
-      
+      Text(selectedMuscle?.rawValue.capitalized ?? "Muscle Group")
+        .foregroundColor(.primary)
     }
-    .foregroundStyle(model.selectedMuscle != nil ? Color.black.gradient : selectedMuscle?.color.gradient ?? Color.pink.gradient)
-    .labelForPickers(background: model.selectedMuscle != nil ? (selectedMuscle?.color.gradient ?? Color.pink.gradient) : Color.secondarySytemBackground.gradient)
+    .labelForPickers(isSelected: selectedMuscle != nil)
   }
+  
+  private func deselect() { self.selectedMuscle = nil }
 }
 
 
 
 // MARK: - APICKER
 struct APicker: View {
-  @ObservedObject var model: ExercisesViewModel
+  @Binding var selectedActivityType: ActivityType?
   
   let activityTypes : [ActivityType] = ActivityType.allCases
   
@@ -82,7 +86,7 @@ struct APicker: View {
     Menu {
       Section {
         Button {
-          model.selectedActivityType = nil
+          selectedActivityType = nil
         } label: {
           Text("See All").bold()
         }
@@ -91,36 +95,36 @@ struct APicker: View {
       Section {
         ForEach(activityTypes, id: \.self) { type in
           Button {
-            model.selectedActivityType = type
+            selectedActivityType = type
           } label: {
-            Label(type.rawValue.capitalized, systemImage: type.logo)
+            Label(type.rawValue.capitalized, systemImage: type.hkType.sfSymbol)
           }
         }
       }
     } label: {
-      label(for: model.selectedActivityType)
+      label()
     }
   }
   
   @ViewBuilder // MARK: - Label
-  private func label(for type: ActivityType?) -> some View {
+  private func label() -> some View {
     HStack(spacing: 5) {
-      if let type {
-        Image(systemName: type.logo)
+      if let selectedActivityType {
+        Image(systemName: selectedActivityType.hkType.sfSymbol)
           .frame(width: 20, height: 20)
+          .foregroundColor(.primary)
       }
-      Text(type?.hkType.commonName.capitalized ?? "Category")
+      Text(selectedActivityType?.hkType.commonName.capitalized ?? "Category")
+        .foregroundColor(.primary)
     }
-    
-    .foregroundStyle(model.selectedActivityType != nil ? Color.black.gradient : Color.exerciseRing.gradient)
-    .labelForPickers(background: model.selectedActivityType != nil ? Color.exerciseRing.gradient : Color.secondarySytemBackground.gradient)
+    .labelForPickers(isSelected: selectedActivityType != nil)
   }
 }
 
 
 // MARK: - EQPICKER
 struct EQPicker: View {
-  @ObservedObject var model: ExercisesViewModel
+  @Binding var selectedEquipment: EquipmentType?
   
   let equipmentTypes  : [EquipmentType] = EquipmentType.allCases
   
@@ -128,7 +132,7 @@ struct EQPicker: View {
     Menu {
       Section {
         Button {
-          model.selectedEquipment = nil
+          selectedEquipment = nil
         } label: {
           Text("See All").bold()
         }
@@ -137,7 +141,7 @@ struct EQPicker: View {
       Section {
         ForEach(equipmentTypes, id: \.self) { eqType in
           Button {
-            model.selectedEquipment = eqType
+            selectedEquipment = eqType
           } label: {
             HStack {
               Image(eqType.image)
@@ -151,36 +155,44 @@ struct EQPicker: View {
         }
       }
     } label: {
-      label(for: model.selectedEquipment)
+      label()
     }
   }
   
   @ViewBuilder // MARK: - Label
-  private func label(for selectedEquipment: EquipmentType?) -> some View {
+  private func label() -> some View {
     HStack(spacing: 5) {
       if let selectedEquipment, selectedEquipment != .body {
         Image(selectedEquipment.image)
           .resizable()
           .scaledToFit()
-          .colorMultiply(Color(.systemTeal))
           .frame(width: 20, height: 20)
       }
       Text(selectedEquipment?.rawValue.capitalized ?? "Equipment")
+        .foregroundColor(.primary)
     }
-    .foregroundStyle(model.selectedEquipment != nil ? Color.black.gradient : Color(.systemTeal).gradient)
-    .labelForPickers(background: model.selectedEquipment != nil ? Color(.systemTeal).gradient : Color.secondarySytemBackground.gradient)
+    .labelForPickers(isSelected: selectedEquipment != nil)
   }
 }
 
 
 extension View {
-  func labelForPickers<Shape: ShapeStyle>(background: Shape) -> some View {
+  func labelForPickers(isSelected: Bool) -> some View {
     self
+      .bold()
+      .minimumScaleFactor(0.8)
       .padding(.horizontal, 7)
+      .multilineTextAlignment(.leading)
       .font(.footnote)
-      .frame(maxWidth: 155)
-      .frame(height: 37)
-      .background(background)
-      .clipShape(RoundedRectangle(cornerRadius: 7))
+      .frame(maxWidth: .infinity)
+      .frame(maxHeight: 38)
+//      .background(isSelected ? Color.systemBackground : Color.secondarySytemBackground.opacity(0.5))
+      .cornerRadius(10)
+      .overlay {
+        if isSelected {
+          RoundedRectangle(cornerRadius: 10)
+            .stroke(Color(.label), lineWidth: 2)
+        }
+      }
   }
 }

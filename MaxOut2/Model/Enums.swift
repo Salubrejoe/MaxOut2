@@ -123,19 +123,19 @@ enum CategoryType: String, CaseIterable {
 }
 
 enum ActivityType: String, CaseIterable {
-  case elliptical                    = "elliptical"
-  case rowing                        = "rowing"
-  case running                       = "running"
-  case traditionalStrengthTraining   = "strength training"
-  case walking                       = "walking"
   case coreTraining                  = "core training"
+  case elliptical                    = "elliptical"
   case flexibility                   = "flexibility"
   case highIntensityIntervalTraining = "high intensity interval training"
   case jumpRope                      = "jump rope"
-  case skatingSports                 = "skating"
-  case wheelchairRunPace             = "wheelchair run pace"
   case mixedCardio                   = "mixed cardio"
-  
+  case rowing                        = "rowing"
+  case running                       = "running"
+  case skatingSports                 = "skating"
+  case traditionalStrengthTraining   = "strength training"
+  case walking                       = "walking"
+  case wheelchairRunPace             = "wheelchair run pace"
+
   var hkType: HKWorkoutActivityType {
     switch self {
       case .elliptical:
@@ -164,11 +164,6 @@ enum ActivityType: String, CaseIterable {
         return .mixedCardio
     }
   }
-  
-  public var logo: String {
-    return hkType.sfSymbol
-  }
-  
   
   static let types: [HKWorkoutActivityType] = [
     .elliptical,
