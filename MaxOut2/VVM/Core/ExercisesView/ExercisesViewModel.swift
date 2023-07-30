@@ -6,9 +6,10 @@ final class ExercisesViewModel: ObservableObject {
   @Published var exercises         : [Exercise] = []
   @Published var selectedExercises : [Exercise] = []
   @Published var templates         : [Exercise] = []
-//  @Published var selectedExercises : [Exercise] = []
+
 
   /// Listener canc
+  let passthrough = PassthroughSubject<Void, Never>()
   private var cancellables = Set<AnyCancellable>()
   
   @Published var selectedLetter = ""
@@ -18,6 +19,7 @@ final class ExercisesViewModel: ObservableObject {
   @Published var selectedActivityType: ActivityType?
   @Published var selectedMuscle: Muscle?
   @Published var selectedEquipment: EquipmentType?
+  @Published var isEditing: Bool = false
   
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
@@ -129,19 +131,23 @@ extension ExercisesViewModel {
     }
   }
   
-  func select(_ exercise: Exercise) {
-    let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
-    selectedExercises.append(newExercise)
+  func select(_ exercise: Exercise, pageScroller: ScrollViewProxy) {
+    if deselect(exercise) {
+//      pageScroller.scrollTo(exercise.id, anchor: .center)
+      return
+    }
+    else {
+      let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
+      selectedExercises.append(newExercise)
+//      pageScroller.scrollTo(exercise.id, anchor: .center)
+    }
   }
   
-  func deselect(_ exercise: Exercise) {
-    for i in selectedExercises.indices {
-      let id = selectedExercises[i].id
-      if id == exercise.id {
-        selectedExercises.remove(at: i)
-        break
-      }
-    }
+  @discardableResult
+  func deselect(_ exercise: Exercise) -> Bool {
+    guard let index = indexOfItem(exercise, collection: selectedExercises) else { return false }
+    selectedExercises.remove(at: index)
+    return true
   }
   
   // LAST SESSION
@@ -152,8 +158,8 @@ extension ExercisesViewModel {
   
   
   // MARK: - IndexForExercise
-  func indexOfItem(_ exercise: Exercise) -> Int? {
-    guard let index = self.exercises.firstIndex(where: { $0.id == exercise.id }) else {
+  func indexOfItem(_ exercise: Exercise, collection exercises: [Exercise]) -> Int? {
+    guard let index = exercises.firstIndex(where: { $0.name == exercise.name }) else {
       return nil
     }
     return index

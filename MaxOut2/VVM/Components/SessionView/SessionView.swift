@@ -36,10 +36,7 @@ struct SessionView: View {
           .padding(.bottom, 20)
           .padding(.top, 5)
       }
-      
-      .onAppear {
-        UITextField.appearance().clearButtonMode = .whileEditing
-      }
+      .textFieldClearButton
     }
   }
 }
@@ -175,3 +172,6 @@ struct SessionView_Previews: PreviewProvider {
     .padding(.horizontal)
   }
 }
+
+
+

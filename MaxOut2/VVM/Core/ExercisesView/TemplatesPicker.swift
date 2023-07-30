@@ -1,8 +1,10 @@
 import SwiftUI
+import Combine
 
 struct TemplatesPicker: View {
   @Environment(\.dismiss) var dismiss
-  @StateObject private var model = ExercisesViewModel()
+  @ObservedObject  var model: ExercisesViewModel
+  
   var body: some View {
     NavigationStack {
       ZStack(alignment: .bottom) {
@@ -14,10 +16,11 @@ struct TemplatesPicker: View {
                 selection
               }
               ForEach(model.groupedTemplates, id: \.0) { section in
-                actualList(section)
+                actualList(section, pageScroller: pageScroller)
               }
             }
             .padding(.bottom, 100)
+            .padding(.horizontal)
           }
           .searchable(text: $model.searchText.bound, placement: .automatic, prompt: "Look up")
           .scrollDismissesKeyboard(.interactively)
@@ -27,7 +30,6 @@ struct TemplatesPicker: View {
               SectionIndexTitles(alphabet: model.alphabetTemplates, selectedLetter: $model.selectedLetter, pageScroller: pageScroller)
             }
           }
-          .padding(.horizontal)
           .navigationTitle("🚀Discover")
           .navigationBarTitleDisplayMode(.inline)
         }
@@ -43,7 +45,7 @@ struct TemplatesPicker: View {
   }
   
   @ViewBuilder
-  private func actualList(_ section: (String, [Exercise])) -> some View {
+  private func actualList(_ section: (String, [Exercise]), pageScroller: ScrollViewProxy) -> some View {
     HStack {
       Text(section.0)
         .font(.caption2.bold())
@@ -55,13 +57,8 @@ struct TemplatesPicker: View {
     
     
     ForEach(section.1) { exercise in
-      ExerciseListCell(exercise: exercise) {
-        //
-      }
-      .transition(.opacity)
-      .onTapGesture {
-        model.select(exercise)
-      }
+      PickerCell(model: model, exercise: exercise) { model.select(exercise, pageScroller: pageScroller) }
+        .id(exercise.id)
     }
   }
   
@@ -87,6 +84,7 @@ struct TemplatesPicker: View {
         }
         .onTapGesture {
           model.deselect(exercise)
+          model.passthrough.send()
         }
     }
     
@@ -109,8 +107,41 @@ struct TemplatesPicker: View {
   }
 }
 
+// MARK: - PICKER CELL
+struct PickerCell: View {
+  @ObservedObject var model: ExercisesViewModel
+  let exercise: Exercise
+  @State private var isSelected = false
+  let action: () -> ()
+  
+  @State private var isSelectedCancellable: AnyCancellable?
+  
+  var body: some View {
+    HStack {
+      if isSelected {
+        Rectangle()
+          .frame(width: 5)
+          .foregroundColor(.accentColor)
+      }
+      CellLabel(for: exercise)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+    }
+    .background(isSelected ? Color.secondarySytemBackground : Color.clear)
+    .cornerRadius(10)
+    .animation(.spring(), value: isSelected)
+    .onTapGesture {
+      isSelected.toggle()
+      action()
+    }
+    .onReceive(model.passthrough) { _ in
+      isSelected = false
+    }
+  }
+}
+
 struct TemplatesPicker_Previews: PreviewProvider {
   static var previews: some View {
-    TemplatesPicker()
+    TemplatesPicker(model: ExercisesViewModel())
   }
 }

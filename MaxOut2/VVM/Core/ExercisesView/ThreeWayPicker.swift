@@ -15,7 +15,7 @@ struct ThreeWayPicker: View {
         .padding(.vertical)
       APicker(selectedActivityType: $model.selectedActivityType)
     }
-    .frame(height: 50)
+    .frame(maxHeight: 50)
     .padding(.horizontal, 7)
     .background(.ultraThinMaterial)
     .cornerRadius(10)
@@ -33,11 +33,15 @@ struct MGPicker: View {
   var body: some View {
     Menu {
       Section {
-        Button {
+        Button(role: .destructive) {
           selectedMuscle = nil
         } label: {
-          Text("See All").bold()
+          HStack {
+            Image(systemName: "arrow.counterclockwise")
+            Text("Clear filter")
+          }
         }
+        
       }
       
       Section {
@@ -49,8 +53,10 @@ struct MGPicker: View {
               Image(muscle.muscleGroupImage)
                 .resizable()
                 .scaledToFit()
+                .colorMultiply(.primary)
                 .frame(width: 10, height: 10)
-              Text(muscle.rawValue.capitalized)
+              Text(muscle.displayName)
+                
             }
           }
         }
@@ -74,8 +80,9 @@ struct MGPicker: View {
           .padding(.trailing, 5)
           
       }
-      Text(selectedMuscle?.rawValue.capitalized ?? "Muscle Group")
+      Text(selectedMuscle?.displayName ?? "Select Muscle Group")
         .foregroundColor(.primary)
+        
     }
     .labelForPickers(isSelected: selectedMuscle != nil)
   }
@@ -94,10 +101,13 @@ struct APicker: View {
   var body: some View {
     Menu {
       Section {
-        Button {
+        Button(role: .destructive) {
           selectedActivityType = nil
         } label: {
-          Text("See All").bold()
+          HStack {
+            Image(systemName: "arrow.counterclockwise")
+            Text("Clear filter")
+          }
         }
       }
       
@@ -123,7 +133,7 @@ struct APicker: View {
           .frame(width: 20, height: 20)
           .foregroundColor(.primary)
       }
-      Text(selectedActivityType?.hkType.commonName.capitalized ?? "Category")
+      Text(selectedActivityType?.hkType.commonName.capitalized ?? "Select Category")
         .foregroundColor(.primary)
     }
     .labelForPickers(isSelected: selectedActivityType != nil)
@@ -140,10 +150,13 @@ struct EQPicker: View {
   var body: some View {
     Menu {
       Section {
-        Button {
+        Button(role: .destructive) {
           selectedEquipment = nil
         } label: {
-          Text("See All").bold()
+          HStack {
+            Image(systemName: "arrow.counterclockwise")
+            Text("Clear filter")
+          }
         }
       }
       
@@ -184,17 +197,15 @@ struct EQPicker: View {
   }
 }
 
-
 extension View {
   func labelForPickers(isSelected: Bool) -> some View {
     self
       .bold()
-      .minimumScaleFactor(0.8)
       .padding(.horizontal, 7)
       .multilineTextAlignment(.leading)
       .font(.footnote)
       .frame(maxWidth: .infinity)
-      .frame(maxHeight: 38)
+      .frame(height: 50)
 //      .background(isSelected ? Color.systemBackground : Color.secondarySytemBackground.opacity(0.5))
       
       .cornerRadius(10)

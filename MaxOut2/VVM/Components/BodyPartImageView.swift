@@ -7,11 +7,7 @@ struct BodyPartImageView: View {
   let size: CGFloat
   
   var body: some View {
-    Image(exercise.muscle.muscleGroupImage)
-      .resizable()
-      .scaledToFit()
-      .colorMultiply(exercise.muscle.color)
-      .shadow(color: exercise.muscle.color, radius: 7, x: 0, y: 0)
+    BodyPartImage(exercise: exercise, color: exercise.muscle.color)
       .padding(5)
       .frame(width: size, height: size)
       .overlay {
@@ -19,17 +15,38 @@ struct BodyPartImageView: View {
             Spacer()
             VStack {
               Spacer()
-              Image(exercise.equipmentType.image)
-                .resizable()
-                .scaledToFit()
-                .frame(width: size/2.5, height: size/2.5)
-                .padding(3)
-                .background(.ultraThinMaterial)
-                .opacity(exercise.equipmentType == .body ? 0 : 1)
-                .clipShape(Circle())
+              EquipmentImage(exercise: exercise, size: size)
             }
           }
           .offset(x: 3, y: 3)
       }
   }
-} 
+}
+
+struct BodyPartImage: View {
+  let exercise: Exercise
+  let color: Color
+  var body: some View {
+    Image(exercise.muscle.muscleGroupImage)
+      .resizable()
+      .scaledToFit()
+      .colorMultiply(color)
+      .shadow(color: color, radius: 7, x: 0, y: 0)
+  }
+}
+
+struct EquipmentImage: View {
+  let exercise: Exercise
+  let size: CGFloat
+  
+  var body: some View {
+    Image(exercise.equipmentType.image)
+      .resizable()
+      .scaledToFit()
+      .frame(width: size/3, height: size/3)
+      .padding(3)
+      .background(.ultraThinMaterial)
+      .opacity(exercise.equipmentType == .body ? 0 : 1)
+      .clipShape(Circle())
+  }
+}

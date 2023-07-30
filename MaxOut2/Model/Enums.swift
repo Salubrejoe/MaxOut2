@@ -28,6 +28,13 @@ enum Muscle: String, CaseIterable {
   /// Calves
   case calves
   
+  public var displayName: String {
+    switch self {
+      case .abdominals : return "Abs"
+      default : return self.rawValue.capitalized
+    }
+  }
+  
   var muscleGroup : MuscleGroup {
     switch self {
       case .neck, .traps, .shoulders                        : return .shoulders
@@ -91,6 +98,7 @@ enum EquipmentType: String, CaseIterable {
   case exerciseBall = "exercise ball"
   case ezCurlBar    = "e-z bar"
   case foamRoll     = "foam roller"
+  case treadmill    = "treadmill"
   case other        = "plate"
   
   public var image : String {
@@ -106,6 +114,7 @@ enum EquipmentType: String, CaseIterable {
       case .exerciseBall: return "exerciseball"
       case .ezCurlBar   : return "ezbar"
       case .foamRoll    : return "foamroller"
+      case .treadmill   : return "treadmill"
       case .other       : return "plate"
     }
   }

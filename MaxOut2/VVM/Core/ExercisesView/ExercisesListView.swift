@@ -12,15 +12,19 @@ struct ExercisesListView: View {
     NavigationStack {
       ScrollViewReader { pageScroller in
         ZStack(alignment: .bottom) {
-          List {
-            ForEach(model.groupedExercises, id: \.0) { section in
-              actualList(section)
+          
+            List {
+              ForEach(model.groupedExercises, id: \.0) { section in
+                actualList(section)
+              }
+              
+              Spacer(minLength: 100)
             }
-          }
-          .searchable(text: $model.searchText.bound, placement: .automatic, prompt: "Look up")
-          .scrollDismissesKeyboard(.interactively)
-          .listStyle(.plain)
-          .scrollIndicators(.hidden)
+            .searchable(text: $model.searchText.bound, placement: .automatic, prompt: "Look up")
+            .scrollDismissesKeyboard(.interactively)
+            .listStyle(.plain)
+            .scrollIndicators(.hidden)
+          
           
           ThreeWayPicker(model: model)
             
@@ -37,9 +41,10 @@ struct ExercisesListView: View {
       .toolbar { createButton }
       .onAppear{
         model.addListenerToFavourites()
+        model.searchText = nil
       }
       .sheet(isPresented: $isShowingTemplates) {
-        TemplatesPicker()
+        TemplatesPicker(model: model)
       }
     }
   }
@@ -59,14 +64,18 @@ struct ExercisesListView: View {
     
     
     ForEach(section.1) { exercise in
-      ExerciseListCell(exercise: exercise) {
-        model.remove(exercise: exercise.id)
+      NavigationLink {
+        ExerciseDetailView(exercise: exercise, model: model)
+//        Text("Pixxa")
+      } label: {
+        ExerciseListCell(exercise: exercise) {
+          model.remove(exercise: exercise.id)
+        }
       }
-      .transition(.opacity)
     }
   }
   
-  @ToolbarContentBuilder // MARK: - TOOLBAR
+  @ToolbarContentBuilder // MARK: - PLUS BUTTON
   private var createButton: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
@@ -83,25 +92,23 @@ struct ExercisesListView: View {
 }
 
 
+
+
 // MARK: - CELL
 struct ExerciseListCell: View {
   let exercise: Exercise
-  @State private var isSelected: Bool = false
   let deleteAction: () -> ()
   
   var body: some View {
-    CellLabel(exercise: exercise, isSelected: $isSelected, image: "checkmark", selectedAction: {
-      //
-    })
-      
-      .animation(.easeIn, value: exercise.isSelected)
+    CellLabel(for: exercise)
       .swipeActions(edge: .leading, allowsFullSwipe: true) {
         Button {
           deleteAction()
         } label: {
           Image(systemName: "trash")
+            .foregroundColor(.red)
         }
-        .tint(Color(.systemRed))
+//        .tint(Color(.systemRed))
       }
   }
 }

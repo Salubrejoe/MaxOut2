@@ -92,7 +92,6 @@
 		7CBAA1F72A5D944400DFA31D /* LoginTextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1E92A5D944400DFA31D /* LoginTextFieldsView.swift */; };
 		7CBAA1F82A5D944400DFA31D /* ResignKeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EB2A5D944400DFA31D /* ResignKeyboardButton.swift */; };
 		7CBAA1F92A5D944400DFA31D /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EC2A5D944400DFA31D /* LoginTextField.swift */; };
-		7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */; };
 		7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1EE2A5D944400DFA31D /* LoginTextFieldsManager.swift */; };
 		7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */; };
 		7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1F12A5D944400DFA31D /* LoginView.swift */; };
@@ -110,6 +109,8 @@
 		7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA2182A5D964F00DFA31D /* Colors.swift */; };
 		7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA21A2A5D96F000DFA31D /* Exercise.swift */; };
 		7CC6FB602A72B82900A9138A /* TemplatesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6FB5F2A72B82900A9138A /* TemplatesPicker.swift */; };
+		7CC6FB622A740B4D00A9138A /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6FB612A740B4D00A9138A /* ExerciseDetailView.swift */; };
+		7CC6FB642A7664E400A9138A /* ClearButtonTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6FB632A7664E400A9138A /* ClearButtonTF.swift */; };
 		7CCB57FB2A69125D0086D291 /* BodyMassChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */; };
 		7CCB57FD2A6912BD0086D291 /* WidgetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */; };
 		7CCB58002A6949EF0086D291 /* HKWorkoutActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FF2A6949EF0086D291 /* HKWorkoutActivityType.swift */; };
@@ -195,7 +196,6 @@
 		7CBAA1E92A5D944400DFA31D /* LoginTextFieldsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextFieldsView.swift; sourceTree = "<group>"; };
 		7CBAA1EB2A5D944400DFA31D /* ResignKeyboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResignKeyboardButton.swift; sourceTree = "<group>"; };
 		7CBAA1EC2A5D944400DFA31D /* LoginTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
-		7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		7CBAA1EE2A5D944400DFA31D /* LoginTextFieldsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextFieldsManager.swift; sourceTree = "<group>"; };
 		7CBAA1F02A5D944400DFA31D /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7CBAA1F12A5D944400DFA31D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -215,6 +215,8 @@
 		7CBAA21A2A5D96F000DFA31D /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		7CBAA21C2A5D9BC500DFA31D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CC6FB5F2A72B82900A9138A /* TemplatesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesPicker.swift; sourceTree = "<group>"; };
+		7CC6FB612A740B4D00A9138A /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
+		7CC6FB632A7664E400A9138A /* ClearButtonTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonTF.swift; sourceTree = "<group>"; };
 		7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMassChart.swift; sourceTree = "<group>"; };
 		7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGrid.swift; sourceTree = "<group>"; };
 		7CCB57FF2A6949EF0086D291 /* HKWorkoutActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutActivityType.swift; sourceTree = "<group>"; };
@@ -358,11 +360,12 @@
 		7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */,
 				7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */,
+				7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */,
+				7C1555D92A701469005C2855 /* ThreeWayPicker.swift */,
 				7CC6FB5F2A72B82900A9138A /* TemplatesPicker.swift */,
 				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
-				7C1555D92A701469005C2855 /* ThreeWayPicker.swift */,
+				7CC6FB612A740B4D00A9138A /* ExerciseDetailView.swift */,
 			);
 			path = ExercisesView;
 			sourceTree = "<group>";
@@ -518,20 +521,11 @@
 		7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */ = {
 			isa = PBXGroup;
 			children = (
-				7CBAA1EA2A5D944400DFA31D /* Components */,
 				7CBAA1E92A5D944400DFA31D /* LoginTextFieldsView.swift */,
+				7CBAA1EC2A5D944400DFA31D /* LoginTextField.swift */,
 				7CBAA1EE2A5D944400DFA31D /* LoginTextFieldsManager.swift */,
 			);
 			path = TSTextFieldsView;
-			sourceTree = "<group>";
-		};
-		7CBAA1EA2A5D944400DFA31D /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				7CBAA1ED2A5D944400DFA31D /* XMarkButton.swift */,
-				7CBAA1EC2A5D944400DFA31D /* LoginTextField.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		7CBAA1EF2A5D944400DFA31D /* LoginView */ = {
@@ -584,6 +578,7 @@
 				7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */,
 				7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */,
 				7CBAA2092A5D94EB00DFA31D /* NumbersOnlyModifier.swift */,
+				7CC6FB632A7664E400A9138A /* ClearButtonTF.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -736,10 +731,12 @@
 				7C7DA0FC2A5EB25400B58AFA /* SmallTsButton.swift in Sources */,
 				7CBAA20B2A5D94EB00DFA31D /* KeyboardAdaptive.swift in Sources */,
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
+				7CC6FB642A7664E400A9138A /* ClearButtonTF.swift in Sources */,
 				7CC6FB602A72B82900A9138A /* TemplatesPicker.swift in Sources */,
 				7C1555D82A6FCBC0005C2855 /* DismissButton.swift in Sources */,
 				7CCB57FB2A69125D0086D291 /* BodyMassChart.swift in Sources */,
 				7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */,
+				7CC6FB622A740B4D00A9138A /* ExerciseDetailView.swift in Sources */,
 				7C7DA0C02A5E968900B58AFA /* MainButtonLabel.swift in Sources */,
 				7C7DA0D82A5EB0F800B58AFA /* SessionView.swift in Sources */,
 				7CBAA2052A5D94AC00DFA31D /* TextFieldFocus.swift in Sources */,
@@ -799,7 +796,6 @@
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
 				7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */,
-				7CBAA1FA2A5D944400DFA31D /* XMarkButton.swift in Sources */,
 				7C7DA0C52A5EAFA000B58AFA /* DiaryViewModel.swift in Sources */,
 				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */,

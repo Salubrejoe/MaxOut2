@@ -10,7 +10,12 @@ struct Exercise: Identifiable, Equatable, Hashable {
                                name: "New Exercise",
                                category: "cardio",
                                primaryMuscles: ["chest"],
-                               instructions: [""],
+                               instructions: [
+                                "Begin by standing on one leg, with the bent knee raised. This will be your start position.",
+                                "Using a countermovement jump, take off upward by extending the hip, knee, and ankle of the grounded leg.",
+                                "Immediately flex the knee and attempt to touch your butt with the heel of your jumping leg.",
+                                "Return the leg to a partially bent position underneath the hips and land. Your opposite leg should stay in relatively the same position throughout the drill."
+                               ],
                                equipment: "barbell",
                                dateModified: Date(),
                                isSelected: false)

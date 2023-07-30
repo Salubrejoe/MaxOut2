@@ -5,10 +5,9 @@ import SwiftUI
 struct CellLabel: View {
   let exercise: Exercise
   
-  @Binding var isSelected: Bool
-  let image: String
-  
-  let selectedAction: () -> ()
+  init(for exercise: Exercise) {
+    self.exercise = exercise
+  }
   
   var body: some View {
     HStack(spacing: 18) {
@@ -18,16 +17,6 @@ struct CellLabel: View {
       vStackLabels
       
       Spacer()
-      
-      if isSelected {
-        Button {
-          selectedAction()
-        } label: {
-          Image(systemName: image)
-            .foregroundColor(.primary)
-            .imageScale(.large)
-        }
-      }
     }
     .multilineTextAlignment(.leading)
   }

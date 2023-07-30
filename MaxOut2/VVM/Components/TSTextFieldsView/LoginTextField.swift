@@ -16,7 +16,7 @@ struct LoginTextField: View {
           .padding()
           .buttonLabel(background: Color.secondarySytemBackground, foreground: .primary)
           .onSubmit {
-            action()
+        action()
           }
       }
       else {
@@ -30,13 +30,14 @@ struct LoginTextField: View {
           }
       }
         
-      if !text.isEmpty {
-        XMarkButton {
-          xMarkAction()
-        }
-        .padding(.trailing)
-      }
+//      if !text.isEmpty {
+//        XMarkButton {
+//          xMarkAction()
+//        }
+//        .padding(.trailing)
+//      }
     }
+    .textFieldClearButton 
     .frame(maxWidth: 428)
     .frame(height: 46)
   }
