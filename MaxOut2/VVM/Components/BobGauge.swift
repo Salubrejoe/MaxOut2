@@ -117,13 +117,13 @@ struct BobGauge: View {
       
       Gauge(value: bob.restTime - model.timeElapsed, in: 0...bob.restTime) {}
         .gaugeStyle(.accessoryLinearCapacity)
-        .tint(.accentColor)
+        .tint(.primary)
         .rotationEffect(.radians(.pi))
         .animation(.linear, value: model.timeElapsed)
     }
     .frame(minWidth: 80)
     .frame(height: 46)
-    .foregroundStyle(Color.accentColor)
+//    .foregroundStyle(Color.accentColor)
     
     .contextMenu {
       TimerSheet(value: $bob.restTime, model: model)

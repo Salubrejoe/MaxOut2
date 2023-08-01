@@ -39,7 +39,7 @@ struct BottomSheetView<Content: View>: View {
         self.content
       }
       .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
-      .background(Color(.secondarySystemBackground))
+      .background(background(isOpen: isOpen))
       .cornerRadius(Constants.radius)
       .frame(height: geometry.size.height, alignment: .bottom)
       .offset(y: self.offset)
@@ -61,6 +61,19 @@ struct BottomSheetView<Content: View>: View {
           self.offset = self.getOffset()
         }
       )
+    }
+  }
+  
+  @ViewBuilder
+  private func background(isOpen: Bool) -> some View {
+    if isOpen {
+      Color(.secondarySystemBackground)
+    }
+    else {
+      LinearGradient(colors: [
+        Color.secondarySytemBackground,
+        Color.clear
+      ], startPoint: .top, endPoint: .bottom)
     }
   }
 }

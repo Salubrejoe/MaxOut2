@@ -7,7 +7,8 @@ final class ExercisesViewModel: ObservableObject {
   @Published var selectedExercises : [Exercise] = []
   @Published var templates         : [Exercise] = []
 
-
+  @Published var selectedExercise = Exercise.mockup
+  
   /// Listener canc
   let passthrough = PassthroughSubject<Void, Never>()
   private var cancellables = Set<AnyCancellable>()
@@ -100,7 +101,6 @@ final class ExercisesViewModel: ObservableObject {
   }
   
   func loadTemplates() {
-//    removeListener()
     let array: ExercisesArray = Bundle.main.decode("exercises.json")
     templates = array.exercises
   }
@@ -132,14 +132,10 @@ extension ExercisesViewModel {
   }
   
   func select(_ exercise: Exercise, pageScroller: ScrollViewProxy) {
-    if deselect(exercise) {
-//      pageScroller.scrollTo(exercise.id, anchor: .center)
-      return
-    }
+    if deselect(exercise) { return }
     else {
       let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
       selectedExercises.append(newExercise)
-//      pageScroller.scrollTo(exercise.id, anchor: .center)
     }
   }
   
@@ -170,7 +166,6 @@ extension ExercisesViewModel {
 // MARK: - ADD/REMOVE form DB
 extension ExercisesViewModel {
   
-  // ADD TO FAV
   func add() {
     addToExercises(selectedExercises)
     selectedExercises = []
@@ -191,8 +186,16 @@ extension ExercisesViewModel {
       }
     }
   }
+  
+  func update(_ exercise: Exercise) {
+//    do {
+//      try ExercisesManager.shared.update(exercise: exercise)
+//    }
+//    catch {
+//      print("Could not update exercise!")
+//    }
+  }
 }
-
 
 
 // MARK: - LISTENER
@@ -206,7 +209,6 @@ extension ExercisesViewModel {
           
         } receiveValue: { [weak self] exercises in
           self?.exercises = exercises.sorted { $0.name < $1.name}
-          print("COunt: \(exercises.count)")
         }
         .store(in: &cancellables)
     }

@@ -1,17 +1,22 @@
 import SwiftUI
+import BottomSheet
 
 struct StartContainer: View {
-  @StateObject var model = StartViewModel()
-  @Binding var showingLoginView: Bool
+  @EnvironmentObject var model: StartViewModel
   
   var body: some View {
         VStack {
-          if model.viewState == .startButton {
-            StartPageView(model: model, showingLoginView: $showingLoginView)
-          }
-          else {
-            NewInProgressView(model: model)
-          }
+          StartPageView()
+            .if(model.inProgress) { content in
+              content
+                .bottomSheet(bottomSheetPosition: $model.position, switchablePositions: model.switchablePositions) {
+                  InProgressHeader()
+                    .environmentObject(model)
+                } mainContent: {
+                  SessionsGrid()
+                    .environmentObject(model)
+                }
+            }
         }
         .task { try? await model.loadCurrentUser() }
         .animation(.spring(), value: model.viewState)
@@ -24,6 +29,17 @@ extension StartContainer {
     ToolbarItem(placement: .keyboard) {
       ResignKeyboardButton()
       Spacer()
+    }
+  }
+}
+
+extension View {
+  @ViewBuilder
+  func `if`<Content: View>(_ condition: Bool, content: (Self) -> Content) -> some View {
+    if condition {
+      content(self)
+    } else {
+      self
     }
   }
 }

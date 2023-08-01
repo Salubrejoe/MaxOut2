@@ -17,6 +17,8 @@
 		7C1555DA2A701469005C2855 /* ThreeWayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555D92A701469005C2855 /* ThreeWayPicker.swift */; };
 		7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DB2A710F2E005C2855 /* TimeRange.swift */; };
 		7C1555DE2A71214C005C2855 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DD2A71214C005C2855 /* Date.swift */; };
+		7C32044B2A79369000A25650 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7C32044A2A79369000A25650 /* BottomSheet */; };
+		7C32044D2A79374600A25650 /* SheetFun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32044C2A79374600A25650 /* SheetFun.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -57,7 +59,7 @@
 		7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */; };
 		7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */; };
 		7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */; };
-		7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */; };
+		7C7DA11D2A5EBC8A00B58AFA /* SessionsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */; };
 		7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */; };
 		7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1262A6018C300B58AFA /* CellStyle.swift */; };
 		7C7DA1292A604B2600B58AFA /* SeshController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1282A604B2600B58AFA /* SeshController.swift */; };
@@ -70,6 +72,8 @@
 		7CA6CE222A66E8ED006FDBD4 /* HealthStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE202A66E8ED006FDBD4 /* HealthStat.swift */; };
 		7CA6CE232A66E8ED006FDBD4 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE212A66E8ED006FDBD4 /* Activity.swift */; };
 		7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */; };
+		7CB371AD2A79607A00A8AD76 /* ExercisesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */; };
+		7CB371AF2A79608300A8AD76 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AE2A79608300A8AD76 /* PickerCell.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -127,6 +131,7 @@
 		7C1555D92A701469005C2855 /* ThreeWayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C1555DB2A710F2E005C2855 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		7C1555DD2A71214C005C2855 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		7C32044C2A79374600A25650 /* SheetFun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetFun.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -165,7 +170,7 @@
 		7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabel.swift; sourceTree = "<group>"; };
 		7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesListView.swift; sourceTree = "<group>"; };
 		7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-optionals.swift"; sourceTree = "<group>"; };
-		7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInProgressView.swift; sourceTree = "<group>"; };
+		7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsGrid.swift; sourceTree = "<group>"; };
 		7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIndexTitles.swift; sourceTree = "<group>"; };
 		7C7DA1262A6018C300B58AFA /* CellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStyle.swift; sourceTree = "<group>"; };
 		7C7DA1282A604B2600B58AFA /* SeshController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeshController.swift; sourceTree = "<group>"; };
@@ -178,6 +183,8 @@
 		7CA6CE202A66E8ED006FDBD4 /* HealthStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStat.swift; sourceTree = "<group>"; };
 		7CA6CE212A66E8ED006FDBD4 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMinutesWidget.swift; sourceTree = "<group>"; };
+		7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesPicker.swift; sourceTree = "<group>"; };
+		7CB371AE2A79608300A8AD76 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CBAA1CD2A5D91D300DFA31D /* GoogleSignInSwift in Frameworks */,
+				7C32044B2A79369000A25650 /* BottomSheet in Frameworks */,
 				7C7DA0F02A5EB1AA00B58AFA /* SwiftUICalendar in Frameworks */,
 				7C7DA0DE2A5EB15300B58AFA /* SwipeActions in Frameworks */,
 				7CBAA1C22A5D91A800DFA31D /* FirebaseAuth in Frameworks */,
@@ -300,8 +308,8 @@
 		7C7DA0BE2A5E943900B58AFA /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA1362A65570100B58AFA /* Diary */,
 				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
+				7C7DA1362A65570100B58AFA /* Diary */,
 				7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */,
 				7C7DA0CE2A5EB0C100B58AFA /* StartWorkoutView */,
 			);
@@ -314,7 +322,7 @@
 				7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */,
 				7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */,
 				7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */,
-				7C7DA11C2A5EBC8A00B58AFA /* NewInProgressView.swift */,
+				7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */,
 			);
 			path = StartWorkoutView;
 			sourceTree = "<group>";
@@ -364,6 +372,8 @@
 				7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */,
 				7C1555D92A701469005C2855 /* ThreeWayPicker.swift */,
 				7CC6FB5F2A72B82900A9138A /* TemplatesPicker.swift */,
+				7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */,
+				7CB371AE2A79608300A8AD76 /* PickerCell.swift */,
 				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
 				7CC6FB612A740B4D00A9138A /* ExerciseDetailView.swift */,
 			);
@@ -396,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */,
+				7C32044C2A79374600A25650 /* SheetFun.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -661,6 +672,7 @@
 				7CBAA1CC2A5D91D300DFA31D /* GoogleSignInSwift */,
 				7C7DA0DD2A5EB15300B58AFA /* SwipeActions */,
 				7C7DA0EF2A5EB1AA00B58AFA /* SwiftUICalendar */,
+				7C32044A2A79369000A25650 /* BottomSheet */,
 			);
 			productName = MaxOut2;
 			productReference = 7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */;
@@ -695,6 +707,7 @@
 				7CBAA1C92A5D91D300DFA31D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */,
 				7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */,
+				7C3204492A79369000A25650 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 7CBAA1B02A5D90DC00DFA31D /* Products */;
 			projectDirPath = "";
@@ -752,6 +765,7 @@
 				7CBAA1F82A5D944400DFA31D /* ResignKeyboardButton.swift in Sources */,
 				7CCB58002A6949EF0086D291 /* HKWorkoutActivityType.swift in Sources */,
 				7C7DA0A42A5DAE2500B58AFA /* Enums.swift in Sources */,
+				7C32044D2A79374600A25650 /* SheetFun.swift in Sources */,
 				7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */,
 				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
 				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
@@ -782,7 +796,9 @@
 				7C7DA0D72A5EB0F800B58AFA /* BobView.swift in Sources */,
 				7C7DA0BD2A5E93F900B58AFA /* FrostedProgressView.swift in Sources */,
 				7CBAA1F72A5D944400DFA31D /* LoginTextFieldsView.swift in Sources */,
+				7CB371AD2A79607A00A8AD76 /* ExercisesPicker.swift in Sources */,
 				7C7DA0ED2A5EB16400B58AFA /* HistoryView.swift in Sources */,
+				7CB371AF2A79608300A8AD76 /* PickerCell.swift in Sources */,
 				7C7DA0DB2A5EB12000B58AFA /* BobGauge.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
 				7C1555DA2A701469005C2855 /* ThreeWayPicker.swift in Sources */,
@@ -795,7 +811,7 @@
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
-				7C7DA11D2A5EBC8A00B58AFA /* NewInProgressView.swift in Sources */,
+				7C7DA11D2A5EBC8A00B58AFA /* SessionsGrid.swift in Sources */,
 				7C7DA0C52A5EAFA000B58AFA /* DiaryViewModel.swift in Sources */,
 				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */,
@@ -1034,6 +1050,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7C3204492A79369000A25650 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aheze/SwipeActions";
@@ -1069,6 +1093,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7C32044A2A79369000A25650 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C3204492A79369000A25650 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
 		7C7DA0DD2A5EB15300B58AFA /* SwipeActions */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */;

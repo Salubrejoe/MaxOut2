@@ -1,9 +1,9 @@
 import SwiftUI
-import Combine
 
-struct TemplatesPicker: View {
+struct ExercisesPicker: View {
   @Environment(\.dismiss) var dismiss
-  @ObservedObject  var model: ExercisesViewModel
+  @EnvironmentObject var startModel: StartViewModel
+  @StateObject var model = ExercisesViewModel()
   
   var body: some View {
     NavigationStack {
@@ -12,10 +12,10 @@ struct TemplatesPicker: View {
           ScrollView(showsIndicators: false) {
             
             LazyVGrid(columns: model.columns) {
-              if !model.selectedExercises.isEmpty {
-                selection
-              }
-              ForEach(model.groupedTemplates, id: \.0) { section in
+//              if !model.selectedExercises.isEmpty {
+//                selection
+//              }
+              ForEach(model.groupedExercises, id: \.0) { section in
                 actualList(section, pageScroller: pageScroller)
               }
             }
@@ -27,19 +27,24 @@ struct TemplatesPicker: View {
           .overlay {
             HStack {
               Spacer()
-              SectionIndexTitles(alphabet: model.alphabetTemplates, selectedLetter: $model.selectedLetter, pageScroller: pageScroller)
+              SectionIndexTitles(alphabet: model.alphabet, selectedLetter: $model.selectedLetter, pageScroller: pageScroller)
             }
           }
-          .navigationTitle("🚀Discover")
+          .navigationTitle("")
           .navigationBarTitleDisplayMode(.inline)
         }
         
-        ThreeWayPicker(model: model)
+        VStack {
+          ThreeWayPicker(model: model)
+          LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
+            model.commitSelection(toRoutineVM: startModel)
+            dismiss()
+          }
+        }
       }
-      .toolbar { saveButton }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)
-      .onAppear { model.loadTemplates() }
+      .onAppear { model.addListenerToFavourites() }
     }
   }
   
@@ -88,26 +93,13 @@ struct TemplatesPicker: View {
     }
     
     Divider()
-    .padding(.vertical)
-    .foregroundColor(.secondary)
-  }
-  
-  @ToolbarContentBuilder // MARK: - SAVE BUTTON
-  private var saveButton: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button {
-        model.add()
-        dismiss()
-      } label: {
-        Text("Save")
-          .bold()
-      }
-    }
+      .padding(.vertical)
+      .foregroundColor(.secondary)
   }
 }
 
-struct TemplatesPicker_Previews: PreviewProvider {
+struct ExercisesPicker_Previews: PreviewProvider {
   static var previews: some View {
-    TemplatesPicker(model: ExercisesViewModel())
+    ExercisesPicker()
   }
 }

@@ -1,28 +1,34 @@
 import SwiftUI
 import Combine
+import BottomSheet
 
 
 final class StartViewModel: ObservableObject {
   @Published var fitUser: FitUser = FitUser.mockup
-
-  @Published var focusedBob: (Session, Int, Int)? = nil
-  
   @Published var routine: Routine? = nil
   @Published var sessions = [Session]()
-  
-  /// KEYBOARD REFERENCE
-  @Published var number = 0.0
-  
-  @Published var currentFocusedValue: Double?
   
   var startDate = Date()
   
   /// Rest Time
   @Published var restTime = 60.0
   
+  ///Root View Model
+  @Published var inProgress = false
+  @Published var position = BottomSheetPosition.dynamic
+  
+  let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(220), .dynamic]
+  
+  @Published var showingLoginView = false
+  
+  func checkCurrentUser() {
+    let user = try? FireAuthManager.shared.currentAuthenticatedUser()
+    self.showingLoginView = user == nil
+  }
   
   /// Grid element
-  let columns = [GridItem(.adaptive(minimum: 300))]
+  let columns = [GridItem(.adaptive(minimum: 155))]
+  let largeColumns = [GridItem(.adaptive(minimum: 300))]
   
   /// Cancel Alert
   @Published var showingCancelAlert = false

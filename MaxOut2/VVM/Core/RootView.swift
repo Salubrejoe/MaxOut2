@@ -2,19 +2,11 @@
 
 import SwiftUI
 
-final class RootViewModel: ObservableObject {
-  
-  @Published var showingLoginView = false
-  
-  func checkCurrentUser() {
-    let user = try? FireAuthManager.shared.currentAuthenticatedUser()
-    self.showingLoginView = user == nil
-  }
-}
+
 
 struct RootView: View {
   @StateObject var manager = HealthKitManager()
-  @StateObject private var model = RootViewModel()
+  @StateObject private var model = StartViewModel()
   let gaugeController = GaugeViewController()
   
   var body: some View {
@@ -39,7 +31,8 @@ struct RootView: View {
         }
         .environmentObject(manager)
         
-      StartContainer(showingLoginView: $model.showingLoginView)
+      StartContainer()
+        .environmentObject(model)
         .tabItem {
           Label("Start", systemImage: "bolt.ring.closed")
         }

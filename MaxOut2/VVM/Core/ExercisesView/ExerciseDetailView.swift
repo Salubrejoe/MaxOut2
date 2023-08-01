@@ -1,87 +1,75 @@
 import SwiftUI
 
-
-struct ExerciseDetailView: View {
+struct ExerciseDetailViiu: View {
+  @Environment(\.dismiss) var dismiss
   enum CoordinateSpases {
     case scrollView
   }
-  
   @Binding var exercise: Exercise
-  @ObservedObject var model : ExercisesViewModel
+  @State private var editedExercise: Exercise
   
-  @FocusState var focus: Bool
+  init(exercise: Binding<Exercise>) {
+    self._exercise = exercise
+    self._editedExercise = State(wrappedValue: exercise.wrappedValue)
+  }
   
   var body: some View {
-    ParallaxScrollView(background: exercise.muscle.color.opacity(0.01), coordinateSpace: CoordinateSpases.scrollView, defaultHeight: 300) {
-      VStack {
-        threeWayPicker
-        
-        TabView {
-          ForEach(exercise.instructions, id: \.self) { instruction in
-            Text(instruction)
-              .padding()
-              .frame(maxWidth: .infinity)
-              .frame(height: 300)
+    ScrollView(showsIndicators: false) {
+      TextField("Name", text: $editedExercise.name)
+        .font(.largeTitle)
+        .padding()
+
+      
+      privatePicker()
+      
+      TabView {
+        ForEach($editedExercise.instructions.indices, id: \.self) { index in
+          GroupBox {
+            TextEditor(text: $editedExercise.instructions[index])
+              .scrollContentBackground(.hidden)
+          } label: {
+            HStack {
+              Text("INSTRUCTIONS")
+              Spacer()
+              Image(systemName: "\(index + 1).circle")
+            }
+            .foregroundColor(.secondary)
           }
         }
-        .frame(height: 200)
-        .background(.ultraThinMaterial)
-        .cornerRadius(7)
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        
-        buttons
       }
-      .padding(.horizontal)
-    } header: {
-      header
+      .tabViewStyle(.page)
+      .frame(height: 250)
+    }
+    .padding(.horizontal)
+    .textFieldClearButton
+    .onAppear {
+      UIPageControl.appearance().currentPageIndicatorTintColor = .label
+      UIPageControl.appearance().pageIndicatorTintColor = UIColor.label.withAlphaComponent(0.2)
+    }
+    .navigationTitle("Edit")
+    .navigationBarTitleDisplayMode(.inline)
+    .onDisappear {
+      exercise = editedExercise
     }
   }
   
-  @ViewBuilder // MARK: - HEADER
-  private var header: some View {
-    VStack {
-      TextField("Name", text: $exercise.name)
-        .textFieldClearButton
-        .focused($focus)
-        .font(.largeTitle).bold()
-        .disabled(!model.isEditing)
-      BodyPartImage(exercise: exercise, color: .primary)
-        .padding()
-    }
-    .padding(.vertical, 100)
-    .padding(.horizontal, 30)
-  }
-  
-  @ViewBuilder // MARK: - 3W PICKER
-  private var threeWayPicker: some View {
-    VStack {
-      APicker(selectedActivityType: $model.selectedActivityType)
-      Divider()
-      MGPicker(selectedMuscle: $model.selectedMuscle)
-      Divider()
-      EQPicker(selectedEquipment: $model.selectedEquipment)
-    }
-    .padding(3)
-    .background(.ultraThinMaterial)
-    .cornerRadius(7)
-    
-  }
-  
-  @ViewBuilder // MARK: - Buttons
-  private var buttons: some View {
-    VStack(spacing: 7) {
-      LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
-        //
-      }
-      LargeTsButton(text: "Cancel", background: Color.secondarySytemBackground, textColor: Color(.darkGray)) {
-        //
+  @ViewBuilder
+  private func privatePicker() -> some View {
+    Picker("", selection: $editedExercise.category) {
+      let activityTypes : [ActivityType] = ActivityType.allCases
+      ForEach(activityTypes, id: \.self) {
+        Text($0.rawValue.capitalized)
       }
     }
   }
 }
 
+
+
+
+
 struct ExerciseDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseDetailView(exercise: .constant(Exercise.mockup), model: ExercisesViewModel())
+    ExerciseDetailViiu(exercise: .constant(Exercise.mockup))
   }
 }

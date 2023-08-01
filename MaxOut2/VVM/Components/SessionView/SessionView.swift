@@ -29,7 +29,7 @@ struct SessionView: View {
           .padding(.bottom, 5)
           .padding(.horizontal, 5)
         }
-        .background(.ultraThinMaterial)
+//        .background(.ultraThinMaterial)
         .cornerRadius(14)
         
         newBobButton
@@ -138,9 +138,9 @@ extension SessionView {
     .font(.headline)
     .foregroundColor(.primary)
     .frame(maxWidth: 428, alignment: .center)
-    .frame(maxHeight: 20)
+    .frame(maxHeight: 250)
     .background(.ultraThinMaterial)
-    .clipShape(Capsule())
+    .clipShape(RoundedRectangle(cornerRadius: 7))
     .padding(.horizontal)
     
     .onTapGesture {

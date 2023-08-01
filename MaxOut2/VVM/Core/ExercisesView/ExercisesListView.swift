@@ -63,10 +63,21 @@ struct ExercisesListView: View {
     .foregroundColor(.secondary)
     
     
+//    ForEach(section.1) { exercise in
+//      let exerciseBinding = Binding<Exercise>(
+//        get: { return exercise },
+//        set: { newValue in model.selectedExercise = newValue }
+//      )
+//      NavigationLink(destination: ExerciseDetailView(exercise: $model.selectedExercise, model: model)) {
+//        ExerciseListCell(exercise: exercise) {
+//          model.remove(exercise: exercise.id)
+//        }
+//      }
+//    }
+    
     ForEach(section.1) { exercise in
       NavigationLink {
-        ExerciseDetailView(exercise: exercise, model: model)
-//        Text("Pixxa")
+        ExerciseDetailViiu(exercise: $model.exercises[model.indexOfItem(exercise, collection: model.exercises) ?? 0])
       } label: {
         ExerciseListCell(exercise: exercise) {
           model.remove(exercise: exercise.id)

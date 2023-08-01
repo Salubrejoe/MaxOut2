@@ -6,8 +6,7 @@ struct StartPageView: View {
     case scrollView
   }
   
-  @ObservedObject var model: StartViewModel
-  @Binding var showingLoginView: Bool
+  @EnvironmentObject var model: StartViewModel
   
   // GRID LAYOUT
   let columns = [GridItem(.adaptive(minimum: 160))]
@@ -41,18 +40,20 @@ extension StartPageView {
         quickGrid
           .padding()
       }
-      
-      settings
     }
   }
   
   @ViewBuilder
   private var quickGrid: some View {
     LazyVGrid(columns: columns, spacing: 20) {
-      NavigationLink {
-        ExercisesListView()
-      } label: {
-        Text("piazzza")
+      ForEach(0..<2, id: \.self) { index in
+        RoundedRectangle(cornerRadius: 10)
+          .fill(.ultraThinMaterial)
+          .frame(height: 155)
+          .overlay {
+            Text("\(index)")
+              .foregroundColor(.accentColor)
+          }
       }
     }
   }
@@ -62,23 +63,8 @@ extension StartPageView {
     LargeTsButton(text: "Start a new workout", background: Color.accentColor, textColor: .systemBackground) {
       model.startRoutine()
       model.viewState = .inProgress
+      model.inProgress = true
     }
   }
-  
-  @ViewBuilder // MARK: - SETTINGS
-  private var settings: some View {
-    VStack {
-      HStack {
-        Spacer()
-        NavigationLink {
-          //
-        } label: {
-          Image(systemName: "gearshape")
-            .imageScale(.large)
-        }
-      }
-      Spacer()
-    }
-    .padding()
-  }
+
 }
