@@ -53,8 +53,8 @@ extension SessionView {
             model.remove(session)
           } label: {
             HStack(alignment: .firstTextBaseline) {
-              Label("\(session.exerciseName.capitalized)", systemImage: session.image)
-                .fontWeight(.heavy)
+              Text("\(session.exerciseName.capitalized)")
+                .fontWeight(.semibold)
               Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
             }
           }
@@ -137,7 +137,7 @@ extension SessionView {
     }
     .font(.headline)
     .foregroundColor(.primary)
-    .frame(maxWidth: 428, alignment: .center)
+    .frame(maxWidth: .infinity, alignment: .center)
     .frame(maxHeight: 250)
     .background(.ultraThinMaterial)
     .clipShape(RoundedRectangle(cornerRadius: 7))

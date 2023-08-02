@@ -18,6 +18,7 @@ extension BobView {
       BobGauge(bob: $bob)
         .frame(width: width * 0.35)
         .frame(height: 37)
+        .foregroundColor(bob.isCompleted ? .secondary : .primary)
     }
   }
   
@@ -71,7 +72,7 @@ extension BobView {
         let width = proxy.size.width
         let index = session.bobs.firstIndex(of: bob) ?? 0
         HStack {
-          Image(systemName: "\(index + 1).square")
+          Text("\(index + 1)")
             .foregroundColor(.secondary)
             .padding(.leading, 4)
             .frame(width: width * 0.09)

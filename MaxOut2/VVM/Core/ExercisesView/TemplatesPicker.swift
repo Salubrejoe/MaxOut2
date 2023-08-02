@@ -34,9 +34,15 @@ struct TemplatesPicker: View {
           .navigationBarTitleDisplayMode(.inline)
         }
         
-        ThreeWayPicker(model: model)
+        VStack {
+          ThreeWayPicker(model: model)
+          LargeTsButton(text: "Save \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
+            model.add()
+            dismiss()
+          }
+          .padding([.bottom, .horizontal])
+        }
       }
-      .toolbar { saveButton }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)
       .onAppear { model.loadTemplates() }
@@ -90,19 +96,6 @@ struct TemplatesPicker: View {
     Divider()
     .padding(.vertical)
     .foregroundColor(.secondary)
-  }
-  
-  @ToolbarContentBuilder // MARK: - SAVE BUTTON
-  private var saveButton: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button {
-        model.add()
-        dismiss()
-      } label: {
-        Text("Save")
-          .bold()
-      }
-    }
   }
 }
 

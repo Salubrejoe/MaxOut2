@@ -5,6 +5,7 @@ struct ProfileView: View {
   @ObservedObject var model: DiaryViewModel
   @EnvironmentObject var manager: HealthKitManager
   @Binding var showingLoginView: Bool
+  @Binding var tabBarIsHidden: Bool
   
   var body: some View {
     NavigationStack {
@@ -34,6 +35,10 @@ struct ProfileView: View {
       .onAppear {
         UITextField.appearance().clearButtonMode = .whileEditing
         manager.start()
+        tabBarIsHidden = true
+      }
+      .onDisappear {
+        tabBarIsHidden = false
       }
     }
   }

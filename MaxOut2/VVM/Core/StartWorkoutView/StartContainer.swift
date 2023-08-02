@@ -2,44 +2,26 @@ import SwiftUI
 import BottomSheet
 
 struct StartContainer: View {
+  private enum CoordinateSpaces {
+    case scrollView
+  }
   @EnvironmentObject var model: StartViewModel
+  @Binding var tabBarIsHidden: Bool
   
   var body: some View {
-        VStack {
-          StartPageView()
-            .if(model.inProgress) { content in
-              content
-                .bottomSheet(bottomSheetPosition: $model.position, switchablePositions: model.switchablePositions) {
-                  InProgressHeader()
-                    .environmentObject(model)
-                } mainContent: {
-                  SessionsGrid()
-                    .environmentObject(model)
-                }
-            }
+    NavigationStack {
+      ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 500) {
+        LargeTsButton(text: "Start a new workout", background: Color.accentColor, textColor: .systemBackground) {
+          model.startRoutine()
+          model.inProgress = true
+          tabBarIsHidden = true
         }
-        .task { try? await model.loadCurrentUser() }
-        .animation(.spring(), value: model.viewState)
-  }
-}
-
-extension StartContainer {
-  @ToolbarContentBuilder // MARK: - RESIGN KEYBOARD
-  private var toolbar: some ToolbarContent {
-    ToolbarItem(placement: .keyboard) {
-      ResignKeyboardButton()
-      Spacer()
+        .padding(.vertical)
+      } header: {
+        Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
+          .font(.largeTitle.bold())
+      }
     }
-  }
-}
-
-extension View {
-  @ViewBuilder
-  func `if`<Content: View>(_ condition: Bool, content: (Self) -> Content) -> some View {
-    if condition {
-      content(self)
-    } else {
-      self
-    }
+      .task { try? await model.loadCurrentUser() }
   }
 }

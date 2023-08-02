@@ -82,7 +82,7 @@ struct MGPicker: View {
       }
       Text(selectedMuscle?.displayName ?? "Select Muscle Group")
         .foregroundColor(.primary)
-        
+        .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedMuscle != nil)
   }
@@ -135,6 +135,7 @@ struct APicker: View {
       }
       Text(selectedActivityType?.hkType.commonName.capitalized ?? "Select Category")
         .foregroundColor(.primary)
+        .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedActivityType != nil)
   }
@@ -190,8 +191,9 @@ struct EQPicker: View {
           .scaledToFit()
           .frame(width: 20, height: 20)
       }
-      Text(selectedEquipment?.rawValue.capitalized ?? "Equipment")
+      Text(selectedEquipment?.rawValue.capitalized ?? "Select Equipment")
         .foregroundColor(.primary)
+        .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedEquipment != nil)
   }

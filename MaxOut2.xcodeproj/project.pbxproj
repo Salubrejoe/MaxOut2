@@ -18,7 +18,6 @@
 		7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DB2A710F2E005C2855 /* TimeRange.swift */; };
 		7C1555DE2A71214C005C2855 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DD2A71214C005C2855 /* Date.swift */; };
 		7C32044B2A79369000A25650 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7C32044A2A79369000A25650 /* BottomSheet */; };
-		7C32044D2A79374600A25650 /* SheetFun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32044C2A79374600A25650 /* SheetFun.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -37,7 +36,6 @@
 		7C7DA0C52A5EAFA000B58AFA /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C32A5EAFA000B58AFA /* DiaryViewModel.swift */; };
 		7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */; };
 		7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */; };
-		7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */; };
 		7C7DA0D12A5EB0EA00B58AFA /* TSTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */; };
 		7C7DA0D72A5EB0F800B58AFA /* BobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D42A5EB0F800B58AFA /* BobView.swift */; };
 		7C7DA0D82A5EB0F800B58AFA /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA0D52A5EB0F800B58AFA /* SessionView.swift */; };
@@ -59,7 +57,7 @@
 		7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */; };
 		7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */; };
 		7C7DA11B2A5EB4DB00B58AFA /* Binding-optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */; };
-		7C7DA11D2A5EBC8A00B58AFA /* SessionsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */; };
+		7C7DA11D2A5EBC8A00B58AFA /* InProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA11C2A5EBC8A00B58AFA /* InProgressView.swift */; };
 		7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */; };
 		7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1262A6018C300B58AFA /* CellStyle.swift */; };
 		7C7DA1292A604B2600B58AFA /* SeshController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1282A604B2600B58AFA /* SeshController.swift */; };
@@ -74,6 +72,13 @@
 		7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */; };
 		7CB371AD2A79607A00A8AD76 /* ExercisesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */; };
 		7CB371AF2A79608300A8AD76 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AE2A79608300A8AD76 /* PickerCell.swift */; };
+		7CB371B22A7A756E00A8AD76 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B12A7A756E00A8AD76 /* AppTabBar.swift */; };
+		7CB371B42A7A758800A8AD76 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B32A7A758800A8AD76 /* CustomTabBarView.swift */; };
+		7CB371B62A7A7B0B00A8AD76 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B52A7A7B0B00A8AD76 /* ContainerView.swift */; };
+		7CB371B82A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B72A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift */; };
+		7CB371BA2A7A820900A8AD76 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B92A7A820900A8AD76 /* TabBarItem.swift */; };
+		7CB371BC2A7AAAB600A8AD76 /* ParallaxModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BB2A7AAAB600A8AD76 /* ParallaxModifier.swift */; };
+		7CB371BE2A7AB06D00A8AD76 /* ifModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -131,7 +136,6 @@
 		7C1555D92A701469005C2855 /* ThreeWayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C1555DB2A710F2E005C2855 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		7C1555DD2A71214C005C2855 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		7C32044C2A79374600A25650 /* SheetFun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetFun.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -150,7 +154,6 @@
 		7C7DA0C32A5EAFA000B58AFA /* DiaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
 		7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartContainer.swift; sourceTree = "<group>"; };
-		7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		7C7DA0D02A5EB0EA00B58AFA /* TSTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTimerView.swift; sourceTree = "<group>"; };
 		7C7DA0D42A5EB0F800B58AFA /* BobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BobView.swift; sourceTree = "<group>"; };
 		7C7DA0D52A5EB0F800B58AFA /* SessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
@@ -170,7 +173,7 @@
 		7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabel.swift; sourceTree = "<group>"; };
 		7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesListView.swift; sourceTree = "<group>"; };
 		7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding-optionals.swift"; sourceTree = "<group>"; };
-		7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsGrid.swift; sourceTree = "<group>"; };
+		7C7DA11C2A5EBC8A00B58AFA /* InProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressView.swift; sourceTree = "<group>"; };
 		7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIndexTitles.swift; sourceTree = "<group>"; };
 		7C7DA1262A6018C300B58AFA /* CellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStyle.swift; sourceTree = "<group>"; };
 		7C7DA1282A604B2600B58AFA /* SeshController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeshController.swift; sourceTree = "<group>"; };
@@ -185,6 +188,13 @@
 		7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMinutesWidget.swift; sourceTree = "<group>"; };
 		7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesPicker.swift; sourceTree = "<group>"; };
 		7CB371AE2A79608300A8AD76 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
+		7CB371B12A7A756E00A8AD76 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
+		7CB371B32A7A758800A8AD76 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		7CB371B52A7A7B0B00A8AD76 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		7CB371B72A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemsPreferenceKey.swift; sourceTree = "<group>"; };
+		7CB371B92A7A820900A8AD76 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		7CB371BB2A7AAAB600A8AD76 /* ParallaxModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxModifier.swift; sourceTree = "<group>"; };
+		7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ifModifier.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -308,6 +318,7 @@
 		7C7DA0BE2A5E943900B58AFA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7C7DA11C2A5EBC8A00B58AFA /* InProgressView.swift */,
 				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
 				7C7DA1362A65570100B58AFA /* Diary */,
 				7C7DA0FD2A5EB32A00B58AFA /* ExercisesView */,
@@ -319,10 +330,8 @@
 		7C7DA0CE2A5EB0C100B58AFA /* StartWorkoutView */ = {
 			isa = PBXGroup;
 			children = (
-				7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */,
-				7C7DA0CC2A5EB0AA00B58AFA /* StartPageView.swift */,
 				7C7DA0C62A5EB03100B58AFA /* StartViewModel.swift */,
-				7C7DA11C2A5EBC8A00B58AFA /* SessionsGrid.swift */,
+				7C7DA0C82A5EB04600B58AFA /* StartContainer.swift */,
 			);
 			path = StartWorkoutView;
 			sourceTree = "<group>";
@@ -406,7 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */,
-				7C32044C2A79374600A25650 /* SheetFun.swift */,
+				7CB371B02A7A755800A8AD76 /* AppTabBar */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -428,6 +437,18 @@
 				7CA6CE212A66E8ED006FDBD4 /* Activity.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7CB371B02A7A755800A8AD76 /* AppTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				7CB371B12A7A756E00A8AD76 /* AppTabBar.swift */,
+				7CB371B92A7A820900A8AD76 /* TabBarItem.swift */,
+				7CB371B32A7A758800A8AD76 /* CustomTabBarView.swift */,
+				7CB371B72A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift */,
+				7CB371B52A7A7B0B00A8AD76 /* ContainerView.swift */,
+			);
+			path = AppTabBar;
 			sourceTree = "<group>";
 		};
 		7CBAA1A62A5D90DC00DFA31D = {
@@ -585,11 +606,13 @@
 				7C7DA1262A6018C300B58AFA /* CellStyle.swift */,
 				7C7DA0BF2A5E968900B58AFA /* MainButtonLabel.swift */,
 				7C7DA0B62A5DD36200B58AFA /* LoginAnimation.swift */,
+				7CB371BB2A7AAAB600A8AD76 /* ParallaxModifier.swift */,
 				7CBAA2102A5D953500DFA31D /* Resign-onDrag.swift */,
 				7CBAA2072A5D94EB00DFA31D /* OnFirstAppear.swift */,
 				7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */,
 				7CBAA2092A5D94EB00DFA31D /* NumbersOnlyModifier.swift */,
 				7CC6FB632A7664E400A9138A /* ClearButtonTF.swift */,
+				7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -746,6 +769,7 @@
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
 				7CC6FB642A7664E400A9138A /* ClearButtonTF.swift in Sources */,
 				7CC6FB602A72B82900A9138A /* TemplatesPicker.swift in Sources */,
+				7CB371B42A7A758800A8AD76 /* CustomTabBarView.swift in Sources */,
 				7C1555D82A6FCBC0005C2855 /* DismissButton.swift in Sources */,
 				7CCB57FB2A69125D0086D291 /* BodyMassChart.swift in Sources */,
 				7CBAA2032A5D94A600DFA31D /* Constants.swift in Sources */,
@@ -758,6 +782,7 @@
 				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
 				7C7DA12C2A6170FD00B58AFA /* BobSwipeActions.swift in Sources */,
 				7CBAA20F2A5D952A00DFA31D /* Bundle-decodable.swift in Sources */,
+				7CB371B62A7A7B0B00A8AD76 /* ContainerView.swift in Sources */,
 				7CBAA2112A5D953500DFA31D /* Resign-onDrag.swift in Sources */,
 				7CBAA1DD2A5D935500DFA31D /* FitUsersManager.swift in Sources */,
 				7C7DA1332A63FA3600B58AFA /* BottomSheetView.swift in Sources */,
@@ -765,18 +790,19 @@
 				7CBAA1F82A5D944400DFA31D /* ResignKeyboardButton.swift in Sources */,
 				7CCB58002A6949EF0086D291 /* HKWorkoutActivityType.swift in Sources */,
 				7C7DA0A42A5DAE2500B58AFA /* Enums.swift in Sources */,
-				7C32044D2A79374600A25650 /* SheetFun.swift in Sources */,
 				7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */,
 				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
 				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
 				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
 				7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */,
+				7CB371BC2A7AAAB600A8AD76 /* ParallaxModifier.swift in Sources */,
 				7C7DA0F42A5EB21000B58AFA /* DurationFormatter.swift in Sources */,
 				7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */,
 				7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */,
 				7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */,
 				7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */,
 				7C1555D22A6BB4B4005C2855 /* RadarChart.swift in Sources */,
+				7CB371B82A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift in Sources */,
 				7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */,
 				7C7DA0F92A5EB25400B58AFA /* BodyPartImageView.swift in Sources */,
 				7C7DA0C42A5EAFA000B58AFA /* ProfileView.swift in Sources */,
@@ -785,7 +811,6 @@
 				7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */,
 				7C7DA0EC2A5EB16400B58AFA /* WorkoutDetailView.swift in Sources */,
 				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
-				7C7DA0CD2A5EB0AA00B58AFA /* StartPageView.swift in Sources */,
 				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
 				7C1555D42A6BDF44005C2855 /* RadarMock.swift in Sources */,
 				7C1555C92A6A98C8005C2855 /* CalendarWidget.swift in Sources */,
@@ -801,6 +826,7 @@
 				7CB371AF2A79608300A8AD76 /* PickerCell.swift in Sources */,
 				7C7DA0DB2A5EB12000B58AFA /* BobGauge.swift in Sources */,
 				7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */,
+				7CB371BA2A7A820900A8AD76 /* TabBarItem.swift in Sources */,
 				7C1555DA2A701469005C2855 /* ThreeWayPicker.swift in Sources */,
 				7C7DA0F22A5EB1ED00B58AFA /* TimeInterval-String.swift in Sources */,
 				7CA6CDE72A65995D006FDBD4 /* GoodColors.swift in Sources */,
@@ -811,7 +837,8 @@
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
-				7C7DA11D2A5EBC8A00B58AFA /* SessionsGrid.swift in Sources */,
+				7C7DA11D2A5EBC8A00B58AFA /* InProgressView.swift in Sources */,
+				7CB371BE2A7AB06D00A8AD76 /* ifModifier.swift in Sources */,
 				7C7DA0C52A5EAFA000B58AFA /* DiaryViewModel.swift in Sources */,
 				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */,
@@ -829,6 +856,7 @@
 				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
 				7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */,
+				7CB371B22A7A756E00A8AD76 /* AppTabBar.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
 				7C7DA1352A65544000B58AFA /* DiaryView.swift in Sources */,
 				7C1555CB2A6B0B3C005C2855 /* GridHeader.swift in Sources */,

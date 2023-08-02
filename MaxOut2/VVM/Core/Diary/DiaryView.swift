@@ -9,6 +9,7 @@ struct DiaryView: View {
   @StateObject private var model = DiaryViewModel()
   
   @Binding var showingLoginView: Bool
+  @Binding var tabBarIsHidden: Bool
   
   var body: some View {
     NavigationStack {
@@ -35,7 +36,7 @@ extension DiaryView {
   private var header: some View {
     List {
       NavigationLink {
-        ProfileView(model: model, showingLoginView: $showingLoginView)
+        ProfileView(model: model, showingLoginView: $showingLoginView, tabBarIsHidden: $tabBarIsHidden)
       } label: {
         ProfileLabel(user: model.user)
       }
@@ -103,6 +104,6 @@ struct ProfileLabel: View {
 
 struct DiaryView_Previews: PreviewProvider {
   static var previews: some View {
-    DiaryView(showingLoginView: .constant(false))
+    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true))
   }
 }

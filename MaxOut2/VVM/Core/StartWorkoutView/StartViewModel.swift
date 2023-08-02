@@ -15,9 +15,9 @@ final class StartViewModel: ObservableObject {
   
   ///Root View Model
   @Published var inProgress = false
-  @Published var position = BottomSheetPosition.dynamic
+  @Published var position = BottomSheetPosition.relative(0.93)
   
-  let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(220), .dynamic]
+  let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(200), .relative(0.93)]
   
   @Published var showingLoginView = false
   
@@ -34,8 +34,6 @@ final class StartViewModel: ObservableObject {
   @Published var showingCancelAlert = false
   let alertText = "Are you sure you want to discard your progress?"
   
-  /// View State
-  @Published var viewState: ViewState = .startButton
   
   /// Error Message
   @Published var errorMessage: String? = nil
@@ -65,7 +63,6 @@ final class StartViewModel: ObservableObject {
   func cancelRoutine() {
     sessions = []
     routine = nil
-    viewState = .startButton
     startDate = Date()
   }
   
@@ -140,20 +137,6 @@ final class StartViewModel: ObservableObject {
       throw URLError(.userAuthenticationRequired)
     }
     return userId
-  }
-}
-
-// MARK: - View State Enum
-extension StartViewModel {
-  func stateTextString() -> String {
-      switch viewState {
-        case .startButton : return "New Workout"
-        case .inProgress  : return routine?.title ?? ""
-      }
-  }
-  
-  enum ViewState {
-    case inProgress, startButton
   }
 }
 

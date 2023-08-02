@@ -45,6 +45,7 @@ struct WidgetGrid: View {
           SmallCardView(activity: $0, style: RegularMaterialStyle())
         }
       }
+      Spacer(minLength: 80)
     }
   }
 }

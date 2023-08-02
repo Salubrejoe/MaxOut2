@@ -40,6 +40,7 @@ struct ExercisesPicker: View {
             model.commitSelection(toRoutineVM: startModel)
             dismiss()
           }
+          .padding([.bottom, .horizontal])
         }
       }
       .dismissButton()

@@ -3,33 +3,38 @@ import SwiftUI
 
 struct InProgressHeader: View {
   @EnvironmentObject var model: StartViewModel
+  @Binding var tabBarIsHidden: Bool
   
   var body: some View {
     VStack(alignment: .leading) {
-      HStack {
-        Button("Quit") {
-          model.showingCancelAlert = true
+      if tabBarIsHidden {
+        HStack {
+          Button("Quit") {
+            model.showingCancelAlert = true
+          }
+          .imageScale(.large)
+          .foregroundColor(.secondary)
+          .frame(width: 80, alignment: .leading)
+          
+          Text(Date().formattedString())
+            .frame(maxWidth: .infinity)
+            .fontWeight(.semibold)
+          
+          Button("Finish") {
+            model.inProgress = false
+            tabBarIsHidden = false
+            model.saveTask()
+          }
+          .bold()
+          .frame(width: 80, alignment: .trailing)
+          .buttonStyle(.bordered)
+          .foregroundColor(.green)
         }
-        .imageScale(.large)
-        .foregroundColor(.secondary)
-        .frame(width: 80, alignment: .leading)
-        
-        Text(Date().formattedString())
-          .frame(maxWidth: .infinity)
-          .fontWeight(.semibold)
-        
-        Button("Finish") {
-          model.inProgress = false
-          model.saveTask()
-        }
-        .bold()
-        .frame(width: 80, alignment: .trailing)
-        .buttonStyle(.bordered)
-        .foregroundColor(.green)
       }
+      
       VStack(alignment: .leading) {
         HStack(alignment: .firstTextBaseline) {
-          Text(model.stateTextString())
+          Text(model.routine?.title ?? "")
             .font(model.position == .absoluteBottom(220) ? .title2.bold() : .largeTitle.bold())
           Spacer()
           Image(systemName: "ellipsis.rectangle.fill")
@@ -47,7 +52,8 @@ struct InProgressHeader: View {
 
 struct SessionsGrid: View {
   @EnvironmentObject var model: StartViewModel
-
+  @Binding var tabBarIsHidden: Bool
+  
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
@@ -107,6 +113,7 @@ extension SessionsGrid {
       model.cancelRoutine()
       model.showingCancelAlert = false
       model.inProgress = false
+      tabBarIsHidden = false
     }
   }
 }
