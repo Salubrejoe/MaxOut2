@@ -8,18 +8,19 @@ struct ThreeWayPicker: View {
   var body: some View {
     HStack(spacing: 3) {
       EQPicker(selectedEquipment: $model.selectedEquipment)
-      Divider()
-        .padding(.vertical)
+//      Divider()
+//        .padding(.vertical)
       MGPicker(selectedMuscle: $model.selectedMuscle)
-      Divider()
-        .padding(.vertical)
+//      Divider()
+//        .padding(.vertical)
       APicker(selectedActivityType: $model.selectedActivityType)
     }
-    .frame(maxHeight: 50)
-    .padding(.horizontal, 7)
-    .background(.ultraThinMaterial)
-    .cornerRadius(10)
-    .padding()
+    .frame(maxHeight: 46)
+    .frame(maxWidth: 428)
+    .padding(.horizontal, 6)
+    .padding(.vertical, 6)
+    .background(.ultraThickMaterial)
+    .cornerRadius(20)
   }
 }
 
@@ -56,7 +57,6 @@ struct MGPicker: View {
                 .colorMultiply(.primary)
                 .frame(width: 10, height: 10)
               Text(muscle.displayName)
-                
             }
           }
         }
@@ -81,7 +81,7 @@ struct MGPicker: View {
           
       }
       Text(selectedMuscle?.displayName ?? "Select Muscle Group")
-        .foregroundColor(.primary)
+        .foregroundColor(selectedMuscle == nil ? .secondary : .accentColor)
         .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedMuscle != nil)
@@ -134,7 +134,7 @@ struct APicker: View {
           .foregroundColor(.primary)
       }
       Text(selectedActivityType?.hkType.commonName.capitalized ?? "Select Category")
-        .foregroundColor(.primary)
+        .foregroundColor(selectedActivityType == nil ? .secondary : .accentColor)
         .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedActivityType != nil)
@@ -192,7 +192,7 @@ struct EQPicker: View {
           .frame(width: 20, height: 20)
       }
       Text(selectedEquipment?.rawValue.capitalized ?? "Select Equipment")
-        .foregroundColor(.primary)
+        .foregroundColor(selectedEquipment == nil ? .secondary : .accentColor)
         .multilineTextAlignment(.center)
     }
     .labelForPickers(isSelected: selectedEquipment != nil)
@@ -203,19 +203,18 @@ extension View {
   func labelForPickers(isSelected: Bool) -> some View {
     self
       .bold()
-      .padding(.horizontal, 7)
+      .padding(.horizontal, 2)
       .multilineTextAlignment(.leading)
       .font(.footnote)
       .frame(maxWidth: .infinity)
-      .frame(height: 50)
-//      .background(isSelected ? Color.systemBackground : Color.secondarySytemBackground.opacity(0.5))
-      
-      .cornerRadius(10)
-      .overlay {
-        if isSelected {
-          RoundedRectangle(cornerRadius: 7)
-            .stroke(Color(.label), lineWidth: 1)
-        }
-      }
+      .frame(height: 46)
+      .background(Color.primary.opacity(isSelected ? 0.1 : 0))
+      .cornerRadius(16)
+//      .overlay {
+//        if isSelected {
+//          RoundedRectangle(cornerRadius: 7)
+//            .stroke(Color(.label), lineWidth: 1)
+//        }
+//      }
   }
 }

@@ -12,9 +12,6 @@ struct ExercisesPicker: View {
           ScrollView(showsIndicators: false) {
             
             LazyVGrid(columns: model.columns) {
-//              if !model.selectedExercises.isEmpty {
-//                selection
-//              }
               ForEach(model.groupedExercises, id: \.0) { section in
                 actualList(section, pageScroller: pageScroller)
               }
@@ -34,14 +31,16 @@ struct ExercisesPicker: View {
           .navigationBarTitleDisplayMode(.inline)
         }
         
-        VStack {
+        VStack(spacing: 3) {
           ThreeWayPicker(model: model)
-          LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
-            model.commitSelection(toRoutineVM: startModel)
-            dismiss()
+          if model.selectedExercises.count > 0 {
+            LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
+              model.commitSelection(toRoutineVM: startModel)
+              dismiss()
+            }
           }
-          .padding([.bottom, .horizontal])
         }
+        .padding([.bottom, .horizontal])
       }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)

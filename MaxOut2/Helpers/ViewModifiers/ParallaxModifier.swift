@@ -13,11 +13,11 @@ struct ParallaxModifier: ViewModifier {
   }
 }
 
-extension View {
-  func parallax(manager: MotionManager, magnitude: Double) -> some View {
-    self.modifier(ParallaxModifier(manager: manager, magnitude: magnitude))
-  }
-}
+//extension View {
+//  func parallax(manager: MotionManager, magnitude: Double) -> some View {
+//    self.modifier(ParallaxModifier(manager: manager, magnitude: magnitude))
+//  }
+//}
 
 
 class MotionManager: ObservableObject {
@@ -29,7 +29,7 @@ class MotionManager: ObservableObject {
   
   init() {
     self.manager = CMMotionManager()
-    self.manager.deviceMotionUpdateInterval = 1/30
+    self.manager.deviceMotionUpdateInterval = 1/20
     self.manager.startDeviceMotionUpdates(to: .main) { motion, error in
       guard error == nil else {
         print("Error starting MotionUpdates: \(String(describing: error))")

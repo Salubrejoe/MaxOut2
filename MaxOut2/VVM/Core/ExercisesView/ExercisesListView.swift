@@ -2,8 +2,8 @@
 import SwiftUI
 
 
-
 struct ExercisesListView: View {
+  @Binding var tabBarSize: ContainerSize
   @StateObject private var model = ExercisesViewModel()
   
   @State private var isShowingTemplates = false
@@ -26,8 +26,11 @@ struct ExercisesListView: View {
             .scrollIndicators(.hidden)
           
           
-          ThreeWayPicker(model: model)
-            
+          VStack {
+            ThreeWayPicker(model: model)
+              .padding()
+          }
+          .padding(.bottom, 30)
         }
         .navigationTitle("Exercises")
         .overlay {

@@ -1,7 +1,7 @@
 import SwiftUI
 import HealthKit
 
-enum Muscle: String, CaseIterable {
+enum Muscle: String, CaseIterable, Hashable {
   /// Shoulders
   case shoulders
   case traps
@@ -86,7 +86,7 @@ enum MuscleGroup: String, CaseIterable, Codable {
   case calves = "calves"
 }
 
-enum EquipmentType: String, CaseIterable {
+enum EquipmentType: String, CaseIterable, Hashable {
   case body         = "body only"
   case machine      = "machine"
   case kettlebells  = "kettlebell"
@@ -120,7 +120,7 @@ enum EquipmentType: String, CaseIterable {
   }
 }
 
-enum CategoryType: String, CaseIterable {
+enum CategoryType: String, CaseIterable, Hashable {
   case strength             = "strength"
   case stretching           = "stretching"
   case plyometrics          = "plyometrics"
@@ -128,10 +128,9 @@ enum CategoryType: String, CaseIterable {
   case powerlifting         = "powerlifting"
   case cardio               = "cardio"
   case olympicWeightlifting = "olympic weightlifting"
-
 }
 
-enum ActivityType: String, CaseIterable {
+enum ActivityType: String, CaseIterable, Hashable {
   case coreTraining                  = "core training"
   case elliptical                    = "elliptical"
   case flexibility                   = "flexibility"

@@ -1,6 +1,19 @@
 
 import SwiftUI
 
+enum ContainerSize {
+  case regular, small
+  
+  mutating func toggle() {
+    switch self {
+      case .regular:
+        self = .small
+      case .small:
+        self = .regular
+    }
+  }
+}
+
 struct CustomTabBarView: View {
   @Environment(\.dismiss) var dismiss
   let tabs: [TabBarItem]
@@ -8,8 +21,24 @@ struct CustomTabBarView: View {
   @State  var localSelection: TabBarItem
   @Namespace private var namespace
   
+  @Binding var containerSize: ContainerSize
+  
+  @State private var offset: CGSize = .zero
+  
   var body: some View {
     v2
+      .offset(offset)
+      .gesture(
+        DragGesture()
+          .onChanged({ newValue in
+            offset = newValue
+          })
+          .onEnded({ newValue in
+            if newValue. > 0 {
+              
+            }
+          })
+      )
       .onChange(of: selection) { newValue in
         withAnimation(.easeInOut) {
           localSelection = newValue
@@ -23,24 +52,28 @@ extension CustomTabBarView {
   private func tabView2(tab: TabBarItem) -> some View {
     VStack {
       Image(systemName: tab.iconName)
-      Text(tab.title.capitalized)
-        .font(.footnote)
-        .fontWeight(.semibold)
-        .fontDesign(.rounded)
-    }
-    .foregroundColor(localSelection == tab ? tab.color : .secondary)
-    .padding(.vertical, 8)
-    .frame(maxWidth: .infinity)
-    .frame(maxHeight: 60)
-    .background(
-      ZStack {
-        if localSelection == tab {
-          RoundedRectangle(cornerRadius: 16)
-            .fill(tab.color.opacity(0.2))
-            .matchedGeometryEffect(id: "background_rect", in: namespace)
-        }
+      if containerSize == .regular {
+        Text(tab.title.capitalized)
+          .font(.footnote)
+          .fontWeight(.semibold)
+          .fontDesign(.rounded)
       }
-    )
+    }
+        .foregroundColor(localSelection == tab ? Color.accentColor : .secondary)
+        .padding(.vertical, 8)
+        .frame(maxWidth: containerSize == .small ? 50 : .infinity)
+        .frame(maxHeight: containerSize == .small ? 30 : 60)
+        .animation(.spring(), value: containerSize)
+        .background(
+          ZStack {
+            if localSelection == tab {
+              RoundedRectangle(cornerRadius: 16)
+                .fill(.primary.opacity(0.2))
+                .matchedGeometryEffect(id: "background_rect", in: namespace)
+            }
+          }
+        )
+    
   }
   
   @ViewBuilder // MARK: - v2

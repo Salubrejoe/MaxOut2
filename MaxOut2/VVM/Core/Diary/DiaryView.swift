@@ -10,6 +10,7 @@ struct DiaryView: View {
   
   @Binding var showingLoginView: Bool
   @Binding var tabBarIsHidden: Bool
+  @Binding var tabBarSize: ContainerSize
   
   var body: some View {
     NavigationStack {
@@ -104,6 +105,6 @@ struct ProfileLabel: View {
 
 struct DiaryView_Previews: PreviewProvider {
   static var previews: some View {
-    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true))
+    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true), tabBarSize: .constant(.regular))
   }
 }

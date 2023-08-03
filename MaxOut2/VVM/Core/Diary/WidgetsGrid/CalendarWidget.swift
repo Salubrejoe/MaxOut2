@@ -35,7 +35,7 @@ struct WidgetCalendarView: View {
       Group {
         grid
       }
-      .padding(.leading, 5)
+      .padding(.horizontal, 5)
       .frame(maxWidth: .infinity)
       
       HStack {

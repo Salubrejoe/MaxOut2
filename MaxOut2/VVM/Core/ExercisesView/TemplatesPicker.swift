@@ -4,6 +4,7 @@ import Combine
 struct TemplatesPicker: View {
   @Environment(\.dismiss) var dismiss
   @ObservedObject  var model: ExercisesViewModel
+//  @EnvironmentObject var motion: MotionManager
   
   var body: some View {
     NavigationStack {
@@ -12,9 +13,6 @@ struct TemplatesPicker: View {
           ScrollView(showsIndicators: false) {
             
             LazyVGrid(columns: model.columns) {
-              if !model.selectedExercises.isEmpty {
-                selection
-              }
               ForEach(model.groupedTemplates, id: \.0) { section in
                 actualList(section, pageScroller: pageScroller)
               }
@@ -34,14 +32,17 @@ struct TemplatesPicker: View {
           .navigationBarTitleDisplayMode(.inline)
         }
         
-        VStack {
+        VStack(spacing: 3) {
           ThreeWayPicker(model: model)
-          LargeTsButton(text: "Save \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
-            model.add()
-            dismiss()
+            
+          if model.selectedExercises.count > 0 {
+            LargeTsButton(text: "Save \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
+              model.add()
+              dismiss()
+            }
           }
-          .padding([.bottom, .horizontal])
         }
+        .padding([.bottom, .horizontal])
       }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)

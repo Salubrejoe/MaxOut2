@@ -17,8 +17,6 @@ struct SessionView: View {
         VStack(spacing: 0) {
           
           header
-            .padding(.horizontal, 16)
-            .padding(.top, 15)
           
           VStack(spacing: 0) {
             ForEach($session.bobs) { $bob in
@@ -27,10 +25,7 @@ struct SessionView: View {
           }
           .cornerRadius(10)
           .padding(.bottom, 5)
-          .padding(.horizontal, 5)
         }
-//        .background(.ultraThinMaterial)
-        .cornerRadius(14)
         
         newBobButton
           .padding(.bottom, 20)
@@ -137,20 +132,19 @@ extension SessionView {
     }
     .font(.headline)
     .foregroundColor(.primary)
-    .frame(maxWidth: .infinity, alignment: .center)
-    .frame(maxHeight: 250)
+    .frame(maxWidth: .infinity)
+    .frame(height: 20)
     .background(.ultraThinMaterial)
-    .clipShape(RoundedRectangle(cornerRadius: 7))
-    .padding(.horizontal)
+    .clipShape(RoundedRectangle(cornerRadius: 20))
     
     .onTapGesture {
       if let lastBob = session.bobs.last {
         let bob = Bob(bob: lastBob)
-        withAnimation {
+        withAnimation(.easeIn) {
           session.bobs.append(bob)
         }
       } else {
-        withAnimation {
+        withAnimation(.easeIn) {
           session.bobs.append(Bob())
         }
       }

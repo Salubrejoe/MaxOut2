@@ -14,15 +14,18 @@ struct PickerCell: View {
     HStack {
       if isSelected {
         Rectangle()
-          .frame(width: 5)
-          .foregroundColor(.accentColor)
+          .frame(width: 6)
+//          .foregroundStyle(
+//            LinearGradient(colors: [.accentColor, .secondarySytemBackground], startPoint: .leading, endPoint: .trailing)
+//          )
+          .foregroundStyle(Color.accentColor.gradient)
       }
       CellLabel(for: exercise)
         .padding(.horizontal, 8)
         .padding(.vertical, 6)
     }
     .background(isSelected ? Color.secondarySytemBackground : Color.clear)
-    .cornerRadius(10)
+    .cornerRadius(20)
     .animation(.spring(), value: isSelected)
     .onTapGesture {
       isSelected.toggle()

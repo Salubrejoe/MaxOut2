@@ -155,7 +155,7 @@ struct RegularMaterialStyle: GroupBoxStyle {
       .padding([.horizontal, .top])
       .padding(.bottom, 10)
       .background(.regularMaterial)
-      .cornerRadius(11)
+      .cornerRadius(20)
   }
 }
 
@@ -165,7 +165,7 @@ struct SecondaryBackgroundStyle: GroupBoxStyle {
       .padding([.horizontal, .top])
       .padding(.bottom, 10)
       .background(Color.secondarySytemBackground)
-      .cornerRadius(11)
+      .cornerRadius(20)
   }
 }
 
