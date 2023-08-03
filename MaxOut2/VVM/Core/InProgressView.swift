@@ -1,5 +1,6 @@
 
 import SwiftUI
+import Combine
 
 struct InProgressHeader: View {
   @EnvironmentObject var model: StartViewModel
@@ -54,15 +55,27 @@ struct SessionsGrid: View {
   @EnvironmentObject var model: StartViewModel
   @Binding var tabBarIsHidden: Bool
   
+  @State private var keyboardHeight: CGFloat = 0
+  private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+    Publishers.Merge(
+      NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+        .compactMap { notification -> CGFloat? in
+          guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return nil
+          }
+          return keyboardFrame.height
+        },
+      NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+        .map { _ in CGFloat(0) }
+    ).eraseToAnyPublisher()
+  }
+
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
         sessionGrid
           .padding(.horizontal)
-          .padding(.vertical, 10)
-        //        .background(.ultraThinMaterial)
-          .cornerRadius(20)
-        //        .shadow(color: .primary.opacity(0.2), radius: 2, y: 1)
+          .padding(.vertical, 20)
       }
       
     }
@@ -74,6 +87,14 @@ struct SessionsGrid: View {
       ToolbarItem(placement: .keyboard) { Spacer() }
       ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
     }
+    
+    .onReceive(keyboardHeightPublisher) { height in
+      withAnimation {
+        keyboardHeight = height
+      }
+    }
+    .padding(.bottom, keyboardHeight)
+    .edgesIgnoringSafeArea(keyboardHeight > 0 ? .bottom : [])
   }
 }
 

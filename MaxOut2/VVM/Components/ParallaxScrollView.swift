@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct ParallaxScrollView<Background: View, Header: View, Content: View, Space: Hashable> : View {
   
   let background: Background
@@ -28,7 +30,7 @@ struct ParallaxScrollView<Background: View, Header: View, Content: View, Space: 
           .padding(.horizontal)
           .padding(.vertical, 5)
 //          .background(.ultraThinMaterial)
-          .cornerRadius(20)
+//          .cornerRadius(20)
 //          .shadow(color: .primary.opacity(0.5), radius: 02)
       }
       .coordinateSpace(name: coordinateSpace)

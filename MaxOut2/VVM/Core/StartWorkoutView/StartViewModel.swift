@@ -13,19 +13,14 @@ final class StartViewModel: ObservableObject {
   /// Rest Time
   @Published var restTime = 60.0
   
-  ///Root View Model
+  /// Bottom Sheet
   @Published var inProgress = false
   @Published var position = BottomSheetPosition.relative(0.93)
-  
   let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(200), .relative(0.93)]
   
+  /// Login Bool
   @Published var showingLoginView = false
-  
-  func checkCurrentUser() {
-    let user = try? FireAuthManager.shared.currentAuthenticatedUser()
-    self.showingLoginView = user == nil
-  }
-  
+ 
   /// Grid element
   let columns = [GridItem(.adaptive(minimum: 155))]
   let largeColumns = [GridItem(.adaptive(minimum: 300))]
@@ -33,16 +28,14 @@ final class StartViewModel: ObservableObject {
   /// Cancel Alert
   @Published var showingCancelAlert = false
   let alertText = "Are you sure you want to discard your progress?"
-  
-  
+
   /// Error Message
   @Published var errorMessage: String? = nil
   @Published var isShowingeErrorAlert = false
   
   /// Exercise Picker bool
   @Published var isShowingPicker = false
-  
-  
+
   @Published var controller = GaugeViewController()
 
   
@@ -53,8 +46,14 @@ final class StartViewModel: ObservableObject {
     self.fitUser = try await FitUserManager.shared.user(id: authDataResult.uid) /// 🧵🥎
   }
   
+  func checkCurrentUser() {
+    let user = try? FireAuthManager.shared.currentAuthenticatedUser()
+    self.showingLoginView = user == nil
+  }
   
-  // MARK: - Start/Cancel Routine
+  
+  
+  // MARK: - ROUTINE START/CANCEL
   func startRoutine() {
     routine = Routine()
     startDate = Date()
@@ -66,8 +65,7 @@ final class StartViewModel: ObservableObject {
     startDate = Date()
   }
   
-  
-  // MARK: - Remove session
+  // MARK: - REMOVE SESSION
   func remove(_ session: Session) {
     guard let index = sessions.firstIndex(of: session) else {
       print("No session named like that")
@@ -76,7 +74,11 @@ final class StartViewModel: ObservableObject {
     sessions.remove(at: index)
   }
   
-  
+}
+
+
+// MARK: - SAVE
+extension StartViewModel {
   func saveTask() {
     Task {
       do {
@@ -88,8 +90,6 @@ final class StartViewModel: ObservableObject {
     }
   }
   
-  
-  // MARK: - Save Routine
   @MainActor
   func save(_ routine: Routine?) async throws {
     let userId = try userId()
@@ -121,7 +121,7 @@ final class StartViewModel: ObservableObject {
       let sessionPath = SessionPath(exerciseId: session.exerciseId, sessionId: sessionId)
       sessionPaths.append(sessionPath)
     }
-      
+    
     let newRoutine = Routine(sessionsPaths: sessionPaths,
                              dateEnded: Date(timeIntervalSince1970: dateEnded),
                              dateStarted: Date(timeIntervalSince1970: dateStarted),

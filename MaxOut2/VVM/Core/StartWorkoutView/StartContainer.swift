@@ -7,7 +7,7 @@ struct StartContainer: View {
   }
   @EnvironmentObject var model: StartViewModel
   @Binding var tabBarIsHidden: Bool
-  @Binding var tabBarSize: ContainerSize
+  
   
   var body: some View {
     NavigationStack {

@@ -1,64 +1,43 @@
 
 import SwiftUI
-
+import MarqueeText
 
 struct ThreeWayPicker: View {
   @ObservedObject var model: ExercisesViewModel
   
+  @State private var isHidden = true
+  
   var body: some View {
     HStack(spacing: 3) {
-      EQPicker(selectedEquipment: $model.selectedEquipment)
-//      Divider()
-//        .padding(.vertical)
-      MGPicker(selectedMuscle: $model.selectedMuscle)
-//      Divider()
-//        .padding(.vertical)
-      APicker(selectedActivityType: $model.selectedActivityType)
+      GenericPicker(selectedItem: $model.selectedEquipment, items: EquipmentType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.image, placeholder: "Equipment")
+//        .threeWayPickerStyle(isHidden: $isHidden)
+      GenericPicker(selectedItem: $model.selectedMuscle, items: Muscle.allCases, labelKeyPath: \.displayName, imageKeyPath: \.muscleGroupImage, placeholder: "Muscle Group")
+//        .threeWayPickerStyle(isHidden: $isHidden)
+      GenericPicker(selectedItem: $model.selectedActivityType, items: ActivityType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.hkType.sfSymbol, placeholder: "Category")
     }
-    .frame(maxHeight: 46)
-    .frame(maxWidth: 428)
-    .padding(.horizontal, 6)
-    .padding(.vertical, 6)
-    .background(.ultraThickMaterial)
-    .cornerRadius(20)
+    .threeWayPickerStyle(isHidden: $isHidden)
   }
 }
 
 
-// MARK: - MGPICKER
-struct MGPicker: View {
-  @Binding var selectedMuscle: Muscle?
-  
-  let muscles  : [Muscle] = Muscle.allCases
+
+// MARK: - GENERIC PICKER
+struct GenericPicker<T: Hashable>: View {
+  @Binding var selectedItem: T?
+  let items: [T]
+  let labelKeyPath: KeyPath<T, String>
+  let imageKeyPath: KeyPath<T, String>
+  let placeholder: String
   
   var body: some View {
     Menu {
       Section {
-        Button(role: .destructive) {
-          selectedMuscle = nil
-        } label: {
-          HStack {
-            Image(systemName: "arrow.counterclockwise")
-            Text("Clear filter")
-          }
-        }
-        
+        clearFilter
       }
       
       Section {
-        ForEach(muscles, id: \.self) { muscle in
-          Button {
-            selectedMuscle = muscle
-          } label: {
-            HStack {
-              Image(muscle.muscleGroupImage)
-                .resizable()
-                .scaledToFit()
-                .colorMultiply(.primary)
-                .frame(width: 10, height: 10)
-              Text(muscle.displayName)
-            }
-          }
+        ForEach(items, id: \.self) { item in
+          menuButton(for: item)
         }
       }
     } label: {
@@ -66,155 +45,95 @@ struct MGPicker: View {
     }
   }
   
-  @ViewBuilder // MARK: - Label
-  private func label() -> some View {
-    HStack(spacing: 0) {
-      
-      if let selectedMuscle {
-        Image(selectedMuscle.muscleGroupImage)
-          .resizable()
-          .scaledToFit()
-          .colorMultiply(.primary)
-          .frame(width: 20, height: 20)
-          .padding(.vertical, 7)
-          .padding(.trailing, 5)
-          
-      }
-      Text(selectedMuscle?.displayName ?? "Select Muscle Group")
-        .foregroundColor(selectedMuscle == nil ? .secondary : .accentColor)
-        .multilineTextAlignment(.center)
-    }
-    .labelForPickers(isSelected: selectedMuscle != nil)
-  }
   
-  private func deselect() { self.selectedMuscle = nil }
-}
-
-
-
-// MARK: - APICKER
-struct APicker: View {
-  @Binding var selectedActivityType: ActivityType?
-  
-  let activityTypes : [ActivityType] = ActivityType.allCases
-  
-  var body: some View {
-    Menu {
-      Section {
-        Button(role: .destructive) {
-          selectedActivityType = nil
-        } label: {
-          HStack {
-            Image(systemName: "arrow.counterclockwise")
-            Text("Clear filter")
-          }
-        }
-      }
-      
-      Section {
-        ForEach(activityTypes, id: \.self) { type in
-          Button {
-            selectedActivityType = type
-          } label: {
-            Label(type.rawValue.capitalized, systemImage: type.hkType.sfSymbol)
-          }
-        }
-      }
+  @ViewBuilder // MARK: - MENU BUTTON
+  fileprivate func menuButton(for item: T) -> some View {
+    Button {
+      selectedItem = item
     } label: {
-      label()
+      HStack {
+        itemImage(item[keyPath: imageKeyPath], size: 10)
+        Text(item[keyPath: labelKeyPath].capitalized)
+      }
     }
   }
   
-  @ViewBuilder // MARK: - Label
+  
+  @ViewBuilder // MARK: - LABEL
   private func label() -> some View {
     HStack(spacing: 5) {
-      if let selectedActivityType {
-        Image(systemName: selectedActivityType.hkType.sfSymbol)
-          .frame(width: 20, height: 20)
+      if let selectedItem {
+        itemImage(selectedItem[keyPath: imageKeyPath],size: 20)
+        
+        MarqueeText(text: textForLabels(), font: .preferredFont(forTextStyle: .footnote), leftFade: 5, rightFade: 1, startDelay: 2)
           .foregroundColor(.primary)
       }
-      Text(selectedActivityType?.hkType.commonName.capitalized ?? "Select Category")
-        .foregroundColor(selectedActivityType == nil ? .secondary : .accentColor)
-        .multilineTextAlignment(.center)
+      else {
+        Text(textForLabels())
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+      }
     }
-    .labelForPickers(isSelected: selectedActivityType != nil)
+    .labelForPickers(isSelected: selectedItem != nil)
   }
-}
-
-
-// MARK: - EQPICKER
-struct EQPicker: View {
-  @Binding var selectedEquipment: EquipmentType?
   
-  let equipmentTypes  : [EquipmentType] = EquipmentType.allCases
+  private func textForLabels() -> String {
+    selectedItem?[keyPath: labelKeyPath].capitalized ?? placeholder
+  }
   
-  var body: some View {
-    Menu {
-      Section {
-        Button(role: .destructive) {
-          selectedEquipment = nil
-        } label: {
-          HStack {
-            Image(systemName: "arrow.counterclockwise")
-            Text("Clear filter")
-          }
-        }
-      }
-      
-      Section {
-        ForEach(equipmentTypes, id: \.self) { eqType in
-          Button {
-            selectedEquipment = eqType
-          } label: {
-            HStack {
-              Image(eqType.image)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 10, height: 10)
-                .padding(2)
-              Text(eqType.rawValue.capitalized)
-            }
-          }
-        }
-      }
+  @ViewBuilder // MARK: - IMAGE
+  private func itemImage(_ text: String, size: CGFloat) -> some View {
+    if isActivity() {
+      Image(systemName: text)
+        .resizable()
+        .scaledToFit()
+        .frame(width: size, height: size)
+        .foregroundColor(.primary)
+    }
+    else {
+      Image(text)
+        .resizable()
+        .scaledToFit()
+        .frame(width: size, height: size)
+        .colorMultiply(.primary)
+    }
+  }
+  
+  private func isActivity() -> Bool {
+    let element = items[0]
+    let type = type(of: element)
+    return type == ActivityType.self
+  }
+  
+  @ViewBuilder // MARK: - CLEAR FILTER
+  private var clearFilter: some View {
+    Button(role: .destructive) {
+      selectedItem = nil
     } label: {
-      label()
-    }
-  }
-  
-  @ViewBuilder // MARK: - Label
-  private func label() -> some View {
-    HStack(spacing: 5) {
-      if let selectedEquipment, selectedEquipment != .body {
-        Image(selectedEquipment.image)
-          .resizable()
-          .scaledToFit()
-          .frame(width: 20, height: 20)
+      HStack {
+        Image(systemName: "arrow.counterclockwise")
+        Text("Clear filter")
       }
-      Text(selectedEquipment?.rawValue.capitalized ?? "Select Equipment")
-        .foregroundColor(selectedEquipment == nil ? .secondary : .accentColor)
-        .multilineTextAlignment(.center)
     }
-    .labelForPickers(isSelected: selectedEquipment != nil)
   }
 }
+
 
 extension View {
   func labelForPickers(isSelected: Bool) -> some View {
     self
       .bold()
-      .padding(.horizontal, 2)
       .multilineTextAlignment(.leading)
       .font(.footnote)
+      .padding(.horizontal, 2)
       .frame(maxWidth: .infinity)
-      .frame(height: 46)
-      .background(Color.primary.opacity(isSelected ? 0.1 : 0))
-      .cornerRadius(16)
-//      .overlay {
-//        if isSelected {
-//          RoundedRectangle(cornerRadius: 7)
-//            .stroke(Color(.label), lineWidth: 1)
-//        }
-//      }
+      .frame(height: 30)
+      .cornerRadius(13)
+      .overlay {
+        if isSelected {
+          RoundedRectangle(cornerRadius: 12)
+            .stroke(Color.accentColor.gradient, lineWidth: 1)
+        }
+      }
   }
 }

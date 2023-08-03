@@ -62,12 +62,12 @@ extension SessionView {
         
         
         Button {
-          controller.isAllCompletedChekmarkFilled.toggle()
+//          controller.markAsCompleted(&session)
           controller.open.send()
         } label: {
           Image(systemName: "checkmark")
             .font(.headline)
-            .foregroundColor(!controller.isAllCompletedChekmarkFilled ? Color(.systemGreen) : .accentColor)
+            .foregroundColor(controller.isCompleted(session) ? Color(.systemGreen) : .accentColor)
         }
       }
       

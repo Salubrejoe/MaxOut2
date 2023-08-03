@@ -15,7 +15,7 @@ final class ExercisesViewModel: ObservableObject {
   
   @Published var selectedLetter = ""
   @Published var searchText: String?
-  
+   
   /// 3 way Picker
   @Published var selectedActivityType: ActivityType?
   @Published var selectedMuscle: Muscle?

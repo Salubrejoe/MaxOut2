@@ -6,16 +6,14 @@ import SwiftUI
 struct ContainerView<Content: View>: View {
   @Binding var selection: TabBarItem
   @Binding var isHidden: Bool
-  @Binding var containerSize: ContainerSize
   let content: Content
   
   @State var tabs: [TabBarItem] = []
   
-  init(selection: Binding<TabBarItem>, isHidden: Binding<Bool>, containerSize: Binding<ContainerSize>, @ViewBuilder content: () -> Content) {
+  init(selection: Binding<TabBarItem>, isHidden: Binding<Bool>, @ViewBuilder content: () -> Content) {
     self.content = content()
     self._selection = selection
     self._isHidden = isHidden
-    self._containerSize = containerSize
   }
   
   var body: some View {
@@ -23,9 +21,9 @@ struct ContainerView<Content: View>: View {
     ZStack(alignment: .bottom) {
         content
         .ignoresSafeArea()
-      CustomTabBarView(tabs: tabs, selection: $selection, localSelection: selection, containerSize: $containerSize)
+      CustomTabBarView(tabs: tabs, selection: $selection, localSelection: selection)
         .offset(y: isHidden ? 300 : 0)
-        .animation(.spring(), value: isHidden)
+        .animation(.spring(blendDuration: 0.5), value: isHidden)
       }
     
     .onPreferenceChange(TabBarItemsPreferenceKey.self) { value in
@@ -36,7 +34,7 @@ struct ContainerView<Content: View>: View {
 
 struct ContainerView_Previews: PreviewProvider {
   static var previews: some View {
-    ContainerView(selection: .constant(TabBarItem.diary), isHidden: .constant(false), containerSize: .constant(.regular), content: {
+    ContainerView(selection: .constant(TabBarItem.diary), isHidden: .constant(false), content: {
       Color.purple
     })
   }

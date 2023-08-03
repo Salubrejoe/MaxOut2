@@ -5,47 +5,71 @@ struct WidgetGrid: View {
   @EnvironmentObject var manager: HealthKitManager
   @StateObject var historyModel = HistoryViewModel()
   
+  
   @State private var isShowingHistory      = false
   @State private var isShowingExerciseTime = false
   
   var body: some View {
     ScrollView(showsIndicators: false) {
-      LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-        CalendarWidget()
-          .environmentObject(historyModel)
-          .onTapGesture { isShowingHistory = true }
-          .sheet(isPresented: $isShowingHistory) {
-            HistoryView()
-              .environmentObject(historyModel)
-          }
+      VStack {
+        
+        calendarGrid
+          
+        longWidgets
+        
+        activities
+        
+        Spacer(minLength: 80)
       }
-      LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-        MediumCardView("Exercise Time", color: .primary, style: RegularMaterialStyle()) {
-          ExerciseMinutesWidget()
-            .environmentObject(manager)
-            
-            .onTapGesture { isShowingExerciseTime = true }
-            .sheet(isPresented: $isShowingExerciseTime) {
-              ExerciseTimeView()
-                .environmentObject(manager)
-                .presentationDetents([.medium])
-            }
+    }
+  }
+  
+  @ViewBuilder
+  private var calendarGrid: some View {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+      CalendarWidget()
+        
+        .environmentObject(historyModel)
+        .onTapGesture { isShowingHistory = true }
+        .sheet(isPresented: $isShowingHistory) {
+          HistoryView()
+            .environmentObject(historyModel)
         }
-        MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
-          NavigationLink {
-            WeightView()
-          } label: {
-            BodyMassChart()
+    }
+  }
+  
+  @ViewBuilder
+  private var longWidgets: some View {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
+      MediumCardView("Exercise Time", color: .primary, style: RegularMaterialStyle()) {
+        
+        ExerciseMinutesWidget()
+          .environmentObject(manager)
+        
+          .onTapGesture { isShowingExerciseTime = true }
+          .sheet(isPresented: $isShowingExerciseTime) {
+            ExerciseTimeView()
               .environmentObject(manager)
+              .presentationDetents([.medium])
           }
+      }
+      MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
+        NavigationLink {
+          WeightView()
+        } label: {
+          BodyMassChart()
+            .environmentObject(manager)
         }
       }
-      LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-        ForEach(manager.currentActivities) {
-          SmallCardView(activity: $0, style: RegularMaterialStyle())
-        }
+    }
+  }
+  
+  @ViewBuilder //
+  private var activities: some View {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+      ForEach(manager.currentActivities) {
+        SmallCardView(activity: $0, style: RegularMaterialStyle())
       }
-      Spacer(minLength: 80)
     }
   }
 }

@@ -78,7 +78,7 @@ extension Exercise {
   }
   
   public var equipmentString : String {
-    guard equipmentType != .body else { return "" }
+    guard equipmentType != .body else { return "Body Only" }
     return equipmentType.rawValue.capitalized
   }
 }

@@ -18,7 +18,7 @@ extension BobView {
       BobGauge(bob: $bob)
         .frame(width: width * 0.35)
         .frame(height: 37)
-        .foregroundColor(bob.isCompleted ? .secondary : .primary)
+        .opacity(bob.isCompleted ? 0.2 : 1)
     }
   }
   

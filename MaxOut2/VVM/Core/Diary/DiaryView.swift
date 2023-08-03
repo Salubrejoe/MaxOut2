@@ -10,23 +10,21 @@ struct DiaryView: View {
   
   @Binding var showingLoginView: Bool
   @Binding var tabBarIsHidden: Bool
-  @Binding var tabBarSize: ContainerSize
   
   var body: some View {
     NavigationStack {
-      ParallaxScrollView(background: Color.clear, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
+      ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 50) {
         WidgetGrid()
           .environmentObject(manager)
+        
+          .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
+          .toolbar { toolbar }
+        
+          .task { try? await model.loadCurrentUser() }
+          .onAppear { manager.start() }
       } header: {
         header
       }
-      .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
-      .toolbar { toolbar }
-      .task { try? await model.loadCurrentUser() }
-    }
-    .environmentObject(manager)
-    .onAppear {
-      manager.start()
     }
   }
 }
@@ -65,28 +63,6 @@ struct ProfileLabel: View {
   
   var body: some View {
     HStack(spacing: 12) {
-//      if let urlString = user.photoUrl, let url = URL(string: urlString) {
-//        AsyncImage(url: url) { image in
-//          image
-//            .resizable()
-//            .scaledToFill()
-//        } placeholder: {
-//          ProgressView()
-//        }
-//        .frame(width: 46, height: 46)
-//        .background(Color.gray)
-//        .clipShape(Circle())
-//      }
-//      else {
-//        Text(user.displayLetter)
-//          .font(.title)
-//          .fontDesign(.rounded)
-//          .fontWeight(.heavy)
-//          .foregroundStyle(Color.systemBackground.gradient)
-//          .frame(width: 46, height: 46)
-//          .background(Color.primary.gradient)
-//          .clipShape(Circle())
-//      }
       VStack(alignment: .leading) {
         Text(user.displayName)
           .font(.title3.bold())
@@ -105,6 +81,6 @@ struct ProfileLabel: View {
 
 struct DiaryView_Previews: PreviewProvider {
   static var previews: some View {
-    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true), tabBarSize: .constant(.regular))
+    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true))
   }
 }

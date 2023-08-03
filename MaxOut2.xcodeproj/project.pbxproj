@@ -78,7 +78,10 @@
 		7CB371B82A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B72A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift */; };
 		7CB371BA2A7A820900A8AD76 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B92A7A820900A8AD76 /* TabBarItem.swift */; };
 		7CB371BC2A7AAAB600A8AD76 /* ParallaxModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BB2A7AAAB600A8AD76 /* ParallaxModifier.swift */; };
-		7CB371BE2A7AB06D00A8AD76 /* ifModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */; };
+		7CB371BE2A7AB06D00A8AD76 /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BD2A7AB06D00A8AD76 /* ConditionalModifier.swift */; };
+		7CB371C02A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371BF2A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift */; };
+		7CB371C22A7C112C00A8AD76 /* ThreeWayStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371C12A7C112C00A8AD76 /* ThreeWayStyle.swift */; };
+		7CB371C52A7C137B00A8AD76 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 7CB371C42A7C137B00A8AD76 /* MarqueeText */; };
 		7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */; };
 		7CBAA1B72A5D90DE00DFA31D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */; };
 		7CBAA1BA2A5D90DE00DFA31D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAA1B92A5D90DE00DFA31D /* Preview Assets.xcassets */; };
@@ -194,7 +197,9 @@
 		7CB371B72A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemsPreferenceKey.swift; sourceTree = "<group>"; };
 		7CB371B92A7A820900A8AD76 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		7CB371BB2A7AAAB600A8AD76 /* ParallaxModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxModifier.swift; sourceTree = "<group>"; };
-		7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ifModifier.swift; sourceTree = "<group>"; };
+		7CB371BD2A7AB06D00A8AD76 /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
+		7CB371BF2A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
+		7CB371C12A7C112C00A8AD76 /* ThreeWayStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayStyle.swift; sourceTree = "<group>"; };
 		7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaxOut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxOut2App.swift; sourceTree = "<group>"; };
 		7CBAA1B62A5D90DE00DFA31D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -247,6 +252,7 @@
 				7CBAA1CD2A5D91D300DFA31D /* GoogleSignInSwift in Frameworks */,
 				7C32044B2A79369000A25650 /* BottomSheet in Frameworks */,
 				7C7DA0F02A5EB1AA00B58AFA /* SwiftUICalendar in Frameworks */,
+				7CB371C52A7C137B00A8AD76 /* MarqueeText in Frameworks */,
 				7C7DA0DE2A5EB15300B58AFA /* SwipeActions in Frameworks */,
 				7CBAA1C22A5D91A800DFA31D /* FirebaseAuth in Frameworks */,
 				7CBAA1CB2A5D91D300DFA31D /* GoogleSignIn in Frameworks */,
@@ -502,6 +508,8 @@
 		7CBAA1D92A5D92BB00DFA31D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7CB371BF2A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift */,
+				7CBAA2042A5D94AC00DFA31D /* TextFieldFocus.swift */,
 				7CBAA1D72A5D92B000DFA31D /* SignInUtility.swift */,
 				7C7DA0F32A5EB21000B58AFA /* DurationFormatter.swift */,
 			);
@@ -594,7 +602,6 @@
 				7CBAA1D92A5D92BB00DFA31D /* Utilities */,
 				7CBAA20D2A5D952000DFA31D /* Extensions */,
 				7CBAA2062A5D94EB00DFA31D /* ViewModifiers */,
-				7CBAA2042A5D94AC00DFA31D /* TextFieldFocus.swift */,
 				7CA6CDE62A65995D006FDBD4 /* GoodColors.swift */,
 			);
 			path = Helpers;
@@ -612,7 +619,8 @@
 				7CBAA2082A5D94EB00DFA31D /* KeyboardAdaptive.swift */,
 				7CBAA2092A5D94EB00DFA31D /* NumbersOnlyModifier.swift */,
 				7CC6FB632A7664E400A9138A /* ClearButtonTF.swift */,
-				7CB371BD2A7AB06D00A8AD76 /* ifModifier.swift */,
+				7CB371BD2A7AB06D00A8AD76 /* ConditionalModifier.swift */,
+				7CB371C12A7C112C00A8AD76 /* ThreeWayStyle.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -622,12 +630,12 @@
 			children = (
 				7CBAA2022A5D94A600DFA31D /* Constants.swift */,
 				7C7DA11A2A5EB4DB00B58AFA /* Binding-optionals.swift */,
-				7C7DA0F12A5EB1ED00B58AFA /* TimeInterval-String.swift */,
 				7CCB57FF2A6949EF0086D291 /* HKWorkoutActivityType.swift */,
 				7CBAA2182A5D964F00DFA31D /* Colors.swift */,
 				7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */,
 				7CBAA20E2A5D952A00DFA31D /* Bundle-decodable.swift */,
 				7C1555D72A6FCBC0005C2855 /* DismissButton.swift */,
+				7C7DA0F12A5EB1ED00B58AFA /* TimeInterval-String.swift */,
 				7C1555DD2A71214C005C2855 /* Date.swift */,
 			);
 			path = Extensions;
@@ -696,6 +704,7 @@
 				7C7DA0DD2A5EB15300B58AFA /* SwipeActions */,
 				7C7DA0EF2A5EB1AA00B58AFA /* SwiftUICalendar */,
 				7C32044A2A79369000A25650 /* BottomSheet */,
+				7CB371C42A7C137B00A8AD76 /* MarqueeText */,
 			);
 			productName = MaxOut2;
 			productReference = 7CBAA1AF2A5D90DC00DFA31D /* MaxOut2.app */;
@@ -731,6 +740,7 @@
 				7C7DA0DC2A5EB15300B58AFA /* XCRemoteSwiftPackageReference "SwipeActions" */,
 				7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */,
 				7C3204492A79369000A25650 /* XCRemoteSwiftPackageReference "BottomSheet" */,
+				7CB371C32A7C137A00A8AD76 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = 7CBAA1B02A5D90DC00DFA31D /* Products */;
 			projectDirPath = "";
@@ -810,6 +820,7 @@
 				7C7DA0AD2A5DAE4100B58AFA /* Session.swift in Sources */,
 				7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */,
 				7C7DA0EC2A5EB16400B58AFA /* WorkoutDetailView.swift in Sources */,
+				7CB371C22A7C112C00A8AD76 /* ThreeWayStyle.swift in Sources */,
 				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
 				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
 				7C1555D42A6BDF44005C2855 /* RadarMock.swift in Sources */,
@@ -838,7 +849,7 @@
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
 				7C7DA11D2A5EBC8A00B58AFA /* InProgressView.swift in Sources */,
-				7CB371BE2A7AB06D00A8AD76 /* ifModifier.swift in Sources */,
+				7CB371BE2A7AB06D00A8AD76 /* ConditionalModifier.swift in Sources */,
 				7C7DA0C52A5EAFA000B58AFA /* DiaryViewModel.swift in Sources */,
 				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */,
@@ -863,6 +874,7 @@
 				7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
 				7C7DA0BB2A5E909600B58AFA /* ParallaxScrollView.swift in Sources */,
+				7CB371C02A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift in Sources */,
 				7CBAA1F92A5D944400DFA31D /* LoginTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1102,6 +1114,14 @@
 				minimumVersion = 0.1.14;
 			};
 		};
+		7CB371C32A7C137A00A8AD76 /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joekndy/MarqueeText.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		7CBAA1C02A5D91A800DFA31D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1135,6 +1155,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7C7DA0EE2A5EB1AA00B58AFA /* XCRemoteSwiftPackageReference "SwiftUICalendar" */;
 			productName = SwiftUICalendar;
+		};
+		7CB371C42A7C137B00A8AD76 /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CB371C32A7C137A00A8AD76 /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
 		};
 		7CBAA1C12A5D91A800DFA31D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

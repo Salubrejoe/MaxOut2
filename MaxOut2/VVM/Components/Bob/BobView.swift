@@ -17,6 +17,7 @@ struct BobView: View {
         else if session.category == "stretching" { stretchingBob() }
         else { strengthBob() } /// else
       }
+//      .keyboardAdaptive()
       .frame(maxWidth: .infinity)
       .foregroundColor(.primary)
       
