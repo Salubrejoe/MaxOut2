@@ -2,7 +2,9 @@
 import SwiftUI
 
 
-struct CustomTabBarView: View {
+
+
+struct CustomBar: View {
   @Environment(\.dismiss) var dismiss
   let tabs: [TabBarItem]
   @Binding var selection: TabBarItem
@@ -21,7 +23,7 @@ struct CustomTabBarView: View {
 }
 
 // MARK: - tabView(tab:)
-extension CustomTabBarView {
+extension CustomBar {
   private func tabView2(tab: TabBarItem) -> some View {
     VStack {
       Image(systemName: tab.iconName)

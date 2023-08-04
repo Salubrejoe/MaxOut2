@@ -1,4 +1,5 @@
 import SwiftUI
+import MarqueeText
 
 struct ExerciseDetailViiu: View {
   @Environment(\.dismiss) var dismiss
@@ -17,34 +18,41 @@ struct ExerciseDetailViiu: View {
   
   var body: some View {
     ScrollView(showsIndicators: false) {
-      TextField("Name", text: $editedExercise.name)
-        .font(.largeTitle)
-        .fontWeight(.semibold)
-        .padding()
-
+//      TextField("Name", text: $editedExercise.name)
+//        .font(.largeTitle)
+//        .fontWeight(.semibold)
+//        .padding()
       
-      HStack {
-        Text(exercise.equipmentString)
-          .frame(maxWidth: .infinity)
-        Divider()
-          .padding(.vertical, 2)
-        Text(exercise.muscleString)
-          .frame(maxWidth: .infinity)
-        Divider()
-          .padding(.vertical, 2)
-        Text(exercise.activityType.rawValue.capitalized)
-          .frame(maxWidth: .infinity)
+      VStack(alignment: .leading) {
+        MarqueeText(text: editedExercise.name, font: .preferredFont(forTextStyle: .largeTitle), leftFade: 5, rightFade: 0, startDelay: 2)
+          .fontWeight(.semibold)
+        
+        HStack {
+          //        Text(exercise.equipmentString)
+          MarqueeText(text: editedExercise.equipmentString, font: .preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 0, startDelay: 2)
+            .frame(maxWidth: .infinity)
+          Divider()
+          //        Text(exercise.muscleString)
+          MarqueeText(text: editedExercise.muscleString, font: .preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 0, startDelay: 2)
+            .frame(maxWidth: .infinity)
+          Divider()
+          //        Text(exercise.activityType.rawValue.capitalized)
+          MarqueeText(text: editedExercise.activityType.rawValue.capitalized, font: .preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 0, startDelay: 2)
+            .frame(maxWidth: .infinity)
+        }
+        .padding(. vertical)
       }
-      .fontWeight(.heavy)
+      
       
       TabView {
         ForEach($editedExercise.instructions.indices, id: \.self) { index in
           GroupBox {
             TextEditor(text: $editedExercise.instructions[index])
               .scrollContentBackground(.hidden)
+              .padding(.bottom)
           } label: {
             HStack {
-              Text("INSTRUCTIONS")
+              Text("HOW TO")
               Spacer()
               Image(systemName: "\(index + 1).circle")
             }
@@ -53,7 +61,7 @@ struct ExerciseDetailViiu: View {
         }
       }
       .tabViewStyle(.page)
-      .frame(height: 250)
+      .frame(height: 300)
     }
     .padding(.horizontal)
     .textFieldClearButton
@@ -62,8 +70,6 @@ struct ExerciseDetailViiu: View {
       UIPageControl.appearance().pageIndicatorTintColor = UIColor.label.withAlphaComponent(0.2)
       tabBarIsHidden = true
     }
-    .navigationTitle("Edit")
-    .navigationBarTitleDisplayMode(.inline)
     .onDisappear {
       exercise = editedExercise
       tabBarIsHidden = false

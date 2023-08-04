@@ -3,7 +3,7 @@
 import SwiftUI
 
 
-struct ContainerView<Content: View>: View {
+struct TabBarView<Content: View>: View {
   @Binding var selection: TabBarItem
   @Binding var isHidden: Bool
   let content: Content
@@ -21,7 +21,7 @@ struct ContainerView<Content: View>: View {
     ZStack(alignment: .bottom) {
         content
         .ignoresSafeArea()
-      CustomTabBarView(tabs: tabs, selection: $selection, localSelection: selection)
+      CustomBar(tabs: tabs, selection: $selection, localSelection: selection)
         .offset(y: isHidden ? 300 : 0)
         .animation(.spring(blendDuration: 0.5), value: isHidden)
       }
@@ -32,9 +32,9 @@ struct ContainerView<Content: View>: View {
   }
 }
 
-struct ContainerView_Previews: PreviewProvider {
+struct TabBarView_Previews: PreviewProvider {
   static var previews: some View {
-    ContainerView(selection: .constant(TabBarItem.diary), isHidden: .constant(false), content: {
+    TabBarView(selection: .constant(TabBarItem.diary), isHidden: .constant(false), content: {
       Color.purple
     })
   }

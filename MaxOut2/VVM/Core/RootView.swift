@@ -28,7 +28,7 @@ struct RootView: View {
   
   @ViewBuilder
   private var mainTabBar: some View {
-    ContainerView(selection: $selection, isHidden: $isHidden) {
+    TabBarView(selection: $selection, isHidden: $isHidden) {
       Group {
         DiaryView(showingLoginView: $model.showingLoginView, tabBarIsHidden: $isHidden)
           .tabBarItem(.diary, selection: $selection)

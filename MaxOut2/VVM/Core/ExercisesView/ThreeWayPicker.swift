@@ -125,7 +125,7 @@ extension View {
       .bold()
       .multilineTextAlignment(.leading)
       .font(.footnote)
-      .padding(.horizontal, 2)
+      .padding(.horizontal, 5)
       .frame(maxWidth: .infinity)
       .frame(height: 30)
       .cornerRadius(13)

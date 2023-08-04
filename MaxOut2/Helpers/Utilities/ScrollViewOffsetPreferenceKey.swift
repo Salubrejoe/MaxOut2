@@ -9,12 +9,12 @@ struct ScrollViewOffsetPK: PreferenceKey {
 }
 
 extension View {
-  func onScrollViewOffsetChanged(action: @escaping (_ offset: CGFloat) -> Void) -> some View {
+  func onScrollViewOffsetChanged<Space: Hashable>(coordinateSpace: Space, action: @escaping (_ offset: CGFloat) -> Void) -> some View {
     self
       .background(
         GeometryReader { geo in
           Text("")
-            .preference(key: ScrollViewOffsetPK.self, value: geo.frame(in: .global).minY)
+            .preference(key: ScrollViewOffsetPK.self, value: geo.frame(in: .named(coordinateSpace)).minY)
         }
       )
       .onPreferenceChange(ScrollViewOffsetPK.self) { value in
@@ -24,31 +24,29 @@ extension View {
 }
 
 struct Test: View {
+  enum CoordinateSpaces {
+    case scrollView
+  }
   @State private var scrollOffset: CGFloat = 0.0
   
   var body: some View {
-    ScrollView {
-      VStack {
-        
-        titleLayer
-//          .background(
-//            GeometryReader { geo in
-//              Text("")
-//                .preference(key: ScrollViewOffsetPK.self, value: geo.frame(in: .global).minY)
-//            }
-//          )
-          .onScrollViewOffsetChanged { offset in
-            scrollOffset = offset
-          }
-        
-        contentLayer
+    NavigationStack {
+      ScrollView {
+        VStack {
+//          
+//          titleLayer
+//          
+          contentLayer
+            .onScrollViewOffsetChanged(coordinateSpace: CoordinateSpaces.scrollView) { offset in
+              scrollOffset = offset
+            }
+        }
       }
-      .padding()
+      .navigationTitle("Pizza")
+      .padding(.horizontal)
+      .coordinateSpace(name: CoordinateSpaces.scrollView)
+      .overlay(Text("\(scrollOffset)"))
     }
-    .overlay(Text("\(scrollOffset)"))
-//    .onPreferenceChange(ScrollViewOffsetPK.self) { value in
-//      scrollOffset = value
-//    }
   }
   
   @ViewBuilder
