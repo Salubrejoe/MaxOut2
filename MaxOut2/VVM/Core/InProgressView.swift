@@ -4,11 +4,12 @@ import Combine
 
 struct InProgressHeader: View {
   @EnvironmentObject var model: StartViewModel
-  @Binding var tabBarIsHidden: Bool
+  @EnvironmentObject var manager: HealthKitManager
+  @Binding var tabBarState: BarState
   
   var body: some View {
     VStack(alignment: .leading) {
-      if tabBarIsHidden {
+      if tabBarState == .hidden {
         HStack {
           Button("Quit") {
             model.showingCancelAlert = true
@@ -23,8 +24,9 @@ struct InProgressHeader: View {
           
           Button("Finish") {
             model.inProgress = false
-            tabBarIsHidden = false
-            model.saveTask()
+            tabBarState = .large
+//            model.saveTask()
+//            manager.saveWorkout()
           }
           .bold()
           .frame(width: 80, alignment: .trailing)
@@ -36,7 +38,7 @@ struct InProgressHeader: View {
       VStack(alignment: .leading) {
         HStack(alignment: .firstTextBaseline) {
           Text(model.routine?.title ?? "")
-            .font(model.position == .absoluteBottom(220) ? .title2.bold() : .largeTitle.bold())
+            .font(model.position == .absoluteBottom(180) ? .title2.bold() : .largeTitle.bold())
           Spacer()
           Image(systemName: "ellipsis.rectangle.fill")
             .imageScale(.large)
@@ -53,7 +55,7 @@ struct InProgressHeader: View {
 
 struct SessionsGrid: View {
   @EnvironmentObject var model: StartViewModel
-  @Binding var tabBarIsHidden: Bool
+  @Binding var tabBarState: BarState
   
   @State private var keyboardHeight: CGFloat = 0
   private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
@@ -99,8 +101,6 @@ struct SessionsGrid: View {
 }
 
 extension SessionsGrid {
-  
-  
   @ViewBuilder
   private var sessionGrid: some View {
     LazyVGrid(columns: model.largeColumns, spacing: 5) {
@@ -134,7 +134,7 @@ extension SessionsGrid {
       model.cancelRoutine()
       model.showingCancelAlert = false
       model.inProgress = false
-      tabBarIsHidden = false
+      tabBarState = .large
     }
   }
 }

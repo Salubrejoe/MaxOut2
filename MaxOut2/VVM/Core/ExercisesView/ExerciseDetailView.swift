@@ -7,13 +7,13 @@ struct ExerciseDetailViiu: View {
     case scrollView
   }
   @Binding var exercise: Exercise
-  @Binding var tabBarIsHidden: Bool
+  @Binding var tabBarState: BarState
   @State private var editedExercise: Exercise
   
-  init(exercise: Binding<Exercise>, tabBarIsHidden: Binding<Bool>) {
+  init(exercise: Binding<Exercise>, tabBarState: Binding<BarState>) {
     self._exercise = exercise
     self._editedExercise = State(wrappedValue: exercise.wrappedValue)
-    self._tabBarIsHidden = tabBarIsHidden
+    self._tabBarState = tabBarState
   }
   
   var body: some View {
@@ -68,11 +68,11 @@ struct ExerciseDetailViiu: View {
     .onAppear {
       UIPageControl.appearance().currentPageIndicatorTintColor = .label
       UIPageControl.appearance().pageIndicatorTintColor = UIColor.label.withAlphaComponent(0.2)
-      tabBarIsHidden = true
+      tabBarState = .hidden
     }
     .onDisappear {
       exercise = editedExercise
-      tabBarIsHidden = false
+      tabBarState = .large
     }
   }
   
@@ -93,6 +93,6 @@ struct ExerciseDetailViiu: View {
 
 struct ExerciseDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseDetailViiu(exercise: .constant(Exercise.mockup), tabBarIsHidden: .constant(true))
+    ExerciseDetailViiu(exercise: .constant(Exercise.mockup), tabBarState: .constant(.large))
   }
 }

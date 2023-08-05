@@ -3,32 +3,38 @@ import SwiftUI
 
 struct ExercisesList_Previews: PreviewProvider {
   static var previews: some View {
-    ContainerView(selection: .constant(.exercises), isHidden: .constant(false)) {
-      ExercisesListView(tabBarIsHidden: .constant(false))
+    TabBarView(selection: .constant(.exercises), tabBarState: .constant(.large)) {
+      ExercisesListView(tabBarState: .constant(.large))
     }
   }
 }
 
 
 struct ExercisesListView: View {
+  enum CoordinateSpaces {
+    case scrollView
+  }
+  
+  @State private var scrollOffset: CGFloat = 0.0
+  
   @StateObject private var model = ExercisesViewModel()
   
   @State private var isShowingTemplates = false
   
-  @Binding var tabBarIsHidden: Bool
-  
+  @Binding var tabBarState: BarState
+
   var body: some View {
     NavigationStack {
       ScrollViewReader { pageScroller in
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .top) {
           
           LiSt
           
           VStack {
             ThreeWayPicker(model: model)
-              .padding()
+              .padding(.horizontal)
           }
-          .padding(.bottom, 50)
+          .padding(.top, 5)
         }
         .navigationTitle("Exercises")
         .overlay { indexTitles(pageScroller: pageScroller) }
@@ -44,7 +50,6 @@ struct ExercisesListView: View {
       }
     }
   }
-  
   @ViewBuilder // MARK: - SOMETHING
   private var LiSt: some View {
     List {
@@ -74,7 +79,7 @@ struct ExercisesListView: View {
     
     ForEach(section.1) { exercise in
       NavigationLink {
-        ExerciseDetailViiu(exercise: $model.exercises[model.indexOfItem(exercise, collection: model.exercises) ?? 0], tabBarIsHidden: $tabBarIsHidden)
+        ExerciseDetailViiu(exercise: $model.exercises[model.indexOfItem(exercise, collection: model.exercises) ?? 0], tabBarState: $tabBarState)
         
       } label: {
         ExerciseListCell(exercise: exercise) {

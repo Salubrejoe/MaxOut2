@@ -16,7 +16,7 @@ final class StartViewModel: ObservableObject {
   /// Bottom Sheet
   @Published var inProgress = false
   @Published var position = BottomSheetPosition.relative(0.93)
-  let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(200), .relative(0.93)]
+  let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(180), .relative(0.93)]
   
   /// Login Bool
   @Published var showingLoginView = false

@@ -1,7 +1,9 @@
 
 import SwiftUI
 
-
+enum BarState: String {
+  case hidden, small, large
+}
 
 
 struct CustomBar: View {
@@ -10,6 +12,8 @@ struct CustomBar: View {
   @Binding var selection: TabBarItem
   @State  var localSelection: TabBarItem
   @Namespace private var namespace
+  
+  @Binding var state: BarState
   
   var body: some View {
     v2
@@ -27,13 +31,15 @@ extension CustomBar {
   private func tabView2(tab: TabBarItem) -> some View {
     VStack {
       Image(systemName: tab.iconName)
-      Text(tab.title.capitalized)
-        .font(.footnote)
-        .fontWeight(.semibold)
-        .fontDesign(.rounded)
+      if state != .small {
+        Text(tab.title.capitalized)
+          .font(.footnote)
+          .fontWeight(.semibold)
+          .fontDesign(.rounded)
+      }
     }
     .foregroundColor(localSelection == tab ? Color.accentColor : .secondary)
-    .frame(maxWidth: .infinity)
+    .frame(maxWidth: state != .small ? .infinity : 50)
     .padding(.vertical, 8)
     .background(
       ZStack {
@@ -44,6 +50,7 @@ extension CustomBar {
         }
       }
     )
+    .animation(.spring(), value: state)
   }
   
   @ViewBuilder // MARK: - v2

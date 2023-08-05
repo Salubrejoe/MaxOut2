@@ -33,9 +33,6 @@ struct Test: View {
     NavigationStack {
       ScrollView {
         VStack {
-//          
-//          titleLayer
-//          
           contentLayer
             .onScrollViewOffsetChanged(coordinateSpace: CoordinateSpaces.scrollView) { offset in
               scrollOffset = offset

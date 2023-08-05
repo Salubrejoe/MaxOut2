@@ -5,17 +5,13 @@ import MarqueeText
 struct ThreeWayPicker: View {
   @ObservedObject var model: ExercisesViewModel
   
-  @State private var isHidden = true
-  
   var body: some View {
     HStack(spacing: 3) {
       GenericPicker(selectedItem: $model.selectedEquipment, items: EquipmentType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.image, placeholder: "Equipment")
-//        .threeWayPickerStyle(isHidden: $isHidden)
       GenericPicker(selectedItem: $model.selectedMuscle, items: Muscle.allCases, labelKeyPath: \.displayName, imageKeyPath: \.muscleGroupImage, placeholder: "Muscle Group")
-//        .threeWayPickerStyle(isHidden: $isHidden)
       GenericPicker(selectedItem: $model.selectedActivityType, items: ActivityType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.hkType.sfSymbol, placeholder: "Category")
     }
-    .threeWayPickerStyle(isHidden: $isHidden)
+    .threeWayPickerStyle()
   }
 }
 

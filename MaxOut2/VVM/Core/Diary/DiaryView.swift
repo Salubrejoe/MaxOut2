@@ -6,26 +6,40 @@ struct DiaryView: View {
     case scrollView
   }
   @EnvironmentObject var manager: HealthKitManager
+  @EnvironmentObject var startModel: StartViewModel
   @StateObject private var model = DiaryViewModel()
   
   @Binding var showingLoginView: Bool
-  @Binding var tabBarIsHidden: Bool
+  @Binding var tabBarState: BarState
+  
+  @State private var scrollOffset: CGFloat = 0.0
   
   var body: some View {
     NavigationStack {
-      ParallaxScrollView(background: Color.systemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 50) {
+      ScrollView(showsIndicators: false) {
+        header
+          .onScrollViewOffsetChanged(coordinateSpace: CoordinateSpaces.scrollView) { offset in
+            scrollOffset = offset
+            calculateBarState(with: offset)
+          }
         WidgetGrid()
           .environmentObject(manager)
-        
-          .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
-          .toolbar { toolbar }
-        
-          .task { try? await model.loadCurrentUser() }
-          .onAppear { manager.start() }
-      } header: {
-        header
       }
+      .coordinateSpace(name: CoordinateSpaces.scrollView)
+      .padding(.horizontal)
+      .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
+//      .toolbar { toolbar }
+      
+      .task { try? await model.loadCurrentUser() }
+      .onAppear { manager.start() }
     }
+  }
+  
+  private func calculateBarState(with offset: CGFloat) {
+    guard tabBarState != .hidden else { return }
+    guard !startModel.inProgress else { return }
+    if offset < 0 { tabBarState = .small }
+    else { tabBarState = .large }
   }
 }
 
@@ -33,13 +47,15 @@ extension DiaryView {
   
   @ViewBuilder // MARK: - Header
   private var header: some View {
-    List {
+    GroupBox {
       NavigationLink {
-        ProfileView(model: model, showingLoginView: $showingLoginView, tabBarIsHidden: $tabBarIsHidden)
+        ProfileView(model: model, showingLoginView: $showingLoginView, tabBarState: $tabBarState)
       } label: {
         ProfileLabel(user: model.user)
       }
-    }.listStyle(.plain)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .groupBoxStyle(RegularMaterialStyle())
   }
   
     
@@ -81,6 +97,6 @@ struct ProfileLabel: View {
 
 struct DiaryView_Previews: PreviewProvider {
   static var previews: some View {
-    DiaryView(showingLoginView: .constant(false), tabBarIsHidden: .constant(true))
+    DiaryView(showingLoginView: .constant(false), tabBarState: .constant(.large))
   }
 }

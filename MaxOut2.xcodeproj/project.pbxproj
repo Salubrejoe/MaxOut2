@@ -18,6 +18,8 @@
 		7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DB2A710F2E005C2855 /* TimeRange.swift */; };
 		7C1555DE2A71214C005C2855 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DD2A71214C005C2855 /* Date.swift */; };
 		7C32044B2A79369000A25650 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7C32044A2A79369000A25650 /* BottomSheet */; };
+		7C6FE5012A7E55710017C0A9 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5002A7E55710017C0A9 /* NavBar.swift */; };
+		7C6FE5032A7E58EE0017C0A9 /* NavContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -124,6 +126,7 @@
 		7CCB57FB2A69125D0086D291 /* BodyMassChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */; };
 		7CCB57FD2A6912BD0086D291 /* WidgetGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */; };
 		7CCB58002A6949EF0086D291 /* HKWorkoutActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB57FF2A6949EF0086D291 /* HKWorkoutActivityType.swift */; };
+		7CDB57802A7E54300060FCFE /* AppNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB577F2A7E54300060FCFE /* AppNavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +140,8 @@
 		7C1555D92A701469005C2855 /* ThreeWayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C1555DB2A710F2E005C2855 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		7C1555DD2A71214C005C2855 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		7C6FE5002A7E55710017C0A9 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavContainer.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -238,6 +243,7 @@
 		7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMassChart.swift; sourceTree = "<group>"; };
 		7CCB57FC2A6912BD0086D291 /* WidgetGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGrid.swift; sourceTree = "<group>"; };
 		7CCB57FF2A6949EF0086D291 /* HKWorkoutActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutActivityType.swift; sourceTree = "<group>"; };
+		7CDB577F2A7E54300060FCFE /* AppNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBAA1B22A5D90DC00DFA31D /* MaxOut2App.swift */,
+				7CDB577E2A7E541B0060FCFE /* CustomNavBar */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -673,6 +680,16 @@
 			path = Charts;
 			sourceTree = "<group>";
 		};
+		7CDB577E2A7E541B0060FCFE /* CustomNavBar */ = {
+			isa = PBXGroup;
+			children = (
+				7CDB577F2A7E54300060FCFE /* AppNavBar.swift */,
+				7C6FE5002A7E55710017C0A9 /* NavBar.swift */,
+				7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */,
+			);
+			path = CustomNavBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -813,6 +830,7 @@
 				7C7DA0AD2A5DAE4100B58AFA /* Session.swift in Sources */,
 				7C7DA0FA2A5EB25400B58AFA /* LargeTsButton.swift in Sources */,
 				7C7DA0EC2A5EB16400B58AFA /* WorkoutDetailView.swift in Sources */,
+				7C6FE5032A7E58EE0017C0A9 /* NavContainer.swift in Sources */,
 				7CB371C22A7C112C00A8AD76 /* ThreeWayStyle.swift in Sources */,
 				7CBAA1E22A5D93D400DFA31D /* RootView.swift in Sources */,
 				7C7DA0EA2A5EB16400B58AFA /* WorkoutGrid.swift in Sources */,
@@ -839,6 +857,7 @@
 				7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */,
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
+				7C6FE5012A7E55710017C0A9 /* NavBar.swift in Sources */,
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
 				7CBAA20C2A5D94EB00DFA31D /* NumbersOnlyModifier.swift in Sources */,
 				7C7DA11D2A5EBC8A00B58AFA /* InProgressView.swift in Sources */,
@@ -866,6 +885,7 @@
 				7C7DA1102A5EB32A00B58AFA /* CellLabel.swift in Sources */,
 				7CBAA1D32A5D924900DFA31D /* SignInWithAppleHelper.swift in Sources */,
 				7C7DA0BB2A5E909600B58AFA /* ParallaxScrollView.swift in Sources */,
+				7CDB57802A7E54300060FCFE /* AppNavBar.swift in Sources */,
 				7CB371C02A7BD50000A8AD76 /* ScrollViewOffsetPreferenceKey.swift in Sources */,
 				7CBAA1F92A5D944400DFA31D /* LoginTextField.swift in Sources */,
 			);

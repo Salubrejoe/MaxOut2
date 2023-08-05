@@ -10,8 +10,8 @@ struct RootView: View {
   @StateObject private var model = StartViewModel()
   let gaugeController = GaugeViewController()
   
-  @State private var selection: TabBarItem = .diary
-  @State private var isHidden: Bool = false
+  @State private var selection: TabBarItem = .start
+  @State private var tabBarState: BarState = .large
   
   var body: some View {
     mainTabBar
@@ -28,17 +28,17 @@ struct RootView: View {
   
   @ViewBuilder
   private var mainTabBar: some View {
-    TabBarView(selection: $selection, isHidden: $isHidden) {
+    TabBarView(selection: $selection, tabBarState: $tabBarState) {
       Group {
-        DiaryView(showingLoginView: $model.showingLoginView, tabBarIsHidden: $isHidden)
+        DiaryView(showingLoginView: $model.showingLoginView, tabBarState: $tabBarState)
           .tabBarItem(.diary, selection: $selection)
-          .environmentObject(manager)
-        StartContainer(tabBarIsHidden: $isHidden)
+        StartContainer(tabBarState: $tabBarState)
           .tabBarItem(.start, selection: $selection)
-          .environmentObject(model)
-        ExercisesListView(tabBarIsHidden: $isHidden)
+        ExercisesListView(tabBarState: $tabBarState)
           .tabBarItem(.exercises, selection: $selection)
       }
+      .environmentObject(manager)
+      .environmentObject(model)
       
       
       
@@ -46,16 +46,18 @@ struct RootView: View {
       .if(model.inProgress) { content in
         content
           .bottomSheet(bottomSheetPosition: $model.position, switchablePositions: model.switchablePositions) {
-            InProgressHeader(tabBarIsHidden: $isHidden)
+            InProgressHeader(tabBarState: $tabBarState)
               .environmentObject(model)
+              .environmentObject(manager)
+              
           } mainContent: {
-            SessionsGrid(tabBarIsHidden: $isHidden)
+            SessionsGrid(tabBarState: $tabBarState)
               .environmentObject(model)
           }
       }
-      .onChange(of: model.position) { newValue in
-        if newValue == .relative(0.93) { isHidden = true }
-        else { isHidden = false}
+      .onChange(of: model.position) { _ in
+        if model.position == .relative(0.93) { tabBarState = .hidden }
+        else { tabBarState = .large }
       }
     }
   }

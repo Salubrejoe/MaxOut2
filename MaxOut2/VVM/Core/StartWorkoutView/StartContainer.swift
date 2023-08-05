@@ -6,7 +6,7 @@ struct StartContainer: View {
     case scrollView
   }
   @EnvironmentObject var model: StartViewModel
-  @Binding var tabBarIsHidden: Bool
+  @Binding var tabBarState: BarState
   
   
   var body: some View {
@@ -15,11 +15,12 @@ struct StartContainer: View {
         LargeTsButton(text: "Start a new workout", background: Color.accentColor, textColor: .systemBackground) {
           model.startRoutine()
           model.inProgress = true
-          tabBarIsHidden = true
+          tabBarState = .hidden
         }
+        .disabled(model.inProgress)
         .padding(.vertical)
       } header: {
-        Text("🏚️ Hi, \(model.fitUser.username ?? "Pizza Guy!")")
+        Text("Buenos dias, \(model.fitUser.username ?? "Pizza Guy!")")
           .font(.largeTitle.bold())
       }
     }

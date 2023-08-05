@@ -36,11 +36,10 @@ final class HealthKitManager: ObservableObject {
       heightType,
       workoutType
     ])
-  } 
+  }
   
   var shareTypes: Set<HKSampleType> {
     Set([
-//      exerciseTimeType,
       bodyMassType,
       heightType,
       workoutType
@@ -316,6 +315,38 @@ extension HealthKitManager {
   }
 }
 
+
+// MARK: - SAVE WORKOUT
+extension HealthKitManager {
+  
+  func saveWorkout(start: Date, end: Date, activityType: HKWorkoutActivityType) {
+    guard let store, HKHealthStore.isHealthDataAvailable() else {
+      print("HealthKit is not available on this device.")
+      return
+    }
+    
+    let startInt = start.timeIntervalSince1970
+    let endInt = end.timeIntervalSince1970
+    let duration = endInt - startInt
+    
+    let workout = HKWorkout(activityType: activityType,
+                        start: start,
+                        end: end,
+                        duration: 600,
+                        totalEnergyBurned: nil,
+                        totalDistance: nil,
+                        metadata: nil)
+    
+    store.save(workout) { (success, error) -> Void in
+      guard success else {
+        print("Mistakes in HK - saveWorkouts()")
+        return
+      }
+    }
+  }
+}
+
+
 // MARK: - SUBMIT STATS
 extension HealthKitManager {
   
@@ -348,6 +379,7 @@ extension HealthKitManager {
     
     let quantity = HKQuantity.init(unit: HKUnit.meter(), doubleValue: height)
     
+    
     let bodyMass = HKQuantitySample(type: quantityType,
                                     quantity: quantity,
                                     start: Date(),
@@ -364,6 +396,8 @@ extension HealthKitManager {
     getHeightStats()
   }
 }
+
+
 
 
 
