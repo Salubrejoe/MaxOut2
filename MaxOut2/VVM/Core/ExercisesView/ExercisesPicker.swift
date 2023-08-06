@@ -61,7 +61,7 @@ struct ExercisesPicker: View {
     
     
     ForEach(section.1) { exercise in
-      PickerCell(model: model, exercise: exercise) { model.select(exercise, pageScroller: pageScroller) }
+      PickerCell(model: model, exercise: exercise) { model.select(exercise) }
         .id(exercise.id)
     }
   }

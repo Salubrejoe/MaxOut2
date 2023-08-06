@@ -15,9 +15,6 @@ struct PickerCell: View {
       if isSelected {
         Rectangle()
           .frame(width: 6)
-//          .foregroundStyle(
-//            LinearGradient(colors: [.accentColor, .secondarySytemBackground], startPoint: .leading, endPoint: .trailing)
-//          )
           .foregroundStyle(Color.accentColor.gradient)
       }
       CellLabel(for: exercise)

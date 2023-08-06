@@ -25,7 +25,19 @@ final class ExercisesViewModel: ObservableObject {
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
-  public var groupedExercises: [(String, [Exercise])] {
+  /// Locate exercise in array
+  func indexOfItem(_ exercise: Exercise, collection exercises: [Exercise]) -> Int? {
+    guard let index = exercises.firstIndex(where: { $0.name == exercise.name }) else {
+      return nil
+    }
+    return index
+  }
+}
+
+
+// MARK: - SEARCH LOGIC
+extension ExercisesViewModel {
+  func filter(_ exercises: [Exercise]) -> [Exercise] {
     var filteredExercises = exercises
     
     if let searchText {
@@ -44,31 +56,20 @@ final class ExercisesViewModel: ObservableObject {
       filteredExercises = filteredExercises.filter { $0.activityType.rawValue == selectedActivityType.rawValue }
     }
     
+    return filteredExercises
+  }
+  
+  public var groupedExercises: [(String, [Exercise])] {
+    let filteredExercises = filter(exercises)
     let sortedItems = filteredExercises.sorted { $0.name < $1.name }
     let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
-
+    
     return grouped.sorted { $0.0 < $1.0 }
   }
   
   public var groupedTemplates: [(String, [Exercise])] {
-    var filteredExercises = templates
     
-    if let searchText {
-      filteredExercises = filteredExercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-    }
-    
-    if let selectedMuscle {
-      filteredExercises = filteredExercises.filter { $0.muscle.rawValue == selectedMuscle.rawValue }
-    }
-    
-    if let selectedEquipment {
-      filteredExercises = filteredExercises.filter { $0.equipmentType.rawValue == selectedEquipment.rawValue }
-    }
-    
-    if let selectedActivityType {
-      filteredExercises = filteredExercises.filter { $0.activityType.rawValue == selectedActivityType.rawValue }
-    }
-    
+    let filteredExercises = filter(templates)
     let sortedItems = filteredExercises.sorted { $0.name < $1.name }
     let grouped = Dictionary(grouping: sortedItems) { String($0.name.prefix(1)) }
     
@@ -91,16 +92,7 @@ final class ExercisesViewModel: ObservableObject {
     return a
   }
   
-  // MARK: - Body Part SEARCH
-  func sieveByBodyPart() {
-    exercises = []
-    addListenerToFavourites()
-    if let muscle = selectedMuscle {
-      exercises = exercises.filter { $0.primaryMuscles[0] == muscle.rawValue }
-    }
-  }
-  
-  func loadTemplates() {
+  func loadTemplatesJson() {
     let array: ExercisesArray = Bundle.main.decode("exercises.json")
     templates = array.exercises
   }
@@ -131,7 +123,15 @@ extension ExercisesViewModel {
     }
   }
   
-  func select(_ exercise: Exercise, pageScroller: ScrollViewProxy) {
+  // LAST SESSION
+  func lastSession(exerciseId: String) async throws -> Session { /// 🧵⚾️
+    let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid /// 🧵🥎
+    return try await SessionsManager.shared.lastSession(exerciseId: exerciseId, userId: userId) /// 🧵🥎
+  }
+  
+  
+  // SELECT - DESELECT
+  func select(_ exercise: Exercise) {
     if deselect(exercise) { return }
     else {
       let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
@@ -144,21 +144,6 @@ extension ExercisesViewModel {
     guard let index = indexOfItem(exercise, collection: selectedExercises) else { return false }
     selectedExercises.remove(at: index)
     return true
-  }
-  
-  // LAST SESSION
-  func lastSession(exerciseId: String) async throws -> Session { /// 🧵⚾️
-    let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid /// 🧵🥎
-    return try await SessionsManager.shared.lastSession(exerciseId: exerciseId, userId: userId) /// 🧵🥎
-  }
-  
-  
-  // MARK: - IndexForExercise
-  func indexOfItem(_ exercise: Exercise, collection exercises: [Exercise]) -> Int? {
-    guard let index = exercises.firstIndex(where: { $0.name == exercise.name }) else {
-      return nil
-    }
-    return index
   }
 }
 

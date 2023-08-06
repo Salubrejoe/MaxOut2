@@ -46,7 +46,7 @@ struct TemplatesPicker: View {
       }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)
-      .onAppear { model.loadTemplates() }
+      .onAppear { model.loadTemplatesJson() }
     }
   }
   
@@ -63,8 +63,7 @@ struct TemplatesPicker: View {
     
     
     ForEach(section.1) { exercise in
-      PickerCell(model: model, exercise: exercise) { model.select(exercise, pageScroller: pageScroller) }
-        .id(exercise.id)
+      PickerCell(model: model, exercise: exercise) { model.select(exercise) }
     }
   }
   

@@ -1,24 +1,10 @@
 
 import SwiftUI
 
-struct ExercisesList_Previews: PreviewProvider {
-  static var previews: some View {
-    TabBarView(selection: .constant(.exercises), tabBarState: .constant(.large)) {
-      ExercisesListView(tabBarState: .constant(.large))
-    }
-  }
-}
 
 
 struct ExercisesListView: View {
-  enum CoordinateSpaces {
-    case scrollView
-  }
-  
-  @State private var scrollOffset: CGFloat = 0.0
-  
   @StateObject private var model = ExercisesViewModel()
-  
   @State private var isShowingTemplates = false
   
   @Binding var tabBarState: BarState
@@ -26,31 +12,33 @@ struct ExercisesListView: View {
   var body: some View {
     NavigationStack {
       ScrollViewReader { pageScroller in
-        ZStack(alignment: .top) {
+        ZStack(alignment: .bottom) {
           
           LiSt
           
-          VStack {
-            ThreeWayPicker(model: model)
-              .padding(.horizontal)
-          }
-          .padding(.top, 5)
+          ThreeWayPicker(model: model)
+            .padding(.horizontal)
+            .padding(.bottom, 60)
         }
         .navigationTitle("Exercises")
         .overlay { indexTitles(pageScroller: pageScroller) }
-      }
-      .animation(.spring(), value: model.exercises)
-      .toolbar { createButton }
-      .onAppear{
-        model.addListenerToFavourites()
-        model.searchText = nil
-      }
-      .sheet(isPresented: $isShowingTemplates) {
-        TemplatesPicker(model: model)
+        .animation(.spring(), value: model.exercises)
+        .toolbar { createButton }
+        .onAppear{
+          model.addListenerToFavourites()
+          model.searchText = nil
+        }
+        .sheet(isPresented: $isShowingTemplates) {
+          TemplatesPicker(model: model)
+        }
       }
     }
   }
-  @ViewBuilder // MARK: - SOMETHING
+}
+
+
+extension ExercisesListView {
+  @ViewBuilder // MARK: - LIST
   private var LiSt: some View {
     List {
       ForEach(model.groupedExercises, id: \.0) { section in
@@ -97,7 +85,7 @@ struct ExercisesListView: View {
       } label: {
         Image(systemName: "plus.circle.fill")
           .imageScale(.large)
-        .foregroundColor(.primary)
+          .foregroundColor(.primary)
       }
     }
   }
@@ -112,13 +100,21 @@ struct ExercisesListView: View {
 }
 
 
+// MARK: - _Preview
+struct ExercisesList_Previews: PreviewProvider {
+  static var previews: some View {
+    TabBarView(selection: .constant(.exercises), tabBarState: .constant(.large)) {
+      ExercisesListView(tabBarState: .constant(.large))
+    }
+  }
+}
 
 
 // MARK: - CELL
 struct ExerciseListCell: View {
   let exercise: Exercise
   let deleteAction: () -> ()
-  
+
   var body: some View {
     CellLabel(for: exercise)
       .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -131,3 +127,6 @@ struct ExerciseListCell: View {
       }
   }
 }
+
+
+
