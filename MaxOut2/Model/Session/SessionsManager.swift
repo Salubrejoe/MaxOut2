@@ -50,7 +50,7 @@ extension SessionsManager {
       Session.CodingKeys.exerciseName.rawValue : session.exerciseName,
       Session.CodingKeys.exerciseId.rawValue   : session.exerciseId,
       Session.CodingKeys.dateCreated.rawValue  : Date(),
-      Session.CodingKeys.category.rawValue     : session.category,
+      Session.CodingKeys.activityType.rawValue : session.activityType,
       Session.CodingKeys.bobs.rawValue         : bobs,
       Session.CodingKeys.image.rawValue        : session.image
     ]

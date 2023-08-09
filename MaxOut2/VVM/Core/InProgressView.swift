@@ -53,70 +53,67 @@ struct InProgressHeader: View {
   }
 }
 
+
 struct SessionsGrid: View {
   @EnvironmentObject var model: StartViewModel
   @Binding var tabBarState: BarState
   
-  @State private var keyboardHeight: CGFloat = 0
-  private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
-    Publishers.Merge(
-      NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-        .compactMap { notification -> CGFloat? in
-          guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return nil
-          }
-          return keyboardFrame.height
-        },
-      NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-        .map { _ in CGFloat(0) }
-    ).eraseToAnyPublisher()
-  }
+//  @State private var keyboardHeight: CGFloat = 0
+//  private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+//    Publishers.Merge(
+//      NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+//        .compactMap { notification -> CGFloat? in
+//          guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+//            return nil
+//          }
+//          return keyboardFrame.height
+//        },
+//      NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+//        .map { _ in CGFloat(0) }
+//    ).eraseToAnyPublisher()
+//  }
 
   var body: some View {
     ScrollView(showsIndicators: false) {
-      VStack {
-        sessionGrid
-          .padding(.horizontal)
-          .padding(.vertical, 20)
+      LazyVGrid(columns: model.largeColumns, spacing: 5) {
+        if !model.sessions.isEmpty {
+          ForEach($model.sessions) { $session in
+                      SessionView(session: $session)
+                        .frame(height: 200)
+
+          }
+        }
+        
+        LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
+          model.isShowingPicker = true
+        }
+        .padding(.top, 20)
+        
+        Spacer(minLength: 100)
       }
-      
+      .padding(.horizontal)
+      .padding(.vertical, 20)
     }
     .scrollDismissesKeyboard(.interactively)
     .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
     .animation(.spring(), value: model.sessions)
     .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
-    .toolbar {
-      ToolbarItem(placement: .keyboard) { Spacer() }
-      ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
-    }
-    
-    .onReceive(keyboardHeightPublisher) { height in
-      withAnimation {
-        keyboardHeight = height
-      }
-    }
-    .padding(.bottom, keyboardHeight)
-    .edgesIgnoringSafeArea(keyboardHeight > 0 ? .bottom : [])
+//    .toolbar {
+//      ToolbarItem(placement: .keyboard) { Spacer() }
+//      ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }
+//    }
+
+//    .onReceive(keyboardHeightPublisher) { height in
+//      withAnimation {
+//        keyboardHeight = height
+//      }
+//    }
+//    .padding(.bottom, keyboardHeight)
+//    .edgesIgnoringSafeArea(keyboardHeight > 0 ? .bottom : [])
   }
 }
 
 extension SessionsGrid {
-  @ViewBuilder
-  private var sessionGrid: some View {
-    LazyVGrid(columns: model.largeColumns, spacing: 5) {
-      ForEach($model.sessions) { $session in
-        SessionView(session: $session, model: model)
-      }
-      
-      LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
-        model.isShowingPicker = true
-      }
-      .padding(.top, 20)
-      
-      Spacer(minLength: 100)
-    }
-  }
-  
   @ViewBuilder // MARK: - FULL SCREEN PICKER
   private var fullScreenPicker: some View {
     ZStack(alignment: .topLeading) {

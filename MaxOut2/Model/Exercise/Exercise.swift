@@ -1,12 +1,11 @@
 
 import SwiftUI
-import AlphabetScrollBar
 
 struct ExercisesArray: Codable {
   let exercises: [Exercise]
 }
 
-struct Exercise: Identifiable, Equatable, Hashable, Alphabetizable {
+struct Exercise: Identifiable, Equatable, Hashable {
   static let mockup = Exercise(id: "",
                                name: "New Exercise",
                                category: "cardio",

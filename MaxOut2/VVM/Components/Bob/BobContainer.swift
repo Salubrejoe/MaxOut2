@@ -23,18 +23,18 @@ extension BobView {
   }
   
   
+  public var timeFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "mm:ss"
+    return formatter
+  }
   @ViewBuilder // MARK: - STRETCHING
   func stretchingBob() -> some View {
-    container { width in
-      Image(systemName: "figure.cooldown")
-        .frame(width: width * 0.35)
-      
-      TextField("00:00", value: $bob.duration, formatter: DurationFormatter())
-        .bobTFStyle()
-        .keyboardType(.numberPad)
-        .frame(width: width * 0.4)
+    HStack {
+      Spacer()
+      DurationPicker(hh: $hh, mm: $mm, ss: $ss)
+        .padding()
     }
-    
   }
   
   
@@ -49,9 +49,7 @@ extension BobView {
           .bobTFStyle()
           .numbersOnly($bob.kg)
         
-        TextField("00:00", value: $bob.duration, formatter: DurationFormatter())
-          .bobTFStyle()
-          .keyboardType(.numberPad)
+        DurationPicker(hh: $hh, mm: $mm, ss: $ss)
       }
       .frame(width: width * 0.4)
     }
@@ -93,7 +91,7 @@ extension BobView {
         .padding(.top, 5)
       }
     }
-    .frame(height: 46)
+    .frame(minHeight: 46)
     .font(.headline)
   }
 }

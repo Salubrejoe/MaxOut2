@@ -7,7 +7,9 @@ import SwipeActions
 struct SessionView: View {
   @Binding var session: Session
   @StateObject private var controller = SeshController()
-  @ObservedObject var model: StartViewModel
+  @EnvironmentObject var model: StartViewModel
+  
+  @State private var text = ""
   
   @State private var removeAlert = false
 
@@ -21,6 +23,7 @@ struct SessionView: View {
           VStack(spacing: 0) {
             ForEach($session.bobs) { $bob in
               BobView(controller: controller, bob: $bob, session: $session)
+//              TimeTextField(text: $bob.duration)
             }
           }
           .cornerRadius(10)
@@ -62,7 +65,6 @@ extension SessionView {
         
         
         Button {
-//          controller.markAsCompleted(&session)
           controller.open.send()
         } label: {
           Image(systemName: "checkmark")
@@ -88,27 +90,17 @@ extension SessionView {
   @ViewBuilder // MARK: - BOB HEADER
   private var bobHeader: some View {
     GeometryReader { proxy in
-      let width = proxy.size.width
-      HStack(spacing: 0) {
-        HStack {
-          Spacer()
-          Text(textForHeader().0)
-            .padding(.trailing, 25)
-        }
-        .frame(width: session.category != "stretching" ? (width * 0.305) : (width * 0.43))
-        
-        HStack {
-          Text(textForHeader().1)
-            .padding(.leading, 22)
-          Spacer()
-        }
-        .frame(width: session.category != "stretching" ? (width * 0.20) : 0)
-        
-        
-        Text("REST")
-          .padding(.trailing, 20)
-          .frame(width: width * 0.45)
+      
+      if session.activityType == .traditionalStrengthTraining || session.activityType == .coreTraining {
+        strength(proxy)
       }
+      else if session.activityType == .flexibility {
+        cooldown(proxy)
+      }
+      else {
+        cardio(proxy)
+      }
+     
     }
     .frame(height: 15)
     .font(.caption2)
@@ -116,11 +108,92 @@ extension SessionView {
   }
   
   private func textForHeader() -> (String, String) {
-    switch session.category {
-      case "cardio": return ("KM", "MIN")
-      case "stretching": return ("MIN", "")
-      case "strength": return ("KG", "REPS")
-      default: return ("","")
+    switch session.activityType {
+      case .traditionalStrengthTraining, .coreTraining : return ("KG", "REPS")
+      case .flexibility : return ("M", "S")
+      default : return ("KM", "MIN")
+    }
+  }
+  
+  
+  @ViewBuilder // MARK: - STRENGTH
+  private func strength(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      HStack {
+        Spacer()
+        Text(textForHeader().0)
+          .padding(.trailing, 25)
+      }
+      .frame(width: (width * 0.305))
+      
+      HStack {
+        Text(textForHeader().1)
+          .padding(.leading, 22)
+        Spacer()
+      }
+      .frame(width: (width * 0.20))
+      
+      
+      Text("REST")
+        .padding(.trailing, 20)
+        .frame(width: width * 0.45)
+    }
+  }
+  
+  
+  @ViewBuilder // MARK: - CARDIO
+  private func cardio(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      Text("LAST TIME")
+        .padding(.trailing, 20)
+        .frame(width: width * 0.45)
+      
+      HStack {
+        Spacer()
+        Text(textForHeader().0)
+          .padding(.trailing, 25)
+      }
+      .frame(width: (width * 0.305))
+      
+      HStack {
+        Text(textForHeader().1)
+          .padding(.leading, 22)
+        Spacer()
+      }
+      .frame(width: (width * 0.20))
+    }
+  }
+  
+  @ViewBuilder // MARK: - COOLDOWN
+  private func cooldown(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      Text("LAST TIME")
+        .padding(.trailing, 20)
+        .frame(width: width * 0.42)
+      
+      HStack {
+        Spacer()
+        Text("H")
+          .padding(.trailing, 25)
+      }
+      .frame(width: (width * 0.2))
+      
+      HStack {
+        Spacer()
+        Text(textForHeader().0)
+          .padding(.trailing, 25)
+      }
+      .frame(width: (width * 0.2))
+      
+      HStack {
+        Text(textForHeader().1)
+          .padding(.leading, 22)
+        Spacer()
+      }
+      .frame(width: (width * 0.20))
     }
   }
 
@@ -156,13 +229,14 @@ extension SessionView {
 struct SessionView_Previews: PreviewProvider {
   static var previews: some View {
     SessionView(session: .constant(
-      Session(id: "", exerciseId: "", exerciseName: "Bench Press", dateCreated: Date(), category: "strength", bobs: [
+      Session(id: "", exerciseId: "", exerciseName: "Bench Press", dateCreated: Date(), activityType: .traditionalStrengthTraining, bobs: [
         Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
         Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
         Bob(kg: "25", reps: "10", isCompleted: true, restTime: 45),
         Bob(kg: "27", reps: "9", isCompleted: false, restTime: 45)
       ], image: "figure.rower")
-    ), model: StartViewModel())
+    ))
+    .environmentObject(StartViewModel())
     .padding(.horizontal)
   }
 }

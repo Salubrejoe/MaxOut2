@@ -7,14 +7,14 @@ struct Bob: Hashable, Identifiable {
   var kg          : String
   var reps        : String
   var distance    : String
-  var duration    : TimeInterval
+  var duration    : String
   var isCompleted : Bool
   var restTime    : Double = 50.0
   
   init(
     kg          : String = "0",
     reps        : String = "0",
-    duration    : TimeInterval = 0,
+    duration    : String = "",
     distance    : String = "0",
     isCompleted : Bool = false,
     restTime    : Double = 50.0
@@ -67,7 +67,7 @@ extension Bob: Codable {
     self.id = try container.decode(String.self, forKey: .id)
     self.kg = try container.decode(String.self, forKey: .kg)
     self.reps = try container.decode(String.self, forKey: .reps)
-    self.duration = try container.decode(TimeInterval.self, forKey: .duration)
+    self.duration = try container.decode(String.self, forKey: .duration)
     self.distance = try container.decode(String.self, forKey: .distance)
     self.restTime = try container.decode(Double.self, forKey: .restTime)
     self.isCompleted = try container.decode(Bool.self, forKey: .isCompleted)

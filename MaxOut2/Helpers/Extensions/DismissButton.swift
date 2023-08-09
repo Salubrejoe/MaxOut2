@@ -24,6 +24,22 @@ struct DismissButton: ViewModifier {
   }
 }
 
+struct XMark: View {
+  @Environment(\.dismiss) var dismiss
+  
+  var body: some View {
+    Button {
+      dismiss()
+    } label: {
+      Image(systemName: "xmark.circle.fill")
+        .imageScale(.large)
+        .symbolRenderingMode(.hierarchical)
+        .foregroundColor(.secondary)
+    }
+  }
+}
+
+
 extension View {
   func dismissButton() -> some View {
     self.modifier(DismissButton())

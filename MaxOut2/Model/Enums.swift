@@ -130,7 +130,7 @@ enum CategoryType: String, CaseIterable, Hashable {
   case olympicWeightlifting = "olympic weightlifting"
 }
 
-enum ActivityType: String, CaseIterable, Hashable {
+enum ActivityType: String, CaseIterable, Hashable, Codable {
   case coreTraining                  = "core training"
   case elliptical                    = "elliptical"
   case flexibility                   = "flexibility"

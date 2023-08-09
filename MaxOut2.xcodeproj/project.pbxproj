@@ -24,7 +24,7 @@
 		7C6FE5072A7EB0450017C0A9 /* NavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5062A7EB0450017C0A9 /* NavLink.swift */; };
 		7C6FE5092A7EB2C80017C0A9 /* NavBarPK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5082A7EB2C80017C0A9 /* NavBarPK.swift */; };
 		7C6FE56A2A7FFF440017C0A9 /* AlphabetScrollBar in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6FE5692A7FFF440017C0A9 /* AlphabetScrollBar */; };
-		7C6FE56C2A7FFF600017C0A9 /* ExListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE56B2A7FFF600017C0A9 /* ExListView.swift */; };
+		7C6FE5722A80EC5A0017C0A9 /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */; };
 		7C7DA09E2A5DA2A100B58AFA /* ExercisesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */; };
 		7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */; };
 		7C7DA0A22A5DAAB800B58AFA /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */; };
@@ -150,7 +150,7 @@
 		7C6FE5042A7EAF050017C0A9 /* UINavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavController.swift; sourceTree = "<group>"; };
 		7C6FE5062A7EB0450017C0A9 /* NavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavLink.swift; sourceTree = "<group>"; };
 		7C6FE5082A7EB2C80017C0A9 /* NavBarPK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarPK.swift; sourceTree = "<group>"; };
-		7C6FE56B2A7FFF600017C0A9 /* ExListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExListView.swift; sourceTree = "<group>"; };
+		7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		7C7DA09D2A5DA2A100B58AFA /* ExercisesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesManager.swift; sourceTree = "<group>"; };
 		7C7DA09F2A5DA38000B58AFA /* FSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSExtensions.swift; sourceTree = "<group>"; };
 		7C7DA0A12A5DAAB800B58AFA /* Launchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launchscreen.storyboard; sourceTree = "<group>"; };
@@ -288,6 +288,7 @@
 		7C7DA09B2A5DA01B00B58AFA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7CB371B02A7A755800A8AD76 /* AppTabBar */,
 				7CBAA1F22A5D944400DFA31D /* SSO */,
 				7CBAA1E82A5D944400DFA31D /* TSTextFieldsView */,
 				7C7DA0D22A5EB0F800B58AFA /* SessionView */,
@@ -336,7 +337,6 @@
 		7C7DA0BE2A5E943900B58AFA /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				7CB371B02A7A755800A8AD76 /* AppTabBar */,
 				7C7DA11C2A5EBC8A00B58AFA /* InProgressView.swift */,
 				7CBAA1E02A5D93D400DFA31D /* RootView.swift */,
 				7C7DA1362A65570100B58AFA /* Diary */,
@@ -398,12 +398,11 @@
 			children = (
 				7C7DA1042A5EB32A00B58AFA /* ExercisesViewModel.swift */,
 				7C7DA1062A5EB32A00B58AFA /* CellLabel.swift */,
+				7CB371AE2A79608300A8AD76 /* PickerCell.swift */,
 				7C1555D92A701469005C2855 /* ThreeWayPicker.swift */,
 				7CC6FB5F2A72B82900A9138A /* TemplatesPicker.swift */,
 				7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */,
-				7CB371AE2A79608300A8AD76 /* PickerCell.swift */,
 				7C7DA1082A5EB32A00B58AFA /* ExercisesListView.swift */,
-				7C6FE56B2A7FFF600017C0A9 /* ExListView.swift */,
 				7CC6FB612A740B4D00A9138A /* ExerciseDetailView.swift */,
 			);
 			path = ExercisesView;
@@ -415,6 +414,7 @@
 				7C7DA0D42A5EB0F800B58AFA /* BobView.swift */,
 				7C7DA12D2A61713100B58AFA /* BobContainer.swift */,
 				7C7DA12B2A6170FD00B58AFA /* BobSwipeActions.swift */,
+				7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */,
 			);
 			path = Bob;
 			sourceTree = "<group>";
@@ -837,10 +837,10 @@
 				7CBAA1F62A5D944400DFA31D /* CreateAccountView.swift in Sources */,
 				7CBAA1FC2A5D944400DFA31D /* LoginViewModel.swift in Sources */,
 				7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */,
-				7C6FE56C2A7FFF600017C0A9 /* ExListView.swift in Sources */,
 				7C1555D22A6BB4B4005C2855 /* RadarChart.swift in Sources */,
 				7CB371B82A7A7EDC00A8AD76 /* TabBarItemsPreferenceKey.swift in Sources */,
 				7CBAA20A2A5D94EB00DFA31D /* OnFirstAppear.swift in Sources */,
+				7C6FE5722A80EC5A0017C0A9 /* DurationPicker.swift in Sources */,
 				7C6FE5072A7EB0450017C0A9 /* NavLink.swift in Sources */,
 				7C7DA0F92A5EB25400B58AFA /* BodyPartImageView.swift in Sources */,
 				7C7DA0C42A5EAFA000B58AFA /* ProfileView.swift in Sources */,

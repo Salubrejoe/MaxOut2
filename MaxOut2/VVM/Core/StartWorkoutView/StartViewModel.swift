@@ -112,7 +112,7 @@ extension StartViewModel {
                                exerciseId: session.exerciseId,
                                exerciseName: session.exerciseName,
                                dateCreated: Date(timeIntervalSince1970: dateStarted),
-                               category: session.category,
+                               activityType: session.activityType,
                                bobs: bobs,
                                image: session.image)
       bobs = []

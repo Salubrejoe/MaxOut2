@@ -7,10 +7,10 @@ struct Session: Identifiable, Equatable {
   let exerciseId   : String
   let exerciseName : String
   var dateCreated  : Date
-  let category     : String
+  let activityType : ActivityType
   var bobs         : [Bob]
   let image        : String
-
+  
   var timeString: String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
@@ -23,7 +23,7 @@ struct Session: Identifiable, Equatable {
     exerciseId   : String,
     exerciseName : String,
     dateCreated  : Date,
-    category     : String,
+    activityType : ActivityType,
     bobs         : [Bob],
     image        : String
   ) {
@@ -31,40 +31,12 @@ struct Session: Identifiable, Equatable {
     self.exerciseId   = exerciseId
     self.exerciseName = exerciseName
     self.dateCreated  = dateCreated
-    self.category     = category     
+    self.activityType = activityType
     self.bobs         = bobs
     self.image        = image
   }
-  
-//  func calculateBestBob(for session: Session) throws -> (bob: Bob, index: Int) {
-//    guard !session.bobs.isEmpty else {
-//      throw URLError(.badServerResponse)
-//    }
-//    
-//    var maxResult = Double.leastNormalMagnitude // Initialize with the smallest possible value
-//    var bestBobIndex = 0
-//    
-//    for (index, bob) in session.bobs.enumerated() {
-//      let result = bob.kg * Double(bob.reps) + bob.distance * bob.duration
-//      
-//      
-//      if result > maxResult {
-//        maxResult = result
-//        bestBobIndex = index
-//      }
-//    }
-//    
-//    let bestBob = session.bobs[bestBobIndex]
-//    
-//    return (bestBob, bestBobIndex)
-//  }
-  
-//  func markBobsAsComplete(session: inout Session) {
-//    for index in 0..<session.bobs.count {
-//      session.bobs[index].isCompleted = true
-//    }
-//  }
 }
+
 
 // MARK: - CODABLE
 extension Session: Codable {
@@ -73,7 +45,7 @@ extension Session: Codable {
     case exerciseId
     case exerciseName
     case dateCreated
-    case category
+    case activityType
     case bobs
     case image
   }
@@ -84,7 +56,7 @@ extension Session: Codable {
     try container.encode(self.exerciseId, forKey: .exerciseId)
     try container.encode(self.exerciseName, forKey: .exerciseName)
     try container.encode(self.dateCreated, forKey: .dateCreated)
-    try container.encode(self.category, forKey: .category)
+    try container.encode(self.activityType, forKey: .activityType)
     try container.encode(self.bobs, forKey: .bobs)
     try container.encode(self.image, forKey: .image)
   }
@@ -95,7 +67,7 @@ extension Session: Codable {
     self.exerciseId = try container.decode(String.self, forKey: .exerciseId)
     self.exerciseName = try container.decode(String.self, forKey: .exerciseName)
     self.dateCreated = try container.decode(Date.self, forKey: .dateCreated)
-    self.category = try container.decode(String.self, forKey: .category)
+    self.activityType = try container.decode(ActivityType.self, forKey: .activityType)
     self.bobs = try container.decode([Bob].self, forKey: .bobs)
     self.image = try container.decode(String.self, forKey: .image)
   }

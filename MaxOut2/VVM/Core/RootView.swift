@@ -25,6 +25,16 @@ struct RootView: View {
       }
   }
   
+  @ViewBuilder // MARK: - FULL SCREEN PICKER
+  private var fullScreenPicker: some View {
+    ZStack(alignment: .topLeading) {
+      Button("Cancel") {
+        model.isShowingPicker = false
+      }
+      ExercisesPicker()
+        .environmentObject(model)
+    }
+  }
   
   @ViewBuilder
   private var mainTabBar: some View {
@@ -53,6 +63,17 @@ struct RootView: View {
           } mainContent: {
             SessionsGrid(tabBarState: $tabBarState)
               .environmentObject(model)
+//            ScrollView {
+//              if !model.sessions.isEmpty {
+//                TimeTextField(text: $model.sessions[0].bobs[0].duration)
+//              }
+//              LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
+//                model.isShowingPicker = true
+//              }
+//              .padding(.top, 20)
+//              .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
+//            }
+//            .scrollDismissesKeyboard(.immediately)
           }
       }
       .onChange(of: model.position) { _ in

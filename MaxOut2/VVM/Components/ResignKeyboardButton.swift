@@ -6,7 +6,7 @@ struct ResignKeyboardButton: View {
       Button {
         Field.hideKeyboard()
       } label: {
-        Image(systemName: "keyboard.chevron.compact.down")
+        Image(systemName: "keyboard.chevron.compact")
       }
       Spacer()
     }

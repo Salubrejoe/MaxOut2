@@ -113,7 +113,7 @@ extension ExercisesViewModel {
                               exerciseId: exercise.id,
                               exerciseName: exercise.name,
                               dateCreated: Date(),
-                              category: exercise.category,
+                              activityType: exercise.activityType,
                               bobs: (lastSession == nil ? [Bob()] : lastSession!.bobs),
                               image: exercise.equipmentType.image)
         
