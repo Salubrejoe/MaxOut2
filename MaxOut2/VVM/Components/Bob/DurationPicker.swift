@@ -4,6 +4,7 @@ struct DurationPicker: View {
   @Binding var hh: Int
   @Binding var mm: Int
   @Binding var ss: Int
+  @Binding var isCompleted: Bool
   
   @State private var isShowingPicker = false
   @State private var includeHours = false
@@ -11,10 +12,10 @@ struct DurationPicker: View {
   var body: some View {
     VStack {
       label
+        
         .sheet(isPresented: $isShowingPicker) {
           pickerView
             .presentationDetents([.fraction(0.4)])
-            .dismissButton()
             .animation(.spring(), value: includeHours)
         }
     }
@@ -29,9 +30,12 @@ struct DurationPicker: View {
       HStack(spacing: 0) {
         if includeHours {
           Text("\(String(format: "%02d", hh)):")
+            .foregroundColor(isCompleted ? .green : .primary)
         }
         Text("\(String(format: "%02d", mm)):")
+          .foregroundColor(isCompleted ? .green : .primary)
         Text("\(String(format: "%02d", ss))")
+          .foregroundColor(isCompleted ? .green : .primary)
       }
     }
     .foregroundColor(isShowingPicker ? .secondary : .primary)
@@ -42,7 +46,8 @@ struct DurationPicker: View {
 // MARK: - PICKER VIEW
 extension DurationPicker {
   
-  @ViewBuilder   private var pickerView: some View {
+  @ViewBuilder
+  private var pickerView: some View {
     ZStack {
       Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
       
@@ -89,9 +94,11 @@ extension DurationPicker {
     ForEach(number..<range, id: \.self) { i in
       if i < 10 {
         Text("0\(i)")
+          .foregroundColor(isCompleted ? .green : .primary)
       }
       else {
         Text("\(i)")
+          .foregroundColor(isCompleted ? .green : .primary)
       }
     }
   }
@@ -115,26 +122,29 @@ extension DurationPicker {
   
   @ViewBuilder
   private var includeHoursButton: some View {
-    Button("Include Hours") {
+    Button {
       includeHours.toggle()
+    } label: {
+      Text("Include Hours")
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity, maxHeight: 30)
+        .background(.ultraThinMaterial)
+        .cornerRadius(10)
     }
-    .foregroundColor(.primary)
-    .frame(maxWidth: .infinity, maxHeight: 30)
-    .background(.ultraThinMaterial)
-    .cornerRadius(10)
     .padding(.top)
   }
   
   @ViewBuilder
   private var doneButton: some View {
-    Button("Done") {
+    Button {
       isShowingPicker = false
+    } label: {
+      Text("Done")
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity, maxHeight: 30)
+        .background(Color.accentColor)
+        .cornerRadius(10)
     }
-    .foregroundColor(.white)
-    .frame(maxWidth: .infinity, maxHeight: 30)
-    .background(Color.accentColor)
-    .cornerRadius(10)
-    .padding(.bottom)
   }
 }
 
@@ -145,6 +155,6 @@ extension DurationPicker {
 // MARK: - Preview
 struct DurationPicker_Previews: PreviewProvider {
   static var previews: some View {
-    DurationPicker(hh: .constant(0), mm: .constant(12), ss: .constant(34))
+    DurationPicker(hh: .constant(0), mm: .constant(12), ss: .constant(34), isCompleted: .constant(true))
   }
 }

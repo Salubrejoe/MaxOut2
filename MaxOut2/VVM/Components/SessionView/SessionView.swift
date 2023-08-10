@@ -12,7 +12,7 @@ struct SessionView: View {
   @State private var text = ""
   
   @State private var removeAlert = false
-
+  
   var body: some View {
     SwipeViewGroup {
       VStack(spacing: 0) {
@@ -23,7 +23,7 @@ struct SessionView: View {
           VStack(spacing: 0) {
             ForEach($session.bobs) { $bob in
               BobView(controller: controller, bob: $bob, session: $session)
-//              TimeTextField(text: $bob.duration)
+              //              TimeTextField(text: $bob.duration)
             }
           }
           .cornerRadius(10)
@@ -45,37 +45,19 @@ extension SessionView {
   @ViewBuilder // MARK: - HEADER
   private var header: some View {
     VStack(spacing: 6) {
-      HStack {
-        HStack {
-          Button {
-            model.remove(session)
-          } label: {
-            HStack(alignment: .firstTextBaseline) {
-              Text("\(session.exerciseName.capitalized)")
-                .fontWeight(.semibold)
-              Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
-            }
-          }
-          Spacer()
-        }
-        .bold()
-        .onTapGesture {
-          removeAlert = true
-        }
+      HStack(alignment: .firstTextBaseline) {
+        Image(systemName: session.activityType.hkType.sfSymbol)
+        Text("\(session.exerciseName.capitalized)")
+          .fontWeight(.semibold)
+        Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
+        Spacer()
         
-        
-        Button {
-          controller.open.send()
-        } label: {
-          Image(systemName: "checkmark")
-            .font(.headline)
-            .foregroundColor(controller.isCompleted(session) ? Color(.systemGreen) : .accentColor)
-        }
+        menu
       }
       
       bobHeader
+        .fontWeight(.semibold)
     }
-    .frame(maxWidth: 428)
     .alert("Remove?", isPresented: $removeAlert, actions: {
       Button("Cancel", role: .cancel) {}
       Button {
@@ -86,129 +68,20 @@ extension SessionView {
       }
     })
   }
-
-  @ViewBuilder // MARK: - BOB HEADER
-  private var bobHeader: some View {
-    GeometryReader { proxy in
-      
-      if session.activityType == .traditionalStrengthTraining || session.activityType == .coreTraining {
-        strength(proxy)
-      }
-      else if session.activityType == .flexibility {
-        cooldown(proxy)
-      }
-      else {
-        cardio(proxy)
-      }
-     
-    }
-    .frame(height: 15)
-    .font(.caption2)
-    .foregroundColor(.gray)
-  }
   
-  private func textForHeader() -> (String, String) {
-    switch session.activityType {
-      case .traditionalStrengthTraining, .coreTraining : return ("KG", "REPS")
-      case .flexibility : return ("M", "S")
-      default : return ("KM", "MIN")
-    }
-  }
-  
-  
-  @ViewBuilder // MARK: - STRENGTH
-  private func strength(_ proxy: GeometryProxy) -> some View {
-    let width = proxy.size.width
-    HStack(spacing: 0) {
-      HStack {
-        Spacer()
-        Text(textForHeader().0)
-          .padding(.trailing, 25)
-      }
-      .frame(width: (width * 0.305))
-      
-      HStack {
-        Text(textForHeader().1)
-          .padding(.leading, 22)
-        Spacer()
-      }
-      .frame(width: (width * 0.20))
-      
-      
-      Text("REST")
-        .padding(.trailing, 20)
-        .frame(width: width * 0.45)
-    }
-  }
-  
-  
-  @ViewBuilder // MARK: - CARDIO
-  private func cardio(_ proxy: GeometryProxy) -> some View {
-    let width = proxy.size.width
-    HStack(spacing: 0) {
-      Text("LAST TIME")
-        .padding(.trailing, 20)
-        .frame(width: width * 0.45)
-      
-      HStack {
-        Spacer()
-        Text(textForHeader().0)
-          .padding(.trailing, 25)
-      }
-      .frame(width: (width * 0.305))
-      
-      HStack {
-        Text(textForHeader().1)
-          .padding(.leading, 22)
-        Spacer()
-      }
-      .frame(width: (width * 0.20))
-    }
-  }
-  
-  @ViewBuilder // MARK: - COOLDOWN
-  private func cooldown(_ proxy: GeometryProxy) -> some View {
-    let width = proxy.size.width
-    HStack(spacing: 0) {
-      Text("LAST TIME")
-        .padding(.trailing, 20)
-        .frame(width: width * 0.42)
-      
-      HStack {
-        Spacer()
-        Text("H")
-          .padding(.trailing, 25)
-      }
-      .frame(width: (width * 0.2))
-      
-      HStack {
-        Spacer()
-        Text(textForHeader().0)
-          .padding(.trailing, 25)
-      }
-      .frame(width: (width * 0.2))
-      
-      HStack {
-        Text(textForHeader().1)
-          .padding(.leading, 22)
-        Spacer()
-      }
-      .frame(width: (width * 0.20))
-    }
-  }
-
   
   @ViewBuilder // MARK: - NEW BOB
   private var newBobButton: some View {
     HStack(spacing: 2) {
       Text("+ New Set")
     }
-    .font(.headline)
-    .foregroundColor(.primary)
+    .font(.footnote)
+    .fontWeight(.semibold)
+    .foregroundColor(.systemBackground)
     .frame(maxWidth: .infinity)
     .frame(height: 20)
-    .background(.ultraThinMaterial)
-    .clipShape(RoundedRectangle(cornerRadius: 20))
+    .background(.primary.opacity(0.1))
+    .clipShape(RoundedRectangle(cornerRadius: 5))
     
     .onTapGesture {
       if let lastBob = session.bobs.last {
@@ -221,6 +94,122 @@ extension SessionView {
           session.bobs.append(Bob())
         }
       }
+    }
+  }
+  
+  @ViewBuilder // MARK: - MENU
+  private var menu: some View {
+    Menu {
+      Section {
+        Button {
+          //
+        } label: {
+          Label("Check How-To", systemImage: "list.bullet.clipboard")
+        }
+        Button {
+          controller.open.send()
+        } label: {
+          Label("Mark All Completed", systemImage: "checkmark")
+        }
+      }
+      Section {
+        Button(role: .destructive) {
+          removeAlert = true
+        } label: {
+          Label("Remove Execise", systemImage: "xmark")
+        }
+      }
+    } label: {
+      Image(systemName: "ellipsis.circle")
+        .fontWeight(.semibold)
+        .foregroundColor(.primary)
+    }
+  }
+}
+
+
+// MARK: - BOB HEADER
+extension SessionView {
+  @ViewBuilder
+  private var bobHeader: some View {
+    GeometryReader { proxy in
+      
+      if session.activityType == .traditionalStrengthTraining || session.activityType == .coreTraining {
+        strength(proxy)
+      }
+      else if session.activityType == .flexibility {
+        cooldown(proxy)
+      }
+      else {
+        cardio(proxy)
+      }
+      
+    }
+    .frame(height: 15)
+    .font(.caption2)
+    .foregroundColor(.gray)
+  }
+  
+  @ViewBuilder // MARK: - STRENGTH
+  private func strength(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      Text("")
+        .frame(width: width * 0.10)
+        
+      Text("KG")
+        .frame(width: (width * 0.2))
+        
+      Text("REPS")
+        .frame(width: (width * 0.20))
+        
+      Text("REST")
+        .frame(width: width * 0.4)
+        
+      Text("")
+        .frame(width: width * 0.10)
+        
+    }
+  }
+  
+  
+  @ViewBuilder // MARK: - STRETCHING
+  private func cooldown(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      Text("")
+        .frame(width: width * 0.10)
+        
+      Text("LAST TIME")
+        .frame(width: width * 0.35)
+        
+      Text("DURATION")
+        .frame(width: width * 0.42)
+      
+      Text("")
+        .frame(width: width * 0.10)
+    }
+  }
+  
+  @ViewBuilder // MARK: - CARDIO
+  private func cardio(_ proxy: GeometryProxy) -> some View {
+    let width = proxy.size.width
+    HStack(spacing: 0) {
+      Text("")
+        .frame(width: width * 0.10)
+        
+      Text("LAST TIME")
+        .frame(width: width * 0.25)
+        
+      Text("KM")
+        .frame(width: (width * 0.20))
+        
+      Text("DURATION")
+        .frame(width: (width * 0.35))
+        
+      Text("")
+        .frame(width: width * 0.10)
+        
     }
   }
 }

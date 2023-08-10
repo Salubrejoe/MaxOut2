@@ -18,6 +18,7 @@
 		7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DB2A710F2E005C2855 /* TimeRange.swift */; };
 		7C1555DE2A71214C005C2855 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DD2A71214C005C2855 /* Date.swift */; };
 		7C32044B2A79369000A25650 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7C32044A2A79369000A25650 /* BottomSheet */; };
+		7C5F26552A84EB9D0074A837 /* BobTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F26542A84EB9D0074A837 /* BobTextField.swift */; };
 		7C6FE5012A7E55710017C0A9 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5002A7E55710017C0A9 /* NavBar.swift */; };
 		7C6FE5032A7E58EE0017C0A9 /* NavContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */; };
 		7C6FE5052A7EAF050017C0A9 /* UINavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5042A7EAF050017C0A9 /* UINavController.swift */; };
@@ -68,7 +69,6 @@
 		7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */; };
 		7C7DA1272A6018C300B58AFA /* CellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1262A6018C300B58AFA /* CellStyle.swift */; };
 		7C7DA1292A604B2600B58AFA /* SeshController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1282A604B2600B58AFA /* SeshController.swift */; };
-		7C7DA12C2A6170FD00B58AFA /* BobSwipeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA12B2A6170FD00B58AFA /* BobSwipeActions.swift */; };
 		7C7DA12E2A61713100B58AFA /* BobContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA12D2A61713100B58AFA /* BobContainer.swift */; };
 		7C7DA1332A63FA3600B58AFA /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1322A63FA3600B58AFA /* BottomSheetView.swift */; };
 		7C7DA1352A65544000B58AFA /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1342A65544000B58AFA /* DiaryView.swift */; };
@@ -145,6 +145,7 @@
 		7C1555D92A701469005C2855 /* ThreeWayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C1555DB2A710F2E005C2855 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		7C1555DD2A71214C005C2855 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		7C5F26542A84EB9D0074A837 /* BobTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobTextField.swift; sourceTree = "<group>"; };
 		7C6FE5002A7E55710017C0A9 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavContainer.swift; sourceTree = "<group>"; };
 		7C6FE5042A7EAF050017C0A9 /* UINavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavController.swift; sourceTree = "<group>"; };
@@ -192,7 +193,6 @@
 		7C7DA1242A5FF8FC00B58AFA /* SectionIndexTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIndexTitles.swift; sourceTree = "<group>"; };
 		7C7DA1262A6018C300B58AFA /* CellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStyle.swift; sourceTree = "<group>"; };
 		7C7DA1282A604B2600B58AFA /* SeshController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeshController.swift; sourceTree = "<group>"; };
-		7C7DA12B2A6170FD00B58AFA /* BobSwipeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobSwipeActions.swift; sourceTree = "<group>"; };
 		7C7DA12D2A61713100B58AFA /* BobContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobContainer.swift; sourceTree = "<group>"; };
 		7C7DA1322A63FA3600B58AFA /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		7C7DA1342A65544000B58AFA /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
@@ -413,8 +413,8 @@
 			children = (
 				7C7DA0D42A5EB0F800B58AFA /* BobView.swift */,
 				7C7DA12D2A61713100B58AFA /* BobContainer.swift */,
-				7C7DA12B2A6170FD00B58AFA /* BobSwipeActions.swift */,
 				7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */,
+				7C5F26542A84EB9D0074A837 /* BobTextField.swift */,
 			);
 			path = Bob;
 			sourceTree = "<group>";
@@ -816,7 +816,6 @@
 				7C7DA1252A5FF8FC00B58AFA /* SectionIndexTitles.swift in Sources */,
 				7C7DA0EB2A5EB16400B58AFA /* HistoryViewModel.swift in Sources */,
 				7CBAA21B2A5D96F000DFA31D /* Exercise.swift in Sources */,
-				7C7DA12C2A6170FD00B58AFA /* BobSwipeActions.swift in Sources */,
 				7CBAA20F2A5D952A00DFA31D /* Bundle-decodable.swift in Sources */,
 				7CB371B62A7A7B0B00A8AD76 /* TabBarView.swift in Sources */,
 				7CBAA2112A5D953500DFA31D /* Resign-onDrag.swift in Sources */,
@@ -895,6 +894,7 @@
 				7CA6CE1E2A66E8E0006FDBD4 /* HealthKitManager.swift in Sources */,
 				7C7DA0E92A5EB16400B58AFA /* TsCalendarViewModel.swift in Sources */,
 				7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */,
+				7C5F26552A84EB9D0074A837 /* BobTextField.swift in Sources */,
 				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
 				7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */,
