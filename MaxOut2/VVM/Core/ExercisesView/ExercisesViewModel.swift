@@ -107,16 +107,18 @@ extension ExercisesViewModel {
   func commitSelection(toRoutineVM model: StartViewModel) {
     Task {
       for exercise in selectedExercises {
+        print("exercise.id")
+        print(exercise.id)
+        
         let lastSession = try? await lastSession(exerciseId: exercise.id)
         
         let session = Session(id: exercise.id,
                               exerciseId: exercise.id,
                               exerciseName: exercise.name,
                               dateCreated: Date(),
-                              activityType: exercise.activityType,
+                              activityType: exercise.activityType.rawValue,
                               bobs: (lastSession == nil ? [Bob()] : lastSession!.bobs),
                               image: exercise.equipmentType.image)
-        
         model.sessions.append(session)
       }
       selectedExercises = []
@@ -134,7 +136,7 @@ extension ExercisesViewModel {
   func select(_ exercise: Exercise) {
     if deselect(exercise) { return }
     else {
-      let newExercise = Exercise(id: UUID().uuidString, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
+      let newExercise = Exercise(id: exercise.id, name: exercise.name, category: exercise.category, primaryMuscles: exercise.primaryMuscles, instructions: exercise.instructions)
       selectedExercises.append(newExercise)
     }
   }

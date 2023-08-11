@@ -219,6 +219,11 @@ struct BobGauge: View {
 
 struct GaugeView_Previews: PreviewProvider {
   static var previews: some View {
-    BobGauge(bob: .constant(Bob(kg: "0", reps: "0", duration: "0", distance: "0", isCompleted: false, restTime: 50)))
+    BobGauge(bob: .constant(Bob(kg: 0,
+                                reps: 0,
+                                duration: [0,0,0],
+                                distance: "0",
+                                isCompleted: false,
+                                restTime: 50)))
   }
 }

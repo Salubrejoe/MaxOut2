@@ -4,18 +4,18 @@ import Foundation
 struct Bob: Hashable, Identifiable {
   var id: String
   
-  var kg          : String
-  var reps        : String
+  var kg          : Double
+  var reps        : Double
   var distance    : String
-  var duration    : String
+  var duration    : [Int]
   var isCompleted : Bool
   var restTime    : Double = 50.0
   
   init(
-    kg          : String = "0",
-    reps        : String = "0",
-    duration    : String = "",
-    distance    : String = "0",
+    kg          : Double = 0,
+    reps        : Double = 0,
+    duration    : [Int] = [0,0,0],
+    distance    : String = "",
     isCompleted : Bool = false,
     restTime    : Double = 50.0
   ) {
@@ -38,6 +38,8 @@ struct Bob: Hashable, Identifiable {
     self.restTime    = 50.0
   }
 }
+
+
 
 // MARK: - CODABLE
 extension Bob: Codable {
@@ -65,9 +67,9 @@ extension Bob: Codable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.id = try container.decode(String.self, forKey: .id)
-    self.kg = try container.decode(String.self, forKey: .kg)
-    self.reps = try container.decode(String.self, forKey: .reps)
-    self.duration = try container.decode(String.self, forKey: .duration)
+    self.kg = try container.decode(Double.self, forKey: .kg)
+    self.reps = try container.decode(Double.self, forKey: .reps)
+    self.duration = try container.decode([Int].self, forKey: .duration)
     self.distance = try container.decode(String.self, forKey: .distance)
     self.restTime = try container.decode(Double.self, forKey: .restTime)
     self.isCompleted = try container.decode(Bool.self, forKey: .isCompleted)

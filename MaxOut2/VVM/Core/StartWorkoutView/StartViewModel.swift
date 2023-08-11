@@ -94,6 +94,7 @@ extension StartViewModel {
   func save(_ routine: Routine?) async throws {
     let userId = try userId()
     guard let routine else { throw URLError(.cannotCloseFile) }
+    
     let dateStarted = routine.dateStarted.timeIntervalSince1970
     let dateEnded = Date().timeIntervalSince1970
     let duration = (dateEnded - dateStarted).rounded()

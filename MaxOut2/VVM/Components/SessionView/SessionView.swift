@@ -46,7 +46,7 @@ extension SessionView {
   private var header: some View {
     VStack(spacing: 6) {
       HStack(alignment: .firstTextBaseline) {
-        Image(systemName: session.activityType.hkType.sfSymbol)
+        Image(systemName: session.activity.hkType.sfSymbol)
         Text("\(session.exerciseName.capitalized)")
           .fontWeight(.semibold)
         Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
@@ -134,10 +134,12 @@ extension SessionView {
   private var bobHeader: some View {
     GeometryReader { proxy in
       
-      if session.activityType == .traditionalStrengthTraining || session.activityType == .coreTraining {
+      if session.activity == .traditionalStrengthTraining
+         || session.activity == .highIntensityIntervalTraining
+          || session.activity == .coreTraining {
         strength(proxy)
       }
-      else if session.activityType == .flexibility {
+      else if session.activity == .flexibility {
         cooldown(proxy)
       }
       else {
@@ -218,11 +220,11 @@ extension SessionView {
 struct SessionView_Previews: PreviewProvider {
   static var previews: some View {
     SessionView(session: .constant(
-      Session(id: "", exerciseId: "", exerciseName: "Bench Press", dateCreated: Date(), activityType: .traditionalStrengthTraining, bobs: [
-        Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
-        Bob(kg: "23", reps: "10", isCompleted: true, restTime: 45),
-        Bob(kg: "25", reps: "10", isCompleted: true, restTime: 45),
-        Bob(kg: "27", reps: "9", isCompleted: false, restTime: 45)
+      Session(id: "", exerciseId: "", exerciseName: "Bench Press", dateCreated: Date(), activityType: "mixed cardio", bobs: [
+        Bob(kg: 23, reps: 10, isCompleted: true, restTime: 45),
+        Bob(kg: 23, reps: 10, isCompleted: true, restTime: 45),
+        Bob(kg: 25, reps: 10, isCompleted: true, restTime: 45),
+        Bob(kg: 27, reps: 9, isCompleted: false, restTime: 45)
       ], image: "figure.rower")
     ))
     .environmentObject(StartViewModel())

@@ -7,13 +7,13 @@ extension BobView {
       
       HStack(spacing: 0) {
 //        TextField("0", text: $bob.kg)
-        BobKgRepsTextField(value: $kg, isCompleted: $bob.isCompleted)
+        BobKgRepsTextField(value: $bob.kg, isCompleted: $bob.isCompleted)
           .bobInputStyle
 //          .numbersOnly($bob.kg)
           .frame(width: width * 0.2)
         
 //        TextField("0", text: $bob.reps)
-        BobKgRepsTextField(value: $reps, isCompleted: $bob.isCompleted)
+        BobKgRepsTextField(value: $bob.reps, isCompleted: $bob.isCompleted)
           .bobInputStyle
 //          .numbersOnly($bob.kg, includeDecimal: false)
           .frame(width: width * 0.2)
@@ -35,7 +35,7 @@ extension BobView {
         Text("")
           .frame(width: width * 0.35)
           
-        DurationPicker(hh: $hh, mm: $mm, ss: $ss, isCompleted: $bob.isCompleted)
+        DurationPicker(hh: $bob.duration[0], mm: $bob.duration[1], ss: $bob.duration[2], isCompleted: $bob.isCompleted)
           .bobInputStyle
           .frame(width: width * 0.42)
           
@@ -58,7 +58,7 @@ extension BobView {
           .frame(width: width * 0.20)
           
         
-        DurationPicker(hh: $hh, mm: $mm, ss: $ss, isCompleted: $bob.isCompleted)
+        DurationPicker(hh: $bob.duration[0], mm: $bob.duration[1], ss: $bob.duration[2], isCompleted: $bob.isCompleted)
           .bobInputStyle
           .frame(width: width * 0.35)
           

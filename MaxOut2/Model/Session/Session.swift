@@ -7,7 +7,7 @@ struct Session: Identifiable, Equatable {
   let exerciseId   : String
   let exerciseName : String
   var dateCreated  : Date
-  let activityType : ActivityType
+  let activityType : String
   var bobs         : [Bob]
   let image        : String
   
@@ -23,7 +23,7 @@ struct Session: Identifiable, Equatable {
     exerciseId   : String,
     exerciseName : String,
     dateCreated  : Date,
-    activityType : ActivityType,
+    activityType : String,
     bobs         : [Bob],
     image        : String
   ) {
@@ -34,6 +34,10 @@ struct Session: Identifiable, Equatable {
     self.activityType = activityType
     self.bobs         = bobs
     self.image        = image
+  }
+  
+  public var activity: ActivityType {
+    ActivityType(rawValue: activityType) ?? .traditionalStrengthTraining
   }
 }
 
@@ -67,7 +71,7 @@ extension Session: Codable {
     self.exerciseId = try container.decode(String.self, forKey: .exerciseId)
     self.exerciseName = try container.decode(String.self, forKey: .exerciseName)
     self.dateCreated = try container.decode(Date.self, forKey: .dateCreated)
-    self.activityType = try container.decode(ActivityType.self, forKey: .activityType)
+    self.activityType = try container.decode(String.self, forKey: .activityType)
     self.bobs = try container.decode([Bob].self, forKey: .bobs)
     self.image = try container.decode(String.self, forKey: .image)
   }

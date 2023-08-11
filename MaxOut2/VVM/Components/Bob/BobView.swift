@@ -9,23 +9,17 @@ struct BobView: View {
   @Binding var bob: Bob
   @Binding var session: Session
   
-  @State var hh = 0
-  @State var mm = 0
-  @State var ss = 0
-  @State var kg = 0.0
-  @State var reps = 0.0
-  
   var body: some View {
     
     SwipeView {
       HStack {
-        if session.activityType == .highIntensityIntervalTraining ||
-            session.activityType == .traditionalStrengthTraining ||
-            session.activityType == .coreTraining {
+        if session.activity  == .highIntensityIntervalTraining ||
+            session.activity == .traditionalStrengthTraining ||
+            session.activity == .coreTraining {
           
           strengthBob()
         }
-        else if session.activityType == .flexibility { stretchingBob() }
+        else if session.activity == .flexibility { stretchingBob() }
         else { cardioBob() }
         
       }
@@ -33,10 +27,8 @@ struct BobView: View {
       .foregroundStyle(bob.isCompleted ? .secondary : .primary)
       
     } leadingActions: { context in
-//      removeBobSwipeAction(context)
       allCompletedSwipeAction(context)
     } trailingActions: { context in
-//      allCompletedSwipeAction(context)
       removeBobSwipeAction(context)
     }
     .swipeActionsStyle(.mask)
