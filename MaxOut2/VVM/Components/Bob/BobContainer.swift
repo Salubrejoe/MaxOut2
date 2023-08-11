@@ -51,9 +51,10 @@ extension BobView {
         Text("")
           .frame(width: width * 0.25)
           
-        TextField("0.0", text: $bob.distance)
+//        TextField("0.0", text: $bob.distance)
+        KmTF(distance: $bob.distance, isCompleted: $bob.isCompleted)
           .bobInputStyle
-          .numbersOnly($bob.kg, includeDecimal: true)
+//          .numbersOnly($bob.kg, includeDecimal: true)
           .frame(width: width * 0.20)
           
         

@@ -1,67 +1,26 @@
 import SwiftUI
 
-final class BobTextFieldController: ObservableObject {
-  @Published var isShowingInputView = false
-  
-  func add(_ number: Int, to total: Double) -> Double {
-    total*10 + Double(number)
-  }
-}
-
-struct BobKgRepsTextField: View {
-  @StateObject private var controller = BobTextFieldController()
-  
+struct InputView: View {
   @Binding var value: Double
+  @Binding var isAnimating: Bool
+  @ObservedObject var controller: BobTextFieldController
   
-  @Binding var isCompleted: Bool
-  @State private var isAnimating = false
   
   var body: some View {
-    VStack {
-      labelButton
-        .minimumScaleFactor(0.5)
-        .frame(height: 32)
-        .overlay {
-          RoundedRectangle(cornerRadius: 10)
-            .stroke(controller.isShowingInputView ? Color.accentColor.gradient : Color.clear.gradient, lineWidth: 2)
-            .scaleEffect(0.8)
-        }
-        .scaleEffect(controller.isShowingInputView ? 1.2 : 1)
-        .sheet(isPresented: $controller.isShowingInputView) {
-          inputView
-            .font(.title3)
-            .presentationDetents([.fraction(0.38)])
-            .onAppear {
-              isAnimating = true
-            }
-        }
-    }
-    .fontWeight(.semibold)
-  }
-  
-  @ViewBuilder // MARK: - LABEL
-  private var labelButton: some View {
-    Button {
-      controller.isShowingInputView.toggle()
-    } label: {
-      Text(String(format: "%.0f", value))
-        .foregroundColor(isCompleted ? .green : .primary)
-        .fontWeight(.semibold)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-  }
-}
-
-
-// MARK: - INPUT VIEW
-extension BobKgRepsTextField {
-  @ViewBuilder
-  private var inputView: some View {
     ZStack {
       Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
       
       VStack {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
+          Button {
+            value = 0
+          } label: {
+            Image(systemName: "xmark.circle.fill")
+              .imageScale(.large)
+              .symbolRenderingMode(.hierarchical)
+              .foregroundColor(.secondary)
+          }
+          Spacer()
           
           Text(String(format: "%.0f", value))
             .font(.largeTitle)
@@ -99,7 +58,8 @@ extension BobKgRepsTextField {
         numberKey(1)
         numberKey(4)
         numberKey(7)
-        resetKey
+        Text("")
+          .frameForInputKeys
       }
       VStack {
         numberKey(2)
@@ -133,14 +93,14 @@ extension BobKgRepsTextField {
   @ViewBuilder
   private func numberKey(_ number: Int) -> some View {
     Button {
-      value = controller.add(number, to: value)
+      value = controller.add(Double(number), to: value)
     } label: {
       Text("\(number)")
         .frameForInputKeys
         .foregroundColor(.primary)
     }
   }
-
+  
   @ViewBuilder
   private var deleteBackwardKey: some View {
     Button {
@@ -153,20 +113,8 @@ extension BobKgRepsTextField {
         .foregroundColor(.primary)
     }
   }
-  
-  @ViewBuilder
-  private var resetKey: some View {
-    Button {
-      value = 0
-    } label: {
-      Image(systemName: "arrow.counterclockwise")
-        .frameForInputKeys
-        .foregroundColor(.primary)
-    }
-  }
-}
 
-extension BobKgRepsTextField {
+  
   @ViewBuilder // MARK: - STEPPO
   private func steppo(_ number: Int) -> some View {
     HStack {
@@ -194,15 +142,8 @@ extension BobKgRepsTextField {
   }
 }
 
-struct BobTextField_Previews: PreviewProvider {
+struct InputView_Previews: PreviewProvider {
   static var previews: some View {
-    BobKgRepsTextField(value: .constant(12), isCompleted: .constant(true))
-  }
-}
-
-
-extension View {
-  var frameForInputKeys: some View {
-    frame(maxWidth: .infinity, maxHeight: 35)
+    InputView(value: .constant(12), isAnimating: .constant(false), controller: BobTextFieldController())
   }
 }

@@ -18,7 +18,10 @@
 		7C1555DC2A710F2E005C2855 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DB2A710F2E005C2855 /* TimeRange.swift */; };
 		7C1555DE2A71214C005C2855 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555DD2A71214C005C2855 /* Date.swift */; };
 		7C32044B2A79369000A25650 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7C32044A2A79369000A25650 /* BottomSheet */; };
-		7C5F26552A84EB9D0074A837 /* BobTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F26542A84EB9D0074A837 /* BobTextField.swift */; };
+		7C5F26552A84EB9D0074A837 /* KgRepsTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F26542A84EB9D0074A837 /* KgRepsTF.swift */; };
+		7C5F26572A863D8E0074A837 /* KmTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F26562A863D8E0074A837 /* KmTF.swift */; };
+		7C5F26592A863F6E0074A837 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F26582A863F6E0074A837 /* InputView.swift */; };
+		7C5F265B2A86457F0074A837 /* StringInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F265A2A86457F0074A837 /* StringInputView.swift */; };
 		7C6FE5012A7E55710017C0A9 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5002A7E55710017C0A9 /* NavBar.swift */; };
 		7C6FE5032A7E58EE0017C0A9 /* NavContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */; };
 		7C6FE5052A7EAF050017C0A9 /* UINavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6FE5042A7EAF050017C0A9 /* UINavController.swift */; };
@@ -145,7 +148,10 @@
 		7C1555D92A701469005C2855 /* ThreeWayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeWayPicker.swift; sourceTree = "<group>"; };
 		7C1555DB2A710F2E005C2855 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		7C1555DD2A71214C005C2855 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		7C5F26542A84EB9D0074A837 /* BobTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobTextField.swift; sourceTree = "<group>"; };
+		7C5F26542A84EB9D0074A837 /* KgRepsTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KgRepsTF.swift; sourceTree = "<group>"; };
+		7C5F26562A863D8E0074A837 /* KmTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmTF.swift; sourceTree = "<group>"; };
+		7C5F26582A863F6E0074A837 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		7C5F265A2A86457F0074A837 /* StringInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInputView.swift; sourceTree = "<group>"; };
 		7C6FE5002A7E55710017C0A9 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		7C6FE5022A7E58EE0017C0A9 /* NavContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavContainer.swift; sourceTree = "<group>"; };
 		7C6FE5042A7EAF050017C0A9 /* UINavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavController.swift; sourceTree = "<group>"; };
@@ -414,7 +420,10 @@
 				7C7DA0D42A5EB0F800B58AFA /* BobView.swift */,
 				7C7DA12D2A61713100B58AFA /* BobContainer.swift */,
 				7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */,
-				7C5F26542A84EB9D0074A837 /* BobTextField.swift */,
+				7C5F26542A84EB9D0074A837 /* KgRepsTF.swift */,
+				7C5F26582A863F6E0074A837 /* InputView.swift */,
+				7C5F265A2A86457F0074A837 /* StringInputView.swift */,
+				7C5F26562A863D8E0074A837 /* KmTF.swift */,
 			);
 			path = Bob;
 			sourceTree = "<group>";
@@ -801,6 +810,7 @@
 			files = (
 				7CA6CE232A66E8ED006FDBD4 /* Activity.swift in Sources */,
 				7C7DA1292A604B2600B58AFA /* SeshController.swift in Sources */,
+				7C5F265B2A86457F0074A837 /* StringInputView.swift in Sources */,
 				7C7DA0FC2A5EB25400B58AFA /* SmallTsButton.swift in Sources */,
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
 				7CC6FB642A7664E400A9138A /* ClearButtonTF.swift in Sources */,
@@ -829,6 +839,7 @@
 				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
 				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
 				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
+				7C5F26592A863F6E0074A837 /* InputView.swift in Sources */,
 				7CBAA1D52A5D924900DFA31D /* FireAuthManager.swift in Sources */,
 				7CB371BC2A7AAAB600A8AD76 /* ParallaxModifier.swift in Sources */,
 				7C7DA0F42A5EB21000B58AFA /* DurationFormatter.swift in Sources */,
@@ -874,6 +885,7 @@
 				7C7DA0A02A5DA38000B58AFA /* FSExtensions.swift in Sources */,
 				7C7DA0C72A5EB03200B58AFA /* StartViewModel.swift in Sources */,
 				7CBAA2192A5D964F00DFA31D /* Colors.swift in Sources */,
+				7C5F26572A863D8E0074A837 /* KmTF.swift in Sources */,
 				7C7DA0AF2A5DAE4100B58AFA /* Bob.swift in Sources */,
 				7C6FE5012A7E55710017C0A9 /* NavBar.swift in Sources */,
 				7C1555D62A6C0087005C2855 /* ExerciseTimeView.swift in Sources */,
@@ -894,7 +906,7 @@
 				7CA6CE1E2A66E8E0006FDBD4 /* HealthKitManager.swift in Sources */,
 				7C7DA0E92A5EB16400B58AFA /* TsCalendarViewModel.swift in Sources */,
 				7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */,
-				7C5F26552A84EB9D0074A837 /* BobTextField.swift in Sources */,
+				7C5F26552A84EB9D0074A837 /* KgRepsTF.swift in Sources */,
 				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
 				7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */,
