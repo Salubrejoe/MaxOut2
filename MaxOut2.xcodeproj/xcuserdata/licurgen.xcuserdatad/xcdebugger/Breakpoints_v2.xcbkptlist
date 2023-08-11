@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "5928B2E3-BDEB-49D3-A2F6-3A65EE8146E1"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "C0A1F255-CCD0-4143-A3B7-C92596923B9A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "A2A80B99-EBD5-4F5D-AE4C-1D628D2ACDF3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D707E24B-F4F6-4768-A64F-FBB6971D9988"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaxOut2/VVM/Components/ExercisesList/SectionedList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D707E24B-F4F6-4768-A64F-FBB6971D9988 - 996119a3b51d2f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(MaxOut2.APicker, MaxOut2.MuscleGroupPicker)&gt;&gt;, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt; in closure #1 (SwiftUI.ScrollViewProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(MaxOut2.APicker, MaxOut2.MuscleGroupPicker)&gt;&gt;, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt;&gt; in MaxOut2.SectionedList.body.getter : some"
+                  moduleName = "MaxOut2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/licurgen/Library/Mobile%20Documents/com~apple~CloudDocs/Develop/!!Projects/SwiftUI/MaxOut2/MaxOut2/VVM/Components/ExercisesList/SectionedList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "D707E24B-F4F6-4768-A64F-FBB6971D9988 - 677c2cff8f2ff6f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(MaxOut2.APicker, MaxOut2.MGPicker)&gt;&gt;, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt; in closure #1 (SwiftUI.ScrollViewProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(MaxOut2.APicker, MaxOut2.MGPicker)&gt;&gt;, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt;&gt; in MaxOut2.SectionedList.body.getter : some"
+                  moduleName = "MaxOut2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/licurgen/Library/Mobile%20Documents/com~apple~CloudDocs/Develop/!!Projects/SwiftUI/MaxOut2/MaxOut2/VVM/Components/ExercisesList/SectionedList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "D707E24B-F4F6-4768-A64F-FBB6971D9988 - a50fb5582761f018"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.EmptyView, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt; in closure #1 (SwiftUI.ScrollViewProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(MaxOut2.ParallaxScrollView&lt;SwiftUI.Color, SwiftUI.EmptyView, SwiftUI.LazyVGrid&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)&gt;, Swift.String, &lt;&lt;opaque return type of MaxOut2.SectionedList.actualList((Swift.String, Swift.Array&lt;MaxOut2.Exercise&gt;)) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, MaxOut2.SectionedList.CoordinateSpaces&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, MaxOut2.SectionIndexTitles)&gt;&gt;)&gt;&gt; in MaxOut2.SectionedList.body.getter : some"
+                  moduleName = "MaxOut2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/licurgen/Library/Mobile%20Documents/com~apple~CloudDocs/Develop/!!Projects/SwiftUI/MaxOut2/MaxOut2/VVM/Components/ExercisesList/SectionedList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "492">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
