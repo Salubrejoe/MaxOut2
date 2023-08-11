@@ -26,6 +26,7 @@ struct ExercisesListView: View {
         .toolbar { createButton }
         .onAppear{
           model.addListenerToFavourites()
+          model.loadSelectedExercisesJson()
           model.searchText = nil
         }
         .sheet(isPresented: $isShowingTemplates) {

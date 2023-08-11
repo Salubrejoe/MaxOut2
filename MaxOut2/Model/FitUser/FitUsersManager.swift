@@ -20,12 +20,12 @@ final class FitUserManager {
     try userDocument(id: user.id)/// 🥎
       .setData(from: user, merge: false)
     
-    let array: ExercisesArray = Bundle.main.decode("selectedExercises.json")
-    
-    let exercises = array.exercises
-    for exercise in exercises {
-      try await ExercisesManager.shared.addToExercises(exercise: exercise, for: user.id)
-    }
+//    let array: ExercisesArray = Bundle.main.decode("selectedExercises.json")
+//    
+//    let exercises = array.exercises
+//    for exercise in exercises {
+//      try await ExercisesManager.shared.addToExercises(exercise: exercise, for: user.id)
+//    }
   }
   
   /// UPDATE USER

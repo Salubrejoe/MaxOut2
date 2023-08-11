@@ -16,7 +16,6 @@ final class CreateAccountViewModel: ObservableObject {
   func pushFitUser() async throws { /// 🧵⚾️
     guard let authUser = authResult else { throw FireAuthManError.noCurrentUser } /// 🥎
     var newUser = FitUser(from: authUser)
-    newUser.color = goodColors.randomElement()
     try await FitUserManager.shared.pushNew(user: newUser) /// 🥎
   }
 }

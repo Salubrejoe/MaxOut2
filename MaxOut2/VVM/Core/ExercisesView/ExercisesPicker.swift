@@ -44,7 +44,10 @@ struct ExercisesPicker: View {
       }
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)
-      .onAppear { model.addListenerToFavourites() }
+      .onAppear {
+        model.addListenerToFavourites()
+        model.loadSelectedExercisesJson()
+      }
     }
   }
   

@@ -92,6 +92,11 @@ extension ExercisesViewModel {
     return a
   }
   
+  func loadSelectedExercisesJson() {
+    let array: ExercisesArray = Bundle.main.decode("selectedExercises.json")
+    exercises = array.exercises
+  }
+  
   func loadTemplatesJson() {
     let array: ExercisesArray = Bundle.main.decode("exercises.json")
     templates = array.exercises
@@ -195,7 +200,9 @@ extension ExercisesViewModel {
         .sink { completion in
           
         } receiveValue: { [weak self] exercises in
-          self?.exercises = exercises.sorted { $0.name < $1.name}
+          guard let self else { return }
+          let allExercises = self.exercises + exercises
+          self.exercises = allExercises.sorted { $0.name < $1.name}
         }
         .store(in: &cancellables)
     }
