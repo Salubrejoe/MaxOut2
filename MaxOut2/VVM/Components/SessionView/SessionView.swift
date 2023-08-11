@@ -23,7 +23,6 @@ struct SessionView: View {
           VStack(spacing: 0) {
             ForEach($session.bobs) { $bob in
               BobView(controller: controller, bob: $bob, session: $session)
-              //              TimeTextField(text: $bob.duration)
             }
           }
           .cornerRadius(10)
@@ -58,7 +57,7 @@ extension SessionView {
       bobHeader
         .fontWeight(.semibold)
     }
-    .alert("Remove?", isPresented: $removeAlert, actions: {
+    .alert("Remove?", isPresented: $removeAlert) {
       Button("Cancel", role: .cancel) {}
       Button {
         model.remove(session)
@@ -66,34 +65,23 @@ extension SessionView {
       } label: {
         Label("Remove", systemImage: "trash")
       }
-    })
+    }
   }
   
   
   @ViewBuilder // MARK: - NEW BOB
   private var newBobButton: some View {
-    HStack(spacing: 2) {
+    Button {
+      controller.newBobTapped(for: &session)
+    } label: {
       Text("+ New Set")
-    }
-    .font(.footnote)
-    .fontWeight(.semibold)
-    .foregroundColor(.systemBackground)
-    .frame(maxWidth: .infinity)
-    .frame(height: 20)
-    .background(.primary.opacity(0.1))
-    .clipShape(RoundedRectangle(cornerRadius: 5))
-    
-    .onTapGesture {
-      if let lastBob = session.bobs.last {
-        let bob = Bob(bob: lastBob)
-        withAnimation(.easeIn) {
-          session.bobs.append(bob)
-        }
-      } else {
-        withAnimation(.easeIn) {
-          session.bobs.append(Bob())
-        }
-      }
+        .font(.footnote)
+        .fontWeight(.semibold)
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity)
+        .frame(height: 20)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 7))
     }
   }
   
@@ -102,14 +90,14 @@ extension SessionView {
     Menu {
       Section {
         Button {
-          //
-        } label: {
-          Label("Check How-To", systemImage: "list.bullet.clipboard")
-        }
-        Button {
           controller.open.send()
         } label: {
           Label("Mark All Completed", systemImage: "checkmark")
+        }
+        Button {
+          //
+        } label: {
+          Label("Check How-To", systemImage: "list.bullet.clipboard")
         }
       }
       Section {

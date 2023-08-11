@@ -40,6 +40,27 @@ struct Bob: Hashable, Identifiable {
 }
 
 
+// MARK: - COMPUTED PROPERTIES
+extension Bob {
+  
+  public var volume: Int {
+    Int(kg*reps)
+  }
+  
+  public var km: Double {
+    Double(distance) ?? 0.0
+  }
+  
+  public var timeInterval: Int {
+    guard duration.count == 3 else { return 0 }
+    var timeInterval = 0
+    timeInterval += duration[2]
+    timeInterval += duration[1] * 60
+    timeInterval += duration[0] * 3600
+    return timeInterval
+  }
+}
+
 
 // MARK: - CODABLE
 extension Bob: Codable {

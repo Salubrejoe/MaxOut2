@@ -1,5 +1,10 @@
 import Foundation
 
+struct DataPoint {
+  let x: Date
+  let y: Double
+}
+
 /// Needs Equatable to get firstIndex(of:)
 struct Session: Identifiable, Equatable {
   
@@ -10,13 +15,6 @@ struct Session: Identifiable, Equatable {
   let activityType : String
   var bobs         : [Bob]
   let image        : String
-  
-  var timeString: String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
-    let date = dateCreated
-    return dateFormatter.string(from: date)
-  }
   
   init(
     id           : String,
@@ -35,9 +33,79 @@ struct Session: Identifiable, Equatable {
     self.bobs         = bobs
     self.image        = image
   }
+}
+
+
+// MARK: - COMPUTED PROPERTIES
+extension Session {
+  public var timeString: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    let date = dateCreated
+    return dateFormatter.string(from: date)
+  }
   
   public var activity: ActivityType {
     ActivityType(rawValue: activityType) ?? .traditionalStrengthTraining
+  }
+  
+  public var totalVolume: Double {
+    var volume = 0
+    for bob in bobs {
+      volume += bob.volume
+    }
+    return Double(volume)
+  }
+  
+  public var bestVolume: Double {
+    var volume = 0
+    for bob in bobs {
+      if bob.volume > volume {
+        volume = bob.volume
+      }
+    }
+    return Double(volume)
+  }
+  
+  public var totalDuration: Double {
+    var timeInterval = 0
+    for bob in bobs {
+      timeInterval += bob.timeInterval
+    }
+    return Double(timeInterval)
+  }
+  
+  public var totalDistanceInKm: Double {
+    var km = 0.0
+    for bob in bobs {
+      km += bob.km
+    }
+    return km
+  }
+  
+  public var averageKmPerHour: Double {
+    let totalTimeInHours = Double(totalDuration / 3600)
+    return totalDistanceInKm / totalTimeInHours
+  }
+}
+
+
+// MARK: - CHARTS
+extension Session {
+  public var bestVolumeDataPoint: DataPoint {
+    DataPoint(x: dateCreated, y: bestVolume)
+  }
+  
+  public var totalVolumeDataPoint: DataPoint {
+    DataPoint(x: dateCreated, y: totalVolume)
+  }
+  
+  public var speedDataPoint: DataPoint {
+    DataPoint(x: dateCreated, y: averageKmPerHour)
+  }
+  
+  public var durationDataPoint: DataPoint {
+    DataPoint(x: dateCreated, y: totalDuration)
   }
 }
 

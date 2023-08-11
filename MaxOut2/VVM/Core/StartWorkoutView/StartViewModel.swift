@@ -15,6 +15,7 @@ final class StartViewModel: ObservableObject {
   
   /// Bottom Sheet
   @Published var inProgress = false
+  @Published var congratulationsScreen = false
   @Published var position = BottomSheetPosition.relative(0.93)
   let switchablePositions: [BottomSheetPosition] = [.absoluteBottom(180), .relative(0.93)]
   
@@ -60,9 +61,14 @@ final class StartViewModel: ObservableObject {
   }
   
   func cancelRoutine() {
-    sessions = []
-    routine = nil
-    startDate = Date()
+    Task {
+      await MainActor.run {
+        congratulationsScreen = true
+        sessions = []
+        routine = nil
+        startDate = Date()
+      }
+    }
   }
   
   // MARK: - REMOVE SESSION
@@ -90,47 +96,6 @@ extension StartViewModel {
     }
   }
   
-  @MainActor
-  func save(_ routine: Routine?) async throws {
-    let userId = try userId()
-    guard let routine else { throw URLError(.cannotCloseFile) }
-    
-    let dateStarted = routine.dateStarted.timeIntervalSince1970
-    let dateEnded = Date().timeIntervalSince1970
-    let duration = (dateEnded - dateStarted).rounded()
-    var sessionPaths = [SessionPath]()
-    var bobs = [Bob]()
-    
-    for session in sessions {
-      for bob in session.bobs {
-        if bob.isCompleted {
-          let newBob = Bob(bob: bob)
-          bobs.append(newBob)
-        }
-      }
-      
-      let newSession = Session(id: "",
-                               exerciseId: session.exerciseId,
-                               exerciseName: session.exerciseName,
-                               dateCreated: Date(timeIntervalSince1970: dateStarted),
-                               activityType: session.activityType,
-                               bobs: bobs,
-                               image: session.image)
-      bobs = []
-      
-      let sessionId = try await SessionsManager.shared.addToSessions(session: newSession, userId: userId)
-      let sessionPath = SessionPath(exerciseId: session.exerciseId, sessionId: sessionId)
-      sessionPaths.append(sessionPath)
-    }
-    
-    let newRoutine = Routine(sessionsPaths: sessionPaths,
-                             dateEnded: Date(timeIntervalSince1970: dateEnded),
-                             dateStarted: Date(timeIntervalSince1970: dateStarted),
-                             duration: duration)
-    try? await RoutinesManager.shared.addToRoutines(routine: newRoutine , for: userId)
-    cancelRoutine()
-  }
-  
   private func userId() throws -> String {
     guard let userId = try? FireAuthManager.shared.currentAuthenticatedUser().uid  else {
       isShowingeErrorAlert = true
@@ -142,3 +107,95 @@ extension StartViewModel {
 }
 
 
+// MARK: - GPT NEW SAVE
+extension StartViewModel {
+  func save(_ routine: Routine?) async throws {
+    guard let routine = routine else {
+      throw URLError(.cannotCloseFile)
+    }
+    
+    let userId = try userId()
+    let currentTime = Date().timeIntervalSince1970
+    let sessionPaths = try await createSessionPaths(from: sessions, userId: userId, currentTime: currentTime)
+    
+    let newRoutine = Routine(
+      sessionsPaths: sessionPaths,
+      dateEnded: Date(timeIntervalSince1970: currentTime),
+      dateStarted: routine.dateStarted,
+      duration: currentTime - routine.dateStarted.timeIntervalSince1970
+    )
+    
+    try? await RoutinesManager.shared.addToRoutines(routine: newRoutine, for: userId)
+    cancelRoutine()
+  }
+  
+  func createSessionPaths(from sessions: [Session], userId: String, currentTime: TimeInterval) async throws -> [SessionPath] {
+    var sessionPaths = [SessionPath]()
+    
+    for session in sessions {
+      let completedBobs = session.bobs.filter { $0.isCompleted }
+      let newBobs = completedBobs.map { Bob(bob: $0) }
+      
+      let newSession = Session(
+        id: "",
+        exerciseId: session.exerciseId,
+        exerciseName: session.exerciseName,
+        dateCreated: Date(timeIntervalSince1970: currentTime),
+        activityType: session.activityType,
+        bobs: newBobs,
+        image: session.image
+      )
+      
+      let sessionId = try await SessionsManager.shared.addToSessions(session: newSession, userId: userId)
+      let sessionPath = SessionPath(exerciseId: session.exerciseId, sessionId: sessionId)
+      sessionPaths.append(sessionPath)
+    }
+    
+    return sessionPaths
+  }
+}
+
+
+
+
+
+//  @MainActor
+//  func save(_ routine: Routine?) async throws {
+//    let userId = try userId()
+//    guard let routine else { throw URLError(.cannotCloseFile) }
+//
+//    let dateStarted = routine.dateStarted.timeIntervalSince1970
+//    let dateEnded = Date().timeIntervalSince1970
+//    let duration = (dateEnded - dateStarted).rounded()
+//    var sessionPaths = [SessionPath]()
+//    var bobs = [Bob]()
+//
+//    for session in sessions {
+//      for bob in session.bobs {
+//        if bob.isCompleted {
+//          let newBob = Bob(bob: bob)
+//          bobs.append(newBob)
+//        }
+//      }
+//
+//      let newSession = Session(id: "",
+//                               exerciseId: session.exerciseId,
+//                               exerciseName: session.exerciseName,
+//                               dateCreated: Date(timeIntervalSince1970: dateStarted),
+//                               activityType: session.activityType,
+//                               bobs: bobs,
+//                               image: session.image)
+//      bobs = []
+//
+//      let sessionId = try await SessionsManager.shared.addToSessions(session: newSession, userId: userId)
+//      let sessionPath = SessionPath(exerciseId: session.exerciseId, sessionId: sessionId)
+//      sessionPaths.append(sessionPath)
+//    }
+//
+//    let newRoutine = Routine(sessionsPaths: sessionPaths,
+//                             dateEnded: Date(timeIntervalSince1970: dateEnded),
+//                             dateStarted: Date(timeIntervalSince1970: dateStarted),
+//                             duration: duration)
+//    try? await RoutinesManager.shared.addToRoutines(routine: newRoutine , for: userId)
+//    cancelRoutine()
+//  }

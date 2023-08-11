@@ -21,4 +21,17 @@ final class SeshController: ObservableObject {
     }
     return true
   }
+  
+  func newBobTapped(for session: inout Session) {
+    if let lastBob = session.bobs.last {
+      let bob = Bob(bob: lastBob)
+      withAnimation(.easeIn) {
+        session.bobs.append(bob)
+      }
+    } else {
+      withAnimation(.easeIn) {
+        session.bobs.append(Bob())
+      }
+    }
+  }
 }

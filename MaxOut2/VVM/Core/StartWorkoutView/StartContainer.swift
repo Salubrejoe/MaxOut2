@@ -5,6 +5,7 @@ struct StartContainer: View {
   private enum CoordinateSpaces {
     case scrollView
   }
+  @Environment(\.dismiss) var dismiss
   @EnvironmentObject var model: StartViewModel
   @Binding var tabBarState: BarState
   
@@ -25,5 +26,13 @@ struct StartContainer: View {
       }
     }
     .task { try? await model.loadCurrentUser() }
+    .fullScreenCover(isPresented: $model.congratulationsScreen) {
+      VStack(spacing: 40) {
+        Text("CONGRATS MF")
+        Button("Thanks?") {
+          model.congratulationsScreen = false
+        }
+      }
+    }
   }
 }
