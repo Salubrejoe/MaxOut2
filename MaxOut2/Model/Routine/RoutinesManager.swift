@@ -41,7 +41,8 @@ extension RoutinesManager {
       "title"         : routine.title,
       "dateStarted"   : routine.dateStarted,
       "dateEnded"     : routine.dateEnded ?? Date(),
-      "duration"      : routine.duration
+      "duration"      : routine.duration,
+      "activityType"  : routine.activityType
     ]
     
     try await routineDocument(routineId: routine.id, userId: userId) /// 🧵🥎
@@ -49,7 +50,7 @@ extension RoutinesManager {
   }
   
   func routines(for userId: String) async throws -> [Routine] { /// 🧵⚾️
-    return try await userRoutinesCollection(userId: userId) /// 🧵🥎
+    try await userRoutinesCollection(userId: userId) /// 🧵🥎
       .getDocuments(as: Routine.self)
   }
   

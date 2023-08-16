@@ -29,8 +29,10 @@ struct Activity: Identifiable, Equatable, Hashable {
         return .jumpRope
       case .skatingSports:
         return .skatingSports
-      case .wheelchairRunPace:
-        return .wheelchairRunPace
+      case .stairs:
+        return .stairs
+      case .tableTennis:
+        return .tableTennis
       case .mixedCardio:
         return .mixedCardio
     }
@@ -49,10 +51,6 @@ struct Activity: Identifiable, Equatable, Hashable {
       a.append(groupedExercise.0)
     }
     return a
-  }
-  
-  public var logo: String {
-    return hkType.sfSymbol
   }
   
   public var duration: TimeInterval {

@@ -5,6 +5,8 @@ struct ExercisesPicker: View {
   @EnvironmentObject var startModel: StartViewModel
   @StateObject var model = ExercisesViewModel()
   
+  let activityType: ActivityType
+  
   var body: some View {
     NavigationStack {
       ZStack(alignment: .bottom) {
@@ -30,9 +32,9 @@ struct ExercisesPicker: View {
           .navigationTitle("")
           .navigationBarTitleDisplayMode(.inline)
         }
-        
+//        
         VStack(spacing: 3) {
-          ThreeWayPicker(model: model)
+//          ThreeWayPicker(model: model, collection: model.exercises)
           if model.selectedExercises.count > 0 {
             LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
               model.commitSelection(toRoutineVM: startModel)
@@ -45,6 +47,7 @@ struct ExercisesPicker: View {
       .dismissButton()
       .animation(.spring(), value: model.selectedExercises)
       .onAppear {
+        model.selectedActivityType = activityType
         model.addListenerToFavourites()
         model.loadSelectedExercisesJson()
       }
@@ -106,6 +109,6 @@ struct ExercisesPicker: View {
 
 struct ExercisesPicker_Previews: PreviewProvider {
   static var previews: some View {
-    ExercisesPicker()
+    ExercisesPicker(activityType: .coreTraining)
   }
 }

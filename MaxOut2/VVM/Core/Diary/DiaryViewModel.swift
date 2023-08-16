@@ -5,6 +5,8 @@ final class DiaryViewModel: ObservableObject {
   
   @Published var user: FitUser = FitUser.mockup
   @Published var authProviders: [AuthProviderOption] = []
+  
+  @Published var userStats: [UserStat]? = nil
 
   @Published var username: String = ""
   @Published var firstName: String = ""
@@ -64,3 +66,4 @@ extension DiaryViewModel {
     try FireAuthManager.shared.signOut() /// 🥎
   }
 }
+

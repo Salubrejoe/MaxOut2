@@ -5,6 +5,8 @@ struct WeightView: View {
   @EnvironmentObject var manager: HealthKitManager
   @State private var weight = "0"
   
+  @Binding var tabBarState: BarState
+  
   var body: some View {
     ZStack(alignment: .bottom) {
       textField
@@ -17,7 +19,11 @@ struct WeightView: View {
     }
     .toolbar { resignKeyboard }
     .onAppear {
+      tabBarState = .hidden
       getHKWeight()
+    }
+    .onDisappear {
+      tabBarState = .large
     }
   }
   
@@ -85,7 +91,7 @@ struct WeightView: View {
 
 struct WeightView_Previews: PreviewProvider {
   static var previews: some View {
-    WeightView().environmentObject(HealthKitManager())
+    WeightView(tabBarState: .constant(.large)).environmentObject(HealthKitManager())
   }
 }
 

@@ -45,7 +45,6 @@ extension SessionView {
   private var header: some View {
     VStack(spacing: 6) {
       HStack(alignment: .firstTextBaseline) {
-        Image(systemName: session.activity.hkType.sfSymbol)
         Text("\(session.exerciseName.capitalized)")
           .fontWeight(.semibold)
         Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)

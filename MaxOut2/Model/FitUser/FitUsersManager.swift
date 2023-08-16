@@ -6,7 +6,7 @@ import FirebaseFirestoreSwift
 
 final class FitUserManager {
   static let shared = FitUserManager()
-  private init() { }
+  private init() {}
   
   private let usersCollection = Firestore.firestore().collection(K.usersCollectionName)
   

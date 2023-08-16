@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "age-3.png",
+      "filename" : "age-4 7.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "age-3 3.png",
+      "filename" : "age-4 8.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -28,7 +28,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "age-3 1.png",
+      "filename" : "age-4 6.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -39,7 +39,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "age-3 4.png",
+      "filename" : "age-4 3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -55,7 +55,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "age-3 2.png",
+      "filename" : "age-4 5.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -66,7 +66,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "age-3 5.png",
+      "filename" : "age-4 4.png",
       "idiom" : "universal",
       "scale" : "3x"
     },

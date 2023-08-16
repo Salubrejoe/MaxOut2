@@ -10,12 +10,14 @@ struct Routine: Codable, Identifiable, Hashable {
   var dateEnded     : Date?
   var dateStarted   : Date
   var duration      : TimeInterval
+  let activityType  : String
   
   init(
     sessionsPaths : [SessionPath] = [],
     dateEnded     : Date? = nil,
     dateStarted   : Date = Date(),
-    duration      : TimeInterval = 0
+    duration      : TimeInterval = 0,
+    activityType  : String
   ) {
     
     var title: String {
@@ -43,6 +45,7 @@ struct Routine: Codable, Identifiable, Hashable {
     self.dateEnded     = dateEnded
     self.dateStarted   = dateStarted
     self.duration      = duration
+    self.activityType  = activityType
   }
 }
 

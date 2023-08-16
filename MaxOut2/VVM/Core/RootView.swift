@@ -25,17 +25,6 @@ struct RootView: View {
       }
   }
   
-  @ViewBuilder // MARK: - FULL SCREEN PICKER
-  private var fullScreenPicker: some View {
-    ZStack(alignment: .topLeading) {
-      Button("Cancel") {
-        model.isShowingPicker = false
-      }
-      ExercisesPicker()
-        .environmentObject(model)
-    }
-  }
-  
   @ViewBuilder
   private var mainTabBar: some View {
     TabBarView(selection: $selection, tabBarState: $tabBarState) {
@@ -64,6 +53,9 @@ struct RootView: View {
             SessionsGrid(tabBarState: $tabBarState)
               .environmentObject(model)
           }
+          .enableBackgroundBlur(true)
+          
+          
       }
       .onChange(of: model.position) { _ in
         if model.position == .relative(0.93) { tabBarState = .hidden }

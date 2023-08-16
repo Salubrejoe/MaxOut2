@@ -9,6 +9,8 @@ struct WidgetGrid: View {
   @State private var isShowingHistory      = false
   @State private var isShowingExerciseTime = false
   
+  @Binding var tabBarState: BarState
+  
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
@@ -55,7 +57,7 @@ struct WidgetGrid: View {
       }
       MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
         NavigationLink {
-          WeightView()
+          WeightView(tabBarState: $tabBarState)
         } label: {
           BodyMassChart()
             .environmentObject(manager)
@@ -68,7 +70,7 @@ struct WidgetGrid: View {
   private var activities: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
       ForEach(manager.currentActivities) {
-        SmallCardView(activity: $0, style: RegularMaterialStyle())
+        SmallCardView(activity: $0, style: RegularMaterialStyle(), text: manager.timeRange.stringForWidget)
       }
     }
   }
@@ -76,7 +78,7 @@ struct WidgetGrid: View {
 
 struct WidgetGrid_Previews: PreviewProvider {
   static var previews: some View {
-    WidgetGrid()
+    WidgetGrid(tabBarState: .constant(.hidden))
   }
 }
 
@@ -119,6 +121,7 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
   
   let activity: Activity
   let style: Style
+  let text: String
   
   var body: some View {
     GroupBox {
@@ -129,39 +132,39 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
               .foregroundColor(.primary)
               .fontWeight(.semibold)
               
-            Text("last 7 days")
+            Text(text)
               .font(.footnote)
               .foregroundColor(.secondary)
           }
           Spacer()
-          Image(systemName: activity.logo)
+          Image(systemName: activity.hkType.sfSymbol)
             .imageScale(.large)
             .foregroundStyle(Color.exerciseRing.gradient)
         }
-        .padding(.leading, 2)
+//        .padding(.leading, 2)
         
         Spacer()
-        HStack {
+        HStack(alignment: .bottom) {
           let hour = activity.durationString.hour
           let minute = activity.durationString.minute
           Spacer()
           if hour != "" {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
               Text(hour)
-                .font(.largeTitle)
+                .font(.title)
                 .foregroundStyle(Color.primary.gradient)
               Text("h")
-                .font(.title)
+                .font(.title2)
                 .foregroundStyle(Color.secondary.gradient)
             }
           }
           if minute != "00" {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
               Text(minute)
-                .font(.largeTitle)
+                .font(.title)
                 .foregroundStyle(Color.primary.gradient)
               Text("m")
-                .font(.title)
+                .font(.title2)
                 .foregroundStyle(Color.secondary.gradient)
             }
           }
@@ -176,8 +179,8 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
 struct RegularMaterialStyle: GroupBoxStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.content
-      .padding([.horizontal, .top])
-      .padding(.bottom, 10)
+      .padding(.horizontal, 17)
+      .padding(.vertical, 14)
       .background(.regularMaterial)
       .cornerRadius(20)
   }

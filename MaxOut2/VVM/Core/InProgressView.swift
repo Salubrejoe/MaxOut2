@@ -15,37 +15,44 @@ struct InProgressHeader: View {
             model.showingCancelAlert = true
           }
           .imageScale(.large)
-          .foregroundColor(.secondary)
+          .foregroundColor(.red.opacity(0.8))
           .frame(width: 80, alignment: .leading)
           
           Text(Date().formattedString())
             .frame(maxWidth: .infinity)
+            .foregroundColor(.secondary)
             .fontWeight(.semibold)
           
           Button("Finish") {
+            manager.saveWorkout(start: model.startDate, end: Date(), activityType: model.activityType())
             model.inProgress = false
+            model.congratulationsScreen = true
             tabBarState = .large
             model.saveTask()
           }
           .bold()
           .frame(width: 80, alignment: .trailing)
           .buttonStyle(.bordered)
-          .foregroundColor(.green)
+          .foregroundColor(.accentColor)
         }
       }
       
       VStack(alignment: .leading) {
         HStack(alignment: .firstTextBaseline) {
-          Text(model.routine?.title ?? "")
-            .font(model.position == .absoluteBottom(180) ? .title2.bold() : .largeTitle.bold())
+          Label(model.activityType().hkType.name, systemImage: model.activityType().hkType.sfSymbol)
+            .font(model.position == .absoluteBottom(180) ? .title2.bold() : .title.bold())
+            .minimumScaleFactor(0.7)
           Spacer()
-          Image(systemName: "ellipsis.circle.fill")
-            .imageScale(.large)
+          if tabBarState == .hidden {
+            Image(systemName: "ellipsis.circle.fill")
+              .imageScale(.large)
+          }
         }
         
         Text(model.startDate, style: .timer)
           .font(.headline)
           .foregroundColor(.secondary)
+          .frame(maxWidth: .infinity, alignment: .center)
       }
     }
     .padding(.horizontal)
@@ -82,7 +89,7 @@ struct SessionsGrid: View {
           }
         }
         
-        LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .accentColor, image: "exercisesList") {
+        LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
           model.isShowingPicker = true
         }
         .padding(.top, 20)
@@ -114,7 +121,7 @@ extension SessionsGrid {
       Button("Cancel") {
         model.isShowingPicker = false
       }
-      ExercisesPicker()
+      ExercisesPicker(activityType: model.activityType())
     }
   }
   

@@ -38,13 +38,11 @@ struct WidgetCalendarView: View {
       .padding(.horizontal, 5)
       .frame(maxWidth: .infinity)
       
-      HStack {
-        Spacer()
-        Text(Date().formattedString())
-          .font(.title2.bold())
-          .foregroundColor(.primary)
-      }
-      .padding(.top, 3)
+      Text(Date().formattedString())
+        .font(.title2.bold())
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .padding(.top, 3)
     }
   }
 }

@@ -22,16 +22,24 @@ struct DiaryView: View {
             scrollOffset = offset
             calculateBarState(with: offset)
           }
-        WidgetGrid()
+        WidgetGrid(tabBarState: $tabBarState)
           .environmentObject(manager)
       }
       .coordinateSpace(name: CoordinateSpaces.scrollView)
       .padding(.horizontal)
       .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
-//      .toolbar { toolbar }
+      //      .toolbar { toolbar }
       
       .task { try? await model.loadCurrentUser() }
       .onAppear { manager.start() }
+      .task {
+        do {
+          model.userStats = try await StatsManager.shared.allStats()
+        }
+        catch {
+          print("DIOCANE ALLSTATS!!")
+        }
+      }
     }
   }
   
@@ -58,7 +66,7 @@ extension DiaryView {
     .groupBoxStyle(RegularMaterialStyle())
   }
   
-    
+  
   @ToolbarContentBuilder // MARK: - TOOLBAR
   private var toolbar: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,7 +78,7 @@ extension DiaryView {
     }
   }
 }
-  
+
 
 // MARK: - PROFILE LABEL
 struct ProfileLabel: View {

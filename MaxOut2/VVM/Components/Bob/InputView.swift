@@ -4,7 +4,7 @@ struct InputView: View {
   @Binding var value: Double
   @Binding var isAnimating: Bool
   @ObservedObject var controller: BobTextFieldController
-  
+  let unit : String
   
   var body: some View {
     ZStack {
@@ -15,25 +15,24 @@ struct InputView: View {
           Button {
             value = 0
           } label: {
-            Image(systemName: "xmark.circle.fill")
-              .imageScale(.large)
-              .symbolRenderingMode(.hierarchical)
+            Image(systemName: "xmark")
               .foregroundColor(.secondary)
           }
           Spacer()
           
-          Text(String(format: "%.0f", value))
-            .font(.largeTitle)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.leading, 20)
-            .padding(.top, 20)
-          
-          RoundedRectangle(cornerRadius: 5)
-            .frame(width: 2, height: 25)
-            .scaleEffect(isAnimating ? 1.2 : 0.9)
-            .opacity(isAnimating ? 0.4 : 0)
-            .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: isAnimating)
-          
+          HStack(alignment: .firstTextBaseline, spacing: 0) {
+            Text(String(format: "%.0f", value))
+              .font(.largeTitle)
+              .frame(maxWidth: .infinity, alignment: .trailing)
+              .padding(.leading, 20)
+              .padding(.top, 20)
+            cursor
+              .padding(.trailing, 3)
+            Text(unit)
+              .font(.title3)
+              .foregroundColor(.secondary)
+              .frame(alignment: .leading)
+          }
         }
         .padding()
         
@@ -49,6 +48,18 @@ struct InputView: View {
       }
       .padding()
     }
+  }
+  
+  @ViewBuilder
+  private var cursor: some View {
+    RoundedRectangle(cornerRadius: 5)
+      .frame(width: 2, height: 25)
+      .scaleEffect(isAnimating ? 1.2 : 0.9)
+      .opacity(isAnimating ? 0.4 : 0)
+      .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: isAnimating)
+      .onAppear {
+        isAnimating = true
+      }
   }
   
   @ViewBuilder
@@ -74,7 +85,7 @@ struct InputView: View {
         deleteBackwardKey
       }
     }
-    .frame(width: 200, height: 200)
+    .frame(width: 200, height: 220)
   }
   
   @ViewBuilder
@@ -144,6 +155,6 @@ struct InputView: View {
 
 struct InputView_Previews: PreviewProvider {
   static var previews: some View {
-    InputView(value: .constant(12), isAnimating: .constant(false), controller: BobTextFieldController())
+    InputView(value: .constant(12), isAnimating: .constant(false), controller: BobTextFieldController(), unit: "kg")
   }
 }

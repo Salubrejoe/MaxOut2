@@ -1,9 +1,5 @@
 import Foundation
 
-struct DataPoint {
-  let x: Date
-  let y: Double
-}
 
 /// Needs Equatable to get firstIndex(of:)
 struct Session: Identifiable, Equatable {

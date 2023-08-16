@@ -13,7 +13,6 @@ struct ExerciseMinutesWidget: View {
       )
       .foregroundStyle(Color.exerciseRing.gradient)
       .cornerRadius(4)
-      .offset(x: manager.timeRange.barOffset)
     }
     
     .chartYAxisLabel("min", position: .topTrailing)

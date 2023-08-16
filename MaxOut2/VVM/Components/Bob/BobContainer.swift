@@ -6,16 +6,12 @@ extension BobView {
     container { width in
       
       HStack(spacing: 0) {
-//        TextField("0", text: $bob.kg)
-        BobKgRepsTextField(value: $bob.kg, isCompleted: $bob.isCompleted)
+        BobKgRepsTextField(value: $bob.kg, isCompleted: $bob.isCompleted, unit: "kg")
           .bobInputStyle
-//          .numbersOnly($bob.kg)
           .frame(width: width * 0.2)
         
-//        TextField("0", text: $bob.reps)
-        BobKgRepsTextField(value: $bob.reps, isCompleted: $bob.isCompleted)
+        BobKgRepsTextField(value: $bob.reps, isCompleted: $bob.isCompleted, unit: "reps")
           .bobInputStyle
-//          .numbersOnly($bob.kg, includeDecimal: false)
           .frame(width: width * 0.2)
       }
       
@@ -51,13 +47,10 @@ extension BobView {
         Text("")
           .frame(width: width * 0.25)
           
-//        TextField("0.0", text: $bob.distance)
         KmTF(distance: $bob.distance, isCompleted: $bob.isCompleted)
           .bobInputStyle
-//          .numbersOnly($bob.kg, includeDecimal: true)
           .frame(width: width * 0.20)
           
-        
         DurationPicker(hh: $bob.duration[0], mm: $bob.duration[1], ss: $bob.duration[2], isCompleted: $bob.isCompleted)
           .bobInputStyle
           .frame(width: width * 0.35)

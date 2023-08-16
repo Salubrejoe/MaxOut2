@@ -32,6 +32,8 @@ struct BobKgRepsTextField: View {
   @Binding var isCompleted: Bool
   @State private var isAnimating = false
   
+  let unit: String
+  
   var body: some View {
     VStack {
       labelButton
@@ -44,7 +46,7 @@ struct BobKgRepsTextField: View {
         }
         .scaleEffect(controller.isShowingInputView ? 1.2 : 1)
         .sheet(isPresented: $controller.isShowingInputView) {
-          InputView(value: $value, isAnimating: $isAnimating, controller: controller)
+          InputView(value: $value, isAnimating: $isAnimating, controller: controller, unit: unit)
             .font(.title3)
             .presentationDetents([.fraction(0.38)])
             .onAppear {
@@ -71,7 +73,7 @@ struct BobKgRepsTextField: View {
 
 struct BobTextField_Previews: PreviewProvider {
   static var previews: some View {
-    BobKgRepsTextField(value: .constant(12), isCompleted: .constant(true))
+    BobKgRepsTextField(value: .constant(12), isCompleted: .constant(true), unit: "")
   }
 }
 

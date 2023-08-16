@@ -27,11 +27,10 @@ struct BodyPartImage: View {
   let exercise: Exercise
   let color: Color
   var body: some View {
-    Image(exercise.muscle.muscleGroupImage)
+    Image(systemName: exercise.activityType.hkType.sfSymbol)
       .resizable()
       .scaledToFit()
-      .colorMultiply(color)
-      .shadow(color: color, radius: 7, x: 0, y: 0)
+      .foregroundStyle(color)
   }
 }
 
@@ -43,8 +42,9 @@ struct EquipmentImage: View {
     Image(exercise.equipmentType.image)
       .resizable()
       .scaledToFit()
+      .colorMultiply(.primary)
       .frame(width: size/3, height: size/3)
-      .padding(3)
+      .padding(4)
       .background(.ultraThinMaterial)
       .opacity(exercise.equipmentType == .body ? 0 : 1)
       .clipShape(Circle())

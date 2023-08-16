@@ -33,7 +33,7 @@ struct TemplatesPicker: View {
         }
         
         VStack(spacing: 3) {
-          ThreeWayPicker(model: model)
+          ThreeWayPicker(model: model, collection: model.templates)
             
           if model.selectedExercises.count > 0 {
             LargeTsButton(text: "Save \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {

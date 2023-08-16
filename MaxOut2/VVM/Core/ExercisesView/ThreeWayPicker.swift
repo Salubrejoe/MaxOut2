@@ -4,12 +4,25 @@ import MarqueeText
 
 struct ThreeWayPicker: View {
   @ObservedObject var model: ExercisesViewModel
+  let collection: [Exercise]
   
-  var body: some View {
+  var body: some View { 
     HStack(spacing: 3) {
-      GenericPicker(selectedItem: $model.selectedEquipment, items: EquipmentType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.image, placeholder: "Equipment")
-      GenericPicker(selectedItem: $model.selectedMuscle, items: Muscle.allCases, labelKeyPath: \.displayName, imageKeyPath: \.muscleGroupImage, placeholder: "Muscle Group")
-      GenericPicker(selectedItem: $model.selectedActivityType, items: ActivityType.allCases, labelKeyPath: \.rawValue, imageKeyPath: \.hkType.sfSymbol, placeholder: "Category")
+      GenericPicker(selectedItem: $model.selectedEquipment,
+                    items: model.equipment(for: model.filter(collection)),
+                    labelKeyPath: \.rawValue,
+                    imageKeyPath: \.image,
+                    placeholder: "Equipment")
+      GenericPicker(selectedItem: $model.selectedMuscle,
+                    items: model.muscles(for: model.filter(collection)),
+                    labelKeyPath: \.displayName,
+                    imageKeyPath: \.muscleGroupImage,
+                    placeholder: "Muscle Group")
+      GenericPicker(selectedItem: $model.selectedActivityType,
+                    items: model.activities(for: model.filter(collection)),
+                    labelKeyPath: \.rawValue,
+                    imageKeyPath: \.hkType.sfSymbol,
+                    placeholder: "Category")
     }
     .threeWayPickerStyle()
   }

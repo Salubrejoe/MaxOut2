@@ -46,6 +46,7 @@ extension HKWorkoutActivityType {
       case .pilates:                      return "figure.pilates"
       case .stairs:                       return "figure.stairs"
       case .stepTraining:                 return "figure.step.training"
+      case .tableTennis:                  return "figure.table.tennis"
       case .wheelchairWalkPace:           return "figure.roll"
       case .wheelchairRunPace:            return "figure.roll.runningpace"
       case .taiChi:                       return "figure.taichi"

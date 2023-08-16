@@ -16,7 +16,7 @@ struct ExercisesListView: View {
           
           LiSt
           
-          ThreeWayPicker(model: model)
+          ThreeWayPicker(model: model, collection: model.exercises)
             .padding(.horizontal)
             .padding(.bottom, 60)
         }

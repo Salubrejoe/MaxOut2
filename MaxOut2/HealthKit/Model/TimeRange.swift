@@ -13,47 +13,12 @@ enum TimeRange: String, CaseIterable, Identifiable {
   case Y  = "Y"
   var id: TimeRange { self }
   
-//  var query: HealthStatsQuery {
-//    switch self {
-//      case .W :
-//        let calendar = Calendar.current
-//        let startDate = calendar.date(byAdding: .weekOfYear,
-//                                      value: -1,
-//                                      to: Date()) ?? Date()
-//        return HealthStatsQuery(resolution: 1, startDate: startDate)
-//      case .TW :
-//        let calendar = Calendar.current
-//        let startDate = calendar.date(byAdding: .weekOfYear,
-//                                      value: -2,
-//                                      to: Date()) ?? Date()
-//        return HealthStatsQuery(resolution: 1, startDate: startDate)
-//      case .M :
-//        let calendar = Calendar.current
-//        let startDate = calendar.date(byAdding: .month,
-//                                      value: -1,
-//                                      to: Date()) ?? Date()
-//        return HealthStatsQuery(resolution: 1, startDate: startDate)
-//      case .SM :
-//        let calendar = Calendar.current
-//        let startDate = calendar.date(byAdding: .month,
-//                                      value: -6,
-//                                      to: Date()) ?? Date()
-//        return HealthStatsQuery(resolution: 7, startDate: startDate)
-//      case .Y :
-//        let calendar = Calendar.current
-//        let startDate = calendar.date(byAdding: .month,
-//                                      value: -12,
-//                                      to: Date()) ?? Date()
-//        return HealthStatsQuery(resolution: 30, startDate: startDate)
-//    }
-//  }
-  
   var startDate : Date {
     switch self {
       case .W :
         let calendar = Calendar.current
-        return calendar.date(byAdding: .weekOfYear,
-                                      value: -1,
+        return calendar.date(byAdding: .day,
+                                      value: -6,
                                       to: Date()) ?? Date()
       case .TW :
         let calendar = Calendar.current
@@ -110,6 +75,26 @@ enum TimeRange: String, CaseIterable, Identifiable {
       case .M  : return -7
       case .SM : return -7/2
       case .Y  : return -17/2
+    }
+  }
+  
+  var numberOfDays: Int {
+    switch self {
+      case .W  : return 7
+      case .TW : return 14
+      case .M  : return 30
+      case .SM : return 180
+      case .Y  : return 365
+    }
+  }
+  
+  var stringForWidget: String {
+    switch self {
+      case .W  : return "last 7 days"
+      case .TW : return "last 2 weeks"
+      case .M  : return "last month"
+      case .SM : return "last 6 months"
+      case .Y  : return "last year"
     }
   }
 }

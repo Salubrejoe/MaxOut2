@@ -21,7 +21,7 @@ final class ExercisesViewModel: ObservableObject {
   @Published var selectedMuscle: Muscle?
   @Published var selectedEquipment: EquipmentType?
   @Published var isEditing: Bool = false
-  
+
   /// Grid columns
   let columns = [GridItem(.adaptive(minimum: 300))]
   
@@ -31,6 +31,38 @@ final class ExercisesViewModel: ObservableObject {
       return nil
     }
     return index
+  }
+}
+
+
+// MARK: - GROUPS FOR 3WPICKER
+extension ExercisesViewModel {
+  public func activities(for collection: [Exercise]) -> [ActivityType] {
+    var types = [ActivityType]()
+    for element in collection {
+      if !types.contains(element.activityType) {
+        types.append(element.activityType)
+      }
+    }
+    return types
+  }
+  public func muscles(for collection: [Exercise]) -> [Muscle] {
+    var types = [Muscle]()
+    for element in collection {
+      if !types.contains(element.muscle) {
+        types.append(element.muscle)
+      }
+    }
+    return types
+  }
+  public func equipment(for collection: [Exercise]) -> [EquipmentType] {
+    var types = [EquipmentType]()
+    for element in collection {
+      if !types.contains(element.equipmentType) {
+        types.append(element.equipmentType)
+      }
+    }
+    return types
   }
 }
 
@@ -89,7 +121,7 @@ extension ExercisesViewModel {
     for groupedExercise in groupedExercises {
       a.append(groupedExercise.0)
     }
-    return a
+    return a.count > 3 ? a : []
   }
   
   func loadSelectedExercisesJson() {
@@ -112,8 +144,6 @@ extension ExercisesViewModel {
   func commitSelection(toRoutineVM model: StartViewModel) {
     Task {
       for exercise in selectedExercises {
-        print("exercise.id")
-        print(exercise.id)
         
         let lastSession = try? await lastSession(exerciseId: exercise.id)
         
@@ -126,6 +156,7 @@ extension ExercisesViewModel {
                               image: exercise.equipmentType.image)
         model.sessions.append(session)
       }
+      model.sessions.sort { $0.activityType < $1.activityType }
       selectedExercises = []
     }
   }

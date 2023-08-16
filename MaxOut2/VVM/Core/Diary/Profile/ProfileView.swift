@@ -121,7 +121,7 @@ extension ProfileView {
       }
       
       NavigationLink {
-        WeightView().environmentObject(manager)
+        WeightView(tabBarState: $tabBarState).environmentObject(manager)
       } label: {
         HStack {
           Text("Weight")

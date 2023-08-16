@@ -130,6 +130,9 @@ enum CategoryType: String, CaseIterable, Hashable {
   case olympicWeightlifting = "olympic weightlifting"
 }
 
+
+
+
 enum ActivityType: String, CaseIterable, Hashable, Codable {
   case coreTraining                  = "core training"
   case elliptical                    = "elliptical"
@@ -140,9 +143,10 @@ enum ActivityType: String, CaseIterable, Hashable, Codable {
   case rowing                        = "rowing"
   case running                       = "running"
   case skatingSports                 = "skating"
+  case stairs                        = "stairs"
   case traditionalStrengthTraining   = "strength training"
   case walking                       = "walking"
-  case wheelchairRunPace             = "wheelchair run pace"
+  case tableTennis                   = "table tennis"
 
   var hkType: HKWorkoutActivityType {
     switch self {
@@ -164,10 +168,12 @@ enum ActivityType: String, CaseIterable, Hashable, Codable {
         return .highIntensityIntervalTraining
       case .jumpRope:
         return .jumpRope
+      case .stairs:
+        return .stairs
       case .skatingSports:
         return .skatingSports
-      case .wheelchairRunPace:
-        return .wheelchairRunPace
+      case .tableTennis:
+        return .tableTennis
       case .mixedCardio:
         return .mixedCardio
     }
@@ -186,6 +192,6 @@ enum ActivityType: String, CaseIterable, Hashable, Codable {
     .jumpRope,
     .stairs,
     .skatingSports,
-    .wheelchairRunPace,
+    .tableTennis
   ]
 }

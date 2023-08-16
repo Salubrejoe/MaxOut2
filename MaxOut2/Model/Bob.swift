@@ -15,7 +15,7 @@ struct Bob: Hashable, Identifiable {
     kg          : Double = 0,
     reps        : Double = 0,
     duration    : [Int] = [0,0,0],
-    distance    : String = "",
+    distance    : String = "0",
     isCompleted : Bool = false,
     restTime    : Double = 50.0
   ) {

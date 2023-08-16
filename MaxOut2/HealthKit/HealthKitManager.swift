@@ -61,9 +61,10 @@ final class HealthKitManager: ObservableObject {
     Activity(name: .running),
     Activity(name: .rowing),
     Activity(name: .highIntensityIntervalTraining),
-    Activity(name: .wheelchairRunPace),
+    Activity(name: .stairs),
     Activity(name: .skatingSports),
     Activity(name: .flexibility),
+    Activity(name: .tableTennis),
     Activity(name: .jumpRope),
     Activity(name: .mixedCardio),
   ]
@@ -91,7 +92,6 @@ final class HealthKitManager: ObservableObject {
   func start() {
     getStats()
     getExerciseTimeGoal()
-    getActivities(last: 7)
   }
 }
 
@@ -162,6 +162,7 @@ extension HealthKitManager {
     getExerciseTimeStats()
     getWeightStats()
     getHeightStats()
+    getActivities(last: timeRange.numberOfDays)
   }
   
   func getExerciseTimeStats() {
@@ -319,7 +320,7 @@ extension HealthKitManager {
 // MARK: - SAVE WORKOUT
 extension HealthKitManager {
   
-  func saveWorkout(start: Date, end: Date, activityType: HKWorkoutActivityType) {
+  func saveWorkout(start: Date, end: Date, activityType: ActivityType) {
     guard let store, HKHealthStore.isHealthDataAvailable() else {
       print("HealthKit is not available on this device.")
       return
@@ -329,10 +330,10 @@ extension HealthKitManager {
     let endInt = end.timeIntervalSince1970
     let duration = endInt - startInt
     
-    let workout = HKWorkout(activityType: activityType,
+    let workout = HKWorkout(activityType: activityType.hkType,
                         start: start,
                         end: end,
-                        duration: 600,
+                        duration: duration,
                         totalEnergyBurned: nil,
                         totalDistance: nil,
                         metadata: nil)

@@ -9,6 +9,7 @@ final class StartViewModel: ObservableObject {
   @Published var sessions = [Session]()
   
   var startDate = Date()
+
   
   /// Rest Time
   @Published var restTime = 60.0
@@ -35,7 +36,7 @@ final class StartViewModel: ObservableObject {
   @Published var isShowingeErrorAlert = false
   
   /// Exercise Picker bool
-  @Published var isShowingPicker = false
+  @Published var isShowingPicker = true
 
   @Published var controller = GaugeViewController()
 
@@ -54,16 +55,24 @@ final class StartViewModel: ObservableObject {
   
   
   
+  // MARK: - ACTIVITY TYPE
+  public func activityType() -> ActivityType {
+    ActivityType(rawValue: routine?.activityType ?? "") ?? ActivityType.walking
+  }
+  
+  
+  
   // MARK: - ROUTINE START/CANCEL
-  func startRoutine() {
-    routine = Routine()
+  func startRoutine(_ activityType: ActivityType) {
+    routine = Routine(activityType: activityType.rawValue)
+    inProgress = true
     startDate = Date()
   }
   
   func cancelRoutine() {
     Task {
       await MainActor.run {
-        congratulationsScreen = true
+        inProgress = false
         sessions = []
         routine = nil
         startDate = Date()
@@ -79,7 +88,6 @@ final class StartViewModel: ObservableObject {
     }
     sessions.remove(at: index)
   }
-  
 }
 
 
@@ -122,7 +130,8 @@ extension StartViewModel {
       sessionsPaths: sessionPaths,
       dateEnded: Date(timeIntervalSince1970: currentTime),
       dateStarted: routine.dateStarted,
-      duration: currentTime - routine.dateStarted.timeIntervalSince1970
+      duration: currentTime - routine.dateStarted.timeIntervalSince1970,
+      activityType: routine.activityType
     )
     
     try? await RoutinesManager.shared.addToRoutines(routine: newRoutine, for: userId)
@@ -149,9 +158,38 @@ extension StartViewModel {
       let sessionId = try await SessionsManager.shared.addToSessions(session: newSession, userId: userId)
       let sessionPath = SessionPath(exerciseId: session.exerciseId, sessionId: sessionId)
       sessionPaths.append(sessionPath)
+      
+      updateStats(for: session, userId: userId)
     }
     
     return sessionPaths
+  }
+  
+  func updateStats(for session: Session, userId: String) {
+    let now = Date()
+    
+    let bestVolumeDP  = [DataPoint(x: now, y: session.bestVolume)]
+    let totalVolumeDP = [DataPoint(x: now, y: session.totalVolume)]
+    let speedDP       = [DataPoint(x: now, y: session.averageKmPerHour)]
+    let durationDP    = [DataPoint(x: now, y: session.totalDuration)]
+    
+    let stat = UserStat(exerciseId: session.exerciseId,
+                        exerciseName: session.exerciseName,
+                        activityType: session.activityType,
+                        bestVolumeDP: bestVolumeDP,
+                        totalVolumeDP: totalVolumeDP,
+                        speedDP: speedDP,
+                        durationDP: durationDP)
+    
+    Task {
+      do {
+        let userId = try FireAuthManager.shared.currentAuthenticatedUser().uid
+        try await StatsManager.shared.addToStats(stat: stat, for: userId)
+      }
+      catch {
+        print("Error UPDATING??: \n \(error)")
+      }
+    }
   }
 }
 

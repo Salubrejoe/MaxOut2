@@ -9,6 +9,7 @@ struct MaxOut2App: App {
   
   var body: some Scene {
     WindowGroup {
+//      FileManView()
       RootView()
 //      BobTextField(value: $number, significantDigits: 2)
     }
