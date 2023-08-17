@@ -19,10 +19,13 @@ struct WidgetGrid: View {
         longWidgets
         activities
         
+        ChartGrid()
+        
         Spacer(minLength: 80)
       }
     }
   }
+  
   
   @ViewBuilder
   private var calendarGrid: some View {

@@ -14,11 +14,11 @@ struct CreateAccountView: View {
       NavigationStack {
         ScrollView {
           VStack {
-            LoginTextFieldsView(model: manager, resetPassword: false, withConfirmation: true, buttonText: K.signUpEmail, buttonColor: .accentColor, withUsername: true) { createNewUser() } /// 🪡🧤
+            LoginTextFieldsView(model: manager, resetPassword: false, withConfirmation: true, buttonText: K.Strings.signUpWithEmail, buttonColor: .accentColor, withUsername: true) { createNewUser() } /// 🪡🧤
             Spacer()
           }
         }
-        .navigationTitle(K.createAccount)
+        .navigationTitle(K.Strings.createAccount)
         .padding()
         .toolbar {
           ToolbarItem(placement: .keyboard) { ResignKeyboardButton() }

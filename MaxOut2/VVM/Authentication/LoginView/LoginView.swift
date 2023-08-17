@@ -81,7 +81,7 @@ extension LoginView {
     VStack {
       Divider()
       Text("New around here?")
-      Button(K.createAccount) {
+      Button(K.Strings.signUpWithEmail) {
         model.showingCreateAccountView = true
       }
     }

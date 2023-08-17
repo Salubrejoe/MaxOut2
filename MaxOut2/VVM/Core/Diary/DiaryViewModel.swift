@@ -27,6 +27,20 @@ final class DiaryViewModel: ObservableObject {
 // MARK: - FirebaseAuth Methods
 extension DiaryViewModel {
   
+  func getStats() async {
+    
+      do {
+        let newStats = try await StatsManager.shared.allStats()
+        await MainActor.run {
+          userStats = newStats
+        }
+      }
+      catch {
+        print("DIOCANE ALLSTATS!!")
+      }
+    
+  }
+  
   func loadAuthProviders() {
     if let providers = try? FireAuthManager.shared.authProviderOptions() {
       self.authProviders = providers

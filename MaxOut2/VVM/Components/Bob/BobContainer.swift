@@ -6,7 +6,7 @@ extension BobView {
     container { width in
       
       HStack(spacing: 0) {
-        BobKgRepsTextField(value: $bob.kg, isCompleted: $bob.isCompleted, unit: "kg")
+        BobKgRepsTextField(value: $bob.mass, isCompleted: $bob.isCompleted, unit: "kg")
           .bobInputStyle
           .frame(width: width * 0.2)
         
@@ -101,6 +101,7 @@ extension BobView {
 extension View {
   var bobInputStyle: some View {
     self
+      
       .multilineTextAlignment(.center)
       .fontWeight(.semibold)
       .foregroundStyle(.primary)

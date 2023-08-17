@@ -4,7 +4,7 @@ import Foundation
 struct Bob: Hashable, Identifiable {
   var id: String
   
-  var kg          : Double
+  var mass        : Double
   var reps        : Double
   var distance    : String
   var duration    : [Int]
@@ -14,13 +14,13 @@ struct Bob: Hashable, Identifiable {
   init(
     kg          : Double = 0,
     reps        : Double = 0,
-    duration    : [Int] = [0,0,0],
+    duration    : [Int]  = [],
     distance    : String = "0",
-    isCompleted : Bool = false,
-    restTime    : Double = 50.0
+    isCompleted : Bool    = false,
+    restTime    : Double  = 50.0
   ) {
     self.id          = UUID().uuidString
-    self.kg          = kg
+    self.mass        = kg
     self.reps        = reps
     self.duration    = duration
     self.distance    = distance
@@ -30,7 +30,7 @@ struct Bob: Hashable, Identifiable {
   
   init(bob: Bob) {
     self.id          = UUID().uuidString
-    self.kg          = bob.kg
+    self.mass        = bob.mass
     self.reps        = bob.reps
     self.duration    = bob.duration
     self.distance    = bob.distance
@@ -39,17 +39,40 @@ struct Bob: Hashable, Identifiable {
   }
 }
 
+// MARK: - USABLE PROPERTIES
+extension Bob {
+  
+  public var kg: Measurement<UnitMass> {
+    Measurement(value: mass, unit: UnitMass.kilograms)
+  }
+  
+  public var pounds: Measurement<UnitMass> {
+    kg.converted(to: UnitMass.pounds)
+  }
+  
+  public var km: Measurement<UnitLength> {
+    let km = Double(distance) ?? 0
+    return Measurement(value: km, unit: UnitLength.kilometers)
+  }
+  
+  public var miles: Measurement<UnitLength> {
+    km.converted(to: UnitLength.miles)
+  }
+}
+
 
 // MARK: - COMPUTED PROPERTIES
 extension Bob {
   
-  public var volume: Int {
-    Int(kg*reps)
+  public var kgVolume: Int {
+    Int(kg.value*reps)
   }
   
-  public var km: Double {
-    Double(distance) ?? 0.0
+  public var lbsVolume: Int {
+    Int(pounds.value*reps)
   }
+  
+  
   
   public var timeInterval: Int {
     guard duration.count == 3 else { return 0 }
@@ -77,7 +100,7 @@ extension Bob: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(self.id, forKey: .id)
-    try container.encode(self.kg, forKey: .kg)
+    try container.encode(self.mass, forKey: .kg)
     try container.encode(self.reps, forKey: .reps)
     try container.encode(self.duration, forKey: .duration)
     try container.encode(self.distance, forKey: .distance)
@@ -88,7 +111,7 @@ extension Bob: Codable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.id = try container.decode(String.self, forKey: .id)
-    self.kg = try container.decode(Double.self, forKey: .kg)
+    self.mass = try container.decode(Double.self, forKey: .kg)
     self.reps = try container.decode(Double.self, forKey: .reps)
     self.duration = try container.decode([Int].self, forKey: .duration)
     self.distance = try container.decode(String.self, forKey: .distance)

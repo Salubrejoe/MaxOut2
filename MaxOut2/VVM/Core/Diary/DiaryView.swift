@@ -19,6 +19,7 @@ struct DiaryView: View {
       ParallaxScrollView(background: Color.secondarySytemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
         WidgetGrid(tabBarState: $tabBarState)
           .environmentObject(manager)
+          .environmentObject(model)
       } header: {
         header
           .padding()
@@ -28,14 +29,7 @@ struct DiaryView: View {
       
       .task { try? await model.loadCurrentUser() }
       .onAppear { manager.start() }
-      .task {
-        do {
-          model.userStats = try await StatsManager.shared.allStats()
-        }
-        catch {
-          print("DIOCANE ALLSTATS!!")
-        }
-      }
+      .task { await model.getStats() }
     }
   }
   

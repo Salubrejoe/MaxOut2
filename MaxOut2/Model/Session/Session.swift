@@ -48,7 +48,7 @@ extension Session {
   public var totalVolume: Double {
     var volume = 0
     for bob in bobs {
-      volume += bob.volume
+      volume += bob.kgVolume
     }
     return Double(volume)
   }
@@ -56,8 +56,8 @@ extension Session {
   public var bestVolume: Double {
     var volume = 0
     for bob in bobs {
-      if bob.volume > volume {
-        volume = bob.volume
+      if bob.kgVolume > volume {
+        volume = bob.kgVolume
       }
     }
     return Double(volume)
@@ -74,7 +74,7 @@ extension Session {
   public var totalDistanceInKm: Double {
     var km = 0.0
     for bob in bobs {
-      km += bob.km
+      km += bob.km.value
     }
     return km
   }
