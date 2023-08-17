@@ -14,7 +14,7 @@ final class ExercisesManager {
   private func userExercisesCollection(userId: String) -> CollectionReference {
     FitUserManager.shared
       .userDocument(id: userId)
-      .collection(K.exercisesCollectionName)
+      .collection(K.CollectionNames.exercises)
   }
   func exerciseDocument(exerciseId: String, userId: String) -> DocumentReference {
     userExercisesCollection(userId: userId)

@@ -3,15 +3,14 @@ import FirebaseCore
 
 @main
 struct MaxOut2App: App {
-  init() { FirebaseApp.configure() }
+  @StateObject private var userManager = FitUserManager()
   
-  @State private var number = 0.0
+  init() { FirebaseApp.configure() }
   
   var body: some Scene {
     WindowGroup {
-//      FileManView()
       RootView()
-//      BobTextField(value: $number, significantDigits: 2)
+        .environmentObject(userManager)
     }
   }
 }

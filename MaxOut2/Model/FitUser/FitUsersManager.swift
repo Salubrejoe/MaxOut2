@@ -4,28 +4,18 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-final class FitUserManager {
+final class FitUserManager: ObservableObject {
   static let shared = FitUserManager()
   private init() {}
   
-  private let usersCollection = Firestore.firestore().collection(K.usersCollectionName)
+  private let usersCollection = Firestore.firestore().collection(K.CollectionNames.users)
   
-  func userDocument(id: String) -> DocumentReference {
-    usersCollection
-      .document(id)
-  }
+  func userDocument(id: String) -> DocumentReference { usersCollection.document(id) }
   
   /// PUSH New Users on FStore providing an instance of FitUser Model
   func pushNew(user: FitUser) async throws { /// ⚾️
     try userDocument(id: user.id)/// 🥎
       .setData(from: user, merge: false)
-    
-//    let array: ExercisesArray = Bundle.main.decode("selectedExercises.json")
-//    
-//    let exercises = array.exercises
-//    for exercise in exercises {
-//      try await ExercisesManager.shared.addToExercises(exercise: exercise, for: user.id)
-//    }
   }
   
   /// UPDATE USER
@@ -48,10 +38,9 @@ final class FitUserManager {
 
 
 /// Two methods to check if User is Signing in for the first time
-///
 extension FitUserManager {
   func isNewUser(with authResultID: String) async throws -> Bool { /// 🧵⚾️
-    return try await !checkDocumentExists(in: K.usersCollectionName, by: authResultID) /// 🧵🥎
+    return try await !checkDocumentExists(in: K.CollectionNames.users, by: authResultID) /// 🧵🥎
   }
   
   func checkDocumentExists(in collection: String, by id: String) async throws -> Bool { /// 🧵⚾️

@@ -15,7 +15,7 @@ final class SessionsManager {
   private func exerciseSessionsCollection(exerciseId: String, userId: String) -> CollectionReference {
     ExercisesManager.shared
       .exerciseDocument(exerciseId: exerciseId, userId: userId)
-      .collection(K.sessionsCollectionName)
+      .collection(K.CollectionNames.sessions)
   }
   private func sessionDocument(sessionId: String, exerciseId: String, userId: String) -> DocumentReference {
     exerciseSessionsCollection(exerciseId: exerciseId, userId: userId)

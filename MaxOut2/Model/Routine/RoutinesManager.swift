@@ -15,7 +15,7 @@ final class RoutinesManager {
   private func userRoutinesCollection(userId: String) -> CollectionReference {
     FitUserManager.shared
       .userDocument(id: userId)
-      .collection(K.routinesCollectionName)
+      .collection(K.CollectionNames.routines)
   }
   private func routineDocument(routineId: String, userId: String) -> DocumentReference {
     userRoutinesCollection(userId: userId)
