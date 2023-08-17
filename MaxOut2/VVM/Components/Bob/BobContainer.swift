@@ -101,7 +101,6 @@ extension BobView {
 extension View {
   var bobInputStyle: some View {
     self
-      
       .multilineTextAlignment(.center)
       .fontWeight(.semibold)
       .foregroundStyle(.primary)

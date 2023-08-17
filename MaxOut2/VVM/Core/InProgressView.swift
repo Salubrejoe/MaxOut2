@@ -82,7 +82,7 @@ struct SessionsGrid: View {
             }
           }
           
-          LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
+          MOButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
             model.isShowingPicker = true
           }
           .padding(.top, 20)

@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct BodyPartImageView: View {
+struct ExerciseCellImageView: View {
   @Environment(\.colorScheme) var colorScheme
   let exercise: Exercise
   let size: CGFloat

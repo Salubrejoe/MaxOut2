@@ -36,7 +36,7 @@ struct ExercisesPicker: View {
         VStack(spacing: 3) {
 //          ThreeWayPicker(model: model, collection: model.exercises)
           if model.selectedExercises.count > 0 {
-            LargeTsButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
+            MOButton(text: "Add \(model.selectedExercises.count)", background: Color.accentColor, textColor: .white) {
               model.commitSelection(toRoutineVM: startModel)
               dismiss()
             }

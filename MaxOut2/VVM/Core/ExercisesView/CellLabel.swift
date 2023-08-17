@@ -12,7 +12,7 @@ struct CellLabel: View {
   var body: some View {
     HStack(spacing: 18) {
       
-      BodyPartImageView(exercise: exercise, size: 60)
+      ExerciseCellImageView(exercise: exercise, size: 60)
       
       vStackLabels
       

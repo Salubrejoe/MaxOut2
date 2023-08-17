@@ -11,7 +11,7 @@ struct WeightView: View {
     ZStack(alignment: .bottom) {
       textField
       
-      LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
+      MOButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
         saveToHK()
         dismiss()
       }
@@ -104,7 +104,7 @@ struct HeightView: View {
     ZStack(alignment: .bottom) {
       textField
       
-      LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
+      MOButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
         saveToHK()
         dismiss()
       }

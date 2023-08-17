@@ -24,7 +24,7 @@ struct ProfileView: View {
         .listStyle(.automatic)
         .scrollDismissesKeyboard(.immediately)
         
-        LargeTsButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
+        MOButton(text: "Save", background: Color.accentColor, textColor: .systemBackground) {
           model.update(user: model.user)
           dismiss()
         }
