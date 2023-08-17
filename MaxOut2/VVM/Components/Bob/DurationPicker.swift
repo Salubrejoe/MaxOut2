@@ -12,7 +12,14 @@ struct DurationPicker: View {
   var body: some View {
     VStack {
       label
-        
+        .scaleEffect(isShowingPicker ? 1.2 : 1)
+        .frame(height: 32)
+        .frame(maxWidth: .infinity)
+        .overlay {
+          RoundedRectangle(cornerRadius: 10)
+            .stroke(isShowingPicker ? Color.accentColor.gradient : Color.clear.gradient, lineWidth: 2)
+            .scaleEffect(0.8)
+        }
         .sheet(isPresented: $isShowingPicker) {
           pickerView
             .presentationDetents([.fraction(0.4)])

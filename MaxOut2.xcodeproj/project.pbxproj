@@ -429,9 +429,9 @@
 				7C7DA12D2A61713100B58AFA /* BobContainer.swift */,
 				7C6FE5712A80EC5A0017C0A9 /* DurationPicker.swift */,
 				7C5F26542A84EB9D0074A837 /* KgRepsTF.swift */,
+				7C5F26562A863D8E0074A837 /* KmTF.swift */,
 				7C5F26582A863F6E0074A837 /* InputView.swift */,
 				7C5F265A2A86457F0074A837 /* StringInputView.swift */,
-				7C5F26562A863D8E0074A837 /* KmTF.swift */,
 			);
 			path = Bob;
 			sourceTree = "<group>";

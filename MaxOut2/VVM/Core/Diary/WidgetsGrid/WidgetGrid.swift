@@ -16,9 +16,7 @@ struct WidgetGrid: View {
       VStack {
         
         calendarGrid
-          
         longWidgets
-        
         activities
         
         Spacer(minLength: 80)
@@ -52,7 +50,7 @@ struct WidgetGrid: View {
           .sheet(isPresented: $isShowingExerciseTime) {
             ExerciseTimeView()
               .environmentObject(manager)
-              .presentationDetents([.medium])
+              .presentationDetents([.large, .medium])
           }
       }
       MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
@@ -69,7 +67,7 @@ struct WidgetGrid: View {
   @ViewBuilder //
   private var activities: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-      ForEach(manager.currentActivities) {
+      ForEach(manager.favouriteActivities) {
         SmallCardView(activity: $0, style: RegularMaterialStyle(), text: manager.timeRange.stringForWidget)
       }
     }
@@ -141,33 +139,11 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
             .imageScale(.large)
             .foregroundStyle(Color.exerciseRing.gradient)
         }
-//        .padding(.leading, 2)
-        
         Spacer()
-        HStack(alignment: .bottom) {
-          let hour = activity.durationString.hour
-          let minute = activity.durationString.minute
+        
+        HStack {
           Spacer()
-          if hour != "" {
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-              Text(hour)
-                .font(.title)
-                .foregroundStyle(Color.primary.gradient)
-              Text("h")
-                .font(.title2)
-                .foregroundStyle(Color.secondary.gradient)
-            }
-          }
-          if minute != "00" {
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-              Text(minute)
-                .font(.title)
-                .foregroundStyle(Color.primary.gradient)
-              Text("m")
-                .font(.title2)
-                .foregroundStyle(Color.secondary.gradient)
-            }
-          }
+          HhMmView(hour: activity.durationString.hour, minute: activity.durationString.minute)
         }
       }
       .frame(height: 150)
@@ -181,7 +157,7 @@ struct RegularMaterialStyle: GroupBoxStyle {
     configuration.content
       .padding(.horizontal, 17)
       .padding(.vertical, 14)
-      .background(.regularMaterial)
+      .background(Color.systemBackground)
       .cornerRadius(20)
   }
 }
@@ -196,3 +172,32 @@ struct SecondaryBackgroundStyle: GroupBoxStyle {
   }
 }
 
+struct HhMmView: View {
+  let hour: String
+  let minute: String
+  
+  var body: some View {
+    HStack(alignment: .bottom) {
+      if hour != "" {
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+          Text(hour)
+            .font(.title2)
+            .foregroundStyle(Color.primary.gradient)
+          Text("h")
+            .font(.title3)
+            .foregroundStyle(Color.secondary.gradient)
+        }
+      }
+      if minute != "00" {
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+          Text(minute)
+            .font(.title2)
+            .foregroundStyle(Color.primary.gradient)
+          Text("m")
+            .font(.title3)
+            .foregroundStyle(Color.secondary.gradient)
+        }
+      }
+    }
+  }
+}

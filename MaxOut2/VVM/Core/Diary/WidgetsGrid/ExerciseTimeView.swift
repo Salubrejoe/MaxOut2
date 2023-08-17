@@ -1,6 +1,6 @@
 
 import SwiftUI
-
+import MarqueeText
 
 
 struct ExerciseTimeView: View {
@@ -45,6 +45,14 @@ struct ExerciseTimeView: View {
         ExerciseMinutesWidget()
           .padding([.leading, .horizontal, .bottom])
           .frame(height: 200)
+        
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
+          ForEach(manager.currentActivities) { activity in
+            ActivityCell(activity: activity, text: manager.timeRange.stringForWidget) {
+//              manager.toggleFavorite(activity)
+            }
+          }
+        }
       }
       .dismissButton()
       .navigationTitle("Edit Card").navigationBarTitleDisplayMode(.inline)
@@ -104,6 +112,37 @@ struct ExerciseTimeView: View {
 struct ExerciseTimeView_Previews: PreviewProvider {
   static var previews: some View {
     ExerciseTimeView()
+  }
+}
+
+
+struct ActivityCell: View {
+  let activity: Activity
+  let text: String
+  
+  let heartTapped: () -> ()
+  
+  var body: some View {
+    HStack {
+      Image(systemName: activity.hkType.sfSymbol)
+        .imageScale(.large)
+        .foregroundStyle(Color.exerciseRing.gradient)
+        .frame(width: 40)
+      
+      MarqueeText(text: activity.name.rawValue.capitalized, font: UIFont.preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 5, startDelay: 4)
+        .frame(maxWidth: .infinity)
+      
+      HhMmView(hour: activity.durationString.hour, minute: activity.durationString.minute)
+      Button {
+        heartTapped()
+      } label: {
+        Image(systemName: activity.isFavorite ? "heart.fill" : "heart")
+          .foregroundColor(activity.isFavorite ? .pink : .secondary)
+      }
+    }
+    .padding()
+    .background(Color.systemBackground)
+    .cornerRadius(10)
   }
 }
 

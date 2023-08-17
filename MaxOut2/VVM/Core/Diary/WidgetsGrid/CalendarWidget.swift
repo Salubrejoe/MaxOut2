@@ -58,7 +58,7 @@ extension WidgetCalendarView {
             ForEach(widgetData) { datum in
               Circle()
                 .frame(width: size(proxy), height: size(proxy))
-                .foregroundStyle(Color.primary.gradient.shadow(.inner(radius: 3)))
+                .foregroundStyle(Color.primary)
                 .opacity(datum.opacity != 0 ? datum.opacity : 0.1)
             }
           }

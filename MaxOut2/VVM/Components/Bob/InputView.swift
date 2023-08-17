@@ -15,7 +15,7 @@ struct InputView: View {
           Button {
             value = 0
           } label: {
-            Image(systemName: "xmark")
+            Image(systemName: "delete.forward")
               .foregroundColor(.secondary)
           }
           Spacer()
@@ -48,18 +48,20 @@ struct InputView: View {
       }
       .padding()
     }
+    .onAppear {
+      isAnimating = false
+      isAnimating = true
+    }
   }
   
   @ViewBuilder
   private var cursor: some View {
     RoundedRectangle(cornerRadius: 5)
       .frame(width: 2, height: 25)
-      .scaleEffect(isAnimating ? 1.2 : 0.9)
+      .scaleEffect(isAnimating ? 1.1 : 0.9)
       .opacity(isAnimating ? 0.4 : 0)
       .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: isAnimating)
-      .onAppear {
-        isAnimating = true
-      }
+
   }
   
   @ViewBuilder

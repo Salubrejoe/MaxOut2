@@ -5,6 +5,8 @@ struct StringInputView: View {
   @Binding var isAnimating: Bool
   @Binding var isCompleted: Bool
   @ObservedObject var controller: BobTextFieldController
+  
+  let unit : String = "km"
 
   @State private var hasDecimalPoint = false
   
@@ -17,9 +19,7 @@ struct StringInputView: View {
           Button {
             value = "0"
           } label: {
-            Image(systemName: "xmark.circle.fill")
-              .imageScale(.large)
-              .symbolRenderingMode(.hierarchical)
+            Image(systemName: "delete.forward")
               .foregroundColor(.secondary)
           }
           Spacer()
@@ -33,9 +33,15 @@ struct StringInputView: View {
           
           RoundedRectangle(cornerRadius: 5)
             .frame(width: 2, height: 25)
-            .scaleEffect(isAnimating ? 1.2 : 0.9)
+            .scaleEffect(isAnimating ? 1.1 : 0.9)
             .opacity(isAnimating ? 0.4 : 0)
             .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: isAnimating)
+            .padding(.trailing, 3)
+          
+          Text(unit)
+            .font(.title3)
+            .foregroundColor(.secondary)
+            .frame(alignment: .leading)
           
         }
         .padding()
@@ -51,6 +57,10 @@ struct StringInputView: View {
         }
       }
       .padding()
+    }
+    .onAppear {
+      isAnimating = false
+      isAnimating = true
     }
   }
   

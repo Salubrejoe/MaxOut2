@@ -53,6 +53,8 @@ final class HealthKitManager: ObservableObject {
   @Published var bodyMassStats = [HealthStat]()
   @Published var heightStats   = [HealthStat]()
   
+  
+  
   var allActivities: [Activity] = [
     Activity(name: .elliptical),
     Activity(name: .traditionalStrengthTraining),
@@ -69,6 +71,15 @@ final class HealthKitManager: ObservableObject {
     Activity(name: .mixedCardio),
   ]
   
+  func toggleFavorite(_ activity: Activity) {
+    Task {
+      await MainActor.run {
+        if let index = allActivities.firstIndex(where: { $0.id == activity.id }) {
+          allActivities[index].toggleFavorite()
+        }
+      }
+    }
+  }
   
   // MARK: - T RANGE
   @Published var timeRange : TimeRange = .M
@@ -98,6 +109,18 @@ final class HealthKitManager: ObservableObject {
 
 // MARK: - COMPUTED STATS
 extension HealthKitManager {
+  
+  var favouriteActivities: [Activity] {
+    var fav = [Activity]()
+    for activity in allActivities {
+      if activity.isFavorite {
+        fav.append(activity)
+      }
+    }
+    return fav.sorted { $0.duration > $1.duration }
+  }
+  
+  
   var currentActivities: [Activity] {
     var current = [Activity]()
     for activity in allActivities {

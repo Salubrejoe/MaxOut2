@@ -10,6 +10,6 @@ extension View {
       .frame(maxWidth: 428)
       .frame(height: 46)
       .background(background)
-      .cornerRadius(20)
+      .cornerRadius(10)
   }
 }

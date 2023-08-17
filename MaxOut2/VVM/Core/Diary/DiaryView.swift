@@ -16,19 +16,15 @@ struct DiaryView: View {
   
   var body: some View {
     NavigationStack {
-      ScrollView(showsIndicators: false) {
-        header
-          .onScrollViewOffsetChanged(coordinateSpace: CoordinateSpaces.scrollView) { offset in
-            scrollOffset = offset
-            calculateBarState(with: offset)
-          }
+      ParallaxScrollView(background: Color.secondarySytemBackground, coordinateSpace: CoordinateSpaces.scrollView, defaultHeight: 100) {
         WidgetGrid(tabBarState: $tabBarState)
           .environmentObject(manager)
+      } header: {
+        header
+          .padding()
       }
-      .coordinateSpace(name: CoordinateSpaces.scrollView)
-      .padding(.horizontal)
       .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
-      //      .toolbar { toolbar }
+      .toolbar { toolbar }
       
       .task { try? await model.loadCurrentUser() }
       .onAppear { manager.start() }
@@ -62,8 +58,6 @@ extension DiaryView {
         ProfileLabel(user: model.user)
       }
     }
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .groupBoxStyle(RegularMaterialStyle())
   }
   
   

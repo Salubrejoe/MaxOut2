@@ -7,6 +7,12 @@ struct Activity: Identifiable, Equatable, Hashable {
   var exercises: [Exercise]?
   var workouts: [HKWorkout]?
   
+  var isFavorite: Bool = false
+  
+  mutating func toggleFavorite() {
+    isFavorite.toggle()
+  }
+  
   public var hkType: HKWorkoutActivityType {
     switch name {
       case .elliptical:

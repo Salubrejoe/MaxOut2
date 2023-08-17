@@ -30,7 +30,8 @@ struct BodyPartImage: View {
     Image(systemName: exercise.activityType.hkType.sfSymbol)
       .resizable()
       .scaledToFit()
-      .foregroundStyle(color)
+      .foregroundStyle(Color.systemBackground.gradient.shadow(.inner(color: color, radius: 1.5, y: 1)))
+//      .shadow(color: color, radius: 2)
   }
 }
 

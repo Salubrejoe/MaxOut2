@@ -11,19 +11,22 @@ struct InProgressHeader: View {
     VStack(alignment: .leading) {
       if tabBarState == .hidden {
         HStack {
-          Button("Quit") {
+          Button {
             model.showingCancelAlert = true
+          } label: {
+            Image(systemName: "xmark.circle.fill")
+              .imageScale(.large)
+              .symbolRenderingMode(.hierarchical)
+              .foregroundColor(.red.opacity(0.8))
+              .frame(width: 80, alignment: .leading)
           }
-          .imageScale(.large)
-          .foregroundColor(.red.opacity(0.8))
-          .frame(width: 80, alignment: .leading)
           
           Text(Date().formattedString())
             .frame(maxWidth: .infinity)
             .foregroundColor(.secondary)
             .fontWeight(.semibold)
           
-          Button("Finish") {
+          Button("🤪 Finish") {
             manager.saveWorkout(start: model.startDate, end: Date(), activityType: model.activityType())
             model.inProgress = false
             model.congratulationsScreen = true
@@ -66,51 +69,39 @@ struct SessionsGrid: View {
   @Binding var tabBarState: BarState
   
   @State private var keyboardHeight: CGFloat = 0
-  private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
-    Publishers.Merge(
-      NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-        .compactMap { notification -> CGFloat? in
-          guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return nil
-          }
-          return keyboardFrame.height
-        },
-      NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-        .map { _ in CGFloat(0) }
-    ).eraseToAnyPublisher()
-  }
+
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      LazyVGrid(columns: model.largeColumns, spacing: 5) {
-        if !model.sessions.isEmpty {
-          ForEach($model.sessions) { $session in
-            SessionView(session: $session)
+    ScrollViewReader { pageScroller in
+      ScrollView(showsIndicators: false) {
+        LazyVGrid(columns: model.largeColumns, spacing: 5) {
+          if !model.sessions.isEmpty {
+            ForEach($model.sessions) { $session in
+              SessionView(session: $session)
+                .id(session.id)
+            }
           }
+          
+          LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
+            model.isShowingPicker = true
+          }
+          .padding(.top, 20)
+          
+          Spacer(minLength: 100)
         }
-        
-        LargeTsButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
-          model.isShowingPicker = true
-        }
-        .padding(.top, 20)
-        
-        Spacer(minLength: 100)
+        .padding(.horizontal)
+        .padding(.vertical, 20)
       }
-      .padding(.horizontal)
-      .padding(.vertical, 20)
+      .scrollDismissesKeyboard(.immediately)
+      .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
+      .animation(.spring(), value: model.sessions)
+      .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
+      
+//      .onReceive(model.inputViewPublisher) { height in
+//      }
+//      .padding(.bottom, keyboardHeight)
+//      .edgesIgnoringSafeArea(keyboardHeight > 0 ? .bottom : [])
     }
-    .scrollDismissesKeyboard(.immediately)
-    .fullScreenCover(isPresented: $model.isShowingPicker) { fullScreenPicker }
-    .animation(.spring(), value: model.sessions)
-    .alert(model.alertText, isPresented: $model.showingCancelAlert) { finishAlert }
-
-    .onReceive(keyboardHeightPublisher) { height in
-      withAnimation {
-        keyboardHeight = height
-      }
-    }
-    .padding(.bottom, keyboardHeight)
-    .edgesIgnoringSafeArea(keyboardHeight > 0 ? .bottom : [])
   }
 }
 
@@ -136,3 +127,20 @@ extension SessionsGrid {
     }
   }
 }
+
+
+
+
+//  private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+//    Publishers.Merge(
+//      NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+//        .compactMap { notification -> CGFloat? in
+//          guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+//            return nil
+//          }
+//          return keyboardFrame.height
+//        },
+//      NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+//        .map { _ in CGFloat(0) }
+//    ).eraseToAnyPublisher()
+//  }
