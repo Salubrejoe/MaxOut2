@@ -19,8 +19,9 @@ struct TabBarView<Content: View>: View {
   var body: some View {
     
     ZStack(alignment: .bottom) {
-        content
+      content
         .ignoresSafeArea()
+        
       CustomBar(tabs: tabs, selection: $selection, localSelection: selection, state: $tabBarState)
         .offset(y: tabBarState == .hidden ? 300 : 0)
         .animation(.spring(blendDuration: 0.5), value: tabBarState)

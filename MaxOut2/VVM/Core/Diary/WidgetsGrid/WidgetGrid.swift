@@ -1,5 +1,6 @@
 import SwiftUI
 import HealthKit
+import MarqueeText
 
 struct WidgetGrid: View {
   @EnvironmentObject var manager: HealthKitManager
@@ -12,8 +13,7 @@ struct WidgetGrid: View {
   @Binding var tabBarState: BarState
   
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      VStack {
+      VStack(spacing: 20) {
         
         calendarGrid
         longWidgets
@@ -23,7 +23,7 @@ struct WidgetGrid: View {
         
         Spacer(minLength: 80)
       }
-    }
+      .padding(.horizontal)
   }
   
   
@@ -44,9 +44,9 @@ struct WidgetGrid: View {
   @ViewBuilder
   private var longWidgets: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-      MediumCardView("Exercise Time", color: .primary, style: RegularMaterialStyle()) {
+      MediumCardView("Exercise Minutes", color: .exerciseRing, style: RegularMaterialStyle()) {
         
-        ExerciseMinutesWidget()
+        RingWidget(ring: .exercise)
           .environmentObject(manager)
         
           .onTapGesture { isShowingExerciseTime = true }
@@ -56,6 +56,18 @@ struct WidgetGrid: View {
               .presentationDetents([.large, .medium])
           }
       }
+      
+      MediumCardView("Active Calories", color: .moveRing, style: RegularMaterialStyle()) {
+        RingWidget(ring: .move)
+          .environmentObject(manager)
+      }
+      
+      MediumCardView("Stand Hours", color: .standRing, style: RegularMaterialStyle()) {
+        RingWidget(ring: .stand)
+          .environmentObject(manager)
+      }
+      
+      
       MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
         NavigationLink {
           WeightView(tabBarState: $tabBarState)
@@ -69,9 +81,12 @@ struct WidgetGrid: View {
   
   @ViewBuilder //
   private var activities: some View {
-    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-      ForEach(manager.favouriteActivities) {
-        SmallCardView(activity: $0, style: RegularMaterialStyle(), text: manager.timeRange.stringForWidget)
+    if let acts = manager.currentActivities {
+      let mappedActs  = acts.sorted { $0.duration > $1.duration}
+      LazyVStack {
+        ForEach(mappedActs) {
+          SmallCardView(activity: $0, style: RegularMaterialStyle(), text: manager.timeRange.stringForWidget)
+        }
       }
     }
   }
@@ -102,7 +117,6 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
   }
   
   var body: some View {
-    GroupBox {
       ZStack(alignment: .topLeading) {
         Text(text)
           .fontWeight(.semibold)
@@ -111,9 +125,6 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
           
       }
       .padding(.leading, 4)
-    }
-    .frame(height: 150)
-    .groupBoxStyle(style)
   }
 }
 
@@ -125,33 +136,18 @@ struct SmallCardView<Style: GroupBoxStyle>: View {
   let text: String
   
   var body: some View {
-    GroupBox {
-      VStack(alignment: .leading, spacing: 0) {
-        HStack(alignment: .top) {
-          VStack(alignment: .leading) {
-            Text(activity.name.rawValue.capitalized)
-              .foregroundColor(.primary)
-              .fontWeight(.semibold)
-              
-            Text(text)
-              .font(.footnote)
-              .foregroundColor(.secondary)
-          }
-          Spacer()
-          Image(systemName: activity.hkType.sfSymbol)
-            .imageScale(.large)
-            .foregroundStyle(Color.exerciseRing.gradient)
-        }
-        Spacer()
-        
-        HStack {
-          Spacer()
-          HhMmView(hour: activity.durationString.hour, minute: activity.durationString.minute)
-        }
-      }
-      .frame(height: 150)
+    HStack(alignment: .center) {
+      MarqueeText(text: activity.name.capitalized, font: UIFont.preferredFont(forTextStyle: .footnote), leftFade: 5, rightFade: 5, startDelay: 2)
+      
+      Spacer()
+      
+      HhMmView(hour: activity.durationString.hour, minute: activity.durationString.minute)
+      
+      Image(systemName: activity.type.sfSymbol)
+        .imageScale(.large)
+        .frame(width: 30)
+        .foregroundStyle(Color.exerciseRing.gradient)
     }
-    .groupBoxStyle(style)
   }
 }
 
@@ -200,6 +196,7 @@ struct HhMmView: View {
             .font(.title3)
             .foregroundStyle(Color.secondary.gradient)
         }
+        .frame(minWidth: 40)
       }
     }
   }

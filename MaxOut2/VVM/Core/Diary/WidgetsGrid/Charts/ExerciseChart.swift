@@ -9,17 +9,16 @@ struct ChartGrid: View {
   var body: some View {
     if let userStats = model.userStats {
       
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 155))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
           ForEach(userStats) { stat in
-            GroupBox {
+            
               VStack {
                 Text(stat.exerciseName)
                   .fontWeight(.semibold)
                   .frame(maxWidth: .infinity, alignment: .leading)
                 ExerciseChart(dataPoints: dataPoints(for: stat)) 
               }
-            }
-            .groupBoxStyle(RegularMaterialStyle())
+            
           }
         }
       

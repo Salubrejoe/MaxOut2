@@ -1,5 +1,5 @@
 import Foundation
-
+import HealthKit
 
 /// Needs Equatable to get firstIndex(of:)
 struct Session: Identifiable, Equatable {

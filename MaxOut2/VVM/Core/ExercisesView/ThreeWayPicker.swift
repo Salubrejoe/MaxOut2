@@ -8,21 +8,21 @@ struct ThreeWayPicker: View {
   
   var body: some View { 
     HStack(spacing: 3) {
-      GenericPicker(selectedItem: $model.selectedEquipment,
-                    items: model.equipment(for: model.filter(collection)),
-                    labelKeyPath: \.rawValue,
-                    imageKeyPath: \.image,
-                    placeholder: "Equipment")
-      GenericPicker(selectedItem: $model.selectedMuscle,
-                    items: model.muscles(for: model.filter(collection)),
-                    labelKeyPath: \.displayName,
-                    imageKeyPath: \.muscleGroupImage,
-                    placeholder: "Muscle Group")
-      GenericPicker(selectedItem: $model.selectedActivityType,
-                    items: model.activities(for: model.filter(collection)),
-                    labelKeyPath: \.rawValue,
-                    imageKeyPath: \.hkType.sfSymbol,
-                    placeholder: "Category")
+//      GenericPicker(selectedItem: $model.selectedEquipment,
+//                    items: model.equipment(for: model.filter(collection)),
+//                    labelKeyPath: \.rawValue,
+//                    imageKeyPath: \.image,
+//                    placeholder: "Equipment")
+//      GenericPicker(selectedItem: $model.selectedMuscle,
+//                    items: model.muscles(for: model.filter(collection)),
+//                    labelKeyPath: \.displayName,
+//                    imageKeyPath: \.muscleGroupImage,
+//                    placeholder: "Muscle Group")
+//      GenericPicker(selectedItem: $model.selectedActivityType,
+//                    items: model.activities(for: model.filter(collection)),
+//                    labelKeyPath: \.rawValue,
+//                    imageKeyPath: \.hkType.sfSymbol,
+//                    placeholder: "Category")
     }
     .threeWayPickerStyle()
   }

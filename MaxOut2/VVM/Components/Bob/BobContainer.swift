@@ -83,7 +83,10 @@ extension BobView {
             self.bob.isCompleted.toggle()
           } label: {
             Image(systemName: "checkmark")
-              .foregroundColor(bob.isCompleted ? .green : .primary)
+              .foregroundColor(bob.isCompleted ? .green : .systemBackground)
+              .padding(2)
+              .background(bob.isCompleted ? .clear : .primary)
+              .cornerRadius(5)
           }
           .frame(width: width * 0.10)
           

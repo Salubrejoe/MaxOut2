@@ -17,7 +17,7 @@ struct CustomBar: View {
   
   var body: some View {
     v2
-      .frame(height: 46)
+      .frame(height: 60)
       .onChange(of: selection) { newValue in
         withAnimation(.easeInOut) {
           localSelection = newValue
@@ -34,18 +34,18 @@ extension CustomBar {
       if state != .small {
         Text(tab.title.capitalized)
           .font(.footnote)
-          .fontWeight(.semibold)
           .fontDesign(.rounded)
       }
     }
-    .foregroundColor(localSelection == tab ? Color.accentColor : .secondary)
+    .foregroundColor(localSelection == tab ? .white : .secondary)
+    .fontWeight(localSelection == tab ? .semibold : .regular)
     .frame(maxWidth: state != .small ? .infinity : 50)
     .padding(.vertical, 8)
     .background(
       ZStack {
         if localSelection == tab {
-          RoundedRectangle(cornerRadius: 16)
-            .fill(.primary.opacity(0.2))
+          RoundedRectangle(cornerRadius: state != .small ? 14 : 12)
+            .fill(Color.systemBackground.opacity(0.2))
             .matchedGeometryEffect(id: "background_rect", in: namespace)
         }
       }
@@ -62,7 +62,7 @@ extension CustomBar {
       }
     }
     .padding(6)
-    .background(.regularMaterial)
+    .background(Color.black)
     .cornerRadius(20)
     .padding(.horizontal)
     .shadow(radius: 3)

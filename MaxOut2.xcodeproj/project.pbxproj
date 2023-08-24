@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C13D76D2A9622060034ACF9 /* HealthStatQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13D76C2A9622060034ACF9 /* HealthStatQuery.swift */; };
+		7C13D7782A965D400034ACF9 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13D7772A965D400034ACF9 /* SwiftUIView.swift */; };
 		7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555C62A6A84E2005C2855 /* WeightView.swift */; };
 		7C1555C92A6A98C8005C2855 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */; };
 		7C1555CB2A6B0B3C005C2855 /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */; };
@@ -78,9 +80,9 @@
 		7C7DA1352A65544000B58AFA /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DA1342A65544000B58AFA /* DiaryView.swift */; };
 		7CA6CDE72A65995D006FDBD4 /* GoodColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CDE62A65995D006FDBD4 /* GoodColors.swift */; };
 		7CA6CE1E2A66E8E0006FDBD4 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE1D2A66E8E0006FDBD4 /* HealthKitManager.swift */; };
-		7CA6CE222A66E8ED006FDBD4 /* HealthStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE202A66E8ED006FDBD4 /* HealthStat.swift */; };
+		7CA6CE222A66E8ED006FDBD4 /* HealthStatQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE202A66E8ED006FDBD4 /* HealthStatQuantity.swift */; };
 		7CA6CE232A66E8ED006FDBD4 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE212A66E8ED006FDBD4 /* Activity.swift */; };
-		7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */; };
+		7CA6CE292A66ED47006FDBD4 /* RingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6CE282A66ED47006FDBD4 /* RingWidget.swift */; };
 		7CB371AD2A79607A00A8AD76 /* ExercisesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */; };
 		7CB371AF2A79608300A8AD76 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371AE2A79608300A8AD76 /* PickerCell.swift */; };
 		7CB371B42A7A758800A8AD76 /* CustomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB371B32A7A758800A8AD76 /* CustomBar.swift */; };
@@ -139,6 +141,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C13D76C2A9622060034ACF9 /* HealthStatQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStatQuery.swift; sourceTree = "<group>"; };
+		7C13D7772A965D400034ACF9 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		7C1555C62A6A84E2005C2855 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		7C1555C82A6A98C8005C2855 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		7C1555CA2A6B0B3C005C2855 /* GridHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHeader.swift; sourceTree = "<group>"; };
@@ -206,9 +210,9 @@
 		7C7DA1342A65544000B58AFA /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		7CA6CDE62A65995D006FDBD4 /* GoodColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodColors.swift; sourceTree = "<group>"; };
 		7CA6CE1D2A66E8E0006FDBD4 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
-		7CA6CE202A66E8ED006FDBD4 /* HealthStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStat.swift; sourceTree = "<group>"; };
+		7CA6CE202A66E8ED006FDBD4 /* HealthStatQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStatQuantity.swift; sourceTree = "<group>"; };
 		7CA6CE212A66E8ED006FDBD4 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMinutesWidget.swift; sourceTree = "<group>"; };
+		7CA6CE282A66ED47006FDBD4 /* RingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingWidget.swift; sourceTree = "<group>"; };
 		7CB371AC2A79607A00A8AD76 /* ExercisesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesPicker.swift; sourceTree = "<group>"; };
 		7CB371AE2A79608300A8AD76 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		7CB371B32A7A758800A8AD76 /* CustomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBar.swift; sourceTree = "<group>"; };
@@ -461,7 +465,8 @@
 			isa = PBXGroup;
 			children = (
 				7C1555DB2A710F2E005C2855 /* TimeRange.swift */,
-				7CA6CE202A66E8ED006FDBD4 /* HealthStat.swift */,
+				7C13D76C2A9622060034ACF9 /* HealthStatQuery.swift */,
+				7CA6CE202A66E8ED006FDBD4 /* HealthStatQuantity.swift */,
 				7CA6CE212A66E8ED006FDBD4 /* Activity.swift */,
 			);
 			path = Model;
@@ -479,6 +484,7 @@
 		7CBAA1A62A5D90DC00DFA31D = {
 			isa = PBXGroup;
 			children = (
+				7C13D7772A965D400034ACF9 /* SwiftUIView.swift */,
 				7CBAA1B12A5D90DC00DFA31D /* MaxOut2 */,
 				7CBAA1B02A5D90DC00DFA31D /* Products */,
 			);
@@ -695,7 +701,7 @@
 		7CCB58012A697C270086D291 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				7CA6CE282A66ED47006FDBD4 /* ExerciseMinutesWidget.swift */,
+				7CA6CE282A66ED47006FDBD4 /* RingWidget.swift */,
 				7C666AA12A8E864B00880D45 /* ExerciseChart.swift */,
 				7CCB57FA2A69125D0086D291 /* BodyMassChart.swift */,
 				7C1555D12A6BB4B4005C2855 /* RadarChart.swift */,
@@ -813,6 +819,7 @@
 			files = (
 				7CA6CE232A66E8ED006FDBD4 /* Activity.swift in Sources */,
 				7C7DA1292A604B2600B58AFA /* SeshController.swift in Sources */,
+				7C13D76D2A9622060034ACF9 /* HealthStatQuery.swift in Sources */,
 				7C5F265B2A86457F0074A837 /* StringInputView.swift in Sources */,
 				7CBAA1FE2A5D944400DFA31D /* SignInWithAppleButton.swift in Sources */,
 				7CC6FB642A7664E400A9138A /* ClearButtonTF.swift in Sources */,
@@ -839,6 +846,7 @@
 				7C7DA0A42A5DAE2500B58AFA /* Enums.swift in Sources */,
 				7C666AA22A8E864B00880D45 /* ExerciseChart.swift in Sources */,
 				7CBAA1B32A5D90DC00DFA31D /* MaxOut2App.swift in Sources */,
+				7C13D7782A965D400034ACF9 /* SwiftUIView.swift in Sources */,
 				7CBAA1D42A5D924900DFA31D /* AuthenticationResultModel.swift in Sources */,
 				7C7DA0B22A5DAE4100B58AFA /* Routine.swift in Sources */,
 				7CBAA1DE2A5D935500DFA31D /* FitUser.swift in Sources */,
@@ -900,7 +908,7 @@
 				7C7DA0C92A5EB04600B58AFA /* StartContainer.swift in Sources */,
 				7C1555C72A6A84E2005C2855 /* WeightView.swift in Sources */,
 				7C7DA0B72A5DD36200B58AFA /* LoginAnimation.swift in Sources */,
-				7CA6CE222A66E8ED006FDBD4 /* HealthStat.swift in Sources */,
+				7CA6CE222A66E8ED006FDBD4 /* HealthStatQuantity.swift in Sources */,
 				7C7DA1122A5EB32A00B58AFA /* ExercisesListView.swift in Sources */,
 				7CBAA1D62A5D924900DFA31D /* SignInGoogleHelper.swift in Sources */,
 				7C7DA0E82A5EB16400B58AFA /* TsCalendarView.swift in Sources */,
@@ -911,7 +919,7 @@
 				7C7DA0B02A5DAE4100B58AFA /* Workout.swift in Sources */,
 				7C5F26552A84EB9D0074A837 /* KgRepsTF.swift in Sources */,
 				7C7DA10E2A5EB32A00B58AFA /* ExercisesViewModel.swift in Sources */,
-				7CA6CE292A66ED47006FDBD4 /* ExerciseMinutesWidget.swift in Sources */,
+				7CA6CE292A66ED47006FDBD4 /* RingWidget.swift in Sources */,
 				7CBAA1FB2A5D944400DFA31D /* LoginTextFieldsManager.swift in Sources */,
 				7C6FE5092A7EB2C80017C0A9 /* NavBarPK.swift in Sources */,
 				7CBAA1FD2A5D944400DFA31D /* LoginView.swift in Sources */,
@@ -1057,6 +1065,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MaxOut2/AppShared/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Philbert;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We would like to share your progress in the Health App";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We would like to record your workouts on Health App";
@@ -1092,6 +1101,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MaxOut2/AppShared/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Philbert;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We would like to share your progress in the Health App";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We would like to record your workouts on Health App";

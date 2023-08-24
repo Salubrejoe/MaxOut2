@@ -47,7 +47,7 @@ extension SessionView {
       HStack(alignment: .firstTextBaseline) {
         Text("\(session.exerciseName.capitalized)")
           .fontWeight(.semibold)
-        Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
+//        Text(" -  \(session.timeString)").font(.caption2).foregroundColor(.gray)
         Spacer()
         
         menu
@@ -211,7 +211,7 @@ struct SessionView_Previews: PreviewProvider {
         Bob(kg: 23, reps: 10, isCompleted: true, restTime: 45),
         Bob(kg: 23, reps: 10, isCompleted: true, restTime: 45),
         Bob(kg: 25, reps: 10, isCompleted: true, restTime: 45),
-        Bob(kg: 27, reps: 9, isCompleted: false, restTime: 45)
+        Bob(kg: 27, reps:  9, isCompleted: false, restTime: 45)
       ], image: "figure.rower")
     ))
     .environmentObject(StartViewModel())

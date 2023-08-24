@@ -1,5 +1,6 @@
 
 import SwiftUI
+import HealthKit
 
 struct ExercisesArray: Codable {
   let exercises: [Exercise]

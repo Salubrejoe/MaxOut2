@@ -1,6 +1,7 @@
 import SwiftUI
 import MarqueeText
 import BottomSheet
+import HealthKit
 
 struct StartContainer: View {
   private enum CoordinateSpaces {
@@ -10,7 +11,7 @@ struct StartContainer: View {
   @EnvironmentObject var model: StartViewModel
   @Binding var tabBarState: BarState
   
-  let activities = ActivityType.allCases
+  let activities = HKWorkoutActivityType.allCases
   
   var body: some View {
     NavigationStack {
@@ -48,15 +49,15 @@ struct StartContainer: View {
   }
   
   @ViewBuilder // MARK: - ELEMENT
-  private func label(for activityType: ActivityType) -> some View {
+  private func label(for activityType: HKWorkoutActivityType) -> some View {
     GroupBox {
       HStack {
         
-        Image(systemName: activityType.hkType.sfSymbol)
+        Image(systemName: activityType.sfSymbol)
           .frame(width: 20)
           .foregroundColor(.primary)
         
-        MarqueeText(text: activityType.rawValue.capitalized, font: UIFont.preferredFont(forTextStyle: .body), leftFade: 5, rightFade: 2, startDelay: 3)
+        MarqueeText(text: activityType.commonName.capitalized, font: UIFont.preferredFont(forTextStyle: .body), leftFade: 5, rightFade: 2, startDelay: 3)
           .foregroundColor(.primary)
           .fontWeight(.semibold)
 

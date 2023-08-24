@@ -18,14 +18,8 @@ struct InProgressHeader: View {
               .imageScale(.large)
               .symbolRenderingMode(.hierarchical)
               .foregroundColor(.red.opacity(0.8))
-              .frame(width: 80, alignment: .leading)
           }
-          
-          Text(Date().formattedString())
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.secondary)
-            .fontWeight(.semibold)
-          
+          Spacer()
           Button("🤪 Finish") {
             manager.saveWorkout(start: model.startDate, end: Date(), activityType: model.activityType())
             model.inProgress = false
@@ -34,14 +28,13 @@ struct InProgressHeader: View {
             model.saveTask()
           }
           .bold()
-          .frame(width: 80, alignment: .trailing)
           .buttonStyle(.bordered)
           .foregroundColor(.accentColor)
         }
       }
       
       VStack(alignment: .leading) {
-        HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .center) {
           Label(model.activityType().hkType.name, systemImage: model.activityType().hkType.sfSymbol)
             .font(model.position == .absoluteBottom(180) ? .title2.bold() : .title.bold())
             .minimumScaleFactor(0.7)
@@ -51,11 +44,13 @@ struct InProgressHeader: View {
               .imageScale(.large)
           }
         }
-        
-        Text(model.startDate, style: .timer)
-          .font(.headline)
-          .foregroundColor(.secondary)
-          .frame(maxWidth: .infinity, alignment: .center)
+        HStack {
+          Text(model.startDate, style: .timer)
+          Spacer()
+          Text(Date().formattedString())
+        }
+        .foregroundColor(.secondary)
+        .fontWeight(.semibold)
       }
     }
     .padding(.horizontal)
@@ -82,7 +77,7 @@ struct SessionsGrid: View {
             }
           }
           
-          MOButton(text: "Add Exercises", background: .ultraThinMaterial, textColor: .primary) {
+          MOButton(text: "Add Exercises", background: .primary, textColor: .systemBackground) {
             model.isShowingPicker = true
           }
           .padding(.top, 20)

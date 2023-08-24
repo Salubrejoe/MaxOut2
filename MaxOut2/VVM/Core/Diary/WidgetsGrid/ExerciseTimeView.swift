@@ -42,14 +42,16 @@ struct ExerciseTimeView: View {
         }
         .padding(.horizontal, 22)
         
-        ExerciseMinutesWidget()
+        RingWidget(ring: .exercise)
           .padding([.leading, .horizontal, .bottom])
           .frame(height: 200)
         
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
-          ForEach(manager.currentActivities) { activity in
-            ActivityCell(activity: activity, text: manager.timeRange.stringForWidget) {
-//              manager.toggleFavorite(activity)
+        if let acts = manager.currentActivities {
+          LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
+            ForEach(acts) { activity in
+              ActivityCell(activity: activity, text: manager.timeRange.stringForWidget) {
+                //              manager.toggleFavorite(activity)
+              }
             }
           }
         }
@@ -96,7 +98,7 @@ struct ExerciseTimeView: View {
   private func averageMinutes() -> String {
     var duration = 0.0
     var count = 0.0
-    for stat in manager.exerTimeStats {
+    for stat in manager.exerciseTimeStats {
       let statMin = stat.minutes
       if statMin != 0 {
         duration += statMin
@@ -124,12 +126,12 @@ struct ActivityCell: View {
   
   var body: some View {
     HStack {
-      Image(systemName: activity.hkType.sfSymbol)
+      Image(systemName: activity.type.sfSymbol)
         .imageScale(.large)
         .foregroundStyle(Color.exerciseRing.gradient)
         .frame(width: 40)
       
-      MarqueeText(text: activity.name.rawValue.capitalized, font: UIFont.preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 5, startDelay: 4)
+      MarqueeText(text: activity.name.capitalized, font: UIFont.preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 5, startDelay: 4)
         .frame(maxWidth: .infinity)
       
       HhMmView(hour: activity.durationString.hour, minute: activity.durationString.minute)

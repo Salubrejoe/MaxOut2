@@ -9,22 +9,90 @@
 import Foundation
 import HealthKit
 
-//[
-//"activity" : "weight lifting",
-//"activity" : "core training",
-//"activity" : "high intensity interval training",
-//"activity" : "flexibility",
-//"activity" : "elliptical", 1
-//"activity" : "jump rope", 1
-//"activity" : "rowing", 1
-//"activity" : "running", 1
-//"activity" : "skating", 1
-//"activity" : "walking", 1
-//]
 
-
-
-extension HKWorkoutActivityType {
+extension HKWorkoutActivityType: CaseIterable {
+  public static var allCases: [HKWorkoutActivityType] {
+    [
+      .americanFootball,
+      .archery,
+      .australianFootball,
+      .badminton,
+      .baseball,
+      .basketball,
+      .bowling,
+      .boxing,
+      .climbing,
+      .cricket,
+      .crossTraining,
+      .curling,
+      .cycling,
+      .cardioDance,
+      .discSports,
+      .elliptical,
+      .equestrianSports,
+      .fencing,
+      .fishing,
+      .functionalStrengthTraining,
+      .golf,
+      .gymnastics,
+      .handball,
+      .hiking,
+      .hockey,
+      .hunting,
+      .lacrosse,
+      .martialArts,
+      .mindAndBody,
+      .mixedCardio,
+      .paddleSports,
+      .play,
+      .preparationAndRecovery,
+      .racquetball,
+      .rowing,
+      .rugby,
+      .running,
+      .sailing,
+      .skatingSports,
+      .snowSports,
+      .soccer,
+      .softball,
+      .squash,
+      .stairClimbing,
+      .surfingSports,
+      .swimming,
+      .tableTennis,
+      .tennis,
+      .trackAndField,
+      .traditionalStrengthTraining,
+      .volleyball,
+      .walking,
+      .waterFitness,
+      .waterPolo,
+      .waterSports,
+      .wrestling,
+      .yoga,
+      .barre,
+      .coreTraining,
+      .crossCountrySkiing,
+      .downhillSkiing,
+      .flexibility,
+      .highIntensityIntervalTraining,
+      .jumpRope,
+      .kickboxing,
+      .pilates,
+      .snowboarding,
+      .stairs,
+      .stepTraining,
+      .wheelchairWalkPace,
+      .wheelchairRunPace,
+      .taiChi,
+      .mixedCardio,
+      .handCycling,
+      .discSports,
+      .fitnessGaming
+      
+    ]
+  }
+  
   
   /*
    Mapping over SFSymbols

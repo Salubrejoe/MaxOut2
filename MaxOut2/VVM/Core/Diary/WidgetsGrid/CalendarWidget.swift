@@ -5,11 +5,8 @@ struct CalendarWidget: View {
   @EnvironmentObject var model: HistoryViewModel
   
   var body: some View {
-    GroupBox {
-      WidgetCalendarView(widgetData: model.widgetData, size: 85)
-    }
+    WidgetCalendarView(widgetData: model.widgetData, size: 85)
     .minimumScaleFactor(0.8)
-    .groupBoxStyle(RegularMaterialStyle())
     .task {
       model.getViewInfo()
     }

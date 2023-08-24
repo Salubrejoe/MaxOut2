@@ -8,9 +8,14 @@ struct DiaryView: View {
   @EnvironmentObject var manager: HealthKitManager
   @EnvironmentObject var startModel: StartViewModel
   @StateObject private var model = DiaryViewModel()
+  @StateObject var historyModel = HistoryViewModel()
   
   @Binding var showingLoginView: Bool
   @Binding var tabBarState: BarState
+  
+  @State private var isShowingHistory      = false
+  @State private var isShowingExerciseTime = false
+  @State private var isShowingBodyMass     = false
   
   @State private var scrollOffset: CGFloat = 0.0
   
@@ -24,11 +29,13 @@ struct DiaryView: View {
         header
           .padding()
       }
-      .navigationTitle("Diary").navigationBarTitleDisplayMode(.inline)
+      
+      .navigationTitle("Diary")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar { toolbar }
       
       .task { try? await model.loadCurrentUser() }
-      .onAppear { manager.start() }
+      .onAppear { manager.getStats() }
       .task { await model.getStats() }
     }
   }
@@ -85,6 +92,7 @@ struct ProfileLabel: View {
         .font(.caption)
         .foregroundColor(.gray)
       }
+      Spacer()
     }
     .padding(.horizontal)
   }

@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 import BottomSheet
-
+import HealthKit
 
 final class StartViewModel: ObservableObject {
   @Published var fitUser: FitUser = FitUser.mockup
@@ -57,14 +57,14 @@ final class StartViewModel: ObservableObject {
   
   // MARK: - ACTIVITY TYPE
   public func activityType() -> ActivityType {
-    ActivityType(rawValue: routine?.activityType ?? "") ?? ActivityType.walking
+    ActivityType(rawValue: routine?.activityType ?? "") ?? .walking
   }
   
   
   
   // MARK: - ROUTINE START/CANCEL
-  func startRoutine(_ activityType: ActivityType) {
-    routine = Routine(activityType: activityType.rawValue)
+  func startRoutine(_ activityType: HKWorkoutActivityType) {
+    routine = Routine(activityType: activityType.commonName)
     inProgress = true
     startDate = Date()
   }

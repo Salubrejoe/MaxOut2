@@ -2,7 +2,6 @@ import SwiftUI
 import Charts
 
 
-
 // MARK: - TIME RANGE for HKQuery
 
 enum TimeRange: String, CaseIterable, Identifiable {

@@ -1,6 +1,7 @@
 
 import SwiftUI
 import Combine
+import HealthKit
 
 final class ExercisesViewModel: ObservableObject {
   @Published var exercises         : [Exercise] = []
@@ -37,11 +38,11 @@ final class ExercisesViewModel: ObservableObject {
 
 // MARK: - GROUPS FOR 3WPICKER
 extension ExercisesViewModel {
-  public func activities(for collection: [Exercise]) -> [ActivityType] {
-    var types = [ActivityType]()
+  public func activities(for collection: [Exercise]) -> [HKWorkoutActivityType] {
+    var types = [HKWorkoutActivityType]()
     for element in collection {
-      if !types.contains(element.activityType) {
-        types.append(element.activityType)
+      if !types.contains(element.activityType.hkType) {
+        types.append(element.activityType.hkType)
       }
     }
     return types
@@ -151,7 +152,7 @@ extension ExercisesViewModel {
                               exerciseId: exercise.id,
                               exerciseName: exercise.name,
                               dateCreated: Date(),
-                              activityType: exercise.activityType.rawValue,
+                              activityType: exercise.activityType.hkType.commonName,
                               bobs: (lastSession == nil ? [Bob()] : lastSession!.bobs),
                               image: exercise.equipmentType.image)
         model.sessions.append(session)

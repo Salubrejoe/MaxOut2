@@ -34,7 +34,7 @@ struct ProfileView: View {
       .onFirstAppear { model.loadAuthProviders() }
       .onAppear {
         UITextField.appearance().clearButtonMode = .whileEditing
-        manager.start()
+        manager.getStats()
         tabBarState = .hidden
       }
       .onDisappear {

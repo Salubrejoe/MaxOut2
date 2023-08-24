@@ -1,4 +1,5 @@
 import SwiftUI
+import HealthKit
 
 struct ExercisesPicker: View {
   @Environment(\.dismiss) var dismiss

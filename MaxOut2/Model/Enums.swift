@@ -140,7 +140,7 @@ enum ActivityType: String, CaseIterable, Hashable, Codable {
   case highIntensityIntervalTraining = "high intensity interval training"
   case jumpRope                      = "jump rope"
   case mixedCardio                   = "mixed cardio"
-  case rowing                        = "rowing"
+  case rowing                        = "rowing" 
   case running                       = "running"
   case skatingSports                 = "skating"
   case stairs                        = "stairs"

@@ -37,7 +37,7 @@ struct ExerciseDetailViiu: View {
             .frame(maxWidth: .infinity)
           Divider()
           //        Text(exercise.activityType.rawValue.capitalized)
-          MarqueeText(text: editedExercise.activityType.rawValue.capitalized, font: .preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 0, startDelay: 2)
+          MarqueeText(text: editedExercise.activityType.hkType.name.capitalized, font: .preferredFont(forTextStyle: .headline), leftFade: 5, rightFade: 0, startDelay: 2)
             .frame(maxWidth: .infinity)
         }
         .padding(. vertical)
