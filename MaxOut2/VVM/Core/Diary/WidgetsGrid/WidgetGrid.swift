@@ -44,29 +44,24 @@ struct WidgetGrid: View {
   @ViewBuilder
   private var longWidgets: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-      MediumCardView("Exercise Minutes", color: .exerciseRing, style: RegularMaterialStyle()) {
-        
-        RingWidget(ring: .exercise)
-          .environmentObject(manager)
-        
-          .onTapGesture { isShowingExerciseTime = true }
-          .sheet(isPresented: $isShowingExerciseTime) {
-            ExerciseTimeView()
-              .environmentObject(manager)
-              .presentationDetents([.large, .medium])
-          }
+      VStack {
+        MediumCardView("Active Calories", color: .moveRing) {
+          RingWidget(ring: .move)
+        }
+        MediumCardView("Exercise Minutes", color: .exerciseRing) {
+          RingWidget(ring: .exercise)
+        }
+        MediumCardView("Stand Hours", color: .standRing) {
+          RingWidget(ring: .stand)
+        }
       }
-      
-      MediumCardView("Active Calories", color: .moveRing, style: RegularMaterialStyle()) {
-        RingWidget(ring: .move)
+      .environmentObject(manager)
+      .onTapGesture { isShowingExerciseTime = true }
+      .sheet(isPresented: $isShowingExerciseTime) {
+        ExerciseTimeView()
           .environmentObject(manager)
+          .presentationDetents([.large, .medium])
       }
-      
-      MediumCardView("Stand Hours", color: .standRing, style: RegularMaterialStyle()) {
-        RingWidget(ring: .stand)
-          .environmentObject(manager)
-      }
-      
       
       MediumCardView("Body Mass", color: .primary, style: RegularMaterialStyle()) {
         NavigationLink {
@@ -108,7 +103,7 @@ struct MediumCardView<Content: View, Style: GroupBoxStyle>: View {
   let style: Style
   let content: () -> Content
 
-  init(_ text: String, link: String? = nil, color: Color, style: Style, content: @escaping () -> Content) {
+  init(_ text: String, link: String? = nil, color: Color, style: Style = RegularMaterialStyle(), content: @escaping () -> Content) {
     self.text = text
     self.link = link
     self.color = color

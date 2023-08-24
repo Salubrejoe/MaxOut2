@@ -44,66 +44,26 @@ final class HealthKitManager: ObservableObject {
   }
   
   func getStats() {
-//    getExerciseTimeStats()
-//    getMoveTimeStats()
-    
     getWeightStats()
     getHeightStats()
     
     getActivities()
-    
-    getActivityRingsGoals()
+    getActivityRings()
   }
 }
 
 
-//// MARK: - SAMPLE QUERY
-//extension HealthKitManager {
-//
-//  func getStandHoursStats() {
-////    let query = HealthStatsCategoryQuery(timeRange: timeRange, type: standHoursType)
-////    performSample(query)
-//  }
-//
-//  private func performSample(_ hSQuery: HealthStatsCategoryQuery) {
-//    guard let store else { return }
-//
-//    let startDate = hSQuery.timeRange.startDate
-//    let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date())
-//
-//    let query = HKSampleQuery(sampleType: hSQuery.type, predicate: predicate, limit: 100, sortDescriptors: []) { query, samples, error in
-//      guard error == nil, let samples else { return }
-//
-//      var healthStatSamples = [HealthStatSample]()
-//
-//      for sample in samples {
-//        let hsSample = HealthStatSample(sample: sample as? HKCategorySample, date: sample.endDate)
-//        healthStatSamples.append(hsSample)
-//      }
-//
-////      DispatchQueue.main.async {
-////        self.standHoursStats = healthStatSamples
-////      }
-//    }
-//
-//    store.execute(query)
-//  }
-//}
-
-
-
-
-// MARK: - STATISTIC COLLECTION Q
+// MARK: - HEIGHT n WEIGHT
 extension HealthKitManager {
-
-  func getExerciseTimeStats() {
-    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: exerciseTimeType)
-    performStatisticCollection(query)
-  }
-  func getMoveTimeStats() {
-    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: activeEnergyBurnedType)
-    performStatisticCollection(query)
-  }
+//
+//  func getExerciseTimeStats() {
+//    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: exerciseTimeType)
+//    performStatisticCollection(query)
+//  }
+//  func getMoveTimeStats() {
+//    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: activeEnergyBurnedType)
+//    performStatisticCollection(query)
+//  }
   func getWeightStats() {
     let query = HealthStatsQuantityQuery(timeRange: timeRange, type: bodyMassType)
     performStatisticCollection(query)
@@ -154,8 +114,8 @@ extension HealthKitManager {
   
   private func save(_ healthStats: [HealthStatQuantity], to type: HKQuantityType) {
     switch type {
-      case HKQuantityType(.appleExerciseTime) : self.exerciseTimeStats       = healthStats
-      case HKQuantityType(.activeEnergyBurned): self.activeEnergyBurnedStats = healthStats
+//      case HKQuantityType(.appleExerciseTime) : self.exerciseTimeStats       = healthStats
+//      case HKQuantityType(.activeEnergyBurned): self.activeEnergyBurnedStats = healthStats
       case HKQuantityType(.bodyMass)          : self.bodyMassStats           = healthStats
       case HKQuantityType(.height)            : self.heightStats             = healthStats
       default : print("ERROR SAVING HEALTH STATS")
@@ -164,9 +124,10 @@ extension HealthKitManager {
 }
 
 
-// MARK: - ACTIVITY SUMMARY Q
+// MARK: - RINGS QUERY
 extension HealthKitManager {
-  func getActivityRingsGoals() {
+  
+  func getActivityRings() {
     guard let store else { return }
     
     let query = HKActivitySummaryQuery(predicate: createPredicate(with: timeRange)) { (query, summariesOrNil, errorOrNil) -> Void in
@@ -208,7 +169,7 @@ extension HealthKitManager {
     }
   }
   
-  public func averagedStats(for collection: [HealthStatQuantity], unit: HKUnit) -> [HealthStatQuantity] {
+  private func averagedStats(for collection: [HealthStatQuantity], unit: HKUnit) -> [HealthStatQuantity] {
     switch timeRange.resolution {
       case 1  : return collection
       case 7  : return resolution(7, for: collection, unit: unit)
