@@ -3,6 +3,8 @@ import HealthKit
 
 final class HealthKitManager: ObservableObject {
   var store: HKHealthStore?
+  var errorMessage: String?
+  let heartRateUnit:HKUnit = HKUnit(from: "count/min")
   
   // MARK: - TYPES
   let exerciseTimeType       = HKQuantityType(.appleExerciseTime)
@@ -11,6 +13,7 @@ final class HealthKitManager: ObservableObject {
   let ringGoalsType          = HKObjectType.activitySummaryType()
   let bodyMassType           = HKQuantityType(.bodyMass)
   let heightType             = HKQuantityType(.height)
+  let heartRateType          = HKQuantityType(.heartRate)
   let workoutType            = HKSampleType.workoutType()
   
   // MARK: - STATS
@@ -22,6 +25,7 @@ final class HealthKitManager: ObservableObject {
   @Published var standHoursStats         = [HealthStatQuantity]()
   @Published var bodyMassStats           = [HealthStatQuantity]()
   @Published var heightStats             = [HealthStatQuantity]()
+  @Published var heartRate               = [HealthStatQuantity]()
   @Published var currentActivities       : [Activity]?
   
   
@@ -47,23 +51,59 @@ final class HealthKitManager: ObservableObject {
     getWeightStats()
     getHeightStats()
     
-    getActivities()
+    getActivities { acts in
+      self.currentActivities = acts
+    }
     getActivityRings()
+  }
+}
+
+// MARK: - HEART RATE
+extension HealthKitManager {
+  
+  private func heartRate(for workout: HKWorkout) async throws -> [Double] {
+    return try await withCheckedThrowingContinuation({ (continuation: CheckedContinuation<[Double],Error>) in
+      getHeartRate(for: workout) { stats in
+        if let stats { continuation.resume(returning: stats)}
+        else { continuation.resume(throwing: URLError.errorDomain as! Error)}
+      }
+    })
+  }
+  
+  private func getHeartRate(for workout: HKWorkout, completion: @escaping ([Double]?) -> ()){
+    guard let store else {
+      completion(nil)
+      return
+    }
+    
+    let start      = workout.startDate
+    let end        = workout.endDate
+    let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictEndDate)
+    
+    let query = HKSampleQuery(sampleType: heartRateType,
+                              predicate: predicate,
+                              limit: 0,
+                              sortDescriptors: nil) { (query, results, error) in
+      
+      guard let results else { return }
+      
+      var heartRates = [Double]()
+      for (_, sample) in results.enumerated() {
+        guard let currentData: HKQuantitySample = sample as? HKQuantitySample else { return }
+        
+        let heartRate = currentData.quantity.doubleValue(for: self.heartRateUnit)
+        heartRates.append(heartRate)
+      }
+      completion(heartRates)
+    }
+    store.execute(query)
   }
 }
 
 
 // MARK: - HEIGHT n WEIGHT
 extension HealthKitManager {
-//
-//  func getExerciseTimeStats() {
-//    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: exerciseTimeType)
-//    performStatisticCollection(query)
-//  }
-//  func getMoveTimeStats() {
-//    let query = HealthStatsQuantityQuery(timeRange: timeRange, type: activeEnergyBurnedType)
-//    performStatisticCollection(query)
-//  }
+  
   func getWeightStats() {
     let query = HealthStatsQuantityQuery(timeRange: timeRange, type: bodyMassType)
     performStatisticCollection(query)
@@ -83,7 +123,7 @@ extension HealthKitManager {
     let anchorDate = Date.firstDayOfWeek()
     let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date())
     
-  
+    
     let query = HKStatisticsCollectionQuery(quantityType: hSQuery.type,
                                             quantitySamplePredicate: predicate,
                                             options: hSQuery.options,
@@ -114,8 +154,8 @@ extension HealthKitManager {
   
   private func save(_ healthStats: [HealthStatQuantity], to type: HKQuantityType) {
     switch type {
-//      case HKQuantityType(.appleExerciseTime) : self.exerciseTimeStats       = healthStats
-//      case HKQuantityType(.activeEnergyBurned): self.activeEnergyBurnedStats = healthStats
+        //      case HKQuantityType(.appleExerciseTime) : self.exerciseTimeStats       = healthStats
+        //      case HKQuantityType(.activeEnergyBurned): self.activeEnergyBurnedStats = healthStats
       case HKQuantityType(.bodyMass)          : self.bodyMassStats           = healthStats
       case HKQuantityType(.height)            : self.heightStats             = healthStats
       default : print("ERROR SAVING HEALTH STATS")
@@ -147,13 +187,13 @@ extension HealthKitManager {
     var exerciseMinutes = [HealthStatQuantity]()
     var activeEnergy    = [HealthStatQuantity]()
     
-    for (index, summary) in summaries.enumerated() {
+    for (index, summary) in summaries.reversed().enumerated() {
       let standingHour = HealthStatQuantity(stat: summary.appleStandHours, date: Date().minusDays(index))
       standingHours.append(standingHour)
       
       let exerciseMinute = HealthStatQuantity(stat: summary.appleExerciseTime, date: Date().minusDays(index))
       exerciseMinutes.append(exerciseMinute)
-
+      
       let activeEn = HealthStatQuantity(stat: summary.activeEnergyBurned, date: Date().minusDays(index))
       activeEnergy.append(activeEn)
     }
@@ -182,7 +222,7 @@ extension HealthKitManager {
     
     var averagedValues = [HealthStatQuantity]()
     let numberOfChunks = collection.count / number
-  
+    
     for chunkIndex in 0..<numberOfChunks {
       let startIndex = chunkIndex * number
       let endIndex = min(startIndex + number, collection.count)
@@ -197,10 +237,10 @@ extension HealthKitManager {
         date = e.date
       }
       
-      let average = values.reversed().reduce(0.0, +) / Double(values.count)
+      let average = values.reduce(0.0, +) / Double(values.count)
       
       let stat = HKQuantity(unit: unit, doubleValue: average)
-   
+      
       let healthStatQuantity = HealthStatQuantity(stat: stat, date: date)
       
       averagedValues.append(healthStatQuantity)
@@ -218,10 +258,8 @@ extension HealthKitManager {
     
     let units: Set<Calendar.Component> = [.day, .month, .year, .era]
     
-    
     var startDateComponents = calendar.dateComponents(units, from: startDate)
     startDateComponents.calendar = calendar
-    
     
     var endDateComponents = calendar.dateComponents(units, from: endDate)
     endDateComponents.calendar = calendar
@@ -236,25 +274,65 @@ extension HealthKitManager {
 // MARK: - ACTIVITIES
 extension HealthKitManager {
   
-  func getActivities() {
+  func getActivities(completion: @escaping ([Activity]) -> Void) {
     var acts = [Activity]()
     
-    for activity in allActivities {
-      let type = activity.type
-      workouts(with: type, last: timeRange.numberOfDays) { workouts in
-        if !workouts.isEmpty {
-          let activity = Activity(type: type, workouts: workouts)
-          acts.append(activity)
-        }
-      }
-    }
+    let group = DispatchGroup()
     
-    DispatchQueue.main.async {
-      self.currentActivities = acts
+    for activity in allActivities {
+      group.enter()
+      let type = activity.type
+      workouts(with: type, last: timeRange.numberOfDays) { [weak self] (workouts, error) in
+        guard let workouts,
+              let self,
+              !workouts.isEmpty,
+              error == nil else {
+          group.leave()
+          return
+        }
+        
+        makeRepresentable(with: workouts) { representableWorkouts in
+          let activity = Activity(type: type, workouts: representableWorkouts)
+          acts.append(activity)
+          group.leave()
+        }
+      }    }
+    
+    group.notify(queue: .main) {
+      completion(acts)
     }
   }
   
-  private func workouts(with type: HKWorkoutActivityType, last interval: Int, completion: @escaping ([HKWorkout]) -> ()) {
+  private func makeRepresentable(with workouts: [HKWorkout], completion: @escaping ([RepresentableWorkout]) -> Void) {
+    
+    let group = DispatchGroup()
+    
+    var representableWorkouts = [RepresentableWorkout]()
+    for workout in workouts {
+      
+      group.enter()
+      self.getHeartRate(for: workout) { stats in
+        
+        guard let stats else { return }
+        let representableWorkout = RepresentableWorkout(id: workout.uuid.uuidString,
+                                                        start: workout.startDate,
+                                                        end: workout.endDate,
+                                                        duration: workout.duration,
+                                                        heartRateValues: stats)
+        
+        representableWorkouts.append(representableWorkout)
+        group.leave()
+      }
+    }
+    group.notify(queue: .main) {
+      // This closure will be called when all async operations are complete
+      completion(representableWorkouts)
+    }
+  }
+  
+  private func workouts(with type: HKWorkoutActivityType,
+                        last interval: Int,
+                        completion: @escaping ([HKWorkout]?, Error?) -> ()) {
     guard let store else { return }
     
     let calendar = Calendar.current
@@ -263,22 +341,34 @@ extension HealthKitManager {
                                   to: Date()) ?? Date()
     let endDate = Date()
     
-    var workouts = [HKWorkout]()
-    
-    let timePredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+    let timePredicate = HKQuery.predicateForSamples(withStart: startDate,
+                                                    end: endDate,
+                                                    options: .strictStartDate)
     let workoutPredicate = HKQuery.predicateForWorkouts(with: type)
-    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, workoutPredicate])
     
-    let query = HKSampleQuery(sampleType: workoutType, predicate: predicate, limit: 0, sortDescriptors: nil) { query, sample, error in
-      guard let stats = sample as? [HKWorkout], error == nil  else {
-        print("Troubles fetching workouts: \(String(describing: error))")
-        return
+    ///from kodeco: HKSource denotes the app that provided the workout data to HealthKit.
+    ///Whenever you call HKSource.default(), you’re saying “this app.” sourcePredicate gets all workouts where the source is, you guessed it, this app.
+    ///
+    ///let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+    
+    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, workoutPredicate])
+    
+    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
+                                          ascending: true)
+    let query = HKSampleQuery(
+      sampleType: workoutType,
+      predicate: compoundPredicate,
+      limit: 0,
+      sortDescriptors: [sortDescriptor]) { (query, sample, error) in
+        
+        guard let sample = sample as? [HKWorkout],
+              error == nil  else {
+          completion(nil, error)
+          return
+        }
+        
+        completion(sample, nil)
       }
-      for workout in stats {
-        workouts.append(workout)
-      }
-      completion(workouts)
-    }
     store.execute(query)
   }
 }
@@ -287,7 +377,9 @@ extension HealthKitManager {
 // MARK: - SAVE WORKOUT
 extension HealthKitManager {
   
-  func saveWorkout(start: Date, end: Date, activityType: ActivityType) {
+  func saveWorkout(start: Date,
+                   end: Date,
+                   activityType: ActivityType) {
     guard let store, HKHealthStore.isHealthDataAvailable() else {
       print("HealthKit is not available on this device.")
       return
@@ -298,12 +390,12 @@ extension HealthKitManager {
     let duration = endInt - startInt
     
     let workout = HKWorkout(activityType: activityType.hkType,
-                        start: start,
-                        end: end,
-                        duration: duration,
-                        totalEnergyBurned: nil,
-                        totalDistance: nil,
-                        metadata: nil)
+                            start: start,
+                            end: end,
+                            duration: duration,
+                            totalEnergyBurned: nil,
+                            totalDistance: nil,
+                            metadata: nil)
     
     store.save(workout) { (success, error) -> Void in
       guard success else {
@@ -323,7 +415,8 @@ extension HealthKitManager {
     
     let quantityType = HKQuantityType(.bodyMass)
     
-    let quantity = HKQuantity.init(unit: HKUnit.gramUnit(with: .kilo), doubleValue: weight)
+    let quantity = HKQuantity.init(unit: HKUnit.gramUnit(with: .kilo),
+                                   doubleValue: weight)
     
     let bodyMass = HKQuantitySample(type: quantityType,
                                     quantity: quantity,
@@ -345,7 +438,8 @@ extension HealthKitManager {
     
     let quantityType = HKQuantityType(.height)
     
-    let quantity = HKQuantity.init(unit: HKUnit.meter(), doubleValue: height)
+    let quantity = HKQuantity.init(unit: HKUnit.meter(),
+                                   doubleValue: height)
     
     
     let bodyMass = HKQuantitySample(type: quantityType,
@@ -380,7 +474,8 @@ extension HealthKitManager {
       ringGoalsType,
       bodyMassType,
       heightType,
-      workoutType
+      workoutType,
+      heartRateType
     ])
   }
   
@@ -454,7 +549,7 @@ extension HealthKitManager {
   public var maxWeight: Double {
     var weights: [Double] = []
     for stat in bodyMassStats {
-      weights.append(stat.weight)
+      weights.append(stat.weight ?? 0)
     }
     return weights.max() ?? 0
   }
@@ -462,7 +557,7 @@ extension HealthKitManager {
   public var minWeight: Double {
     var weights: [Double] = []
     for stat in bodyMassStats {
-      weights.append(stat.weight)
+      weights.append(stat.weight ?? 0)
     }
     return weights.min() ?? 0
   }
@@ -470,7 +565,7 @@ extension HealthKitManager {
   public var maxExerciseTime: Double {
     var min: [Double] = []
     for stat in exerciseTimeStats {
-      min.append(stat.minutes/Double(timeRange.resolution))
+      min.append((stat.minutes ?? 0)/Double(timeRange.resolution))
     }
     return min.max() ?? 0
   }

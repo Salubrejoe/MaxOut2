@@ -99,7 +99,7 @@ struct ExerciseTimeView: View {
     var duration = 0.0
     var count = 0.0
     for stat in manager.exerciseTimeStats {
-      let statMin = stat.minutes
+      let statMin = stat.minutes ?? 0
       if statMin != 0 {
         duration += statMin
         count += 1

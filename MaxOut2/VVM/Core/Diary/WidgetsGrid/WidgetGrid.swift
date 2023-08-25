@@ -44,7 +44,7 @@ struct WidgetGrid: View {
   @ViewBuilder
   private var longWidgets: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 307))]) {
-      VStack {
+
         MediumCardView("Active Calories", color: .moveRing) {
           RingWidget(ring: .move)
         }
@@ -54,11 +54,12 @@ struct WidgetGrid: View {
         MediumCardView("Stand Hours", color: .standRing) {
           RingWidget(ring: .stand)
         }
-      }
+      
       .environmentObject(manager)
       .onTapGesture { isShowingExerciseTime = true }
       .sheet(isPresented: $isShowingExerciseTime) {
-        ExerciseTimeView()
+//        ExerciseTimeView()
+        ActivitiesList()
           .environmentObject(manager)
           .presentationDetents([.large, .medium])
       }

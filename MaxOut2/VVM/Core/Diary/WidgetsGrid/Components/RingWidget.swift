@@ -9,7 +9,7 @@ struct RingWidget: View {
   var body: some View {
     Chart(appropriateStats()) { stat in
       BarMark(
-        x: .value("Week Day", stat.date),
+        x: .value("", stat.date),
         y: .value(ring.measure.capitalized, appropriateValue(stat: stat)),
         width: manager.timeRange.barWidth
       )
@@ -17,10 +17,10 @@ struct RingWidget: View {
       .cornerRadius(4)
       .opacity(0.6)
     }
-    
+
     .chartYAxisLabel(ring.measure, position: .topTrailing)
     .chartYAxis {
-      AxisMarks(values: [appropriateDouble()]) { value in
+      AxisMarks(values: [appropriateGoal()]) { value in
         AxisGridLine(centered: true, stroke: StrokeStyle(dash: [2]))
           .foregroundStyle(appropriateColor().gradient)
         AxisValueLabel() {
@@ -36,6 +36,7 @@ struct RingWidget: View {
     }
     .transition(.scale)
     .animation(.spring(), value: appropriateStats())
+    .padding(.horizontal)
   }
 
   
@@ -55,7 +56,7 @@ struct RingWidget: View {
     }
   }
   
-  private func appropriateDouble() -> Double {
+  private func appropriateGoal() -> Double {
     switch ring {
       case .move     : return manager.activeEnergyBurnedGoalDouble
       case .exercise : return manager.exerTimeGoalDouble
@@ -73,9 +74,9 @@ struct RingWidget: View {
   
   private func appropriateValue(stat: HealthStatQuantity) -> Double {
     switch ring {
-      case .move     : return stat.kcal
-      case .exercise : return stat.minutes
-      case .stand    : return stat.hours
+      case .move     : return stat.kcal ?? 0
+      case .exercise : return stat.minutes ?? 0
+      case .stand    : return stat.hours ?? 0
     }
   }
   
@@ -105,3 +106,5 @@ enum Ring {
     }
   }
 }
+
+

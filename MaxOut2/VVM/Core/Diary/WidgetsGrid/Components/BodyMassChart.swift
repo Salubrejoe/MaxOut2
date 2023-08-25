@@ -8,7 +8,7 @@ struct BodyMassChart: View {
     Chart(manager.bodyMassStats) { stat in
       LineMark(
         x: .value("Week Day", stat.date),
-        y: .value("Kg", stat.weight)
+        y: .value("Kg", stat.weight ?? 0)
       )
       .interpolationMethod(.catmullRom)
       .foregroundStyle(Color.primary.gradient)
