@@ -2,41 +2,41 @@ import Foundation
 import HealthKit
 
 struct HealthStatQuantity: Identifiable, Equatable, Hashable {
-  let id = UUID()
-  
+  let id  = UUID()
   let stat: HKQuantity?
   let date: Date
+}
+
+// COMPUTED PROPERTIES
+extension HealthStatQuantity {
   
-  var kcal: Double? {
+  public var kcal: Double? {
     stat?.doubleValue(for: .largeCalorie())
   }
-  var hours: Double? {
+  public var hours: Double? {
     stat?.doubleValue(for: .count())
   }
-  var minutes: Double? {
+  public var minutes: Double? {
     stat?.doubleValue(for: .minute())
   }
-  var weight: Double? {
+  public var weight: Double? {
     stat?.doubleValue(for: .gram())
   }
-  var height: Double? {
+  public var height: Double? {
     stat?.doubleValue(for: .meter())
   }
-  var bpm: Double? {
+  public var bpm: Double? {
     stat?.doubleValue(for: .count())
   }
-
-  var weightString: String {
+  public var weightString: String {
     guard let weight else { return ""}
     return String(format: "%.1f", weight)
   }
-  
-  var heightString: String {
+  public var heightString: String {
     guard let height else { return ""}
     return String(format: "%.2f", height)
   }
-  
-  func valueToAverage(unit: HKUnit) -> Double {
+  public func valueToAverage(unit: HKUnit) -> Double {
     switch unit {
       case .count()        : return self.hours   ?? 0
       case .minute()       : return self.minutes ?? 0

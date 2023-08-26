@@ -46,15 +46,6 @@ struct ExerciseTimeView: View {
           .padding([.leading, .horizontal, .bottom])
           .frame(height: 200)
         
-        if let acts = manager.currentActivities {
-          LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
-            ForEach(acts) { activity in
-              ActivityCell(activity: activity, text: manager.timeRange.stringForWidget) {
-                //              manager.toggleFavorite(activity)
-              }
-            }
-          }
-        }
       }
       .dismissButton()
       .navigationTitle("Edit Card").navigationBarTitleDisplayMode(.inline)
@@ -96,18 +87,21 @@ struct ExerciseTimeView: View {
   }
   
   private func averageMinutes() -> String {
+    if let stats = manager.exerciseTimeStats {
     var duration = 0.0
     var count = 0.0
-    for stat in manager.exerciseTimeStats {
-      let statMin = stat.minutes ?? 0
-      if statMin != 0 {
-        duration += statMin
-        count += 1
+      for stat in stats {
+        let statMin = stat.minutes ?? 0
+        if statMin != 0 {
+          duration += statMin
+          count += 1
+        }
       }
-    }
     let drt = duration/Double(manager.timeRange.resolution)
     let avg = drt/count
-    return String(format: "%.0f", avg)
+      return String(format: "%.0f", avg)
+    }
+    return "No stats exercise time stats ("
   }
 }
 

@@ -3,6 +3,14 @@ import Foundation
 
 // MARK: - Extension Date
 extension Date {
+  
+  /// HKManager
+  func minusDays(_ number: Int) -> Date {
+    Calendar.current.date(byAdding: .day, value: -number, to: self) ?? self
+  }
+
+
+  
   static func firstDayOfWeek() -> Date {
     let calendar =  Calendar(identifier: .iso8601)
     let components: Set<Calendar.Component> = [.yearForWeekOfYear, .weekOfYear]

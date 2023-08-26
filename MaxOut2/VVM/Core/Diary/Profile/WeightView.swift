@@ -33,7 +33,7 @@ struct WeightView: View {
   }
   
   private func getHKWeight() {
-    guard let weight = manager.bodyMassStats.last else { return }
+    guard let stats = manager.bodyMassStats, let weight = stats.last else { return }
     self.weight = weight.weightString
   }
   
@@ -123,7 +123,7 @@ struct HeightView: View {
   
   private func getHKHeight() {
     manager.getHeightStats()
-    guard let height = manager.heightStats.last else { return }
+    guard let stats = manager.heightStats, let height = stats.last else { return }
     self.height = height.heightString
   }
   

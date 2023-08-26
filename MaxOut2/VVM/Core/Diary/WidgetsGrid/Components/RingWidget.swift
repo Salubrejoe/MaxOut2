@@ -42,9 +42,9 @@ struct RingWidget: View {
   
   private func appropriateStats() -> [HealthStatQuantity] {
     switch ring {
-      case .move     : return manager.activeEnergyBurnedStats
-      case .exercise : return manager.exerciseTimeStats
-      case .stand    : return manager.standHoursStats
+      case .move     : return manager.activeEnergyBurnedStats ?? []
+      case .exercise : return manager.exerciseTimeStats ?? []
+      case .stand    : return manager.standHoursStats ?? []
     }
   }
   

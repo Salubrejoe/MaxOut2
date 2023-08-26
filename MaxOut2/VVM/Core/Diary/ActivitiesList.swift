@@ -6,31 +6,44 @@ struct ActivitiesList: View {
   @EnvironmentObject var manager: HealthKitManager
   
   var body: some View {
-    if let activities = manager.currentActivities {
+    if !manager.currentActivities.isEmpty {
       
+      let activities = manager.currentActivities
+
       List(activities) { activity in
-        
+
         if let workouts = activity.workouts {
+
           Section(activity.name) {
-            
+
             ForEach(workouts) { workout in
+
                 VStack(alignment: .leading) {
+
                   Text("Duration: \(workout.duration.formatElapsedTime())")
+
                   Text("Start: \(workout.start.formatted())")
                   Text("End: \(workout.end.formatted())")
-                  ScrollView(.horizontal) {
-                    HStack {
-                      if workout.heartRateValues.count > 2 {
-                        ForEach(1..<workout.heartRateValues.count, id: \.self) { index in
-                          Rectangle()
-                            .frame(width: 2, height: workout.heartRateValues[index])
-                        }
-                      }
-                    }
+
+                  if let avgHR = workout.avgHeartRateValue {
+                    Text("Average bpm: \(String(format: "%.0f", avgHR))")
                   }
-                  .frame(height: 200)
+
+                  if let maxHR = workout.maxHeartRateValue {
+                    Text("Max bpm: \(String(format: "%.0f", maxHR))")
+                  }
+
+                  if let minHR = workout.minHeartRateValue {
+                    Text("Min bpm: \(String(format: "%.0f", minHR))")
+                  }
                   
-                }
+                  if let kcal = workout.activeEnergyBurned {
+                    Text("Kcal: \(String(format: "%.0f", kcal))")
+                  }
+                  else {
+                    Text("No data")
+                  }
+                } 
               }
           }
         }

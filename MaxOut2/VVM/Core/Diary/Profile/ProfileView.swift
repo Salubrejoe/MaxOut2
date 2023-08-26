@@ -116,7 +116,9 @@ extension ProfileView {
         HStack {
           Text("Height")
           Spacer()
-          Text("\(manager.heightStats.last?.heightString ?? "") m")
+          if let stats = manager.heightStats {
+            Text("\(stats.last?.heightString ?? "") m")
+          }
         }
       }
       
@@ -126,7 +128,9 @@ extension ProfileView {
         HStack {
           Text("Weight")
           Spacer()
-          Text("\(manager.bodyMassStats.last?.weightString ?? "") kg")
+          if let stats = manager.bodyMassStats {
+            Text("\(stats.last?.weightString ?? "") kg")
+          }
         }
       }
 

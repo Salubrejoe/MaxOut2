@@ -77,8 +77,8 @@ struct WidgetGrid: View {
   
   @ViewBuilder //
   private var activities: some View {
-    if let acts = manager.currentActivities {
-      let mappedActs  = acts.sorted { $0.duration > $1.duration}
+    if !manager.currentActivities.isEmpty {
+      let mappedActs  = manager.currentActivities.sorted { $0.duration > $1.duration}
       LazyVStack {
         ForEach(mappedActs) {
           SmallCardView(activity: $0, style: RegularMaterialStyle(), text: manager.timeRange.stringForWidget)
